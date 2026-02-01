@@ -1,0 +1,266 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Problem Set 10}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+%coloring with color
+\newmdenv[
+  backgroundcolor=gray!8,
+  linewidth=0pt,
+  innerleftmargin=0pt,
+  innerrightmargin=0pt,
+  skipabove=\baselineskip,
+  skipbelow=\baselineskip
+]{coloredadjust}
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+
+% problem writing
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}
+   \textit{Problem. }#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Section 5.3}
+\begin{enumerate}
+	\item \begin{enumerate}
+		\item Find the remainder when 15! is divided by 17.
+		\begin{problem}
+			We want to find the remainder when 15! is divided by 17.\gline
+			Consider via Wilsons Theorem that $16!\equiv -1$. We rewrite the equation as:
+			\begin{align*}
+				16! &= 16\cdot (15!)\\
+				&\equiv -1\mod 17\\
+				&\equiv 16 \mod 17
+			\end{align*}
+			Thus, because we have that $-1\equiv 16\gmod{17}$, it follows that:
+			\begin{align*}
+				16\cdot (15!)\equiv 16 \gmod{17}\implies 15!\equiv 1\gmod{17}
+			\end{align*} 
+			Thus, we have that $15!\equiv 1 \gmod{17}$, and that the remainder is 1. 
+		\end{problem}
+		\item Find the remainder when 2(26!) is divded by 29.
+		\begin{problem}
+			First, consider that $2(28!)\equiv -2 \gmod{29}$ via Wilson's theorem. It follows that:
+			\begin{align*}
+				(26! \cdot 27\cdot 28) \equiv -1 \gmod{29}
+			\end{align*} 
+			Now, consider that $27\cdot 28 \equiv 2 \gmod{29}$. Because 29 is prime, via the rules of inverses of primes, because $2\cdot 14 =28\equiv -1\gmod{29}$, it follows that $26! = 14\gmod{29}$. \gline
+			Thus, it follows that $2\cdot 26! = 28$.
+		\end{problem}
+	\end{enumerate}
+	\item [3.] Arrange the integers $2,3,4,\ldots, 21$ in pairs $a$ and $b$ that satisfy $ab \equiv 1\gmod{23}$.
+	\begin{problem}
+		The pairs that satisfy this in $\gmod{23}$ are:
+		\begin{center}
+			\begin{tabular}{c|c}
+				$a$ & $b$\\\hline
+				1 & 1\\\hline
+				2 & 12\\\hline
+				3& 8\\\hline
+				4 & 6\\\hline
+				5&14\\\hline
+				6 & 4\\\hline
+				7 & 10\\\hline
+				11& 21\\\hline
+				13& 16\\\hline
+				15& 20\\\hline
+				17& 19\\\hline
+				22&22
+			\end{tabular}
+		\end{center}
+		Hooray problem done.
+	\end{problem}
+	\pagebreak
+	\item [11.] Apply Theorem 5.5 to obtain two solutions to each of the quadratic congruences $x^2 \equiv -1 \gmod{29}$ and $x^2 \equiv -1\gmod{37}$.
+	\begin{problem}
+		Via Theorem 5.5, we know that the quadratic congruence has a solution if and only if $p\equiv 1 \gmod 4$. \gline
+		Consider $17^2\equiv -1\gmod{29}$, and $12^2 \equiv -1 \gmod{29}$. Those are our solutions for mod 29.  \gline
+		Furthermore, consider that $6^2\equiv -1\gmod{37}$ (rather simply), and that $31^2\equiv -1\gmod{37}$.\gline
+		Note that solutions are equidistant from $p/2$. 
+	\end{problem}
+	\item [15.] Verify that $4(29!)+5!$ is divisible by 31. 
+	\begin{problem}
+		To solve this problem, we will use Wilson's theorem again.\gline
+		Note that $(30!)\equiv -1\gmod{31}$. Thus, it follows that:
+		\begin{align*}
+			4(29!)\cdot 30 \equiv 4\cdot30\gmod{31}\\
+			4(29!)\equiv 4\cdot1\gmod{31}
+		\end{align*}
+		Furthermore, we have that $5!\equiv 27\gmod{31}$. Adding our two results together gives that:
+		\begin{align*}
+			4(29!)+5!\equiv 0\gmod{31}
+		\end{align*}
+	\end{problem}
+\end{enumerate}
+
+\subsection*{Subsection 6.1}
+\begin{enumerate}
+	\item [7.] Prove the following:
+	\begin{enumerate}
+		\item $\tau (n)$ is an odd integer if an only if $n$ is a perfect square. 
+		\begin{proof}
+			We want to show that $\tau (n)$ is an odd integer if an only if $n$ is a perfect square.
+			\centerit{\ul{Forwards}}
+			We start by assuming $n$ is a perfect square given by $a^2$. Thus, $n$'s divisors are given by:
+			\begin{align*}
+				1 , \cdots , a , \cdots , n
+			\end{align*}
+			Because each non-square divisor must have a unique other non-square divisor paried to it, we write the divisors as:
+			\begin{align*}
+				((1, n), (\ldots, \ldots), (a))
+			\end{align*}
+			Thus, $n$ has an odd number of divisors. 
+			\centerit{\ul{Backwards}}
+			Let $n$ be an integer with an odd number of divisors. Let $D$ be the set of all the unique positive divisors of $n$, and let $d\in D$. \gline
+			\textbf{Case 1: $\forall d\in D, d^2\ne n$.} \\
+			If $d^2\ne n$, then $\exists f\in D$ such that $d\cdot f$. Thus, $d$ does not change the parity of $\tau(n)$, a contradiction.\gline
+			Thus, $n$ must contain one divisor such that $d^2 = n$, and thus $n$ is a perfect square, as desired. 
+		\end{proof}
+		\item If $n$ is a square-free integer, prove that $\tau(n) = 2^r$, where $r$ is the number of prime-divisors of n. 
+		\begin{proof}
+			Let $n$ be a square-free integer. We want to show that $\tau(n) = 2^r$.\\
+			Let $P = \{p_1,\ldots, p_s\}$. Be the prime factorization of $n$. \\
+			Via the formula for $\tau$, we have that for powers $p^k$, that:
+			\begin{align*}
+				\tau(n) &= (1+k_1)\cdots (1+k_s)\\
+				&= (1+1)^s\\
+				&= 2^s
+			\end{align*}
+			Hence, $\tau(n) = 2^r$. 
+		\end{proof}
+	\end{enumerate}
+	\item [11.] Establish the assertions below:
+	\begin{enumerate}
+		\item [(c)] If $n>1$ is a composite number, then $\sigma(n) > n+ \sqrt{n}$. 
+		\begin{proof}
+			Let $n$ be a composite number, and $d\ne 1, d\ne n$ be a divisor of $n$. We want to show that $\sigma(n)>n + \sqrt n$.\gline
+			\textbf{Case 1: $d = \sqrt n$}. If $d = \sqrt n$, we have that:
+			\begin{align*}
+				\sigma(n) = 1 + n + \sqrt{n} + \ldots > n + \sqrt n
+			\end{align*}
+			\textbf{Case 2: $d < \sqrt n$}. If $d < \sqrt n$, let $f$ be a divisor of $n$ such that $n/d =f$. Thus, it must be that $f>\sqrt{n}$, because $f\cdot d = n$. (Otherwise $d\cdot f < \sqrt{n}^2 < n)$. Thus, we have that:
+			\begin{align*}
+				\sigma(n) = 1 + n + f + d + \ldots > n + \sqrt n
+			\end{align*}
+			\textbf{Case 3: $d > \sqrt n$}. If $d > \sqrt n$, we have that:
+			\begin{align*}
+				\sigma(n) = 1+ n + d + \ldots > n + \sqrt n
+			\end{align*}
+			Hence, because it has been shown for all possible values of d, $\sigma(n) > n + \sqrt n$, as desired. 
+		\end{proof}
+	\end{enumerate}
+	\item [12.] \begin{enumerate}
+		\item Find the form of all positive integers $n$ satisfying $\tau(n) = 10$.
+		\begin{problem}
+			Because we know that $\tau(n) = (1 + k_1)\cdots(1+k_s)$, we look at the prime factorization of 10:
+			\begin{align*}
+				10 &= 2^15^1
+			\end{align*}
+			Because there are no three integers which multiply to 10, it must have two numbers 2 \& 5 which multiply to 10. Additionally, we also have the possibility of any prime to the power of 9. \gline
+			Thus, any integer $n$ such that $\tau(n) = 10$ must be of the form:
+			\begin{align*}
+				p_1^1p_2^4 \text{ or } p_1^9
+			\end{align*}
+			where $p_1$ and $p_2$ are primes. 
+		\end{problem}
+		\item Show that there are no integers $n$ satisfying $\sigma(n) = 10$. 
+		\begin{problem}
+			First, we specify that we will not check any numbers above 9, because for $n> 1$, $\sigma(n) > n$, and thus for $n\ge 10$, $\sigma(n) > 10$. \gline
+			Now, we just check each positive number:
+			\begin{align*}
+				\sigma(1) &= 1\\
+				\sigma(2) &= 3\\
+				\sigma(3) &= 4\\
+				\sigma(4) &= 7\\
+				\sigma(5)&= 6\\
+				\sigma(6)&= 12\\
+				\sigma(7)&= 8\\
+				\sigma(8) &= 15\\
+				\sigma(9)&= 13
+			\end{align*}
+			Because none of them equal 12, we verify the claim that no integers $n$ satisfying $\sigma(n) = 10$ exist. 
+		\end{problem}
+		\item[15.] If $n$ and $n+2$ are a pair of twin primes, establish that $\sigma(n+2) = \sigma(n) + 2$.
+		\begin{proof}
+			Let $p$ and $p+2$ be twin primes. We want to show $\sigma(n+2) = \sigma(n) + 2$. \gline
+			We know that because the only divisors of $p+2$ are $1$ and $p+2$, that $\sigma(p+2) = 1 + p +2$. We also know the same applies for $p$, where $\sigma(p) = 1 + p$.\gline
+			Substitution gives $\sigma(p+2) = \sigma(p) + 1$. 
+		\end{proof}
+	\end{enumerate}
+	\item [17.] For a fixed integer $k$, show that the function $f$ defined by $f(n) = n^k$ is multiplicative.
+	\begin{problem}
+		We will show that if $\gcd(a,b) = 1$, $f(a)\cdot f(b) = f(ab)$. \gline
+		Consider that $f(ab) = (ab)^k = a^kb^k$.\gline
+		Also consider that $f(a)\cdot f(b) = a^kb^k$.\gline
+		Thus, we have that $f(ab) = f(a)f(b)$, as desired. 
+	\end{problem}
+\end{enumerate}
+\end{document}

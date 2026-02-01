@@ -1,0 +1,227 @@
+\documentclass[twocolumn]{article}
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{supertabular}
+\usepackage{changepage}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
+\usepackage{titlesec}
+\titleformat*{\section}{\normalsize\bf} 
+\titleformat*{\subsection}{\small\bf}
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+
+% Commands for spacing
+\newcommand{\n}{\vspace{0.15cm}\\}
+\newcommand{\en}{\vspace{0.25cm}\\}
+
+% Command for the image
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+% Commands for cenerting and underlining
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%% Page Setup %%%%%%%
+% Sets page size:
+\newcommand{\smallpage}{  \setlength \oddsidemargin{0in}
+            \setlength \textwidth{6in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Project Draft - Everesting}}}
+\author{Gordie Novak}
+\setlength{\headheight}{10pt}
+%\setcounter{section}{1}
+
+\begin{document}
+\section{INTRODUCTION}
+Cycling is widely considered an enjoyable sport. As a low-impact, lower-body mode of transportation, biking's accesibility to a wide array of age ranges gives it the capacity to be a joyous, social activity (apart from the hills). However, \textit{some} people saw how unfun hills were and decided to form a whole subgenre of cycling dedicated to it. The most masochistic of these individuals decided to climb the \textit{height of Mount Everest} in a single ride, called \textbf{Everesting}.\en
+The current world record "everester" is Ronan McLaughlin, who achieved this feat  by repeatedly going up and down the Mamore Gap in Ireland in a time of 6:40:54. For perspective, dedicated hobbyists can expect to achieve this same result in 20 hours. Yet for McLaughlin to get such a time, there has been rampant speculation on the affect of the 5.5 m/s tailwind on his ascent. The \href{https://doi.org/10.1119/5.0131679}{research article} this project bases itself on attempts to quantitatively determine the affect of this tailwind on McLaughlin's performance. 
+\section{MODEL}
+\subsection{Preliminary Model}
+We can model the affects of air resistance on a cyclist of McLaughlin's size by assuming air is a high-Reynolds-number enviroment\footnote{A high-Reynolds-number environment refers to a liquid or gas in which the \textbf{turbulence} of the substance has much greater impact on its interactions with other particals than its \textbf{viscosity}.} with the following formulae:
+\begin{align}
+    F_{\text{fr}}=\beta v^2, \quad \text{where } \beta = \frac{1}2\rho C_d A,
+\end{align}
+where $v$ is the velocity of the cyclist relative to the airflow. $\beta$ is a constant that bundles together physical parameters of the drag, with:
+\begin{itemize}[parsep=0pt]
+    \item $\rho = $ air density (kg/$\text{m}^3$)
+    \item $C_d = $ drag coefficient (dimensionless)
+    \item $A = $ frontal area ($m^2$)
+\end{itemize}
+Thus, it follows that to maintain speed $v$ on a flat surface, McLaughlin must provide a power of:
+\begin{align}
+    P_\text{fr}=\beta v^3.
+\end{align}
+However, apart from air-resistance, force of gravity significantly contributes to McLaughlin's total travel time, for which we write:
+\begin{align*}
+    F_g=mg\sin\theta,
+\end{align*}
+where $\theta$ is the angle of ascent. This gives a total force of
+\begin{align}
+    F = \beta v_\text{up}^2 + mg\sin\theta.
+\end{align}
+If the cyclist provides a power $P$ while maintaining constant velocity, then:\newcommand{\vup}{v_\text{up}}
+\begin{align}
+    (\beta \vup^2 + mg\sin\theta)\vup - P = 0
+\end{align}
+where $\vup$ is our velocity upwards.\en
+Note that upon descent, the cyclist will reach a terminal velocity \newcommand{\vterm}{v_\text{term}}$\vterm$ for which gravitational pull equals air resistance:
+\begin{align}
+    \vterm = \sqrt{\frac{mg\sin\theta}{\beta}}
+\end{align}
+\subsection{Additional Considerations}
+There remain additional factors that affect a cyclist's performance. \textbf{Rolling resistance}, caused by the give of the tires on asphault, follows the formulation:
+\begin{align}
+    F_\text{fr, rol}=\mu_rmg\cos\theta,
+\end{align}
+where $\mu_r$ is the dimensionless coefficient of rolling resistance (for which the authors use an estimate of 0.006).\en
+Furthermore, upon descent, there exists a period of time for which the cyclist is not at $\vterm$ and must start accelerating. To solve for this time, we solve the differential equation
+\begin{align}
+    \dot v = g\sin\theta - \frac{(v+v_w)^2}{\ell_0},
+\end{align}
+with $\dot v \equiv \frac{d}{dt}(v)$, and $v_w$ being the velocity of headwinds/tailwinds. Solving the differential in terms of $\vterm$ and $v_w$ gives this very yucky trancendental equation:
+\begin{align*}
+    \frac{L}{2} =\ell_0\Big[\ln\cosh\!\left(\frac{\tilde v_{\rm term}(T_{\rm down}+\tau)}{l_0}\right)\\ -\ln\cosh\!\left(\frac{\tilde v_{\rm term}\tau}{l_0}\right)\Big]-v_w T_{\rm down}\tag{T}
+\end{align*}
+\subsection{Accounting for Wind}
+Thus, along with rolling resistance and the time it takes ot reach terminal velocity, the wind has a meaningful impact on velocity up and velocity down. We can modify equation (3) to account for this effect, with:
+\begin{align*}
+    F=mg&(\sin\theta)_\text{up} \\
+    &- \beta \text{sgn}(v_w-\vup)(v_w-\vup)^2.\tag 8
+\end{align*}
+This gives us a respective power of:
+\begin{align*}
+    P = mg&(\sin\theta)_\text{up}\vup\\
+    &- \beta \text{sgn}(v_w-\vup)(v_w-\vup)^2\vup.\tag 9
+\end{align*}
+Finally, with equation (9), we solve it with the cubic equation with respect to $\vup$.\newcommand{\cd}[1]{\texttt{#1}}
+\section{Creating the Simulation}
+To create the simulation, I will use the online platform \href{https://vpython.org/}{\texttt{VPython}} due to it's readability and portability. For details, of implementation, please refer to the appendix.
+\subsection{Structure of the Program}
+The program is structured as follows:
+\centerit{\texttt{\ul{program.py}}}
+\[
+\boxed{
+\begin{aligned}
+    &\texttt{Global Variables}\\
+    &\boxed{\texttt{\ul{Main Function}}}\\
+    &\boxed{\begin{aligned}
+        &\texttt{Object Definitions}\\
+        &\boxed{\texttt{Complex}}
+    \end{aligned}}\\
+    &\boxed{\begin{aligned}
+        &\texttt{Function Definitions}\\
+        &\boxed{\texttt{sgn}}\\
+        &\boxed{\texttt{rad}}\\
+        &\boxed{\cdots}
+    \end{aligned}}\\
+    &\texttt{Global Constants}\\
+    &\triangleright\texttt{ Call to main()}
+\end{aligned}
+}\]
+We structure the program like this to ensure \texttt{main} is easily accessible at the top of the program, and helper functions are more easily identifiable and findable. We place \texttt{Global Constants} at the bottom so users don't edit them by mistake.\en
+Note that due to restrictions with \texttt{Glowscript WebVPython}, we must keep all code in a single file without imports. 
+\subsection{Main Function}
+The \texttt{main} function has four primary responsibilities:
+\begin{itemize}[parsep=0pt, itemsep=0pt]
+    \item Regulate speed of the program
+    \item Create and maintain the user interface
+    \item Correctly interpret user input
+    \item Call the correct functions to calculate speed and time
+\end{itemize}
+Additionally, during runtime, main will attempt to minimize calculation load on the system by conserving values in memory. For example, adjusting the variable $P$ (power) does not require a recalcualtion of the terminal velocity, so \texttt{main} will avoid the call to \texttt{v\_term}. 
+\subsection{Handling Complex Numbers}
+An important caveat of utilizing a web-transferrable version of WebVPython is that external libraries like \cd{cmath} are unusable. Thus, we must define how complex numbers are handled in our file. \en
+We accomplish this by making a \cd{class Complex}, which represents a number's real and complex components. This object has the following member variables \& functions:
+\begin{verbatim}
+self.real → real component
+self.img  → imaginary components
+__mul__   → defines complex multiplication
+__abs__   → gets absolute value
+conjugate → finds complex conjugate
+\end{verbatim}
+These methods do not represents the full extent of implementation. 
+\subsection{Helper Functions}
+Several calculation functions are utilized to aid in calculation of velocities and total time. Complete details can be found in the appendix.\newcommand{\ct}[1]{\texttt{#1}}
+\begin{center}\small
+    \begin{supertabular}{|c|c|}
+        \hline
+        \textbf{Func.} &\textbf{Purpose} \\ \hline
+        \ct{sgn(n)} & Gets sign of $n\in \R$\\ \hline
+        \ct{rad(ø)} & Returns angle ø in radians\\ \hline
+        \ct{sin\_up(ø)} & Returns effective upward\\ &angle given rolling friction\\\hline
+        \ct{sin\_down(ø)} & Returns effective downward \\ &angle given rolling friction\\\hline
+        \ct{real\_roots(L)} & Returns $\{i\in L: i\in \R\}$\\\hline
+        \ct{sqrt(x)}& Returns $\sqrt x$\\\hline
+        \ct{cbrt(j)}& Returns $\sqrt[3]x$ for $x\in \C$\\\hline
+        $\cdots$&$\cdots$\\
+        $\cdots$&$\cdots$\\\hline
+        \ct{cubic\_roots(...)}& Returns real roots of cubic\\&polyn. $ax^3+bx^2+cx+d$\\\hline
+        \ct{vel\_up()}& Calculates $v_\text{up}$ of cyclist.\\\hline
+        \ct{v\_term()}& Returns $v_\text{term}$ of cyclist\\\hline
+        \ct{t\_up($v_\text{up}$)}& Calculates time to go \\&up hill.\\\hline
+        \ct{t\_down($v_\text{term}$)}& Calculates time to go\\&down hill.\\\hline
+    \end{supertabular}\normalsize
+\end{center}
+Please note that \ct{main()} will only ever call \ct{vel\_up, vel\_down, t\_up, }and \ct{t\_down}, because the details of calculations are encapsulated to each respective function. 
+\subsection{Global variables and constants}
+This program will have a collection of global variables and constants. The user can edit global variables within the program interface, but cannot edit the constants. 
+\centerit{\ul{Variables}}
+\begin{verbatim}
+# Stored at beginning of program
+vw:    → the tailwind (m/s)
+P:     → power of the cyclist (W)
+theta: → angle of ascent (deg)
+ß:     → Coefficient of air friction
+m:     → mass of rider (kg)
+\end{verbatim}
+\centerit{\ul{Constants}}
+\begin{verbatim}
+# Stored at end of program
+g = 9.81   → gravity (m/s^2)
+p = 1.225  → air density (kg/m^3)
+µ = 0.006  → Rolling resistance
+pi = 3.141 → Self-explanatory
+\end{verbatim}
+We keep these variables global to reduce the number of parameters required for a function. Otherwise, a method like \ct{v\_term()} would look like \ct{v\_term(vw, theta, beta, m, pi, g, p)}, which is counterintuitive for program readability. 
+\section{Continued Direction}
+Although the program is already capable of replicating the results found in the, this is only a rough draft and there remains many additional measures to improve the program thus far. 
+\subsection{User-Interface}
+In order for users to currently use the program, they must create their own instance of VPython, which is impractical. Instead, by creating buttons and scales by which users can adjust the global variables in a visual setting will be completed.\en
+\texttt{VPython} offers many measures for doing this, and real-time updates are rather simple to implement without large computational load. 
+\subsection{Visualization}
+By this time this project is complete, there will also be a visualization of a cyclist going up a hill pedaling at a speed proportional to the Power $P$ specified by the user.\en
+Although this serves no mathematical purpose, it will look nice to those unfamiliar with the physical concepts. This will also allow for display of the equations of motion.\en
+This will be accomplished not by having a rotated environemnt in \texttt{VPython}, but simply by rotating the camera. 
+\subsection{Graphing}
+Just as in the initial study, by the time this simulation is fully complete, there will be graphs of Power Output vs. Speed with constant variation given a time interval.\\
+This will allow users to experiment with various different physical constants and see the effects of hill angle, cyclist power, tailwinds, mass, and frontal area on time to "\textbf{Everest}."
+\subsection{Publishing}
+Finally, the code that accomplishes this, this \LaTeX\;document, and it's accompanying presentation (in .pptx \& .pdf) will all be uploaded to a public \texttt{GitHub} repository.
+This will allow the professor and any interested onlookers to understand the working of the project. This will be accompanied by a \texttt{README.md} that specifies each file's purpose.\n
+That's all for this draft. Goodbye.
+\end{document}

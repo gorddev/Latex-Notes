@@ -1,0 +1,170 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro,changepage}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{changepage}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.5in}
+            \setlength \textwidth{5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\n}{\vspace{0.15cm}\\}
+\newcommand{\en}{\vspace{0.25cm}\\}
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Day 1 - Intro to Proofs}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+   \end{adjustwidth}}
+
+
+\begin{document}
+
+%%%% Introductions
+\section{Introductions}
+Class begins by discussion \textit{how we prove something}. A proof is basically a \textit{really really really small paper}, and the point of communicatino is to tell a story in a way. We should sit and think, ``how is this going to go?''
+\subsection{Statements}
+A statement is something that has a \textbf{truthness} or \textbf{falseness} to it. For example, 
+\[\text{The sky is blue today}\]
+It may be impossible to discern a statement's truth value, but that doesn't mean that it's not a statement (e.g. the Reimann Hypothesis). 
+\section{Direct Proofs}
+We will start with some assumptions, we wlil determine what those assumptions mean, and discern truthness from it.\en
+Let's start with some basic assumptions:
+\begin{itemize}
+    \item An integer $n$ is even if it is possible to write $n=2k$ for some integer $k$.
+    \item An integer $n$ is odd if it is possible to write $n = 2\ell + 1$ for some integer $\ell$
+\end{itemize}
+Quick questions:
+\begin{enumerate}
+    \item Why is $n= 10$ even? \en
+    Because we can write $2\cdot 5 = 10$
+    \item Why is $m = -21$ odd? \en
+    Because we can write $-11\cdot 2 + 1 = -21$. 
+\end{enumerate}
+\subsection{First Proof}
+Now, consider the following statement:
+\centerit{If $n$ is even, then $n^2+1$ is odd.}
+Without proof, I think the following statement is true.
+\begin{proof}
+Assume that $n=2k$. We must show that $n^2 +1$ can be written as $2\ell + 1$. Since $n^2 + 1 = (2k)^2 + 1$, we can write:
+\begin{align*}
+    4k^2 +1 = 2(2\cdot k^2) + 1
+\end{align*}
+Let $2\cdot k^2 \equiv \ell$, then we have that:
+\begin{align*}
+    n^2+1 = 2\ell + 1
+\end{align*}
+Thus, we see that $n^2+1$ is odd as I so hungrily desired.
+\end{proof}
+\pagebreak
+\subsection{Structure of a proof}
+We will quickly overview the general structure of a proof.
+\begin{proof}
+    Let $n$ be an even integer.\\
+    We must show $n^2+1$ is odd. \\
+    Since $n$ is even, then $n = 2k, k\in \Z$.\\
+    Then $n^2 + 1 = (2k)^2 + 1 = 2(2k^2) + 1$. Let $\ell = 2k^2$, which is an integer. \\
+    Then, $n^2 + 1 = 2\ell +1$ and is thus odd, as desired. 
+\end{proof}
+\subsection{Second Proof}
+Fill in the following statement:
+\centerit{If $m$ is off, then $m^2 +m $ is even}
+\begin{proof}
+Assume that $m \equiv 2k + 1$. Then we can write:
+\begin{align*}
+    m^2+m &= (2k + 1)^2 + 2k + 1\\
+    &= 4k^2 + 4k + 1 + 2k +1\\
+    &= 4k^2 + 6k + 2.
+\end{align*}
+Simplifying the equation gives that:
+\begin{align*}
+    m^2 + m = 2(2k^2 + 3k + 2)
+\end{align*}
+If we define $\ell \equiv 2k^2 + 3k + 2$, then we write $m^2 + m = 2\ell$. Thus, because we can write $m^2 +m$ in this form, we see that $m^2+m$ is even, as desired. 
+\end{proof}
+\subsection{Third Proof}
+If $n$ is odd, then $n^2 - 1$ is a multiple of 8.
+\begin{proof}
+    Assume that we may write $n$ as $n = 2k+1, \,k\in \Z$ because $n$ is odd. We must show that $n^2 - 1$ is a multiple of 8, such that we can write $n^2- 1 = 8\ell$, for some $\ell \in \Z$. \en
+    Consider that:
+    \begin{align*}
+        n^2 - 1 &= (2k +1)^2 -1\\
+        &= 4k^2 + 4k\\
+        &= 4(k^2 + k)
+    \end{align*}
+    Via proof \#2, we know that $k^2 + k$ is even, so we can write:
+    \begin{align*}
+        4(k^2+k) &= 4(2\ell)\\
+        &= 8\ell, \,\text{ for some } \ell \in \Z
+    \end{align*}
+    Thus, we have that $n^2 - 1 = 8\ell$, and $n^2 - 1$ is a multiple of 8, as desired.
+\end{proof}
+\subsection{Fourth Proof}
+If $n<10$, then $n^2+100 \le 181$. 
+\begin{proof}
+    \textit{By counterexample. }We want to show that $\exists n<10, $ for $n\in\Z$ such that $n^2 + 100 > 181$.\en
+    Consider $n = -10$. Then we have that:
+    \begin{align*}
+        n^2 + 100 = 200 > 181
+    \end{align*}
+    Thus, the statement ``if $n<10$, then $n^2+100 \le 181$'' is false. 
+\end{proof}
+\newpage
+\section{Divisibility \& Vocab}
+We say that:
+\centerit{\fbox{An integer $b$ is divisible by an integer $a\ne 0$ if $b = a\cdot k$ for some $K\in \Z$}}
+The notation we use is $a\mid b$,\;\;(a ``divides'' b).
+\subsection{Theorem 2.2}
+Fill in the missing parts o the proof:
+\begin{proof}
+    Assume $a,b,c,d$ are integers and \textbf{nonzero}. Since $a\mid b$ there is an integer $x$ such that $b= x\cdot a$. Similarly, since $c\mid d$, there is an integer $y$ such that $d = y\cdot c$. It follows that $bd = xy\cdot ac$, and therefore $ac\mid bd$. 
+\end{proof}
+\subsection{Division Algorithm}
+Let $n, m \in \Z,\,(m\ne 0)$. \\
+Then there exists a unique $q, r\in\Z$ where $n = q\cdot m + r$, for $0\le r < q$
+\subsection{Divisibility Proof 1}
+Let $n$ be an integer. \textbf{Claim:} it is impossible for $n^2 - 2$ to be divisible by 3. \\
+Consider the cases where we can represent $n^2 - 2$ as $3a + r$, where $r = 0,1,2$. Thus we simplify this representation with $n = 0, 1, 2$.  We get $-2, -1, 2$ as our results, all of which are not divisible by 3. 
+
+\end{document}

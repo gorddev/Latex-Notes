@@ -1,0 +1,333 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.5in}
+            \setlength \textwidth{5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Day 3 - Berliner lectures us hooray}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+   \end{adjustwidth}}
+
+
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+\subsection*{Section 2.4}
+\begin{enumerate}
+	\item [2.] Use the Euclidean Algorithm to obtain integers $x$ and $y$ that satify:
+	\begin{enumerate}
+		\item [(b)] gcd(24, 138$) = 24x + 138y$.\gline
+		We will use the Euclidean algorithm to solve this problem.
+		\begin{align*}
+			138 &= 5(24) + 18\\
+			24 &= 1(18) + 6\\
+			18 &= 3(6) + 0
+		\end{align*}
+		Thus, our gcd is 6. Now we work backwards to find the linear combination.
+		\begin{align*}
+			6 &= 24 - 1(18)\\
+			6&= 24 - 1(138 - 5(24))\\
+			6&= 6(24) - 138
+		\end{align*}
+		Thus, our linear combination will have $x = 6$ and $y = -1$. 
+		\item [(d)] gcd(1769, 2378$) = 1769x + 2378y$.\gline
+		We will again use the Euclidean algorithm to solve this problem:
+		\begin{align*}
+			2378 &= 1(1769) + 609\\
+			1769 &= 2(609) + 551\\
+			609 &= 1(551) + 58\\
+			551 &= 9(58) + 29 \\
+			58 &= 2(29) + 0
+		\end{align*}
+		Thus, our gcd is 29. Now, again, we work backwards to find the linear combination:
+		\begin{align*}
+			29&= 551 -9(58)\\
+			29&= 551 - 9(609 - 551)\\
+			29 &= 10(551) - 9(609)\\
+			29&= 10(1769 - 2(609)) - 9(609)\\
+			29 &= -29(609) + 10(1769)\\
+			29 &= -29(2378 - 1769) + 10(1769)\\
+			29 &= -29(2378) + 39(1769)
+		\end{align*}
+		This gives us a final result of $x = 39$ and $y = -29$.
+	\end{enumerate}
+	\item [9.] Prove that the greatest common divisor of two positive integers divides their least common multiple.\gline
+	We will show that because the greatest common divisor divides both numbers ($a$ and $b$) in a gcd, it must divide any of their multiples as well. 
+	\begin{proof}
+		Let $a, b$ be integers with $d = \text{gcd}(a,b)$ and $\ell = \text{lcm}(a,b)$. We want to show that $d\mid \ell$. \gline
+		Because $d$ is the greatest common divisor of $a$ and $b$, let $x, y \in \Z$ such that that:
+		\begin{align*}
+			xd &= a, \text{ and}\\
+			yd &= b.
+		\end{align*}
+		Furthermore, because $\ell$ is the least common multiple of $a$ and $b$, let $ p,q \in \Z$ such that:
+		\begin{align*}
+			pa &= \ell, \text{ and} \\
+			qb &= \ell.
+		\end{align*}
+		Thus, via substitution, we have that:
+		\begin{align*}
+			xp\cdot d &= \ell.
+		\end{align*}
+		Let $m \equiv xp \in \Z$. Hence, because $md = \ell$, via the definition of a divisor, $d=\text{gcd}(a,b)$ divides $\ell = \text{lcm}(a, b)$, as desired. 
+	\end{proof}
+\end{enumerate}
+
+\subsection*{Section 2.5}
+\begin{enumerate}
+	\item Which of the following \textbf{Diophantine equations} cannot be solved?\gline
+	To solve each of these, we will just find the gcd and determine if the other side of the equation is a multiple of the gcd. 
+	\begin{enumerate}
+		\item $6x +51y = 22$\gline
+		Consider that the gcd of 6 and 51 is equal to 3:
+		\begin{align*}
+			51 &= 8(6) + \fbox{3}\\
+			6 &= 2(3) + 0
+		\end{align*}
+		Thus, because $22/3$ is not an integer, this Diophantine equation cannot be solved.
+		\item $33x + 14y = 115$\gline
+		Consider that the gcd of 33 and 14 is 1:
+		\begin{align*}
+			33 &= 2(14) + 5 \\
+			14 &= 2(5) + 4\\
+			5 &= 1(4) + \fbox{1}\\
+			4 &= 4(1) + 0
+		\end{align*}
+		Thus, because 115 is trivially a multiple of 1, this Diophjantine equatino can be solved.
+		\item $14x + 35y = 93$\gline
+		Consider that the gcd of 35 and 14 is 7:
+		\begin{align*}
+			35 &= 3(14) + \fbox{7}\\
+			14 &= 2(7) + 0 
+		\end{align*}
+		Thus, because $93/7$ is not an integer (as in 7 is not a divisor of 93), this Diophantine equation is not solvable.
+	\end{enumerate}
+	\item Determine all solutions in the integers of the following Diophantine equations.\gline
+	To solve this problem, we will first find the gcd of both $a$ and $b$, and then use our handy-dandy equations:
+	\begin{align*}
+		x_1 &= x_0 + \left(\frac{b}d\right)t\\
+		y_1&= y_0 - \left(\frac{a}d\right)t
+	\end{align*}
+	To find our solution sets!
+	\pagebreak
+	\begin{enumerate}
+		\item $56x + 72y=40$\gline
+		First, let's find the gcd of both numbers:
+		\begin{align*}
+			72 &= 1(56) + 16\\
+			56 &= 3(16) + \fbox 8\\
+			16 &= 2(8) + 0
+		\end{align*}
+		Now that we've identified our gcd as 8 (and that $8\mid 40$), we start looking for our $x_0$ and $y_0$ by doing the Euclidean backwards:
+		\begin{align*}
+			8&= 56 - 3(16)\\
+			8&= 56 - 3(72 - 56)\\
+			8&= 4(56) - 3(72)
+		\end{align*}
+		Thus, we have that $x_0 = 4$ and $y_0 = -3$. 
+		\begin{align*}
+			x_1 &= 4 + \left(\frac{72}8\right)t &x_1 = 4+9t\\
+			y_1&= -3 + \left(\frac{56}8\right)t &y_1 = -3 - 7t
+		\end{align*}
+		However, these are not our final equations, as they are the solution for $c = 8$. Now, we need to multiply the non-coefficients by $40/8 = 5$ to get our final equations:
+		\begin{align*}
+			x_1 &= 20+9t\\
+			y_1 &= -15 - 7t
+		\end{align*}
+		\item $24x + 138y = 18$\gline
+		First we need to find the gcd the $a$ and $b$:
+		\begin{align*}
+			138 &= 5(24) + 18\\
+			24 &= 1(18) + \fbox 6\\
+			18 &= 6 + 0
+		\end{align*}
+		Now that we have that our gcd is 6, and $6$ clearly divides 18 (so we have solutions), we work backwards to find our particular solution for $x_0$ and $y_0$:
+		\begin{align*}
+			6&= 24 - 1(18)\\
+			6&= 24 - (138 - 5(24))\\
+			6&= 6(24) - 138
+		\end{align*}
+		Thus, we find that $x_0 = 6$ and $y_0 = -1$. Now, we can plug these values into our equations to get a tasty result:
+		\begin{align*}
+			x_1 &= 6 + \left(\frac{138}6\right)t &x_1 = 6+23t\\
+			y_1&= -1 - \left(\frac{24}6\right)t &y_1 = -1 - 4t
+		\end{align*}
+		Multiplying by our factor of $18/6 = 3$ gives:
+		\begin{align*}
+			x_1 &= 18+23t\\
+			y_1 &= -3 - 4t
+		\end{align*}
+		Hooray!
+		\item Determine all solutions in the positive integers of the following Diophantine equations.\gline
+		Little preface from me, gordie! I'm not sure how to solve this one, so I'm going to solve it like I solved the rest of them except restrict $t$ such that by $x_1$ and $y_1$ are positive. 
+		\begin{enumerate}
+			\item [(b)] $54x + 21y = 906$\gline
+			First, let's find the greatest common divisor of both $a$ and $b$:
+			\begin{align*}
+				54 &= 2(21) + 12\\
+				21 &= 1(12) + 9 \\
+				12 &= 1(9) + \fbox 3 \\
+				9 &= 3(3) + 0
+			\end{align*}
+			Our gcd is 3, and 3 divides 906 so we have integer solutions to this equation! Solving for $x_0$ and $y_0$ yields:
+			\begin{align*}
+				3&= 12 - 9\\
+				3&= 12 - (21 - 12)\\
+				3&= 2(12) - 21\\
+				3&= 2(54 - 2(21)) -21 \\
+				3&= 2(54) - 5(21)
+			\end{align*}
+			This gievs us $x_0 = 2$ and $y_0 = -5$. Plugging into our fancy equations gives us that:
+			\begin{align*}
+				x_1 &= 2 + 7t\\
+				y_1 &= -5 - 18t
+			\end{align*}
+			Multiplying by (906/3) gives:
+			\begin{align*}
+				x_1 &= 2(302) + 7t\\
+				y_1 &= -5(302) - 18t
+			\end{align*}
+			Now we start to restrict $t$ with $x_1 > 0$ and $y_1>0$:
+			\begin{align*}
+				t &> -\frac{2(302)}{7}\\
+				t &< -\frac{5(302)}{18}
+			\end{align*}
+			Simplifying to integer forms, $t \ge -86$ and $t <- 83$.
+			Thus, our three solutions occur when $t = \{-86, -85, -84\}$
+			Writing them out explicitly, we have that:
+			\begin{align*}
+				x_n &= \{16, 9, 2\}\\
+				y_n &= \{2, 20, 38\}
+			\end{align*}
+			With each solution paired respectively (e.g. (16, 2))
+			\pagebreak
+		\end{enumerate}
+	\end{enumerate}
+	\item[6.] A farmer purchased 100 head of livestock for a total cost of \$4000. Prices were as follow: calves, \$120 each; lambs, \$50 each; piglets, \$25 each. If the farmer obtained at least one animal of each type, how many of each did he buy?\gline
+	So honestly I'm a little confused by this question, so I think I'm just going to solve it with a system of equations. Let $x$ be the number of calves, $y$ be the number of lambds, and $z$ be the number piglets.
+	\begin{align*}
+		100 &= x + y + z\\
+		4000&= 120x + 50y + 25z
+	\end{align*}
+	Next, I'm going to reduce this system to two variables so we can use the methods taught in this chapter of the textbook to solve it.
+	\begin{align*}
+		z&= 100 - x - y, \text{ and then we substitute:} \\
+		4000 &= 120 x + 50y + 25(100 - x - y)\\
+		1500 &= 95x +25y.
+	\end{align*}
+	Now, we have an equation of the form $c = ax + by$, which is exactly what we want. Now we use the Euclidean Algorithm to solve for our gcd:
+	\begin{align*}
+		95 &= 3(25) + 20\\
+		25 &= 1(20) + \fbox 5\\
+		20 &= 4(5) + 0
+	\end{align*}
+	Thus, we have a gcd of 5. Now we can do the reverse Euclidean algorithm thing to get our exact values:
+	\begin{align*}
+		5&= 25 - 20\\
+		5 &= 25 - (95 - 3(25))\\
+		5 &= 25(4) - 95(1)
+	\end{align*}
+	We have that  $x = -1$ and $y = 4$. However, this is obviously not realistic as the farmer must buy a minimum of 1 of each livestock. Thus, we must utilize our fancy equations to determine all the possibilities where $x\ge 1$, $y \ge 4$, and $x+y \le 99$ (because have a total of 100 livestock). \gline
+	Doing this yields our equations:
+	\begin{align*}
+		x_1 &= -1 + \frac{25}5t\\
+		y_1 &= 4 - \frac{95}5t
+	\end{align*} 
+	Now, we multiply our constant non-coefficients in the equation by $1500/5 = 300$ and get:
+	\begin{align*}
+		x_1 &= -300 + 5t\\
+		y_1 &= 1200 - 19t
+	\end{align*}
+	Thus we see that for $x_1> 0$ and $y_1>0$ we must have:
+	\begin{align*}
+		t &> 60\\
+		t &\le 63
+	\end{align*}
+	So that leaves us with three possibilities: 61, 62, and 63. But this is not satisfactory as we must remain with a singular answer. Thus, we now must satify that final condition, that $x+y \le 99$.
+	\pagebreak
+	Plugging in our values for t gives us that for $t = \{61, 62, 63\}$ we have that:
+	\begin{align*}
+		x &= \{5, 10, 15\}\\
+		y &= \{41, 22, 3\}
+	\end{align*} 
+	Turns out all three solutions are valid under this constraint.\\
+	Thus, I have create a \textit{LIVESTOCK TABLE} to congratulate me on completing this problem:
+	\begin{center}
+		\begin{tabular}{c|c|c|c}
+			calf & lamb & pig & total\\\hline
+			5 & 41 & 54 & 100\\\hline
+			10 & 22 & 68 & 100\\\hline
+			15 & 3 & 82 & 100\\\hline
+		\end{tabular}\gline
+		\ul{\textbf{Chart of Total Animal Counts}}\gbline
+		\begin{tabular}{c|c|c|c}
+			calf & lamb & pig & total\\\hline
+			\$600 & \$2050 & \$1350 & \$4000\\\hline
+			\$1200 & \$1100 & \$1700 & \$4000\\\hline
+			\$1800 & \$150 & \$2050 & \$4000\\\hline
+		\end{tabular}\gline
+		\ul{\textbf{Chart of Total Animal Costs}}
+	\end{center}
+	Thus we have a total of 3 possible solutions to the farmer's problem. Which is kinda weird cause the problem made it seem like there was going to be one. 
+\end{enumerate}
+
+
+\end{document}

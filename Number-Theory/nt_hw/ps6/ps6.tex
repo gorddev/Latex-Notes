@@ -1,0 +1,300 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}{\,\text{mod}\,}
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Problem Set 6/7}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Section 4.2}
+
+\begin{enumerate}
+	\item Prove each of the following assertions:
+	\begin{enumerate}
+		\item If $a\equiv b(\gmod n)$, and $c> 0$, then $ca \equiv cb(\gmod cn)$.
+		\begin{proof}
+			We want to show that if $a\equiv b(\gmod n)$, and $c> 0$, then $ca \equiv cb(\gmod cn)$. \gline
+			Let $a,b,n,c\in\Z$ such that $a\equiv b(\gmod n)$, and $c> 0$. Thus, we have that:
+			\begin{align*}
+				n&\mid b- a
+			\end{align*}
+			Thus, $\exists x\in\Z$ such that $nx = b - a$. With simple algebraic manipulation, we have that:
+			\begin{align*}
+				cnx &= cb - ca\\
+				cn&\mid cb - ca 
+			\end{align*}
+			And hence, we have that $ca \equiv cb (\gmod cn)$, as desired. 
+		\end{proof}
+	\end{enumerate}
+	\item [4.] \begin{enumerate}
+		\item Find the remainders when $2^{50}$ and $41^{65}$ are divided by 7.\gline
+		We know that for $2^50$, that:
+		\begin{align*}
+			2^{50} &= (2^3)^{16}\cdot 2^2\\
+			&= 8^{16} 2^2\\
+			&\equiv 4\gmod 7
+		\end{align*}
+		Furthermore, we know that for $41^65$, that:
+		\begin{align*}
+			41^{65}&\equiv 6^{65}\gmod 7\\
+			&\equiv (36)^{32}\cdot 6 \gmod 7\\
+			&\equiv 1\cdot 6 \gmod 7\\
+			&\equiv 6\gmod 7
+		\end{align*}
+		\item What is the remainder when the following sum is divided by 4?
+		\begin{align*}
+			1^5+2^5+3^5+\cdots+99^5+100^5
+		\end{align*}
+		In order to solve this problem, we reduce everything into modulo four, such that we have:
+		\begin{align*}
+			1^5+2^5+3^5+\cdots+99^5+100^5&\equiv
+			25(1^5 + 2^5+3^5) \gmod 4\\
+			&\equiv 32(1+2+3)\\
+			&\equiv 0\gmod 4
+		\end{align*}
+		We then have that our remainder is 0. 
+	\end{enumerate}
+	\item Prove that the integer $53^{103}+103^{53}$ is divisible by 39, and that $111^{333} + 333^{111}$ is divisible by 7.\gline
+	Consider that $53\gmod 39 = 14, 14^2\gmod 39 = 1$. \\
+	Furthermore, we have that $103\gmod 39 = 25, 25^2 \gmod 39 = 1$.
+	We can then write:
+	\begin{align*}
+		53^{103}+103^{53}&\equiv (14^2)^{51}14 + (25^{2})^{26}25\\
+		&\equiv 1\cdot 14 + 1 \cdot 25\\
+		&\equiv 39\gmod 39\\
+		&\equiv 0 \gmod 39
+	\end{align*}
+	So it is divisible by 39. Next problem. With $111^{333} + 333^{111}$, note that:\gline
+	$111\equiv 6\gmod 7$, $6^2 \equiv 1 \gmod 7$. \\
+	$333\equiv 4\gmod 7$, $4^2 \equiv 2 \gmod 7$.\gline
+	So thus we get that:
+	\begin{align*}
+		111^{333} + 333^{111}&\equiv 6^{333}+4^{111} \gmod 7\\
+		&\equiv (6^2)^{166}6 + (4^2)^{55}4\gmod 7\\
+		&\equiv 6 + (2^{3})^{18}\cdot 2\cdot 4\gmod 7\\
+		&\equiv 6 + 1 \gmod 7\\
+		&\equiv 0 \gmod 7
+	\end{align*}
+	Thus, $111^{333} + 333^{111}$ is divisible by 7.
+	\item[6.] For $n\ge 1$, use congruence theory to establish each of the following divisibility statements:
+	\begin{enumerate}
+		\item [(b)] $13\mid 3^{n+2}+4^{2n+1}$\gline
+		Consider that:
+		\begin{align*}
+			3^{n+2}+4^{2n+1}&= 9\cdot 3^n + 4\cdot (4^2)^n\\
+			&\equiv -4 \cdot 3^n + 4 \cdot (3)^n \gmod 13\\
+			&\equiv 0 \gmod 13
+		\end{align*}
+		Thus the statement is true. 
+	\end{enumerate}
+	\item [8.] Prove the assertions below:
+	\begin{enumerate}
+		\item If $a$ is an odd integer, then $a^2\equiv 1\gmod 8$.
+		\begin{proof}
+			We want to show that if $a$ is an odd integer, then $a^2\equiv 1\gmod 8$. \gline
+			Let $a$ be an odd integer represented by $a = 2k+1,\;k\in\Z$. Thus, we have that:
+			\begin{align*}
+				a^2 &= (2k+1)^2\\
+				&= 4k^2 + 4k + 1\\
+				&= 4k(k+1) + 1
+			\end{align*}
+			Thus, because the multiplication of two consecutive integers results in an even number (even times odd), we have that:
+			\begin{align*}
+				4k(k+1) + 1 &= 4(2n) + 1, \;n\in\Z\\
+				&= 8n + 1\\
+				&\equiv 1 \gmod 8
+			\end{align*}
+			Hence, if $a$ is odd, then $a^2 \equiv 1 \gmod 8$. 
+		\end{proof}
+	\end{enumerate}
+	\item [16.] Use the theory of congruences to verify that $89\mid 2^{44} - 1$. 
+	\begin{proof}
+		We want to show that $89\mid 2^{44} - 1$. \gline
+		Consider that $2^{11}\gmod 89 \equiv 1\gmod 89$. Thus we have that $(2^{11})^4 - 1 \equiv (1)^4 - 1\gmod 89 \equiv 1 - 1 \gmod 89 \equiv 0 \gmod 89$.\gline
+		Hence, $89\mid 2^{44}-1$, as desired. 
+	\end{proof}
+\end{enumerate}
+
+\subsection*{Section 4.3}
+\begin{enumerate}
+	\item [4.] Without performing the divisions, determine whether the integers 176521221 and 149235678 are divisible by 9 or 11. \gline
+	Via modular arithmetic, we know that we can determine visibility by 9 in base 10 by writing:
+	\begin{align*}
+		n &= a_k10^k+\cdots+a_010^0\\
+		&\equiv a_k + \cdots +a_0 \gmod 9\\
+		&\equiv -a_k + \cdots -a_1+a_0 \gmod 11
+	\end{align*}
+	In plain english, this says that the sum of the digits must be divisible by 9 to be divisible by 9, and the alternating sum of the digits must be divisible by 11 to be divisible by 11. \gline
+	Summing both regular and alternating digits gives:
+	\begin{align*}
+		1+7+6+5+2+1+2+2+1 &= 27\equiv 0 \mod 9\\
+		1-7+6-5+2-1+2-2+1 &= -3 \equiv 8\mod 11
+	\end{align*}
+	Thus, 176521221 is divisible by 9 and not 11.
+	\begin{align*}
+		1+4+9+2+3+5+6+7+8 &= 45\equiv 0 \mod 9\\
+		1-4+9-2+3-5+6-7+8 &= 9 \equiv 9 \mod 11
+	\end{align*}
+	Thus, 149235678 is divisible by 9 and not 11. 
+	\item [5.] \begin{enumerate}
+		\item Obtain the folloing generalization of Theorem 4.6: If the integer $N$ is represented in the base $b$ by:
+		\begin{align*}
+			N = a_mb^m+\cdots + a_2b^2 + a_1b + a_0\quad 0 \le a_k \le b - 1
+		\end{align*}
+		then $b -1 \mid N$ if and only if $b- 1\mid (a_m+\cdots+a_2+a_1+a_0)$ 
+		\begin{proof}
+			We want to show that for an integer $N$ represented in base $b$ by:
+			\begin{align*}
+				N = a_mb^m+\cdots + a_2b^2 + a_1b + a_0\quad 0 \le a_k \le b - 1,
+			\end{align*}
+			then $b-1\mid N$ if and only if $b-1 \mid (a_m+\cdots+a_2+a_1+a_0)$.\gline
+			Let $N$ be an integer represented in base $b$ by the above formula. We proceed with the forwards direction.
+			\centerit{\textbf{Forwards: Assume $b-1\mid N$}}
+			We want to show that if $b-1\mid N$, then $b-1\mid (a_m+\cdots+a_2+a_1+a_0$. \gline
+			Because $b-1\mid N$, we know that $N\equiv 0 \gmod (b-1)$. Thus, because $b \equiv 1 \gmod b-1$, we write:
+			\begin{align*}
+				0 &\equiv a_mb^m+\cdots + a_1b + a_0\; \gmod (b-1)\\
+				&\equiv a_m(1)^m +\cdots + a_1(1)^1 + a_0\;\gmod (b-1)\\
+				&= a_m+\cdots a_1 + a_0
+			\end{align*}
+			Thus, because $a_m+\cdots+a_1+a_0\equiv 0 \gmod b-1$, the forwards direction holds.\gline
+			We now proceed with the backwards direction.
+			\pagebreak
+			\centerit{\textbf{Backwards: Assume $b-1\mid a_m+\cdots+a_1+a_0$}}
+			We want to show that if $b-1\mid a_m+\cdots+a_1+a_0$, then $b-1\mid N$. \gline
+			Consider that in $\gmod b-1$, any integer $n\equiv b^kn(\gmod b-1)$, because $b \equiv 1 \gmod b -1$. Thus, we have that:
+			\begin{align*}
+				0 &\equiv a_m+\cdots+a_1+a_0\gmod(b-1)\\
+				&\equiv b^ka_m + \cdots +ba_1+a_0\gmod b-1\\
+				&\equiv N \gmod (b-1)
+			\end{align*}
+			Thus, because $N\equiv 0\gmod (b-1)$, $b-1\mid N$, and the backwards direction holds.\gline
+			Hence, $b-1\mid N$ if and only if $b-1 \mid (a_m+\cdots+a_2+a_1+a_0)$, as desired.
+		\end{proof}
+		\item Give criteria for the divisibility of $N$ by 3 and 8 that depend on the digits of $N$ when written in the base 9. \gline
+		To show the divisibility in base 3, consider an integer $N$ in base 9:
+		\begin{align*}
+			N &= a_mb^k + \cdots + a_1b^1 + a_0\\
+			&= a_m(9)^3 + \cdots + a_1(3) + a_0\\
+			&\equiv a_0\gmod 9
+		\end{align*}
+		Thus, for divisibility of 3 in base 9, you only look at the last digit, and if it is divisible by 3, then the whole number is.\gline
+		Now for divisibility with respect to 9:
+		\begin{align*}
+			N &= a_mb^k + \cdots + a_1b^1 + a_0\\
+			&= a_m(8)^k + \cdots + a_1(8) + a_0\\
+			&\equiv a_m(-1)^k + \cdots - a_1 + a_0\gmod 9
+		\end{align*}
+		Thus, for divisibility of 8 in base 9, if the alternating sum of the digits is divisible by 8, then the whole number is divisible by 8.
+		\item Is the integer $(447836)_9$ divisible by 3 and 8? \gline
+		The last digit is divisible by 3, so it is divisible by 3.\gline
+		We sum the alternating digits to check divisibility by 8:
+		\begin{align*}
+			4+4-7+8-3+6 &= 12\\
+			&\equiv 4 \gmod 8 \implies \text{not divisible by 8}
+		\end{align*}
+	\end{enumerate}
+	\item [10.] Prove that no integer whose digits add up to 15 can be a square or a cube. \gline
+	We will prove this with the provided hint that for any $a, a^3\equiv 0, 1, \text{ or }8 \gmod 9$. 
+	\begin{proof}
+		\textit{By Contradiction.} We want to show that no integer whose digits add up to 15 is a perfect square or a perfect cube. We proceed first with disproving the cube case.
+		\centerit{\textbf{Cubed: $a^3$}}
+		For the sake of contradiction, let $a$ be an integer such that the digits of $a^3$ in base 10 add up to 15. Via the properties of modulo 9, we have for $a^3$ that:
+		\begin{align*}
+			a^3 \equiv b_m + \cdots + b_1 + b_0\gmod 9,
+		\end{align*}
+		where $b_m$ represents the digits of $a^3$ in descending order. Thus, we have that $a^3\equiv 15 \gmod 9 \equiv 6\gmod 9$. \gline
+		However, via the division algorithm with respect to 3, we know that $a^3$ must take the form:
+		\begin{align*}
+			(3n)^3 &= 27n^3\\
+			&= \boxed{9k\equiv 0\gmod 9}\\
+			(3n+1)^3 &= 27n^3 + 27n^2 + 18n + 1\\
+			&= 9(3n^3 + 3n^2 + 2n) + 1\\
+			&= \boxed{9k+1\equiv 1\gmod 9}\\
+			(3n+2)^3&= 27n^3 + 54n^2 + 36n + 8\\
+			&= 9(3n^3 + 6n^2 + 4n) + 8\\
+			&= \boxed{(9k+8)\equiv 8\gmod 9}
+		\end{align*}
+		This is a contradiction.\gline
+		Hence, no integer whose digits add up to 15 can be a cube. \gline
+		We now proceed with the square case.
+		\centerit{\textbf{Squared: $b^2$}}
+		For the sake of contradiction, let $b\in\Z$ such that the sum of the digits of $b^2$ is 15. Via the properties of modulo 9 discussed above, we have that $b\gmod 9 \equiv 6$. \gline
+		However, via the division algorithm with respect to 3, we know that $b^2$ must take the form:
+		\begin{align*}
+			(3n)^2 &= \boxed{9n\equiv 0 \gmod 9}\\
+			(3n+1)^2 &= 9n^2 + 6n + 1\\
+			&= \boxed{3(n^2+3n) + 1\equiv 1, 4, 7\gmod 9}\\
+			(3n+2)^2 &= 9n^2 + 18n + 4\\
+			&= \boxed{9(n^2+2n) + 4\equiv 4\gmod 9}
+		\end{align*}
+		Yet in order for the digits of $b$ to add to 15, it must be $6\gmod 9$, a contradiction. Thus, for any integer, the sum of the digits of its square cannot be equal to 15. \gline
+		Hence, for any integer $a$, the digits of $a^2$ or $a^3$ cannot sum to 15, as desired. 
+	\end{proof}
+\end{enumerate}
+
+\end{document}

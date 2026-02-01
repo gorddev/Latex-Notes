@@ -1,0 +1,215 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}{\text{mod}\,}
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Problem Set 8}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Section 5.2}
+
+\begin{enumerate}
+	\item Use Fermat's theorem to verify that $17$ divides $11^{104}+1$.
+	\begin{proof}
+		We want to show that $17$ divides $11^{104}+1$. \gline
+		Note that via the corollary to Fermat's Little Theorem that for any nonzero $a$ in a prime modulus, that $a^{17} = a$.\gline
+		Consider that:
+		\begin{align*}
+			11^{104}+1 &= (11^{17})^6\cdot 11^2 + 1\\
+			&\equiv 11^6\cdot 11^2 + 1\mod 17\\
+			&\equiv 11^8 + 1 \mod 17
+		\end{align*}
+		Now, note that $11^2 = 121\equiv 2\gmod 17$. We can simplify our equation to be:
+		\begin{align*}
+			11^8 + 1 &\equiv (11^2)^4 + 1\mod 17\\
+			&\equiv 2^4 + 1\mod 17\\
+			&\equiv 16 + 1\mod 17\\
+			&\equiv 0 \mod 17
+		\end{align*}
+		Hence, because $11^{104}+ 1 \equiv 0(\gmod 17)$, 17 divides $11^{104} + 1$, as desired. 
+	\end{proof}
+	\item \begin{enumerate}
+		\item If $\gcd(a, 35)=1$, show that $a^{12}\equiv 1(\gmod 35)$.
+		\begin{proof}
+			We want to show that if $\gcd(a,35) = 1$, then $a^{12}\equiv 1 (\gmod 35)$. \gline
+			Consider that $a$ and 35 are relatively prime, and thus share no common prime factors. Hence, we show that $a^{12}\equiv 1(\gmod 7)$ and $a^{12}\equiv 1(\gmod 5)$.
+			\centerit{\ul{$a^{12}\equiv 1 (\gmod 7)$}}
+			Via Fermat's little theorem, we have that $a^{6}\equiv 1 (\gmod 7)$. \\
+			It follows that: 
+			\begin{align*}
+				a^{12}&=(a^{6})^2\\
+				&\equiv (1)^2(\gmod 7)\\
+				&\equiv 1 (\gmod 7)
+			\end{align*}
+			Hence, $a^{12}\equiv 1(\gmod 7)$.
+			\centerit{\ul{$a^{12}\equiv 1 (\gmod 5)$}}
+			Via Fermat's little theorem, we have that $a^{4}\equiv 1 (\gmod 5)$. \\
+			It follows that: 
+			\begin{align*}
+				a^{12}&=(a^{4})^3\\
+				&\equiv (1)^3(\gmod 5)\\
+				&\equiv 1 (\gmod 5)
+			\end{align*}
+			Thus, $a^{12}\equiv 1(\gmod 5)$.
+		\end{proof}
+		Hence, because $a^{12}\equiv 1(\gmod 7)$ and $a^{12}\equiv 1(\gmod 5)$, it follows that \\$a^{12}\equiv 1(\gmod 35)$, as desired. 
+		\item If $\gcd(a,42)\equiv 1$, show that $168 = 3\cdot 7 \cdot 8$ divides $a^6 - 1$. 
+		\begin{proof}
+			We want to show that if $\gcd(a,42)\equiv 1$, it follows that $168$ divides $a^6 - 1$.\gline
+			We will first demonstrate that $a^6 \equiv 1(\gmod 42)$. \gline
+			Consider that $a$ is relatively prime to $42 = 2\cdot 3\cdot 7$, so it shares no common prime factors. Thus, proving that $a^6\equiv 1(\gmod 2)$, $a^6\equiv 1(\gmod 3)$, and $a^6\equiv 1(\gmod 7)$ is equivalent to proving that $a^6\equiv 1(\gmod 42)$.
+			\pagebreak
+			\centerit{\ul{$a^6\equiv 1 (\gmod 2)$}}
+			Because $a$ is odd, because it does not share the prime factor of 2 with 32, and any odd number to any power remains odd, thus $a\equiv 1 (\gmod 2)$ \\
+			Hence $a^6\equiv 1 (\gmod 2)$. 
+			\centerit{\ul{$a^6\equiv 1 (\gmod 3)$}}
+			Consider that via Fermat's little theorem, $a^{3-1}=a^2\equiv 1(\gmod 3)$.\\
+			It follows that $a^6 = (a^2)^3 \equiv (1)^3(\gmod 3) \equiv 1 (\gmod 3)$\\
+			Hence $a^6\equiv 1 (\gmod 3)$. 
+			\centerit{\ul{$a^6\equiv 1 (\gmod 7)$}}
+			Consider that via Fermat's little theorem, $a^{7-1}=a^6\equiv 1(\gmod 7)$. No further proof needed.\gline
+			Hence $a^6\equiv 1 (\gmod 42)$. \\\\
+			Now, we show that $a^6 - 1\equiv 0 (\gmod 168)$ (equivalently $168\mid a^6 - 1$). \gline
+			Because 168 prime factorizes into $2^3,3$, and 7, it remains that we must show that $a^6\equiv 1 (\gmod 8)$. \gline
+			Consider that $a$ is an odd number because the prime factor of 2 does not divide it. Let $k\in \Z$ such that $a = 2k + 1$. It follows that:
+			\begin{align*}
+				a^6 &= (a^2)^3\\
+				&= (4k^2 + 4k + 1)^3\\
+				&= (4k(k+1) + 1)^3
+			\end{align*}
+			Becuase $k(k+1)$ is an even number (even times an odd), let $j$ such that $k(k+1) = 2j$. We then have that:
+			\begin{align*}
+				(4k(k+1)+1)^3 &= (8j + 1)^3
+			\end{align*}
+			Note that $(8j+1)^3$ is trivially factorable into the form $8l + 1, l\in\Z$, because an 8 is attached to each $j$ term. 
+			\gline 
+			Thus, we have that $a^6 \equiv 1 (\gmod 8)$. \gline
+			Hence, because $a^6\equiv 1$ for mod 8, mod 3, mod 7, it follow that $a^6\equiv 1(\gmod 168)$, and thus, $a^6 - 1 \equiv 0 (\gmod 168)$, as desired. 
+		\end{proof}
+
+	\end{enumerate}
+	\item Derive each fo the following congruences:
+	\begin{enumerate}
+		\item $a^{21}\equiv a(\gmod 15)$ for all $a$. 
+		\begin{proof}
+			Let $a$ be an integer. We want to show that $\forall a\in \Z$, we have that $a^{21}\equiv a(\gmod 15)$.\gline
+			Via the corollary to Fermat's little theorem, we have that $a^{15}\equiv a (\gmod 15)$. We also have that $(a^3)^7\equiv a^7 (\gmod 3)\equiv (a^2)a \equiv a (\gmod 3)$ and $(a^5)^4a  \equiv a^5 \equiv a (\gmod 5)$.\gline
+			Thus, we have that $a^{21} \equiv a (\gmod 15)$. 
+		\end{proof}
+	\end{enumerate}
+	\item Exploy Fermat's theorem to prove that, if $p$ is an odd prime, then:
+	\begin{enumerate}
+		\item $1^{p-1}+2^{p-1}+3^{p-1}+\cdots+(p-1)^{p-1}\equiv-1(\gmod p)$
+		\begin{proof}
+			Let $p$ be an odd prime. We want to show that 
+			\begin{align}
+				1^{p-1}+2^{p-1}+3^{p-1}+\cdots+(p-1)^{p-1}\equiv-1(\gmod p).
+			\end{align}
+			Consider the representation of equation (1) in mod $p$ as:
+			\begin{align*}
+				1^{p-1}+2^{p-1}+\cdots + (-2)^{p-1} + (-1)^{p-1}(\gmod p)
+			\end{align*}
+			Because $p$ is an odd number, we write all of our values as positive:
+			\begin{align*}
+				1^{p-1}+2^{p-1}+\cdots + (2)^{p-1} + (1)^{p-1}(\gmod p)
+			\end{align*}
+			Via Fermat's little theorem, because $p$ is prime and all of these $a$ are positive, we rewrite our representation as:
+			\begin{align*}
+				\equiv 1+1+\cdots + 1 + 1(\gmod p)
+			\end{align*}
+			And because we have $p-1$ elements, we have that this equation is:
+			\begin{align*}
+				&\equiv p -1 (\gmod p)\\
+				&\equiv -1 (\gmod p),
+			\end{align*}
+			as desired.
+		\end{proof}
+		\item $1^p + 2^p + 3^p + \cdots + (p-1)^p \equiv 0 (\gmod p)$
+		\begin{proof}
+			Let $p$ be an odd prime. We want to show that 
+			\begin{align}
+				1^p + 2^p + 3^p + \cdots + (p-1)^p \equiv 0 (\gmod p)
+			\end{align}
+			Consider via Fermat's theorem, that $a^p \equiv a(\gmod p)$. We rewrite equation (2) as:
+			\begin{align*}
+				1+2+3+\cdots + (p-1) \mod p
+			\end{align*}
+			Consider that for any $p-n$, $p-n\equiv -n(\gmod p)$. We then rewrite our equation as:
+			\begin{align*}
+				1 + 2+ 3 + \cdots + -3 + -2 + -1
+			\end{align*}
+			Because we have an even number of elements ($p-1$ elements , and $p$ is odd), we have that:
+			\begin{align*}
+				1 + 2+ 3 + \cdots + -3 + -2 + -1 \equiv 0 (\gmod p)
+			\end{align*}
+	Hence, equation (2) is true, as desired. 
+		\end{proof}
+	\end{enumerate}
+\end{enumerate}
+
+
+\end{document}

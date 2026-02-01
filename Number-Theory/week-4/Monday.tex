@@ -1,0 +1,201 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{charter}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Jan 23rd - Notes}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+%coloring with color
+\newmdenv[
+  backgroundcolor=gray!8,
+  linewidth=0pt,
+  innerleftmargin=0pt,
+  innerrightmargin=0pt,
+  skipabove=\baselineskip,
+  skipbelow=\baselineskip
+]{coloredadjust}
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+
+% problem writing
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}
+   \textit{Problem. }#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+% theorem writing
+\newtcbtheorem[
+]{definition}{Definition}%
+{%
+  enhanced,
+  colback=blue!2,
+  colframe=blue!50!black,
+  coltitle=blue!70!black,
+  fonttitle=\bfseries,
+  boxrule=0pt,
+  toprule=2pt,
+  bottomrule=1pt,
+  leftrule=1pt,
+  rightrule=1pt,
+  arc=1pt,
+  outer arc=1pt,
+  attach title to upper,
+  title={#1},
+}{dfn}
+
+\newtcbtheorem[
+]{criterion}{Criterion}%
+{%
+  enhanced,
+  colback=magenta!3,
+  colframe=magenta!60!black,
+  coltitle=magenta!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt,
+  toprule=2pt,
+  bottomrule=1pt,
+  leftrule=1pt,
+  rightrule=1pt,
+  arc=1pt,
+  outer arc=1pt,
+  attach title to upper,
+  title={#1},
+}{ctn}
+
+\newtcbtheorem[
+]{corollary}{Corollary}%
+{%
+  enhanced,
+  colback=orange!3,
+  colframe=orange!80!black,
+  coltitle=orange!50!black,
+  fonttitle=\bfseries,
+  boxrule=4pt,
+  toprule=1pt,
+  bottomrule=1pt,
+  leftrule=1pt,
+  rightrule=1pt,
+  arc=5pt,
+  outer arc=5pt,
+  attach title to upper,
+  title={#1},
+}{ctn}
+
+\newtcbtheorem[
+]{theorem}{Theorem}%
+{%
+  enhanced,
+  colback=green!2,
+  colframe=green!40!black,
+  coltitle=green!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt,
+  toprule=3pt,
+  bottomrule=1pt,
+  leftrule=1pt,
+  rightrule=1pt,
+  arc=5pt,
+  outer arc=5pt,
+  attach title to upper,
+  title={#1},
+}{thm}
+
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Pythagorean Triple}
+First we begin by discussing Pythagorean Triples:
+\begin{definition}{Pythagorean Triple}{}\gline
+  A triple of integers $(x,y,z)$ is called a \ul{Pythagorean Triple} if:
+  \begin{align*}
+    x^2 + y^2 = z^2
+  \end{align*}
+  For example, $(3, 4, 5)$ is a Pythagorean Triple.
+\end{definition}
+There's also an important relationship between scalar multiples of Pythagorean triples.
+\begin{theorem}{Scalars of Pythagorean Triples}{}\gline
+  Let $d>0$. Then $(x,y,z)$ is a \ul{Pythagorean Triple} if and only if $(dx, dy, dz)$ is a Pythagorean Triple.
+  \begin{corollary}{}{}\gline
+  If any two of $x,y,z$ are divisible by $d$, then all three of $x,y,z$ are divisible by $d$.
+\end{corollary}
+\end{theorem}
+
+\begin{definition}{Primitive Pythagorean Triple}{}\gline
+  A Pythagorean Triple $(x,y,z)$ where $\gcd(x,y,z)=1$ is called a \ul{primitive Pythagorean Triple}.
+  \begin{criterion}{Primitive Properties}{}\gline
+      All Primitives of the form $x^2+y^2 = z^2$ must have the following properties:
+      \begin{itemize}[itemsep=0pt, parsep=0pt]
+        \item One of $x^2, y^2$ is $0\gmod{4}$
+        \item One of $x^2,y^2$ is $1\gmod{4}$
+        \item $z^2 \equiv 1\gmod 4$. 
+      \end{itemize}
+  \end{criterion}
+\end{definition}
+
+
+\end{document}

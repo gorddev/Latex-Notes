@@ -1,0 +1,223 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{changepage}
+\usepackage{booktabs}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.in}
+            \setlength \textwidth{6.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Ker}{{\rm Ker}\,}
+\newcommand{\im}{{\rm Im}\,}
+
+% Multi calculus%
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dsp}{\displaystyle}
+\newcommand{\magnitude}[1]{\left|\left| #1\right|\right|}
+
+\newcommand{\n}{\vspace{0.15cm}\\}
+\newcommand{\en}{\vspace{0.25cm}\\}
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{HW8 - Gordon Novak}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+%\setcounter{section}{1}
+
+\begin{document}
+\begin{enumerate}
+    %% Quesiton 1 %%
+    \item Consider the line integral $\int_C (x+y)dx+(y-x)dx$. 
+    \begin{enumerate}
+        \item[(a)] What is the vector field $\mathrm R$ that is being integrated?\en
+        The vector field is the field $\mathrm F = \langle x+y, y-x\rangle$. 
+        \item[(b)] Let $C$ be the cuere that is first the line segment from $(0,0)$ to $(1,0)$ then theline segment from $(1,0)$ to $(1,1)$. Evaluate the integral. \en
+        So to solve this, we will split the problem up into two parts. We first need to paramaterize the curve $C$. This is pretty straightforward:
+        \begin{align*}
+            (0,0)\text{ to }(1,0)&\mapsto (t, 0)\\
+            (1,0)\text{ to }(1,1)&\mapsto (1, t)
+        \end{align*}
+        With $\alpha'(t) = (1,0)$, evaluating the first curve gives:
+        \[\int_0^1(t + 0, 0 - t)\cdot(1,0)\,dt = \left[\frac{1}2t^2\right]\Big|_0^1= \frac{1}2\]
+        Evaluating the second curve gives:
+        \[\int_0^1 (1 +t, t - 1)\cdot(0,1)\,dt = \left[\frac{1}2t^2-t\right]\Big|_0^1 = -\frac{1}2\]
+        Summing our two results gives:
+        \[\frac{1}2-\frac{1}2 = 0\]
+        Yay we're done. 
+    \end{enumerate}
+    %% Quesiton 2 %%
+    \item Determine if the following vector fields are conservative. If it is, find a potential function. If it's not, explain why not.
+    \begin{enumerate}
+        \item [(a)] $\mathrm F(x,y,z) = (3y^4z^2, 4x^3z^2, -3x^2y^2)$\en{}
+        Ok for this one, we just need to take a bunch of partials and essential determine if the curl is 0 or not. Here we go.
+        \centerit{
+        \begin{tabular}{cc}
+            $\dsp\prt{F_1}{y} = 12y^3z^2$ & $\dsp\prt{F_2}{x}=12x^2z^2$ \\
+        \end{tabular}
+        }
+        Oops that was rather easy. These two partials are not equal, thus, the third component of the curl is nonzero, and our vector field is $\boxed{\text{not conservative}}$. 
+        \item [(b)] $\mathrm F(x,y) = (x^2+y^2,2xy)$\en
+        Exciting let's do it.
+        \centerit{
+            \begin{tabular}{cc}
+                $\dsp\prt{F_1}y =2y$ & $\dsp\prt{F_2}{x}=2y$\\
+            \end{tabular}
+        }
+        Well aint that dandy. If we subtract these two, we get zero curl for this field. Thus, our field is conservative, and finding a potential function should be a piece of cake. In order for our potential function to work, we these two conditions to be met:
+        \centerit{
+            \begin{tabular}{cc}
+                $\prt{f(x,y)}x = F_1$ & $\prt{f(x,y)}y = F_2$
+            \end{tabular}
+        }
+        So let's integrate both of our field components:
+        \centerit{
+            \begin{tabular}{cc}
+                $\int F_1\,dx = \frac{1}3x^3 + xy^2$ & $\int F_2\,dy = xy^2$
+            \end{tabular}
+        }
+        And considering that $\prt{\frac{1}3x^3}y = 0$, we have our potential function: $\boxed{f(x,y) = \frac{1}3x^3 + xy^2}$. 
+    \end{enumerate}
+    \newpage
+    %% Quesiton 3 %%
+    \item Let $\mathrm F = (F_1, F_2, F_3)$ be a vector field in $\R^3$. Is the vector field $\nabla \times \mathrm F$ necesasrily orthogonal to $\mathrm F$? If it is, explain why. If it's not, find a counterexample. \en
+    My initial reaction is to say that it's not, but thinking about it makes me think that I need to investigate it mathematically. \en 
+    Consider the field $\mathrm F$ given above. The gradient is equal to $(\prt{F_1}x,\prt{F_2}y, \prt{F_3}z)$. Thus, taking the cross product gives:
+    \[\left(F_2\prt{F_3}y-F_3\prt{F_2}z,\quad F_3\prt{F_1}z - F_1\prt{F_3}x,\quad F_1\prt{F_2}x- F_2\prt{F_1}y\right).\]
+    If we dot that with our original field, we get that:
+    \[\boxed{\left(F_1\left(F_2\prt{F_3}y-F_3\prt{F_2}z\right)\;+\; F_2\left(F_3\prt{F_1}z - F_1\prt{F_3}x\right)\;+\; F_3\left(F_1\prt{F_2}x- F_2\prt{F_1}y\right)\right)\ne0}\]
+    So those terms just don't cancel. Thus my intuition was correct! haha!
+    %% Question 4 %%
+    \item Evaluate $\dsp \int_C(3y+x^5)dx+(2x+e^y)dy$, where $C$ is the unit circle oriented counterclockwise.\en
+    So let's first paramaterize our curve. We know that it's the circle oriented counterclockwise, so that makes it super easy:
+    \[\alpha(t) = (r\cos t, r\sin t),\quad r = 1\]
+    Next, we need to grab that derivative with respect to time:
+    \[\alpha'(t) = (-\sin t, \cos t)\]
+    Now, it's just plug and chug with our fancy line integral formula.
+    \begin{align*}
+        \int_C f\,ds &= \int_C f(\alpha(t))\cdot\alpha'(t)\,dt\\
+        \int_C f(\alpha(t))\cdot\alpha'(t)\,dt &= \int_0^{2\pi}(3\sin t + \cos^5t, 2\cos t + e^{\sin t})\cdot (-\sin t, \cos t)\,dt\\
+        &=\int_0^{2\pi}-3\sin^2 t + \sin t\cos^5t - 2\cos t\sin t + \cos t e^{\sin t}\,dt\\
+        &\quad\text{Note: we use substitution: } 2\cos t\sin t = \sin 2t,\text{ and } \sin^2 t = \frac{1}2(1-\cos(2t))\\
+        &=\left[-\frac{3}2t-\frac{1}6\cos^6t+\frac{1}2\cos(2t) + e^{\sin t}\right]\Big|_0^{2\pi}\\
+        &\quad\text{Note: All terms except } \frac{3}2t \text{ cancel.}\\
+        &= \boxed{-3\pi}
+    \end{align*}
+    \item Evaluate $\dsp\oint_C xy\,dx + x^3\,dy$, where $C$ is the triangle with vertices $(0,0), (0,2), $ and $(1,0)$ clockwise.\en
+    Ok this one is not going to be very fun to do in \LaTeX, but we got this. First, let's paramaterize:
+    \centerit{
+        \begin{tabular}{ccc}
+            $C_1\;\;t:[0,2]$ & $C_2\;\;t:[0,1]$ & $C_3\;\;t:[0,1]$\\
+            \hline\\
+            $(0,0)$ to $(0,2)$ $\mapsto$ $\boxed{(0,t)}$ & $(0,2)$ to $(1,0)$ $\mapsto$ $\boxed{(t,2-2t)}$ & $(1,0)$ to $(0,0)$ $\mapsto\boxed{(1-t,0)}$  \vspace{0.3cm}\\
+            \hline\\
+            $\boxed{\alpha_1'(t) = (0,1)}$ & $\boxed{\alpha_2'(t) = (1,-2)}$ & $\boxed{\alpha_3'(t) = (-1,0)}$
+        \end{tabular}
+    } 
+    \newpage
+    Now we do this very fun stuff for each curve with the formula $\dsp\oint_C \mathrm{F}\,ds = \oint_C \mathrm F(\alpha(t))\cdot \alpha'(t)$.\vspace{-0.3cm}
+    \[C_1:\quad\int_0^2(0,0)\cdot (0,1)\,dt = 0\]\vspace{-0.5cm}
+    \begin{align*}
+        C_2:\quad\int_0^1((2-2t)t, t)\cdot(1, -2)\,dt &= \int_0^1 2 t - 2 t^2 - 2 t^3\,dt\\
+        &=-t^2 - \frac{(2 t^3)}3 - \frac{t^4}2\Big|_0^1\\
+        &=-\frac{1}6
+    \end{align*}
+    \begin{align*}
+        C_3:\quad\int_0^1(0,(1-t))^3\cdot(-1,0)\,dt &= 0
+    \end{align*}
+    Then, we just get $\boxed{\dsp-\frac{1}6}$. There's definitely an easier way to do this, and that's with Green's theorem, but I realized that after i finished the problem.
+    \item Let $S$ be the sphere $r = 5$
+    \begin{enumerate}
+        \item [(a)] Paramaterize $S$.\en
+        Pretty straightforward because we just use spherical coordinates with a radius of 5:
+        \[\alpha(\theta, \phi) = (5\cos\theta\sin\phi, 5\sin\theta\sin\phi, 5\cos\phi)\]
+        Now we can calculate some stuff we'll need for later:
+        \[\prt{\alpha}{\theta} = (-5\sin\theta\sin\phi, 5\cos\theta\sin\phi, 0)\]
+        \[\prt{\alpha}{\phi}= (5\cos\theta\cos\phi, 5\sin\theta\cos\phi, -5\sin\phi)\]
+        \[\prt{\alpha}{\theta}\times\prt{\alpha}\phi=(-25 \cos \theta \sin^2 \phi, -25 \sin^2 \phi \sin \theta, -25 \cos \phi \cos^2 \theta \sin\phi - 25 \cos\phi \sin\phi \sin^2\theta)\]
+        \begin{align*}\left|\left|\prt{\alpha}{\theta}\times\prt{\alpha}\phi\right|\right| &= \sqrt{625((\cos\theta\sin^2\phi)^2+\sin^2\phi\cos^2\theta-25(\cos^2\phi\cos^2\theta\sin^2\phi+\cos^2\phi\sin^2\phi\sin^2\theta))}\\
+            &=25\sin\phi
+        \end{align*}
+        \item [(b)] Find the surface area of the portion of the sphere where $z\le 0$ by using integration.
+        Now we just use the stuff we found to integrate on the bottom portion
+        \begin{align*}
+            \int_{\pi/2}^{\pi}\int_0^{2\pi}25\sin\phi \,d\theta\,d\phi&=\int_{\pi/2}^\pi 50\pi\sin\phi \\
+            &=-50\pi\cos\phi\Big|_{\pi/2}^\pi\\
+            &=50\pi
+        \end{align*}
+        We can verify this is right with the surface area of a sphere formula, which is $A = 4\pi r^2$, which gives us a surface area of $100\pi$, and half of that would be $50\pi$. 
+    \end{enumerate}
+    \pagebreak
+    \item Evaluate $\int\int_S 4y\,dS$, where $S$ is a portion of $x^2+z^2 = 9$ between $y = 2$ and $y= 10-x$. \en
+    Ok the first thing I want to do whenever I see a problem like this is to paramaterize by bounds immediately. This appears to be a surface integral with respect to another surface, so I'm going to start by paramaterizing the first equation $x^2 + z^2 = 9$ to be:
+    \[\alpha(\theta, y) = (3\cos\theta, y, 3\sin\theta)\]
+    This also makes it so we can keep our y variables consistent. Then, I can start calculating our partials for our paramaterization:
+    \centerit{
+        \begin{tabular}{cc}
+            $\dsp\prt{\alpha}{\theta} = (-3\sin\theta, 0, 3\cos\theta)$ & $\dsp\prt{\alpha}{y}=(0,1,0)$
+        \end{tabular}
+    }
+    Now it's time for the worst part:
+    \[\magnitude{\prt{\alpha}\theta \times \prt{\alpha}y} \to (-3\cos\theta, 0,-3\sin\theta)\to \sqrt{9\cos^2\theta + 9\sin^2\theta} = 3\]
+    Ok solving this should be as simple as plugging in bounds and being happy:
+    \begin{align*}
+        \int_0^{2\pi}\int_2^{10-3\cos\theta}4y\cdot 3\,dy\,d\theta &=\int_0^{2\pi}6y^2\Big|_2^{10-3\cos\theta}\,d\theta\\
+        &=\int_0^{2\pi}600-360\cos\theta + 54\cos^2\theta  - 24\,d\theta\\
+        &=\int_0^{2\pi}576-360\cos\theta + 27 + 27\cos(2\theta)\,d\theta\\
+        &=603\theta - 360\sin\theta + \frac{27}2\sin(2\theta)\Big|_0^{2\pi}\\
+        &=603(2\pi) = \boxed{1206\pi}
+    \end{align*}
+    \item Calculate the outward flux of $\mathbf F = \langle 0, y, -z\rangle$ through the surface that consists of a paraboloid $y = x^2 + z^2$, $0\le y\le 1$, and the disk $x^2+z^2\le 1$ and $y= 1$. \en
+    So I kinda forgot how to calculate outward flux, and I was thinking of paramaterizing everything and using the formula:
+    \[\iint_S\mathbf F \cdot d\mathbf S =\iint_D \mathbf{F}(\mathbf{r}(u,v))\cdot (\mathbf{r}_u \times \mathbf{r}_v)\; du\,dv.\]
+    But then I realized that this surface is actually a closed surface, so we can just use the divergence theorem, which I like a lot more:
+    \[\iint_S\mathbf F \cdot d\mathbf S = \iiint_V(\nabla \cdot \mathbf F)d\mathbf V\]
+    The volume is just really given by the paraboloid cut off at $y =1$, and that gives us really easy bounds for $x$ and $z$, which will just be from $0$ to $1$:
+    \begin{align*}
+        \int_0^1\int_0^1\int_{x^2+y^2}^1 (\nabla \cdot \mathbf F)\;dy\,dx\,dz &=\int_0^1\int_0^1\int_{x^2+y^2}^1 \left\langle \prt{\mathbf F}x, \prt{\mathbf F}y, \prt{\mathbf F}z \right\rangle \cdot \langle 0, 1, -1\rangle \;dy\,dx\,dz \\
+        &=\int_0^1\int_0^1\int_{x^2+y^2}^1 0 \;dx\,dy\,dz = \boxed{0}.
+    \end{align*}
+    Huh this really doesn't seem right. This reaaaally doesn't seem right. Oh well off to submission!
+\end{enumerate}
+
+
+\end{document}

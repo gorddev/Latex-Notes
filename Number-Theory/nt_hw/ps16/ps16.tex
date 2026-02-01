@@ -1,0 +1,162 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Problem Set 16}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+%coloring with color
+\newmdenv[
+  backgroundcolor=gray!8,
+  linewidth=0pt,
+  innerleftmargin=0pt,
+  innerrightmargin=0pt,
+  skipabove=\baselineskip,
+  skipbelow=\baselineskip
+]{coloredadjust}
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+
+% problem writing
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}
+   \textit{Problem. }#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Section 12.1}
+\begin{enumerate}
+  \item \begin{enumerate}
+    \item Find three different Pythagorean Triples, not necessarily primitive, of the form $16, y,z$. 
+    \begin{problem}
+      We find three pythagorean triples by guessing and checking.\gline
+      First, consider the pythagorean triple $3, 4, 5$. Multiplying by 4 gives $12, 16, 20$. \\
+      Next, we use the formula $x=2st, y=s^2-t^2, z= s^2 +t^2$, where $16=2(1)(8)$. Thus we get the triple:
+      \begin{enumerate}
+        \item $y = 63, z=65$
+      \end{enumerate}
+      Finally, we note that $8, 15, 17$ is another pythagorean triple, and multiplying by 2 gives $16, 30, 34$. 
+    \end{problem}
+    \item Obtain all primitive Pythagorean tripels, $x, y, z$ in which $x = 40$. Do the same for $x = 60$.
+    \begin{problem}
+      We start with $x = 40$.\gline
+      Note that $x = 40 = 2st$,  for $(s,t) = (5,4)$. Thus we get that $25 - 16 = 9$ and that $25 + 16=41$. Thus we get a triple of the form $9, 40, 41$. .\gline
+      We also have that we can factor it as $(s,t)=(20, 1)$. Thus we get the triple of the form $400 -1 = 399$ anH d $400+1=401$. This gives us the triple (40, 399, 401).\gline
+      This gives us all the triples because $(20,1)$ and $(4,5)$ are the only coprime factors of 20. \gline
+      Now, we move on to $x = 60$.\gline
+      Consider that $x = 60 = 2st$, for coprime $s,t$ being $(s,t)=(15,2), (10, 3), (5, 6), (30,1)$. This gives four solutions for $y, z$, being:
+      \begin{enumerate}
+        \item (60, 899, 901)
+        \item (60, 221, 229)
+        \item (60, 91, 109)
+        \item (11, 60, 61)
+      \end{enumerate}
+      These just follow the formulation $s^2 - t^2$ and $s^2 + t^2$. 
+    \end{problem}
+  \end{enumerate}
+  \item Prove that in a primitive Pythagorean triple $x, y, z$, the product $xy$ is divisble by 12, hence $60\mid xyz$.
+  \begin{problem}
+    We will solve this problem in two parts. First, we show that $xy$ is divisble by 12.
+    \begin{proof}
+      Let $x, y, z$ be a primitive pythagorean triple for $x^2 + y^2 = z^2$. We want to show that $12 \mid xy$ by showing that $4\mid xy$ and $3\mid xy$. \gline
+      Without loss of generality, let $x$ be even. We then use the formulation $x = 2st$, $y=(s^2-t^2)=(s-t)(s+t)$. 
+      \centerit{Part 1: $4\mid xy$}
+      First, we show that $4\mid xy$. Because $x$ is even, we have that:
+      \begin{align*}
+        x &= 2st\\
+        y &= s^2 - t^2=(s+t)(s-t)
+      \end{align*}
+      Consider the case where $s$ and $t$ are of the same parity. Thus, $s\pm t = 2k,k\in Z$. Thus, $4\mid 2st(s-t)(s+t) = 2st(2k) = xy$\gline
+      \textbf{Case: }Consider the case where $s$ and $t$ are of opposite parity. Then, we have that either $s$ or $t$ is even, and thus that $2st = 4k, k\in\Z$, and thus that $4\mid 2st(s^2-t^2) = 4k(s^2-t^2)=xy$.
+      \centerit{Part 2: $3\mid xy$}
+      \textbf{Case: }Next, because we have shown that $4\mid xy$, we show that $3\mid xy$. \gline
+      \textbf{Case: }Consider the case where $s$ or $t\equiv 0\gmod 3$. Trivially, $3\mid xy$.\\
+      \textbf{Case: }Consider the case where $s$ and $t$ are of the form $3n + 1$. Then, we have that $(s-t)$ is of the form $3k$, and thus $3\mid xy$.\gline
+      \textbf{Case: }Consider the case where $s$ and $t$ are of the form $3n+2$. Then, we have that $(s-t)$ is of the form $3k$, and thus $3\mid xy$. \gline
+      \textbf{Case: }Consider the case, without loss of generality, where $s\equiv 1\gmod 3$ and $t\equiv 2\gmod 3$. Thus we have that $(s+t)=(3k+3)\equiv 0\gmod 3$, and thus, $3\mid xy$.\gline
+      Thus, for all cases, $3\mid xy$.\gline
+      Hence, because both $3\mid xy$ and $4\mid xy$, $12\mid xy$. 
+    \end{proof}
+    Now, we will show that $60\mid xyz$. 
+    \begin{proof}
+      Let $x,y,z$ be a primitive pythagorean triple of the form $x^2+y^2 =z^2$. We will show that $60\mid xyz$. \gline
+      Consider that $(x^2/5), (y^2/5)=1$ for:
+      \begin{align*}
+        x^2,y^2 \equiv 0, 1, 4\gmod 5
+      \end{align*}
+      Thus, we have that $z^2$ must also be of the form $0, 1, 4\gmod 5$. The only possible combinations that give us that $z^2$ are:
+      \begin{align*}
+        0+0&\equiv 0\gmod 5  &0+1\equiv 1 \gmod 5\\
+        1+4&\equiv 0 \gmod 5 &0+4\equiv 4 \gmod 5
+      \end{align*}
+      Thus, for all cases, we have that $5$ divides $x, y, $ or/and $z$.\gline
+      Hence, via the last proof, because $12\mid xy$ and $5\mid x, y, \text{ or } z$, we have that $60\mid xyz$. 
+    \end{proof}
+  \end{problem}
+\end{enumerate}
+
+\end{document}

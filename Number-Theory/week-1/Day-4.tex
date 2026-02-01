@@ -1,0 +1,360 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Day 3 - Berliner lectures us hooray}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+   \end{adjustwidth}}
+
+
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{black}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{black}}
+%
+% Introductions
+%
+\subsection*{Last Time in Class}
+Last class, we primarily covered:
+\begin{itemize}[itemsep=0pt, parsep=0pt]
+	\item Euclidean Algorithm
+	\begin{itemize}
+		\item to find $\gcd(a,b)$
+		\item to get $\gcd(a,b)$ as a combo of $a,b$. 
+	\end{itemize}
+	\item Solving $ax + by = c$. 
+  \begin{itemize}
+    \item Existence of solutions
+    \item Procedure for finding solutions.
+  \end{itemize}
+\end{itemize}
+\begin{enumerate}
+  \item Suppose you know that whenever Dorm Room \#K is occupied, then Dorm Room \#($K+1$) will also be occupied.\\
+  \textbf{Group Discussion: }Which dorm rooms are guaranteed to be occupied?\gline
+  All dorm rooms with numbers $n\ge K$ will be occupied, but no specific dorm room has any guarantee.\gline
+  Suppose you know that:
+  \begin{itemize}
+    \item Dorm Room \#1 is occupied \textit{and}
+    \item whenever Dorm Room \#K is occupied, then Dorm Room \#(K+1) will also be occupied. \\
+    \textbf{Group Chit-Chat: }Which dorm rooms are guarenteed to be occupied?\gline
+    All dorm rooms with number $n \ge 1$.
+  \end{itemize}
+  \item Suppose you know that:
+  \begin{itemize}
+    \item Dorm Room \#2 and \#3 are occupied \textit{and}
+    \item Whenever Dorm Room \#K is occupied, then Dorm Room \#($K+3$) will also be occupied.\gline
+    \textbf{Group Dialogue:} Which dorm rooms are guaranteed to be occupied?\gline
+    All dorm rooms that do not match the pattern $1 + 3n, \;n\in\Z \ge 0$.  
+  \end{itemize}
+  \item Suppoe you know that:
+  \begin{itemize}
+    \item Dorm Room \#2 is occupied \textit{and}
+    \item whenever Dorm Room \#K is occupied, then dorm room $\#(2k)$ will also be occupied. \gline
+    \textbf{Group Schmooze:} Which dorm rooms are guarenteed to be occupied?\gline
+    All dorm room such that $2^n,\; n\ge 1$. 
+  \end{itemize}
+\end{enumerate}
+
+\subsection*{Key Takeaways from Warmup}
+Here's the main takeaways from the lesson today:
+\[
+\begin{rcases}
+  \text{Suppose Statement \#1 is \cg{true}.}\\
+  \text{If statement $K$ is true, then statement $K+1$ is true.\;}
+\end{rcases} \text{implies all statements are true}
+\]
+This is the Principle of (Weak) Mathematical Induction. 
+\pagebreak
+\subsection*{Practice}
+Now, consider the following claim:\gspc
+\begin{adjustwidth}{2em}{2em}
+  \textit{Claim.} The sum of the first $n$ (positive) integers is $\frac{n(n+1)}2$
+\end{adjustwidth}\gspc
+Each value of $n$ is its own ``claim'' that needs verification. \gline
+Gauss explains this because we can ``pair'' up each number. Consider:
+\begin{align*}
+  1, 2, \ldots,n
+\end{align*}
+If we add the first at the last number, we get $1 + n$. If we add up the second and second to last number, we get $2 + (n-1) = 1+n$. So on and so forth. So, we have a total of $n/2$ pairs of $n+1$, so we have our claim. \gline
+Now, trying to do this with a formal proof, we write:
+\begin{proof}
+  \textit{Proceed using induction.}\gline
+  \textbf{Base Case: } Let $n= 1$. The sum of the first integer is 1, and:
+  \begin{align*}
+    \frac{n(n+1)}2 = \frac{1(2)}2 = 1
+  \end{align*}\gline
+  Now we have shown the first step to be true.\gline
+  \textbf{Inductive Step: } Now that we know that statement $K$ is true, we show that the $K+1$ case is true. ``Assume the claim holds when $n=K$.''\gline
+  Since the claim is true for $n = K$, we know for a fact that:
+  \begin{align*}
+    \frac{K(K+1)}2.
+  \end{align*}
+  Consider $n = K +1$. The sum of the first $K+1$ integers is:
+  \begin{align*}
+    1 + 2+ 3+\ldots + K + (K+1)= \frac{K(K+1)}2 + (K+1) \text{ by hypothesis.}
+  \end{align*}
+  Simplifying gives us:
+  \begin{align*}
+    \frac{K(K+1)}2 + \frac{2(K+1)}2 &= \frac{(K+2)(K+1)}2=\frac{n(n+1)}2
+  \end{align*}
+  Wabam wow we did it. By induction the claim is true. 
+\end{proof}
+
+\subsection*{Little More Practice}
+Consider the claim that for all $n\ge 0$, $5\mid 7^n - 2^n$.
+Let's do it!
+\begin{proof}
+  \textit{By Induction.} We want to show that $\forall n \ge 0$, $5\mid 7^n - 2^n$.\gline
+  \textbf{Base Case: }Let $n =0$. $7^n - 2^n = 7^0-2^0 = 1 - 1 0$. And,$5\mid 0$.  \gline
+  \textbf{Inductive Step: }Assume that $5\mid 7^k - 2^k$. We want to prove that $5\mid 7^{K+1} - 2^{K+1}$.\gline
+  Consider the following step:
+  \begin{align*}
+    7^{K+1}-2^{K+1}&=-7^K7 - 2^K2\\
+    &=7^K(5+2) - 2^K2\\
+    &= 7^K(5+2) - 2^K\cdot 2\\
+    &= 7^K\cdot 5 - 2(7^K - 2^K)
+  \end{align*}
+  And because $7^K\cdot 5$ is divisible by 5 and $7^K-2^K$ is, $5\mid 7^n-5^n, n\ge 0$.
+\end{proof}
+
+\begin{enumerate}
+  \item \begin{enumerate}
+    \item What is a formula (in terms of $n$) for the $n$-th positive \textbf{odd} integer?\gline
+    \[2n- 1\]
+    \item \textbf{Group Chart Fill-in:}
+    \begin{center}
+      \begin{tabular}{|c|c|}
+        \hline
+        $n$ & \begin{tabular}{c}\textit{sum} of the first $n$ \\positive \textbf{odd} integers\end{tabular}\\\hline\hline
+        1 & 1\\\hline
+        2 & 4 \\\hline
+        3 & 9 \\\hline
+        4 & 16 \\\hline
+        5 & 25 \\\hline\hline
+      \end{tabular}
+    \end{center}
+    \item \textbf{Group Conjecture: }What do you think is the sum of the first $n$ positive integers?
+    \[n^2\]
+    \item What would the ``base case'' be? Try and prove the base case\gline
+    \[\text{Sum is 1. }1^2 = 1\]
+    What would the ``inductive hypothesis'' be?
+    \[n = K\implies K^2 = \sum_{i=0}^K(2i - 1)\] 
+    Let's prove your conjecture using induction.
+    \begin{align*}
+      \sum_{i=0}^{K+1}(2i - 1) &= \sum_{i=0}^K(2i - 1) + (2K + 1)\\
+      &= K^2 + (2K + 1)\\
+      &= (K+1)^2
+    \end{align*}
+  \end{enumerate}
+  \item \begin{enumerate}
+    \item \textbf{Group play-time: } Take a good guess at the values of $n$ for which $n! > 3^n$. \gline
+    I'm guessing that this applies for all $n\ge 7$, because we have:
+    \begin{gather*}
+      3 \cdot 3 \cdot 3 \cdot 3 \cdot 3 \cdot 3 \cdot 3\\
+      1 \cdot 2 \cdot 3 \cdot 4 \cdot 5 \cdot 6 \cdot 7
+    \end{gather*}
+    Which simplifies to:
+    \begin{gather*}
+      3 \cdot 3 \cdot 3 \cdot 3 \cdot 3 \cdot 3\\
+      1 \cdot 2 \cdot 4 \cdot 5 \cdot 6 \cdot 7
+    \end{gather*}
+    And then we get:
+    \begin{align*}
+      6 &> 3\\
+      1\cdot 2 \cdot 5 &> 3\cdot 3\\
+      4\cdot 7 =28&> 3 \cdot 3 \cdot 3 =27
+    \end{align*}
+    It's at this point that all the multipliers of our factorial outnumber the 3s so we achieve victory. 
+    \item Prove your guess using induction.\gline
+    We will prove the claim that for $n\ge 7$ that $n! > 3^n$.
+    \begin{proof}
+      \textit{By Induction. }We want to show via. induction that for $n\ge 7$, $n! > 3^n$.\gline
+      \textbf{Base Case: }Let $n= 7$. Thus we have that:
+      \begin{align*}
+        3^n = 2187 &< n! = 5040
+      \end{align*}
+      \textbf{Inductive Step: }Assume the claim holds when $n = K$. Let $n = K+1$. Thus we have that:
+      \begin{align*}
+        3^K < K!
+      \end{align*}
+      Now consider the $K+1$ case:
+      \begin{align*}
+        3^{K+1}&=3^K3\\
+        (K+1)! &= K! \cdot (K+1)
+      \end{align*}
+      Because in our base case, $n> 7$, we know that $(K+1) > 3$. Thus, we have:
+      \begin{gather*}
+        3^K\cdot 3 < K!\cdot 3 < K!\cdot(K+1)\\
+        3^{K+1} < (K+1)!\\
+        3^n < n!
+      \end{gather*}
+      Hence, for $n\ge 7$, $3^n < n!$.
+    \end{proof}
+  \end{enumerate}
+  
+  \item The Fibonacci numbers are a really cool list (i.e sequence) of integers given recurively by:
+  \begin{center}
+    \begin{tabular}{c c c c}
+      $F_1 = 1$ & $F_2 = 1$ & \text{and} & $F_n = F_{n-1} + F_{n-2}$ (for $n\ge 2$)
+    \end{tabular}
+  \end{center}  
+  \begin{enumerate}
+    \item List the first ten Fibonacci numbers
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+      \hline
+      $n$& 1&2 &3 &4 &5 &6&7&8&9&10\\\hline
+      $F_n$&1&1&2&3&5&8&13&21&34&55 \\\hline
+    \end{tabular}
+  \end{center}
+    \item Find the \textit{sum of the squares} of the first $n$ Fibonacci numbers.
+    \begin{center}
+      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        $n$& 1&2 &3 &4 &5 &6&7&8&9\\\hline
+        $F_1^2+\ldots+F_n^2$&1&2&6&15&40&104&273&714&?\\\hline
+      \end{tabular}
+    \end{center}
+    \item Make a conjecture regarding $F_1^2+\ldots+F_n^2$.\gline
+    $F_1^2+\ldots+F_n^2$ = $F_n \cdot F_{n+1}$
+    \item Use induction to prove your conjecture
+    \begin{proof}
+      \textit{By Induction. } Let $F_n$ be the $n$-th number in the Fibonacci sequence. We want to show via induction that $F_1^2+\ldots+F_n^2$ = $F_n \cdot F_{n+1}$.\gline
+      \textbf{Base Case: }Let $n= 1$. Consider that:
+      \begin{align*}
+        F_1^2 &= 1^2 = 1\\
+        F_1\cdot F_2 &= 1\cdot 1 = 1
+      \end{align*}
+      \textbf{Inductive Step: } We know that $n= K$ holds. So, we asumme that:
+      \begin{align*}
+        F_1^2+\ldots + F_K^2 = F_K\cdot F_{K+1}
+      \end{align*}
+      Now we want to show that the $n = K+1$ case holds. Lookie here:
+      \begin{align*}
+        F_1^2 + \ldots + F_K^2 + F_{K+1}^2 &= F_{K}\cdot F_{K+1} + F_{K+1}^2\\
+        &= F_K\cdot F_{K+1} + F_{K+1}F_{K+1}\\
+        &= F_{K+1}(F_K+F_{K+1})\\
+        &= F_{K+1}\cdot F_{K+2}
+      \end{align*}
+      yay we did it we're done. end of proof.
+    \end{proof}
+  \end{enumerate}
+\end{enumerate}
+\subsection*{Euclid's Lemma}
+\begin{adjustwidth}{2em}{2em}
+  \textit{Lemma. } Let $a,b,c\in\Z$. If $a\mid bc$ and $\gcd(a,b) = 1$, then $a\mid c$. 
+  \begin{proof}
+    If $a\mid bc$ then let $x, y \in \Z$ such that:
+    \begin{align*}
+      ax + by = 1
+    \end{align*}
+    Also let $K\in \Z$ such that $Ka = bc$
+    \begin{align*}
+      xac + ybc = c
+    \end{align*}
+    Now it gets yummier:
+    \begin{align*}
+      xac + yKa = c
+    \end{align*}
+    Look:
+    \begin{align*}
+      a(xc + yK) = c
+    \end{align*}
+    Thus $a\mid c$.
+  \end{proof}
+\end{adjustwidth}
+
+
+\subsection*{Primes}
+\subsubsection*{Prime Definition}
+\begin{adjustwidth}{2em}{2em}\gspc
+  \textit{Definition. }An integer $p>1$ is \ul{prime} if the only positive divisors of $p$ are 1 and $p$. 
+\end{adjustwidth}\gspc
+\begin{adjustwidth}{2em}{2em}\gspc
+  \textit{Theorem. }Let $p\mid mn$. Then $p\mid m$ or $p\mid n$. Assume $p\nmid m$; Prove $p\mid n$.  
+\end{adjustwidth}\gspc
+\begin{adjustwidth}{2em}{2em}\gspc
+  \textit{Theorem. }Let $p\mid m_1m_2\ldots m_k$. Then $p\mid m_i$ for at least one;
+\end{adjustwidth}
+\subsubsection*{Fundamental Theorem of Arithmetic}
+\begin{adjustwidth}{2em}{2em}
+  \textit{Theorem. }Let $n>1$ be an integer. There is a unique way to express $n$ as a product of primes, up to order 10.
+\end{adjustwidth}\gspc
+\subsubsection*{Infinite Primes}
+\begin{adjustwidth}{2em}{2em}
+  \textit{Theorem. }There are infinitely many primes
+\end{adjustwidth}\gspc
+\subsubsection*{Dirichlet's Theorem}
+\begin{adjustwidth}{2em}{2em}
+  \textit{Theorem. }Consider the sequence:
+  \begin{align*}
+    a, a+b, a+2b, a+3b
+  \end{align*}
+  If $\gcd(a,b)=1$, this sequence contains $\infty$-many primes.
+\end{adjustwidth}\gspc
+\pagebreak
+\subsubsection*{}
+
+
+\end{document}

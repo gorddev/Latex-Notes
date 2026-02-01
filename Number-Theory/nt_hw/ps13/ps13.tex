@@ -1,0 +1,287 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Problem Set 10}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+%coloring with color
+\newmdenv[
+  backgroundcolor=gray!8,
+  linewidth=0pt,
+  innerleftmargin=0pt,
+  innerrightmargin=0pt,
+  skipabove=\baselineskip,
+  skipbelow=\baselineskip
+]{coloredadjust}
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+
+% problem writing
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}
+   \textit{Problem. }#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Section 9.1}
+
+\begin{enumerate}
+	\item Solve the following quadratic congruences:
+	\begin{enumerate}
+		\item [(b)]$3x^2 + 9x + 7 = 0 \gmod{13}$
+    \begin{problem}
+      We solve this problem by utilities the ``$y^2\equiv d\gmod{p}$'' method from the textbook. First I will do some quick algebra showing why this method works:
+      \begin{align*}
+        ax^2 + bx + c &= 0\\
+        4a(ax^2+bx + c) &= 0\\
+        4a^2x^2+4abx + 4ac &= 0\\
+        (2ax+b)^2 - b^2 + 4ac &= 0\\
+        (2ax+b)^2 &= b^2 - 4ac
+      \end{align*}
+      Thus, we rewrite our problem in the form:
+      \begin{align*}
+        y^2 = d \gmod{p}
+      \end{align*}
+      For $y = (2ax+b)$ and $d = b^2-4ac$.\gline
+      Now we can begin with the problem. Consider that in this case:
+      \begin{align*}
+        y &= 6x + 9\\
+        d&= -3
+      \end{align*}
+      Rewriting gives:
+      \begin{align*}
+        (6x+9)^2 &\equiv 10 \gmod{13}
+      \end{align*}
+      Now, we manually solve for $y$-values. We find that $y = 6$ gives $y^2 = 36 \equiv 10 \gmod{13}$. Solving this equation gives with $10 = 2x + b$ gives that $x = 6$. Subtracting $13 - 6$ gives the other solution for $y = 7$.  
+    \end{problem}
+		\item [(c)]$5x^2 + 6x + 1=0\gmod {23}$
+    \begin{problem}
+      We'll use the same solution method for this problem too. Consider the following $y$ and $d$:
+      \begin{align*}
+        y &= 10x+ 6\\
+        d &= 16
+      \end{align*}
+      Trying out various $y$ values gives us that $y = 4$. Solving for $x$ gives that $10x + 6 \equiv 4\gmod{23}$. Thus, $10x\equiv 21\gmod{23}$, and thus using the euclidean:
+      \begin{align*}
+        23 &= 2(10) + 3\\
+        10 &= 3(3) + 1\\
+        3 &= 3(1) + 0
+      \end{align*}
+      With reverse:
+      \begin{align*}
+        10 - 3(3) &= 1\\
+        10-3(23 - 2(10)) &= 1\\
+        7(10) - 3(23) &= 1
+      \end{align*}
+      Gives us that 
+      $x = 7\cdot 21 = 147 \equiv 9\gmod{23}$. Thus one of our solutions is $x = 9$. \gline 
+      The other solution is given from $10x + 6 = -4$, such that $10x \equiv -10\gmod{23}$. This very simply gives $x = -1 \equiv 22 \gmod{23}$, \gline
+      Thus our two solutions are $x =9, x = 22$. 
+    \end{problem}
+	\end{enumerate}
+  \item Prove that the quadratic congruence $6x^2 + 5x + 1 \equiv 0\gmod{p}$ has a solution for every prime $p$. \gline
+  I'm going to do this a little bit weird because we can factor this to get the solutions early rather than going through a lot of the legwork. 
+  \begin{proof}
+    Let $p$ be a prime. We want to show that the quadratic congruence $6x^2 + 5x + 1 \equiv 0\gmod{p}$ has a solution.\gline
+    Consider the factorization $(3x+1)(2x+1)$. Thus we have that for solutions, we have that:
+    \begin{align*}
+      3x \equiv -1 \gmod{p}\\
+      2x \equiv -1 \gmod{p}
+    \end{align*}
+    \centerit{Case: $p = 2$}
+    Consider the case where $p = 2$. Thus we have that $3x\equiv -1\gmod{2}$ has a solution for $x = -1$. 
+    \centerit{Case: $p =3$}
+    Consider the case where $p = 3$. Thus we have that $2x \equiv -1\gmod{3}$ has a solution for $x = 2$. 
+    \centerit{Case: $p > 3$}
+    Consider the case where $p>3$. Thus, because $\gcd(2, p)=1$ and $\gcd(3,p) = 1$, we have that both equations $3x \equiv -1 \gmod{p}$ and $2x \equiv -1\gmod{p}$ have solutions. \gline
+    Thus, the quadratic congruence $6x^2 + 5x + 1 \equiv 0\gmod{p}$ has a solution for every prime $p$, as desired.
+  \end{proof}
+  \item [12.] If $n>2$ and $\gcd(a,n)=1$, then $a$ is called a quadratic residue of $n$ whenever there exists an integer $x$ such that $x^2\equiv a \gmod{n}$. Prove that if $a$ is a quadratic reside of $n > 2$, then $a^{\phi(n)/2}\equiv 1 \gmod{n}$. 
+  \begin{problem}
+    Consider via Euler's Theorem that because $a$ is relatively prime to $n$, that $x$ is also relatively prime to $n$. Consider a prime factor $p$ that did divide $x$ and $n$, then $p$ must also divide $x^2 = a$, a contradiction since $\gcd(a,n)= 1$. \gline
+    Thus, we have that $x^{\phi(n)}\equiv 1\gmod{n}$, and resultantly, that $(x^{\phi(n)})^2 = a^{\phi(n)/2}\equiv 1 \gmod{n} $. (Note that $\phi(n)$ is even for $n > 2$, so we know that $\phi(n)/2$ is an integer).
+  \end{problem}
+\end{enumerate}
+\subsubsection{Section 9.1}
+\begin{enumerate}
+  \item [4.] Show that 3 is a quadratic residue of 23, but a nonresidue of 31.
+  \begin{problem}
+    Consider 3 under Euler's Criterion for mod 23 and 31. $\gcd(3, 23) = \gcd(3, 31) = 1$. We have that:
+    \begin{align*}
+      3^{(23 - 1)/2}&\equiv 1\gmod{23}\\
+      3^{(31-1)/2}&\equiv -1 \gmod{31}
+    \end{align*}
+    We can show this via the fact that:
+    \begin{align*}
+      3^{11} &= 3\cdot 3^5 3^5\\
+      &\equiv 3\cdot 13\cdot 13 \gmod {23}\\
+      &\equiv 3\cdot 8 \gmod{23}\\
+      &\equiv 1 \gmod{23}
+    \end{align*}
+    And for mod 31 we have that:
+    \begin{align*}
+      3^{15} &= 3^33^63^6\\
+      &\equiv 27\cdot 16 \cdot 16\gmod{31}\\
+      &\equiv 27\cdot 8 \gmod{31}\\
+      &\equiv 30\gmod{31}\\
+      &\equiv -1 \gmod {31}
+    \end{align*}
+  \end{problem}
+\end{enumerate}
+\subsubsection*{Section 9.2 (wrong number 4)}
+\begin{enumerate}
+  \item [4.] \begin{enumerate}
+    \item Let $p$ be an odd prime. Show that the Diophantine equation $x^2 + py + a = 0\quad \gcd(a,p) = 1$ has a solution if and only if $(-a/p)=1$.  
+    \begin{problem}
+      We will solve this problem in two directions.
+      \centerit{Forwards: $x^2 + py + a = 0\quad \gcd(a,p)=1$}
+      First consider the term $py$, which reduces to $0\gmod{p}$. We thus have that:
+      \begin{align*}
+        x^2 + py + a\equiv x^2 + a \gmod{p}
+      \end{align*}
+      Simplifying gives that:
+      \begin{align*}
+        x^2 \equiv -a \gmod{p}
+      \end{align*}
+      Thus, the equation has a solution if and only if $-a$ is a quadratic residue. 
+      \centerit{Backwards: $(-a/p)=1$.}
+      We are given that $-a$ is a quadratic residue in $\gmod p$. Thus, let $y$ such that $y^2\equiv -a\gmod{p}$. Let $x = y$ Thus, we have a solution:
+      \begin{align*}
+        y^2 + py + a &\equiv y^2 + a \gmod{p}\\
+        &\equiv -a + a \gmod{p}\\
+        &\equiv 0 \gmod{p}
+      \end{align*}
+      Hence, the diophantine equation $x^2 + py + a = 0$ has a solution if and only if $(-a/p)= 1$. 
+    \end{problem}
+  \end{enumerate}
+  \item [1.] Find the value of the following Legendre symbols:
+  \begin{enumerate}
+    \item (19/23)
+    \begin{problem}
+      We use Euler's criterion, as both 19 and 23 are prime and relatively prime to each other.
+      \begin{align*}
+        19^{(23-1)/2}&=19^{11}\\
+        &= (19^3)^3\cdot 19^2\\
+        &\equiv (5)^3 \cdot 16\gmod{23}\\
+        &\equiv 10 \cdot 16\gmod{23}\\ 
+        &\equiv 22\gmod{23}\\
+        &\equiv -1 \gmod {23}
+      \end{align*}
+    \end{problem}
+    \item (-23/59)
+    \begin{problem}
+      We use Euler's Criterion because 23 is relatively prime to 59 (59 is prime).
+      \begin{align*}
+        (23^{(59-1)/2}) &= 23^{59}\\
+        &= -23\cdot(23^2)^14\\
+        &\equiv -23\cdot (-2)^{14}\gmod {59}\\
+        &\equiv -23 \cdot ((-2)^7)^2\gmod {59}\\
+        &\equiv -23 \cdot (49)^2 \gmod{59}\\
+        &\equiv 1 \gmod{59}
+      \end{align*}
+    \end{problem}
+    \item (20/31)
+    \begin{problem}
+      We use Euler's Criterion because 31 is prime. (and thus relatively prime to all other numbers)
+      \begin{align*}
+        20^{(30-1)/2}&= 20^{15}\\
+        &= (20^3)^5\\
+        &\equiv (2)^5\gmod{31}\\
+        &\equiv 32 \gmod{31}\\
+        &\equiv -1 \gmod{31}
+      \end{align*}
+    \end{problem}
+    \pagebreak
+    \item (18/43)
+    \begin{problem}
+      We use Euler's criterion (yet again, because 43 is prime)
+      \begin{align*}
+        18^{(41-1)/2}&= 18^{20}\\
+        &\equiv (18^5)^{4}\gmod{31}\\
+        &\equiv 1^4\gmod{31}\\
+        &\equiv 1 \gmod{31}
+      \end{align*}
+    \end{problem}
+    \item (-72/131)
+    \begin{problem}
+      We use Euler's criterion (yet again, yet again because 131 is prime)
+      \begin{align*}
+        -72^{(131-1)/2} &= (-72)^{65}\\
+        &= -1 \cdot (72)(72^4)^{16}\\
+        &\equiv -1 \cdot (72) (8^{16})\gmod{131}\\
+        &\equiv -1 \cdot (72)(8^8)^2 \gmod {131}\\
+        &\equiv -1 \cdot 72(46)^2 \gmod {131}\\
+        &\equiv -1 \cdot 72\cdot 20 \gmod{131}\\
+        &\equiv -1 \cdot 130 \gmod{131}\\
+        &\equiv -1 \cdot -1 \gmod{131}\\
+        &\equiv 1 \gmod{131}
+      \end{align*}
+    \end{problem}
+  \end{enumerate}
+\end{enumerate}
+\end{document}

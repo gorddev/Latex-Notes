@@ -1,0 +1,290 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Problem Set 10}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+%coloring with color
+\newmdenv[
+  backgroundcolor=gray!8,
+  linewidth=0pt,
+  innerleftmargin=0pt,
+  innerrightmargin=0pt,
+  skipabove=\baselineskip,
+  skipbelow=\baselineskip
+]{coloredadjust}
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+
+% problem writing
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}
+   \textit{Problem. }#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Section 7.2}
+\begin{enumerate}
+	\item Calculate $\phi(1001), \phi(5040), $ and $\phi(36000)$.
+	\begin{problem}
+		Consider the prime factorizations of 1001, 5040, and 36000:
+		\begin{align*}
+			1001 &= 7^1 11^1 13^1 \\
+			5040 &= 2^4 3^2 5^1 7^1 \\
+			36000 &= 2^5 3^2 5^3 
+		\end{align*}
+		Utilizing the formua for $\phi$ given by $\phi(n) = n(1-\frac{1}{p_1})(1-\frac{1}{p_2})\cdots$. Plugging in this formula for each of the prime factorizations gives:
+		\begin{align*}
+			\psi(1001) &= 720\\
+			\psi(5040) &= 1152\\
+			\psi(36000) &= 9600
+		\end{align*}
+	\end{problem}
+	\item [4.] Establish each of the assertions below:
+	\begin{enumerate}
+		\item If $n$ is an odd integer, then $\phi(2n) = \phi(n)$.
+		\begin{problem}
+			Because $n$ is odd, let $k\in \Z$ such that $n = 2k +1$. \gline
+			Thus, we have that (because $n$ is not already even) that:
+			\begin{align*}
+				\phi(2n) &= (2n)(1-\frac{1}2)(1-\frac{1}{p_1})\cdots\\
+				&= n(1- \frac{1}{p_1})\cdots\\
+				&= \phi(n)
+			\end{align*}
+			Proof Done!
+		\end{problem}
+		\item If $n$ is an even integer, then $\phi(2n) = 2\phi(n)$. 
+		\begin{problem}
+			Because $n$ is an even integer, let $k\in\Z$ such that $n = 2k$. \gline
+			Thus, we have that:
+			\begin{align*}
+				\phi(2n) &= (2n)(1-\frac{1}2)(1-\frac{1}{p_1})\cdots\\
+				&= n(1-\frac{1}{p_1})\cdots\\
+				2\phi(n) &= 2\phi(2k)\\
+				&= 2(2k)(1-\frac{1}2)(1-\frac{1}{p_1})\cdots\\
+				&= n(1-\frac{1}{p_1})\cdots
+			\end{align*}
+			Thus, $\phi(2n) = 2\phi(n)$. 
+		\end{problem}
+	\end{enumerate}
+	\pagebreak
+	\item [6.] Show that there are infinitely many integers $n$ for which $\phi(n)$ is a perfect square. 
+	\begin{problem}
+		Let $n = 2^{2k+1}$ be a positive integer for $k\in\Z$. It is trivial that there are infinitely may possibilities for $n$, and that the only prime factor of $n$ is 2. Thus, we have that:
+		\begin{align*}
+			\phi(n) &= 2^{2k+1}(1-\frac{1}2)\\
+			&= 2^{2k}2(\frac{1}2)\\
+			&= 2^{2k}\\
+			&= (2^k)^2
+		\end{align*}
+		Thus, $\phi(n)$ is a perfect square, and because there are infinitely many $n$ for which $\phi(n)$ is a perfect square, the conjecture holds. 
+	\end{problem}
+\end{enumerate}
+\subsection*{Section 7.3}
+\begin{enumerate}
+	\item [2.]Use Euler's Theorem to confirm that, for any integer $n\ge 0$, $51\mid 10^{32n+9}-7$. 
+	\begin{problem}
+		Via Euler's theorem, we know that for any positive integer $n$, $a^{\phi(n)} \equiv 1 \gmod{n}$ for $a\in\Z$. \gline
+		For the integer 10, we have that $\phi(51) = 32$. Thus, we have that $10^32 \equiv 1 \gmod{51}$. We now rewrite the equation in question:
+		\begin{align*}
+			10^{32n+9}-7 &= (10^32)^{n}(10^9)-7\\
+			&\equiv 1^n\cdot 10^9 - 7\mod 51\\
+			&\equiv 10^9 - 7 \mod 51
+		\end{align*}
+		Now, consider that $10^2 = 100 \equiv -2\gmod{51}$. We rewrite again:
+		\begin{align*}
+			10^9 - 7 &\equiv (-2)^4 (10) - 7\gmod{51}\\
+			&\equiv 16(10) - 7 \gmod{51}\\
+			&\equiv 0 \gmod{51}
+		\end{align*}
+		Thus, this equation is divisible by 51. 
+	\end{problem}
+	\item [7.] Find the units digit of $3^{100}$
+	\begin{problem}
+		We will use the wonderful powers of $\gmod {10}$ to solve this problem, because finding the remainder in mod 10 gives the units digit.  Consider that $\phi(10) = 4$. Thus, we have that for any $a\in\Z$ that $a^4\equiv 1 \gmod {9}$. This will help us greatly in our reduction efforts. Let's rewrite our equation:
+		\begin{align*}
+			(3^{25})^4\equiv 1 \gmod {10}
+		\end{align*}
+		Thus, the remainder is 1, as desired.
+	\end{problem}
+	\pagebreak
+	\item [8.] \begin{enumerate}
+		\item If $\gcd(a,n)=1$, show that the linear congruence $ax\equiv b\gmod{n}$ has the solution $x\equiv ba^{\phi(n)-1}\gmod{n}$.
+		\begin{problem}
+			Consider in this case that $a^{\phi(n)}\equiv 1\gmod{n}$. Then, plugging in the provided solution for $x$ gives that:
+			\begin{align*}
+				ax&= a(ba^{\phi(n)-1})\\
+				&= ba^{\phi(n)}\\
+				&= b
+			\end{align*}
+			Thus, the solution $x = ba^{\phi(n)-1}$ holds. 
+		\end{problem}
+		\item Use part (a) to solve the linear congruences $3x\equiv 5\gmod{26}$, $13x\equiv 2 \gmod{40}$ and $10x\equiv 21\gmod{49}$. 
+		\begin{problem}
+			Now, with this solution, we can solve each of these problems. Considering the following phi solutions:
+			\begin{align*}
+				\phi(26)&= 12\\
+				\phi(40)&= 16\\
+				\phi(21)&= 42
+			\end{align*}
+			Thus, we solve for $x$ in each of these cases.
+			\centerit{\ul{$3x\equiv 5\gmod{26}$}}
+			\begin{align*}
+				aba^{\phi(n)-1} &= 5(3^{12})\\
+				&\equiv 5(1)\gmod{26}\\
+				&\equiv 5\gmod{26}
+			\end{align*}
+			Thus, we have that $x = 5(3^{11})\equiv 19\gmod {26}$. 
+			\centerit{\ul{$13x\equiv 2\gmod{40}$}}	
+			\begin{align*}
+				aba^{\phi(n)-1} &= 2(13^{16})\\
+				&\equiv 2(1) \gmod{40}
+			\end{align*}
+			Thus, we solve for $x$ and get that $x = 2\cdot 13^{15}\gmod{40}\equiv 2\cdot (13^4)^313^3\gmod{40}\equiv 2\cdot 13^3 \gmod {40}\equiv 34\gmod{40}$. \gline
+			Hence, we have that $x \equiv 34 \gmod{40}$ as a solution.
+			\centerit{\ul{$10x\equiv 21\gmod{49}$}}	
+			\begin{align*}
+				aba^{\phi(n)-1} &= 21(10^{42})\\
+				&\equiv 21(1) \gmod{49}
+			\end{align*}
+			Thus, we now solve for $x$, (note that $10^2 \equiv 2 \gmod {49}$), and get that:
+			\begin{align*}
+				x &= 21*10^{41}\\
+				&= 21(10^2)^2010\\
+				&\equiv 21(2)^{20}10\gmod{49}\\
+				&\equiv 21(2^10)^210 \gmod {49}\\
+				&\equiv 21 (44)^210\gmod{49}\\
+				&\equiv 21\cdot 25\cdot 10 \gmod{49}\\
+				&\equiv 7 \gmod{49}
+			\end{align*}
+			Thus, $x \equiv 7 \gmod{49}$ is a valid solution. 
+		\end{problem}
+		\item [9.] Use Euler's theorem to evaluate $2^{100000}\gmod{77}$.
+		\begin{problem}
+			Consider that $\phi(77)= 60$, and further consider that $a^60\equiv 1\gmod{77}$, and that $2^{10}\equiv 23 \gmod{77}$ via Euler's theorem. We have that:
+			\begin{align*}
+				2^{100000}&= (2^{1666})^{60}2^{40}\\
+				&\equiv 2^{40}\gmod{77}\\
+				&\equiv (2^{10})^4\gmod{77}\\
+				&\equiv (23)^4 \gmod{77}\\
+				&\equiv 23 \gmod{77}
+			\end{align*}
+			Thus, we have that $2^{100000}\equiv 23 \gmod{77}$
+		\end{problem}
+		\item [11.] For any prime $p$ establish each of the assertions below:
+		\begin{enumerate}
+			\item $\tau(p!)=2\tau((p-1)!)$
+			\begin{problem}
+				Consider that for $\tau$, we have that $\tau(n) = (1+k_1)\cdots$ for prime factors with powers $k$. Thus, because $p$ is a prime, we have that the prime factorization of $p!$ is given by:
+				\begin{align*}
+					s_0^{k_0}s_1^{s_1}\cdots s_n^{k_n}\cdot p
+				\end{align*}
+				Because the prime $p$ is not a prime factor of any numbers before it. Thus, we have that:
+				\begin{align*}
+					\tau(p!) &= (1+k_0)\cdots(1+k_n)(1+1) \\
+					&= 2(1+k_0)\cdots(1+k_n)\\
+					&= 2\tau((p-1)!)
+				\end{align*}
+				We can make the substitution for $\tau((p-1)!)$ because the term $p$ does not contribute any additional powers to the rest of the prime factorization, because it is not a factor of any number before it. 
+			\end{problem}
+			\pagebreak
+			\item $\sigma(p!) = (p+1)\sigma((p-1)!)$
+			\begin{problem}
+				Consider that $\sigma(p!)$ represents the sum of all the divisors of $p!$. Let $s_0^{k_0}\cdots s_n^{k_n}$ be the prime factorization of $p!$. We thus have that:
+				\begin{align*}
+					\sigma(p!)=\frac{s_0\cdot s_0^{k_0} - 1}{{s_0-1}}\cdots \frac{s_n\cdot s_n^{k_n} - 1}{s_n -1}\cdot\frac{p^2 - 1}{p-1}
+				\end{align*}
+				Because $p$ adds a completely new prime to the prime factorization, and doesn't contribute to any more exponents, we write:
+				\begin{align*}
+					\sigma(p!)&=\sigma((p-1)!)\cdot \frac{p^2 - 1}{p-1}\\
+					&= \sigma((p-1)!)\cdot \frac{(p+1)(p-1)}{p-1}\\
+					&= \sigma((p-1)!)\cdot (p+1)
+				\end{align*}
+				Thus the conjecture holds.
+			\end{problem}
+			\item $\phi(p!)=(p-1)\phi((p-1)!)$
+			\begin{problem}
+				Let $s_0\cdots s_1\cdot p$ be the prime factorization of $p!$. Consider that:
+				\begin{align*}
+					\phi(p!) &= (p!)\left(1-\frac{1}{s_0}\right)\cdots\left(1-\frac{1}{s_n}\right)\left(1-\frac{1}{p}\right)\\
+					\phi\left(\left(p-1\right)!\right) &= \left(p-1\right)!\left(1-\frac{1}{s_0}\right)\cdots\left(1-\frac{1}{s_n}\right)
+				\end{align*}
+				Thus, we rewrite the equation for $\sigma\left(p!\right)$ as:
+				\begin{align*}
+					\phi\left(p!\right) &= p\left(\left(p-1\right)!\right)\left(1-\frac{1}{s_0}\right)\cdots\left(1-\frac{1}{s_n}\right)\left(1-\frac{1}{p}\right)\\
+					&= p\left(1-\frac{1}p\right)\phi\left(\left(p-1\right)!\right)\\
+					&= \left(p-1\right)\phi\left(\left(p-1\right)!\right)
+				\end{align*}
+				Thus, the conjecture holds, as desired. 
+			\end{problem}
+		\end{enumerate}
+	\end{enumerate}
+\end{enumerate}
+
+
+\end{document}

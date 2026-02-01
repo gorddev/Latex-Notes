@@ -1,0 +1,303 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.5in}
+            \setlength \textwidth{5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Day 3 - Berliner lectures us hooray}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+   \end{adjustwidth}}
+
+
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+
+%
+% Introductions
+%
+\subsection*{Last Time in Class}
+Last class, we primarily covered:
+\begin{itemize}[itemsep=0pt, parsep=0pt]
+	\item Divisibility
+	\item GCD (greatest common denominator)
+	\item Euclidean Algorithm
+\end{itemize}
+\subsubsection*{Euclidean Algorithm Review}
+Below is an example with the Euclidean algorithm:
+\begin{adjustwidth}{2em}{2em}\gspc
+	\textit{EX:} gcd$(2346, 1002)$ 
+	\begin{align*}
+		2346 &= 2\cdot 1002 + 342&=\text{gcd}(2346, 1002)\\
+		1002 &= 2\cdot 342 + 318&=\text{gcd}(1002, 342)\\
+		342 &= 2\cdot 342 + 318&=\text{gcd}(342, 318)\\
+		318 &= 13\cdot 24 + 6&=\text{gcd}(318, 24)\\
+		24 &= 4\cdot 6 + 0&=\text{gcd}(24, 6)
+	\end{align*}
+	Finally, we see that our gcd is 6. 
+\end{adjustwidth}\gspc
+Berliner tells us that we likely will \textit{not have to do this many steps on our midterm exam}, so don't stress about it too much.
+%
+% GCD Review
+%
+\subsubsection*{GCD Theorem Review}
+Note that the below theorem is quite important to remember:
+\begin{adjustwidth}{2em}{2em}\gspc
+	\textbf{Theorem!} There exist integers $x,y$ such that for integers $a,b$,
+	\[\text{gcd}(a,b)=xa+yb.\]
+	This theorem in plain english states that there is a linear combination of $a$ and $b$ that equals the greatest common divisor. \gspc
+\end{adjustwidth}
+This theorem has some pretty interesting implications. Take our previous example with gcd$(2346, 1002)$. We can work backworks from our gcd of 6 to find this linear combination:
+\begin{align*}
+	\cg {\fbox{6}} &= \fbox{318} - 32\cdot\fbox{24}\\
+	\cg{\fbox{6}} &= \fbox{318} - 13\left[\fbox{342} - 1\cdot \fbox{318}\right] = -13\cdot\fbox{342} + 14\cdot \fbox{318}\\
+	\cg{\fbox{6}} &= -32\cdot\fbox{342}+14\cdot\left[\fbox{1002}-2\cdot\fbox{342}\right]=14\cdot\fbox{1002}-41\cdot\fbox{342}\\
+	\cg{\fbox{6}}&=14\cdot\fbox{1002}-41\cdot\left[\fbox{2346}-2\cdot\fbox{1002}\right]=\cb{\boxed{-41\cdot\fbox{2346}+96\cdot\fbox{1002}}}.
+\end{align*}
+Thus we've found the linear combination that gets the gcd (-41 and 96). What a painful process but it works. 
+\pagebreak
+\section*{Solving Diophantine Equations}
+Recall from the last lecture that Diophantine Equations are equations with integer coefficients and integer solutions. For example, with the equation $x + y =1$, the solutions are all integers $x$ such that $x = 1 -y$. \textit{Now let's do an example}. 
+\begin{adjustwidth}{2em}{2em}\gspc
+	\textit{Solve.} $2346x + 1002y = 6$.\gline
+	One possible solution: $x = -41, \;y=96$ (which we discussed above)
+\end{adjustwidth}
+However, solving for these integer solutions is not always so easy.
+\subsection*{Fermat's Last Theorem}
+Take for example, Fermat's Last Theorem:
+\[x^n+y^n = z^n,\;\;x,y,z,n\in\Z\]
+Notice that this equationresembles the form of a Pythagorean Triple $a^2 + b^2 = c^2$. However, the interesting thing is, for non-trivial solutions (e.g. $n = 0, 1, 2$, or $x = -y$ for odd $n$), that \textit{no solutions exist.}\gline
+For now, we will primarily cover the equation $ax+ by=c$
+%
+%
+%
+\subsection*{Zesty Warm-Up}
+Let's do some fun warm up problems:
+\begin{enumerate}
+	\item [(a)] What is the gcd of two consecutive even integers?\gline
+	Consider that we have two integers, $n$ and $n + 2$. We can represent $n$ as $n = 2k$ for $k\in \Z$. Thus, we write:
+	\begin{align*}
+		d&\mid 2k\\
+		d&\mid 2k+2
+	\end{align*}
+	Thus we have an $x,y\in \Z$ such that:
+	\begin{align*}
+		xd &= 2k\\
+		yd &= 2k+ 2
+	\end{align*}
+	Pluggin in gives us that:
+	\begin{align*}
+		yd &= xd + 2\\
+		(y-x)d &= 2
+	\end{align*}
+	Thus, for integer $d$, $d$ must equal -2, -1, 1, 2.\gline
+	We can also try this with the euclidean algorithm variation;
+	\begin{align*}
+		2k + 2 &= 1(2k) + 2\\
+		2k &= k(2) + 0\\
+	\end{align*}
+	Thus, we find that the gcd is the remainder one above 0, which is 2!
+	% Second question
+	\item [(b)]What is the gcd of two consecutive odd integers?
+	Consider two consecutive odd integers, $n$ and $n +2$. We know that $n = 2k + 1$, for $k\in \Z$, so we can write:
+	\begin{align*}
+		d&\mid 2k + 1\\
+		d&\mid 2k + 3
+	\end{align*}
+	We know that there exists integers $x,y$ such that:
+	\begin{align*}
+		xd &= 2k + 1\\
+		yd &= 2k + 3
+	\end{align*}
+	Substituion yields:
+	\begin{align*}
+		xd &= yd + 2\\
+		(x-y)d &= 2
+	\end{align*}
+	However, we know that $d$ cannot be 2 because $n$ and $n+2$ are odd, so $d = -1, 1$ and the gcd is $1$.\gline
+	We also use the Euclidean algorithm to solve this problem:
+	\begin{align*}
+		2k +3 &= 1(2k+1) + 2\\
+		2k+1 &= k(2) + \fbox{1}\\
+		2 &= 2(1) + 0
+	\end{align*}
+	Thus, we see that the gcd is 1. 
+\end{enumerate}
+Here's the moral of this story: for gcd problems, the Euclidean algorithm is more consistent and more reliable than using the defintiion of a divisor. 
+\subsection*{Diophantine Equation Practice}
+Consider the Diophantine Equation $152x + 108y = 84$.
+\begin{enumerate}
+	\item [(a)] Show that $x = -3$, $y = 5$ is a solution:
+	\begin{align*}
+		152(-3) + 108(5) = 84
+	\end{align*}
+	\item [(b)] Can you find a solution for which $x > 0$?\gline
+	Yes, $x = 108-3$ and $y = 152 -5$
+	\item [(c, d)] Are there solutions where $x$ and $y$ are of the same sign?\gline
+	No, there are no solutions that satisfy this condition 
+\end{enumerate}
+
+\subsection*{Another Diophantine Equation}
+\begin{enumerate}
+	\item Consider the Diophantine equation $6x + 9y = c$.
+	\begin{enumerate}
+		\item Are there any solutions for $x,y$ when $c = 6$?\gline
+		Yes, when $x = 1$ and $y = 0$. 
+		\item Are there any solutions for $x,y$ when $c = 3$?\gline
+		Yes, when $x = -1$ and $y = 1$.\gline
+		\item Are there any solutions for $x,y$ when $c = 33$?\gline
+		Yes, when $x = 8$ and $y = -5$
+		\item Key Takeaway: \textbf{Diophantine equations of the form $ax + by = c$ only have solutions if $c$ is a multiple of $\text{gcd}(a, b)$}
+		\item What is the \textit{smallest} positive value of $c$ for which there is a solution for $x, y$?\gline
+		It's 3. 
+	\end{enumerate}
+	\item Consider the Diophantine Equation $ax + by =1 $
+	\begin{enumerate}
+		\item Does this equation have any solutions when $(a,b) = (6,9)?$\gline
+		No, because 6 and 9 are not relatively prime.
+		\item Are there any solutions when $(a,b) = (2,4)$?\gline
+		No, because 2 and 4 are not relatively prime.
+		\item Are there any solutions when $(a,b) = (2,5)$?\gline
+		Yes, because 2 and 5 are relatively prime.
+		\item Are there any solutions when $(a,b) = (2k, 2k+1)$?
+		Yes, because two consecutive integers are always relatively prime
+		\item \textbf{Group Fill-in Theorem}:\\
+		The diophantine equation $ax + by = 1$ has a soution for $(x,y)$ if and only if \ul{$a$ and $b$ are relatively prime.}
+	\end{enumerate}
+\end{enumerate}
+
+% Section
+\subsection*{Takeaways from the practice problems}
+So what are we supposed to take away from these exercises? It's this one primary detail:
+\begin{adjustwidth}{2em}{2em}\gspc\gspc
+	\gbox {
+	\textbf{Theorem! }
+	The Diophantine eq. $ax+by=c$ only has a solution when $\text{gcd}(a,b) \mid c$}
+\end{adjustwidth}\gspc\gspc
+For example, with the equation $6x + 9y = c$, we know that we will have solutions as long as $c = \{\ldots, -3, 0, 3, 6, \ldots\}$. However, as soon as $3 \nmid c$, like with $1, 4, 10, -2$, \ul{no solution exists}. 
+\gbline
+However, what \ul{are} the solutions to $ax + by = c$? To get \ul{one} $(x_0, y_0)$, use Euclid Alg to get gcd($a,b$), then multiply by $\frac{c}{\text{gcd}(a,b)}.$ \gline
+What about the others though?\gline
+Pretend that $(x_1, y_1)$ is a solution, also. Then, we have that:
+\begin{align*}
+	\begin{cases}
+		ax_0 + by_0 &= c\\
+		ax_1 + by_1 &= c
+	\end{cases}
+\end{align*}
+So setting both equations equal gives us that $ax_0 + by_0 = ax_1 + by_1$. This is quite helpful, as we can rewrite this as:
+\begin{align*}
+	a(x_1 - x_0) = b(y_0 - y_1)
+\end{align*}
+However, here's the little bitty crucial component. Remember that because $c \mid\text{gcd}(a,b)=d$, we have that $d\mid a$, and $d\mid b$. Thus, $\exists K, L\in \Z$ such that $Kd = a$ and $Ld = b$. Soooooo... look at this:
+\begin{align*}
+	Kd(x_1 - x_0) &= Ld(y_0 -y_1)\\
+	K(x_1-x_0) &= L(y_0-y_1)
+\end{align*}
+Interestingly, a consequence of $d$ being the gcd is that $\text{gcd}(K,L) = 1$ (they are relatively prime). \\
+\footnotesize *For the reason for why this is, I'll probably write a brief appendix to these notes but I don't have time to detail it right now. \normalsize\\
+So, via the properties of divisibility, we know that:
+\begin{align*}
+	L&\mid (x_1 - x_0)\\
+	K&\mid (y_0 - y_1) 
+\end{align*}
+Thus, there exists a $t\in \Z$ such that $Kt = (y_0 - y_1)$.
+\pagebreak
+So, we then write:
+\begin{align*}
+	K(x_1-x_9)&= L(Kt)\\
+	x_1-x_0 &= Lt\\
+	x_1 -x_0 &= Lt\\
+	x_1 - x_0 &= \left(\frac{b}d\right) t\\
+	x_1 &= x_0 + \left(\frac{b}d\right) t
+\end{align*}
+Furthermore, we can write this in terms of $y$ too:
+\begin{align*}
+	y_1 = y_0 - \left(\frac{a}d\right)t
+\end{align*}
+If you want both equations in a big box so they're easy to see, look no futher:
+\begin{gather*}
+	\cb{\boxed{x_1 = x_0 + \left(\frac{b}d\right) t}}\\
+	\cb{\boxed{y_1 = y_0 - \left(\frac{a}d\right)t}}
+\end{gather*}
+\section*{Algorithmically Solving Diophantine Equations}
+Thus, we estbalish a consistent algorithm for solving diophantine equations:\gspc\\
+\gbox{
+	\begin{enumerate}[topsep=0pt, itemsep=-1pt, parsep=-1pt]
+		\item Use Euclidean Algorithm to solve your equation to get the gcd.
+		\item Multiply by your $c$.
+		\item Use the equations to solve your equations.
+	\end{enumerate}
+}\gspc\\\\
+For example, let's consider the $6x + 9y = c$ equation from earlier:
+\begin{enumerate}[itemsep=0pt, parsep=1pt]
+	\item Use Euclidean algorithm\gline
+	$6x + 9y = 3\ldots x = -1, y = 1$
+	\item Multiply by 33:\gline
+	$x_0 = -33, y_0=33$
+	\item Solutions are:\gline
+	$$x_1 = -33 + \frac{9}3 t = -33 +3t$$
+	$$y_1 = 33 - \frac{6}3t = 33 - 2t$$ 
+\end{enumerate}
+Hooray! Wasn't that great? That's all the notes for now. 
+
+\end{document}

@@ -1,0 +1,209 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro,changepage}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{changepage}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.5in}
+            \setlength \textwidth{5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\n}{\vspace{0.15cm}\\}
+\newcommand{\en}{\vspace{0.25cm}\\}
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Day 2 - Proof? Proof?}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+   \end{adjustwidth}}
+\begin{document}
+
+%
+% Introductions
+%
+We just began the class talking about the free weekend, where people are going. Considerations include:
+\begin{itemize}[itemsep=0pt]
+    \item Vienna (\$30 - \$40) each way. Staying in the hostel costs \$30 per night.
+    \item Stay in Budapest (no moneys)
+    \item Whatever else you want to do
+\end{itemize}
+I think most people are going to Vienna and buying a two-day travel pass. 
+\subsection*{Last Time}
+Last class we covered:
+\begin{itemize}[itemsep=0pt]
+    \item Direct Arguments \& practice
+    \item Cases (Sometime an argument needs several small cases)
+    \item Division Algorithm, ``forms'' for integers. 
+\end{itemize}
+Everyone's jetlagged, and it's nighttime, and it can be frusterating when things don't click instantly. There were only 3 homework problems, but `they weren't the easiest three'.
+\subsection*{Division Algorithm}
+We primary covered the division algorithm last class, and how it is useful for solving various problems. The divsion algorithm takes the form:
+\[n = qb + r\]
+where $n$ is an integer. \n
+Essentially, the division algoritm is saying, ``we can represent any integer in terms of this equation''. Although this sounds a little abstract, essentially imagine it like this:
+\centerit{\fbox{Say I let $q = 3$. For any given integer $n$, I can represent it in the form $3b + r$.}}
+Take the numbers 4, 8, and 9. I can represent them as:
+\begin{align*}
+    4 &= 3b + 1,\, \text{ for } b = 1\\
+    8 &= 3b + 2,\, \text{ for } b = 2\\
+    9 &= 3b + 0,\, \text{ for } b = 3
+\end{align*}
+Now, we don't just have to use $q = 3$, but is a convenient example, because if $q=3$, we have a maximum of 3 representations to cover a set of all integers: $3b + r$, for $r = \{0, 1, 2\}$. \n
+For $q\ne 3$, things get more complicated, but it's still really managable. For say $q = 6$, we have six forms instead:
+\centerit{
+\begin{tabular}{c c c c c c}
+    $6b + 0$ & $6b + 1$ & $6b + 2$ & $6b + 3$ & $6b+4$ & $6b+5$
+\end{tabular}}
+But you may be asking, \textit{how do we use this in a proof?} Well you kinda gotta figure this out by yourself, but you split your proof into \textbf{cases}. However, a hint is that you begin your proof like this:
+\begin{proof}
+    Let $n\in\Z$. By the \textbf{Division Algorithm}, $n$ has one of the forms $4b,\, 4b+1,\, 4b+2, $ or $4b+3$.\\
+    \textbf{Case 1: } If $n= 4b$ ($b\in \Z$,) then $\ldots$
+    \textbf{Case 2: } $\ldots$
+\end{proof}
+\pagebreak
+
+
+
+\section*{New Material for Day 2}
+After reviewing the division algorithm, we started govering the \textbf{Greatest Commond Divisor} (GCD).
+\subsection*{Greatest Common Divisor}
+Here's our working definition:
+\begin{center}
+    \fbox{\fbox{
+        Given $a,b\in Z$, $\text{gcd}(a,b)$ is the largest integer $d$ for which $d\mid a$ and $d\mid b$. 
+    }}
+\end{center}
+\footnotesize{*Note that, $d\mid a$ means that ``$d$ \text{divides} $a$'' }\normalsize\n
+For example:
+\centerit{
+    \begin{tabular}{c c c}
+        gcd(4,6) $=2$ & gcd$(4,5) = 1$ & gcd$(-8, -4) = 4$
+    \end{tabular}
+}
+\subsection*{In-Class Work (pt. 1)}
+\subsubsection*{Question 1}
+\begin{enumerate}
+    \item Find gcd$(24, 98)$
+    It's 2
+    \item Find the gcd$(1, 18)$
+    It's 1
+    \item Find the gcd$(-24, 98)$ It's 2
+    \item Find the gcd$(1000, 1001)$ I'ts 1. 
+\end{enumerate}
+\subsubsection{Linear Combinations of Integers}
+An interesting property of the greatest common divisor is that is is actually a \textbf{linear combination} of both numbers. Take gcd$(a,b)$, we can write:
+\centerit{
+    \fbox{gcd$(a,b) = x\cdot a + y\cdot b,\quad x,y\in\Z$. }
+}
+Little abstract and confusing, but imagine it like this. Let $a = 2, b = 3$. Their greatest common divisor is clearly 1. However, we can form the greatest common divisor from linearly combining $a$ and $b$:
+\[-1 \cdot a + 1 \cdot b = 1\]
+Wow! Look at that!
+\subsubsection*{Question 2}
+Find one pair of integers $x, y$ such that gcd$(a,b) = xa + yb$:
+\begin{enumerate}[itemsep=0pt]
+    \item $a = 10, b = 25:\quad \text{gcd}(10,25)=5,\quad x = -2, \;y = 1$
+    \item $a = 10, b = 25:\quad \text{gcd}(24,98)=2,\quad x = -4, \;y = 1$
+\end{enumerate}
+\subsection*{Relative Prime}
+You gotta know this definition. I don't know why, but you gotta know it:
+\begin{center}
+    \fbox{\fbox{Two integers $a, b$ are said to be \textit{relatively prime} if gcd$(a,b) = 1$}}
+\end{center}
+
+\pagebreak
+\section*{Euclidean Aglorithm}
+Now we need a way to consistenly solve for the gcd, and we'll use the euclidean algorithm to do so. Let $a$ and $b$ be the two integers we want to find the gcd for. We use the following code to find it:
+\begin{verbatim}
+while (b != 0) {
+    int r = a % b;
+    if (r == 0)
+        break;
+    a = b;
+    b = r;
+}
+return b;
+\end{verbatim} 
+Now what is this algorithm actually doing? Well, let's break it down step by step. 
+\begin{enumerate}[itemsep=0pt]
+    \item First, find the remainder of $a \div b$. 
+    \item \textbf{Case: }If our remainer is 0, the current value of $b$ is our gcd, and end here.
+    \item Otherwise, set $a$ equal to the original $b$.
+    \item Finally, set $b$ equal to the remainder.
+    \item Repeat steps 1-4.
+\end{enumerate}
+We can see this in action with $a = 24$ and $b = 19$ (Ignore that they are relatively prime, this is for example purposes):
+\begin{align*}
+    24 / 19 &= 1(19) + 3\\
+    19 / 3 &= 6(8) + 1\\
+    3 / 1 &= 3(1) + 0
+\end{align*}
+Thus, because our last remainder is zero, we find that the remainder above that, 1, is our greatest common denominator, as desired. 
+
+\section*{Diophantine Equations}
+A Diophantine Equation is an equation that only concerns integer solutions to integer equations. For example, the equation:
+\[ax+by =c\]
+is a Diophantine equation if we restrict: $a,b,c,x,y\in \Z$. \n
+A couple examples looks like:
+\centerit{
+    \begin{tabular}{c c c}
+        $2x+4y =8$ & $3x + 5y = 13$ & $2 + 4y = 7$ 
+    \end{tabular}
+}
+A interesting property of this particular subclass of equation, $ax + by = c$, is that:
+\begin{center}
+    \fbox{A solution to the diophantine eq. $ax + by = c$ exists if and only if gcd$(a,b) \mid c$}
+\end{center}
+It's that interesting? For example:
+\[6x + 9y = 12\]
+We know solutions exist because gcd$(6, 9) = 3$, and $3\mid 12$.\n
+Let's go through an example problem.
+\subsection*{Example Example Example Eggsample Example}
+To solve $ax +by = c$:
+\begin{itemize}
+    \item Check if gcd$(a,b)\mid c$
+    \item Solve $ax + by = \text{gcd}(a,b)$ using Euclidean Algorithm
+    \item Multiply by appropriate multiplier to get a solution to $ax + by =c$ 
+\end{itemize}
+We didn't really finish this. 
+\end{document}

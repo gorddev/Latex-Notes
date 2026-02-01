@@ -1,0 +1,254 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{centernot}
+\usepackage{amsthm,letltxmacro,changepage}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{changepage}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{0.4in}
+            \setlength \textwidth{5.4in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\n}{\vspace{0.15cm}\\}
+\newcommand{\en}{\vspace{0.25cm}\\}
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{PS1 - Number Theory}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+   \end{adjustwidth}}
+
+
+\begin{document}
+
+\begin{enumerate}
+	\item Show that any integer of the form $6k+5$ is also of the form $3j + 2$, but not conversely. \en
+	\textbf{Part One}: We will prove that for any integer $n$, \centerit{$n=6k+5, \,k\in \Z \implies n=3j+2,\,j\in\Z$.}
+	\begin{proof}
+		Let $n$ be an integer such that $n = 6k+5, \,k\in\Z$. We want to show that $n = 3j+2, \,j\in\Z$. \n
+		We will now rewrite $n=6k+5$.
+		\begin{align*}
+			n &= 6k+5\\
+			&=6k + 3 + 2\\
+			&= 3(2k + 1) + 2
+		\end{align*}
+		Let $j\equiv (2k+1)$. Hence, we have that $n$ can be written as $n = 3j + 2$, as desired. 
+	\end{proof}
+	\textbf{Part Two}: We will prove via counterexample that for an integer $n$, \centerit{$n=3j+2, \,j\in \Z \centernot\implies n=6k+5,\,k\in\Z$.}
+	\begin{proof}
+		We want to show that for an integer $n$, if $n=3j+2,\,j\in\Z$, that does not imply that $n = 6k+5,\,k\in\Z$. \n
+		Consider the case where $j = 2$, and thus $n = 8$. We have that:
+		\begin{align*}
+			8 &= 6k+5\\
+			3 &= 6k
+		\end{align*}
+		However, $3\,\text{mod } 6 = 3$, and 3 is not divisble by 6. Thus, if $n = 3j+2$, that does not imply that $n = 6k+5$ for $k\in\Z$, as desired.
+	\end{proof}
+	\item Use the division algorithm to establish the following:
+	\begin{enumerate}
+		\item [(a)] The square of any integer is of the form $n^2 = 3k$ or $n^2 = 3k+1$. \en
+		An integer can be represented in terms of multiples of three via the division algorithm: $n = q\cdot m + r$, where $q = 3$. Thus, we will represent $n$ as $3m,\, 3m+1,\, $ or $3m+2$ to achieve the desired result. 
+		\begin{proof}
+			We want to show that for any integer $n$, $n^2 = 3k$ or $n^2 = 3k+1$ for $k\in \Z$.
+			\centerit{\textbf{Case 1. $n = 3m$}}
+			Consider the case where $n = 3m$ for $m\in\Z$. We write that for $n^2$, that:
+			\begin{align*}
+				n^2 &= 9m^2
+			\end{align*}
+			Let $k \equiv m^2$. We then have that, $n^2 = 3k$. Thus, \textbf{Case One} holds.
+			\pagebreak
+			\centerit{\textbf{Case 2. $n = 3m + 1$}}
+			Conside the case where $n = 3m+1$ for $m\in \Z$. We write that for $n^2$, that:
+			\begin{align*}
+				n^2 &= 9m^2 + 6m + 1\\
+				&= 3(3m^2 + 2m) + 1
+			\end{align*}
+			Let $k \equiv 3m^2 + 2m$. We then have that, $n^2 = 3k +1$. Thus, \textbf{Case 2} holds.
+			\centerit{\textbf{Case 3 $n = 3m + 2$}}
+			Consider the case wherE $n = 3m+ 2$ for $m\in \Z$. We write that for $n^2$, that:
+			\begin{align*}
+				n^2 &= 9m^2 + 12m + 4\\
+				&= 3(3m^2 + 4m) + 3 + 1\\
+				&= 3(3m^2 + 4m + 1) + 1
+			\end{align*}
+			Let $k\equiv 3m^2 + 4m + 1$. We then have that $n^2 = 3k + 1$. Thus, \textbf{Case 3} holds.\en
+			Hence, because all three cases hold, $n^2$ can always be written as $n = 3k$ or $n = 3k+1$ for $k\in \Z$. 
+		\end{proof}
+		\item [(b)] The cube of any integer is of the form $9k,\, 9k + 1$ or $9k + 8$.\en
+		We will use the work from part (a) to solve this problem, and will continue to use the division algorithm representation of $n = 3m + r$ to solve the problem in three cases. Such results, will show that the cube of any integer is of the form $9k,\, 9k + 1$ or $9k + 8$.
+		\begin{proof}
+			We want to show that the cube of any integer $n$ can be written in the form $9k,\, 9k+1$, or $9k + 8$.
+			\centerit{\textbf{Case 1. $n = 3m$}}
+			Consider the case where $n = 3m$ for $m\in\Z$. We write that for $n^3$, that:
+			\begin{align*}
+				n^3 &= 81m^3\\
+				&= 9(9m^3)
+			\end{align*}
+			Let $k \equiv 9m^3$. We then have that, $n^2 = 9k$. Thus, \textbf{Case One} holds.
+			\pagebreak
+			\centerit{\textbf{Case 2. $n = 3m + 1$}}
+			Conside the case where $n = 3m+1$ for $m\in \Z$. We write that for $n^3$, that:
+			\begin{align*}
+				n^3 &= 27m^3 + 27m^2 + 9m +1\\
+				&= 9(3m^3 + 3m^2 + m) + 1
+			\end{align*}
+			Let $k \equiv 3m^3 + 3m^2 + m$. We then have that, $n^3 = 9k +1$. Thus, \textbf{Case 2} holds.
+			\centerit{\textbf{Case 3 $n = 3m + 2$}}
+			Consider the case where $n = 3m+ 2$ for $m\in \Z$. We write that for $n^3$, that:
+			\begin{align*}
+				n^3 &= 27 m^3+ 54 m^2 + 36 m + 8\\
+				&= 9(3m^2 + 6m^2 + 4m) + 8\\
+			\end{align*}
+			Let $k\equiv 3m^2 + 6m^2 + 4m$. We then have that $n^2 = 3k + 2$. Thus, \textbf{Case 3} holds.\en
+			Hence, because all three cases hold, $n^3$ can always be written as $n = 9k$, $n = 9k+1$, $n = 9k+8$, for $k\in \Z$. 
+		\end{proof}
+	\end{enumerate}
+	\item [5.] For n $\ge$ 1, prove that $n(n + 1)(2n + 1)/6$ is $\frac{n(n + 1)(2n + 1)}6$ an integer.\n
+	\begin{proof}
+		We want to show that for any integer $n$, the equation $n(n + 1)(2n + 1)/6$ is an integer.\en
+		Consider that $n$ can be written as $n = 6m + r$ for $m\in \Z$, and $r\in\{0,1,2,3,4,5\}$. Thus, we have a total of six possible cases for $m$. To solve this problem, we will show that between the three polynomails in the numerator:
+		\begin{gather*}
+			n,\\
+			n+1, \text{ and}\\
+			2n+1,\\
+		\end{gather*}
+		one will at minimum be divisible by 2, and one will be divisible by 3. Thus, we know that our numerator will be a factor of $2\cdot 3 = 6$, and thus the result of our equation will be an integer. \n
+		First take the case where our remainder is zero:
+		%
+		% Case One
+		%
+		\centerit{\textbf{Case One: }$n = 6m + 0$}
+
+		If $r = 0$, then trivially $n(n + 1)(2n + 1)/6$ is an integer because $n = 6m$, and our equation simplifies to:
+		\begin{align*}
+			n(n+1)(2n+1)/6 &= 6m(6m +1)(12m+1)/6\\
+			&= m(6m+1)(12m+1)
+		\end{align*}
+		\pagebreak
+		%
+		% Case Two
+		%
+		\centerit{\textbf{Case Two: }$n = 6m + 1$}
+		Consider each of the parts of our polynomial under the case where $r = 1$:
+		\begin{align*}
+			n &= 6m +1\\
+			(n+1)&= 6m+2\\
+			(2n+1)&= 12m+3
+		\end{align*}
+		Notice that $2\mid (6m+2)$ and that $3\mid (12m+3)$, and we can factor out a 6, thus simplifying our equation to an integer result:
+		\begin{align*}
+			n(n+1)(2n+1)/6 &= (6m+1)(6m+2)(12m+3)/6\\
+			&= 6(6m+1)(3m+1)(4m+1)/6\\
+			&= (6m+1)(3m+1)(4m+1) \in \Z
+		\end{align*}
+		Thus, for the $n= 6m+1$ case, the equation is an integer. 
+
+		%
+		% Case Three
+		%
+		\centerit{\textbf{Case Three: }$n = 6m + 2$}
+		Consider each of the parts of our polynomial under the case where $r = 2$:
+		\begin{align*}
+			n &= 6m +2\\
+			(n+1)&= 6m+3\\
+			(2n+1)&= 12m+5
+		\end{align*}
+		We note that $2\mid (6m+2)$ and that $3\mid (6m+3)$, and factor out a 6, thus simplifying our equation to an integer result:
+		\begin{align*}
+			n(n+1)(2n+1)/6 &= (6m+2)(6m+3)(12m+5)/6\\
+			&= (3m+1)(2m+1)(12m+5) \in \Z
+		\end{align*}
+		Thus, for the $n= 6m+2$ case, the equation is an integer. 
+		%
+		% Case Four
+		%
+		\centerit{\textbf{Case Four: }$n = 6m + 3$}
+		Consider each of the parts of our polynomial under the case where $r = 3$:
+		\begin{align*}
+			n &= 6m +3\\
+			(n+1)&= 6m+4\\
+			(2n+1)&= 12m+7
+		\end{align*}
+		We note that $2\mid (6m+4)$ and that $3\mid (6m+3)$, and factor out a 6, thus simplifying our equation to an integer result:
+		\begin{align*}
+			n(n+1)(2n+1)/6 &= (6m+3)(6m+4)(12m+7)/6\\
+			&= (2m+1)(3m+2)(12m+7) \in \Z
+		\end{align*}
+		Thus, for the $n= 6m+3$ case, the equation is an integer. 
+		%
+		% Case Five
+		%
+		\centerit{\textbf{Case Five: }$n = 6m + 4$}
+		Consider each of the parts of our polynomial under the case where $r = 4$:
+		\begin{align*}
+			n &= 6m +4\\
+			(n+1)&= 6m+5\\
+			(2n+1)&= 12m+9
+		\end{align*}
+		We note that $2\mid (6m+4)$ and that $3\mid (12m+9)$, and factor out a 6, thus simplifying our equation to an integer result:
+		\begin{align*}
+			n(n+1)(2n+1)/6 &= (6m+4)(6m+5)(12m+9)/6\\
+			&= (3m+2)(6m+5)(4m+3) \in \Z
+		\end{align*}
+		Thus, for the $n= 6m+4$ case, the equation is an integer. 
+		%
+		% Case Five
+		%
+		\centerit{\textbf{Case Six: }$n = 6m + 5$}
+		Consider each of the parts of our polynomial under the case where $r = 5$:
+		\begin{align*}
+			n &= 6m +5\\
+			(n+1)&= 6m+6\\
+			(2n+1)&= 12m+11
+		\end{align*}
+		We note that $6\mid (6m+6)$ thus simplifying our equation to an integer result:
+		\begin{align*}
+			n(n+1)(2n+1)/6 &= (6m+4)(m+1)(12m+11)
+		\end{align*}
+		Thus, for the $n= 6m+5$ case, the equation is an integer. \en
+		Hence, because under all possible cases for $n$ under the division algorithm for 6—the equation $n(n+1)(2n+1)/6$ is an integer—said equation is shown to always be an integer, as desired. 
+	\end{proof}
+\end{enumerate}
+
+\end{document}

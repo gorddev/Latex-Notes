@@ -1,0 +1,269 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Problem Set 15}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+%coloring with color
+\newmdenv[
+  backgroundcolor=gray!8,
+  linewidth=0pt,
+  innerleftmargin=0pt,
+  innerrightmargin=0pt,
+  skipabove=\baselineskip,
+  skipbelow=\baselineskip
+]{coloredadjust}
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+
+% problem writing
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}
+   \textit{Problem. }#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Section 9.3}
+\begin{enumerate}
+  \item Prove that 3 is a quadratic nonresidue of all primes of the form $2^{2n}+1$ and also all primes of the form $2^p - 1$ where $p$ is an odd prime. 
+  \begin{problem}
+    We want to show that 3 is a quadratic nonresidue of all primes of the form $2^{2n}+1$ and $2^p -1$ where $p$ is an odd prime. \gline
+    We first use the Quadratic Reciprocity Law:
+    \begin{align*}
+      (3/2^{2n}+1)(2^{2n}+1/3)&=(-1)^{((3-1)/2)((2^{2n}+1-1)/2)}\\
+      &=(-1)^{((2^{2n})/2)}
+    \end{align*}
+    Thus, for $n\ge 1$, we have that:
+    \begin{align*}
+      (3/2^{2n}+1)(2^{2n}+1/3)&= 1
+    \end{align*}
+    For the term $(2^{2n}+1/3)$, we simplify as $(2^{2n}+1)\equiv (-1)^{2n}+1\gmod p\equiv 2\gmod p$. However, $2$ is not a quadratic residue of 3, so thus we have that $(2^{2n}+1/3) = -1$. Thus, because:
+    \begin{align*}
+      (3/2^{2n}+1)(-1)&= 1, 
+    \end{align*}
+    we have that $(3/2^{2n}+1) = -1$.\gline
+    For the case of $2^{p}-1$, the same process applies. We write $2^{p}-1$ as $2^{4k + 1}-1$ for odd primes. This gives with the quadratic residue formula that:
+    \begin{align*}
+      (3/2^{2n}+1)(2^{4k+1}+1/3)&= (-1)^{(1)((2^{4k+1}-1-1/2))}\\
+      &= (-1)^{(1)((2^{4k+1}-2/2))}\\
+      &= (-1)^{(((2^{4k+1})/2-1))}\\
+      &= (-1)^{(((2^{4k})-1))}
+    \end{align*}
+    Because $2^{4k}-1$ is an odd number, we have that:
+    \begin{align*}
+      (3/2^{2n}+1)(2^{4k+1}+1/3)&=-1
+    \end{align*}
+    Then, in mod 3, we have that:
+    \begin{align*}
+      (2^{4k+1}+1/3)&\equiv ((-1)^{4k+1}+1/3)\gmod {2^{p}-1}\\
+      &\equiv (0/3)
+    \end{align*}
+    0 is trivially a quadratic residue of 3. We have that:
+    \begin{align*}
+      (3/2^{2n}+1)&= -1
+    \end{align*}
+    Thus, 3 is a nonresidue of $(3/2^{2n}+1)$.
+  \end{problem}
+  \item [5.] \begin{enumerate}
+    \item Prove that if $p>3$ is an odd prime, then:
+    \begin{align*}
+      (-3/p)=\begin{cases}
+        1\text{ if }p\equiv 1\gmod 6\\
+        -1 \text{ if }p\equiv 5 \gmod 6
+      \end{cases}
+    \end{align*}
+    \pagebreak
+    \begin{problem}
+      Consider that $(-3/p)=(-1/p)(3/p)$. Via properties of the quadratic residue, we have that
+      \begin{align*}
+        (-1/p) = (-1)^{(p-1)/2}
+      \end{align*}
+      Now consider that for $(3/p)$ we have that:
+      \begin{align*}
+        (3/p)(p/3)&= (-1)^{(3-1)/2\cdot(p-1)/2}\\
+          &=(-1)^{(p-1)/2}
+      \end{align*}
+      Now, we split into two cases. For $p =6n+1$, we have that $(p/3)=1$, because $6n+1\equiv 1 \gmod 3$, and 1 is a quadratic residue of 3. Thus,
+      \begin{align*}
+        (3/p)&=(-1)^{(p-1)/2}
+      \end{align*}
+      And thus that:
+      \begin{align*}
+        (-1/p)(3/p)&= (-1)^{(\frac{p-1}2)^2}\\
+        &=(-1)^{p-1}\\
+        &=1, \;(\text{because }p\text{ is an odd prime})
+      \end{align*}
+      For the case where $p=6n+5$, we have that $(p/3)=-1$ because $6n+5\equiv 2 \gmod 3$ is not a quadratic residue of 3:
+      \begin{align*}
+        (3/p)(p/3)&= -1\cdot(-1)^{(p-1)/2}
+      \end{align*}
+      Hence, 
+      \begin{align*}
+        (-1/p)(3/p)&= -1\cdot(-1)^{(\frac{p-1}2)^2}\\
+        &=-1\cdot(-1)^{p-1}\\
+        &=-1, \;(\text{because }p\text{ is an odd prime}).
+      \end{align*}
+      Thus, we have that if $p>3$ is an odd prime, then:
+    \begin{align*}
+      (-3/p)=\begin{cases}
+        1\text{ if }p\equiv 1\gmod 6\\
+        -1 \text{ if }p\equiv 5 \gmod 6
+      \end{cases}
+    \end{align*}
+    \end{problem}
+    \item We want to show that there are infinitely many primes of the form $6k+1$. 
+    \begin{problem}
+      Consider via Dirchlet's theorem that there are infinitely many primes of the form $p\equiv a\gmod b$ for $\gcd(a,b)=1$. \gline
+      Note that $1$ and $6$ are relatively prime. Thus, there are infinitely many primes of the form $p = 1\gmod 6$. \gline
+      For a more formal proof, look below.
+      \begin{proof}
+        For the sake of contradiction, let $p_1p_2\cdots p_k$ be all primes of the form $6k+1$. Then, let $N$ be a integer such that:
+        \begin{align*}
+          N &= (2p_1p_2\cdots p_s)^2 + 3
+        \end{align*}
+        Note that the multiplication of any term $6k+1$ with itself will result in $(6k+1)^2 = 36k^2 + 12k + 1 = 6j +1$. Thus, we rewrite $N$:
+        \begin{align*}
+          N &= 4(6j +1) + 3\\
+          &= 24j + 7\\
+          &= 6\ell +1
+        \end{align*}
+        Thus, $N$ is also of the form $6\ell +1$. Note that primes also of the form $6n+5$ when multiplied together can form $6\ell +1$. \gline 
+        However, let $t$ be a prime factor of $N$ of the form $6\ell +5$. Thus, $t \mid 3$. However, $t\nmid 3$ because 3 is a prime and is not of the form $6n+5$. Then, try $t$ of the form $6n+1$. It cannot also divide 3 because 3 is not of the form $6n+1$. \gline
+        Because all prime factors of $N$ must be of the form $6n+5$ or $6n+1$, but said prime factors cannot divide $N$, we have a contradction. Thus, there cannot be a finite number of primes of the form $6n +1$. 
+      \end{proof}
+    \end{problem}
+  \end{enumerate}
+  \item [10.] Establish each of the following assertions:
+  \begin{enumerate}
+    \item $(5/p)=1$ if and only if $p = 1,9,11,$ or $19\gmod {20}$.
+    \begin{problem}
+      We're going to use the quadratic reciprocity theorem to show this to be true, and use the notation $p=\pm 1\gmod{10}$. 
+      \begin{proof}
+        We start with the forwards direction. Assume that $(5/p)=1$. Consider that via the Quadratic Reciprocity theorem we have that:
+        \begin{align*}
+          (5/p)(p/5)&=(-1)^{((5-1)/2)\cdot (p-1)/2}\\
+          &= 1
+        \end{align*}
+        Thus, either $(5/p)=1$ in order for $(5/p)(p/5)=1$. However, for this to be the case, $(p/5)$ must be a quadratic residue, then thus:
+        \begin{align*}
+          p = 0^2 &\equiv 0\\
+          p = 1^2 &\equiv 1\\
+          p = 2^2 &\equiv 4\\
+          p = 3^2 &\equiv 1\\
+          p = 4^2 &\equiv 1\gmod 5\
+        \end{align*} 
+        Hence, if $(5/p)=1$, $p\equiv \pm 1\gmod{5}$. Because $p$ must be an odd number, reducing this in mod 10 gives $p = 1, 4, 6, 10$, but $p$ cannot be even when reduced in mod 10, so $p=\pm 1 \gmod{10}$. \gline
+        Now consider the backwards direction. Assume that $p\equiv \pm 1\gmod{10}$. We have that:
+        \begin{align*}
+          (5/p)(p/5)&=(-1)^{(5-1)/2\; \cdot\; (5n\pm 1-1)/2}\\
+          &= 1
+        \end{align*}
+        Because $p\equiv \pm 1 \gmod{10}$, that means $(p/5)=1$. Thus, because $(5/p)(p/5)=1$, $(5/p)=1$. Hence, both cases are solved. \gline
+        However, we must also consider the case where $p = 5$. In this case, $(5/p) = 1$ and $(p/5)=1$
+      \end{proof}
+    \end{problem}
+    \item $(6/p)=1$ if and only if $p \equiv 1, 5, 19, 23\gmod{24}$.
+    \begin{problem}
+      Consider that if $(6/p)=1$, then $(3/p)(2/p)=1$. \gline 
+      Via theorem 9.10, we have that:
+      \begin{align*}
+        (3/p)=\begin{cases}
+          1 \text{ if } p\equiv \pm 1 \gmod {12}\\
+          -1 \text{ if }p \equiv \pm 5 \gmod{12}
+        \end{cases}
+      \end{align*}
+      Furthermore, for 2, via Theorem 9.6, we have that:
+      \begin{align*}
+        (2/p)=\begin{cases}
+          1\text{ if }p\equiv 1\gmod{8}\text{ or }p\equiv 7\gmod 8\\
+          -1 \text{ if }p\equiv 3 \gmod 8\text{ or } p \equiv 5 \gmod 8
+        \end{cases}
+      \end{align*}
+      Because for $(p/3)(p/2)=1$, $(p/3)$ and $(p/2)$ must be of the same sign for $(6/p)=1$, we have that:
+      \begin{align*}
+        (6/p)=(2/p)(3/p)=\begin{cases}
+          (1)(1)\text{ if }p\equiv \pm 1 \gmod{24}\\
+          (-1)(-1)\text{ if }p\equiv 5, 19\gmod{24}
+        \end{cases}
+      \end{align*}
+      This proves the forwards direction.\gline
+      Now, for the backwards direction, we have that $p \equiv 1, 5, 19, 23$. \gline
+      We have that if $p \equiv 1, 23\gmod{24}$:
+      \begin{align*}
+        (2/p)(3/p)=(6/p)=(1)(1)=1
+      \end{align*}
+      In the case of $p\equiv 5, 19\gmod{24}$, we have that:
+      \begin{align*}
+        (2/p)(3/p)=(6/p)=(-1)(-1)=1
+      \end{align*}
+      Hence, $(6/p)=1$ if and only if $p\equiv 1, 5, 19, 23\gmod{24}$. 
+    \end{problem}
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}

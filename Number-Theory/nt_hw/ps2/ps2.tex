@@ -1,0 +1,179 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm,letltxmacro,changepage}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{changepage}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.5in}
+            \setlength \textwidth{5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\n}{\vspace{0.15cm}\\}
+\newcommand{\en}{\vspace{0.25cm}\\}
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Problem Set 2 - Gordie's Novak}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+   \end{adjustwidth}}
+\begin{document}
+
+\subsection*{Section 2.3}
+\begin{enumerate}
+    %
+    % Question 2
+    %
+    \item[2.] Given integers $a, b, e, d$ verify the following:
+    \begin{enumerate}
+        \item[(b)] If $a \mid b$ and $a \mid c$, then $a^2 \mid bc$.\en
+        We will show that because $a$ divides both $b$ and $c$, that $a^2$ will divide $b\cdot c$. We will do this by using the definition of ``divides'' to our advantage.
+        \begin{proof}
+            We want to show that if $a \mid b$ and $a \mid c$, then $a^2 \mid bc$. \n
+            Consider that because $a\mid b$, then $\exists n\in \Z$ such that $n\cdot a = b$. The same applies to $a\mid c$, such that $\exists m\in\Z$ such that $m\cdot a = c$.\en
+            Thus, we can represent $bc$ as:
+            \begin{align*}
+                bc &= an\cdot am\\
+                &= nm\cdot a^2
+            \end{align*}
+            Let $\ell \equiv nm$, $\ell \in \Z$. Hence, via the definition of ``divides'', because $\ell a^2 = bc$, $a^2\mid bc$, as desired. 
+        \end{proof}
+    \end{enumerate}
+    %
+    % Question 3
+    %
+    \item [3.]Prove or disprove: If $a \mid (b + c)$, then either $a \mid b $ or $a \mid c$.\en
+    I will disprove this statement with a simple counterexample.
+    \begin{proof}
+        We want to show by providing a counterexample that if $a\mid (b+c)$, that does not imply that either $a\mid b$ or $a\mid c$. \en
+        Let $a = 2$, $b = 1$, and $c = 1$. We have that $2\mid (1+1) = 2$. \en
+        However, note that because $a > b,c$, that $a\nmid b, c$. Hence, if $a\mid (b+c)$, that does not imply that either $a\mid b$ or $a\mid c$, as desired.  
+    \end{proof}
+    %
+    % Question 12
+    %
+    \item [12.] Prove that, for a positive integer $n$ and any integer $a,\; \text{gcd}(a, a+ n)$ divides $n$.\n
+    We will prove this by selecting an arbitrary $m$ that helps to satisfy the condition of this problem.
+    \begin{proof}
+        Let $a, n\in \Z$. We want to show that for $m = \text{gcd}(a,\;a+n)$, $m$ divides $n$. \n
+        Consider that because $m$ is a divisor of $a$ and $a+n$, $\exists x, y\in \Z$ such that $x\cdot m = a$ and $y\cdot m = a+n$.\n
+        Now, we write that:
+        \begin{align*}
+            ym &= a+n \\
+            ym&= xm + n\\
+            (y-x)m &= n
+        \end{align*}
+        Let $\ell \equiv (y-x)\in \Z$. Hence, because $\exists \ell \in \Z$ such that $\ell m = n$, $m\mid n$. Because $m = \text{gcd}(a,a+n)$, we equivilantly state that the greatest common divisor of $a$ and $a+n$ divides $n$, as desired. 
+    \end{proof}
+    \pagebreak
+    %
+    % Question 12
+    %
+    \item [14.] For any integer $a$, show the following: $\text{gcd}(2a + 1 , 9a + 4) = 1$.\n
+    I will show in this proof that there exists a linear combination of $2a +1$ and $9a +4$ such that said combination equals one.
+    \begin{proof}
+        Let $a$ be an integer. We want to show that: 
+        \[\text{gcd}(2a + 1 , 9a + 4) = 1.\]
+        Consider the following linear combination of $2a+1$ and $9a+4$:
+        \[(9\cdot(2a+1)) + (-2\cdot(9a+4)) = 1\]
+        Hence, via \textbf{Theorem 2.4}, because there exists a linear combination of both terms that equals 1, $2a+1$ and $9a+4$ are relatively prime, and thus their greatest common denominator is 1, as desired.
+    \end{proof}
+    \item [20b. ]Confirm the following properties of the greatest common divisor: If $\text{gcd}(a, b) = 1$, and $c \mid a$, then $\text{gcd}(b, c) = 1$.\n
+    In this proof I will show with the help \textbf{Theorem 2.4} that $b$ and $c$ are relatively prime, and thus their gcd is 1. 
+    \begin{proof}
+        Let $a,b$ and $c$ be integers such that $\text{gcd}(a,b) = 1$ and $c\mid a$. We want to show that $\text{gcd}(b,c) = 1$.\n
+        Via \textbf{Theorem 2.4}, because $a$ and $b$ are relatively prime, let $x,y\in \Z$ such that:
+        \[xa + yb = 1\]
+        Furthermore, via the properties of divisible numbers, because $c\mid a$, let $\ell\in\Z$ such that $\ell c = a$. Substituting $\ell c$ into the above equation gives:
+        \[x\ell c + yb = 1\]
+        Let $z \equiv x\ell\in \Z$. Thus, because $zc + yb = 1$, $c$ and  $b$ are relatively prime, and hence their greatest common denominator is one, as desired. 
+    \end{proof}
+\end{enumerate}
+\subsection*{Section 2.4}
+\begin{enumerate}
+    \item Find gcd(143, 227) and gcd(306, 657).\n
+    I will use a computer program implemented with the Euclidean algorithm to solve this problem that I have created. The primary snippet I am using is displayed below. For the complete implementation, refer to the \texttt{gcd.cpp} file in my submission page.
+\begin{verbatim}
+int a, b;
+while (b != 0) {
+    const int r = a % b;
+    if (r == 0)
+        break;
+    a = b;
+    b = r;
+}
+\end{verbatim}
+    Running the program yields the following results:
+    \begin{enumerate}
+        \item gcd$(143, 227) = 1$
+        \item gcd$(306,657) = 9$
+    \end{enumerate}
+    \pagebreak
+    However, much to my personal grumblings, and upon reflection, I realize that I'll just do it with the Euclidean algorithm to make sure I get full credit on this assignment. (insert sad face emoji here)
+    \begin{enumerate}
+        \item gcd(143, 227)
+        \begin{align*}
+            227 &= 1(143) + 84\\
+            143 &= 1(84) + 59\\
+            84 &= 1(59) + 25\\
+            59 &= 2(25) + 9 \\
+            25 &= 2(9) + 7 \\
+            9 &= 1(7) + 2 \\
+            7 &= 3(2) + 1 \\
+            2 &= 2(1) + 0
+        \end{align*}
+        We look at the second to last remainder and see that our gcd is 1.
+        \item  gcd(306, 657)
+        \begin{align*}
+            657 &=  2(306) + 45\\
+            306 &= 6(45) + 36 \\
+            45 &= 1(36) + 9 \\
+            36 &= 4(9) + 0
+        \end{align*}
+        We look at the second to last remainder and see that our gcd is 9.
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,221 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{charter}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Jan 23rd - Notes}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+%coloring with color
+\newmdenv[
+  backgroundcolor=gray!8,
+  linewidth=0pt,
+  innerleftmargin=0pt,
+  innerrightmargin=0pt,
+  skipabove=\baselineskip,
+  skipbelow=\baselineskip
+]{coloredadjust}
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+
+% problem writing
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}
+   \textit{Problem. }#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+% theorem writing
+\newtcbtheorem[
+]{theorem}{Theorem}%
+{%
+  enhanced,
+  colback=blue!3,
+  colframe=blue!60!black,
+  coltitle=blue!90!black,
+  fonttitle=\bfseries,
+  boxrule=0pt,
+  toprule=2pt,
+  bottomrule=0pt,
+  leftrule=0pt,
+  rightrule=0pt,
+  arc=3pt,
+  outer arc=3pt,
+  attach title to upper,
+  title={#1},
+}{thm}
+
+\newtcbtheorem[
+]{criterion}{Criterion}%
+{%
+  enhanced,
+  colback=green!3,
+  colframe=green!60!black,
+  coltitle=green!40!black,
+  fonttitle=\bfseries,
+  boxrule=4pt,
+  toprule=2pt,
+  bottomrule=1pt,
+  leftrule=0pt,
+  rightrule=0pt,
+  arc=3pt,
+  outer arc=3pt,
+  attach title to upper,
+  title={#1},
+}{ctn}
+
+\newtcbtheorem[
+]{corollary}{Corollary}%
+{%
+  enhanced,
+  colback=yellow!2,
+  colframe=yellow!60!black,
+  coltitle=yellow!40!black,
+  fonttitle=\bfseries,
+  boxrule=4pt,
+  toprule=2pt,
+  bottomrule=1pt,
+  leftrule=0pt,
+  rightrule=0pt,
+  arc=3pt,
+  outer arc=3pt,
+  attach title to upper,
+  title={#1},
+}{ctn}
+
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Remember from Last Time}
+\subsubsection*{Euler's Criterion}
+\begin{criterion}{Euler's Criterion}{}\gline
+  If $p$ is an odd prime, and $p\nmid a$:
+  \begin{itemize}[itemsep=0pt, parsep=0pt]
+    \item $a$ is a quadratic residue of $p \Leftrightarrow a^{(p-1)/2}\equiv 1\gmod{p}$.
+    \item $a$ is a quadratic nonresidue of $p\Leftrightarrow a^{(p-1)/2}\equiv -1 \gmod p$
+  \end{itemize}
+\end{criterion}
+We rephrase using the Legendre symbols: \gline
+$(a/p)\equiv a^{(p-1)/2}\gmod p$\\
+Multiplicativity: $(ab/p) = (a/p)(b/p)$. (i.e. $ab$ is a quadratic residue if $!(a \texttt{ XOR } b))$.
+\begin{corollary}{Euler's Criterion}{}\gline
+  We also have the following properties:
+  \begin{itemize}[itemsep=0pt, parsep=0pt]
+    \item $(1/p) = 1$ for all $p$
+    \item $(4/p) = 1$ for all $p$
+    \item $(-1/p) = 1$ if and only if $p\equiv 1 \gmod 4$
+  \end{itemize}
+\end{corollary}
+
+This brings us to Dirchlet's Theorem:
+\begin{theorem}{Dirchlet's Theorem }{}\gline
+  Let $\gcd(a,b) =1$. There are $\infty$-many primes $p$ for which $p\equiv b \gmod{a}$.\gline
+  This leads to the corollary such that there are $\infty$ many primes such that $p\equiv 1 \gmod 4$. 
+  \begin{proof}
+    Assume there are finitely many primes. Create $X = 4p_1^2p_2^2\cdots p_r^2 + 1$.\gline
+    Facts: $X\equiv 1 \gmod 4$, and $X$ has at lease one prime factor: $q$. 
+    \begin{itemize}
+      \item No $p_i\mid X$, otherwise $p_i\mid 1$, so that means that $q\not\equiv 1 \gmod 4$, so $q\equiv 3\gmod 4$. Now we manipulate with algebra:
+      \begin{align*}
+        X&\equiv 0 \gmod q\\
+        4p_1^2p_2\cdots p_r^2 +1&\equiv 0 \gmod q\\
+        (2p_1p_2\cdots p_r)^2 + 1&\equiv 0 \gmod q\\
+        (2p_1p_2\cdots p_r)^2 &\equiv -1 \gmod q
+      \end{align*}
+      Thus, that means that $-1$ is a quadratic residue $\gmod q$, so $q\equiv 1 \gmod 4$ via the corollary to Euler's Criterion, a contradiction. 
+    \end{itemize}
+  \end{proof}
+\end{theorem}
+Take the following example:
+\begin{problem}
+  Is 120 a quadratic residue for 239?\gline
+  To use Euler's criterion, you'd need to find $120^{119}\gmod{239}$, which sounds miserable.\gline
+  By multiplicity, we have that: $(120/239)=(2/239)(2/239)(2/239)(3/239)(5/239)$. Because $(2/239)$ and $(3/239)$ are both 1, we just needto find $(5/239).$
+\end{problem}
+\begin{theorem}{Quadratic Reciprocity Law} {}\gline
+  Let $p,q$ be distinct odd primes. Then:
+  \begin{gather*}
+    (p/q)(q/p)= (-1)^{\left(\frac{p-1}2\right)\left(\frac{(q-1)}2\right)}
+  \end{gather*}
+\end{theorem}
+\begin{problem}
+  Let $p = 3, q= 239$. Then, we have that:
+  \begin{gather*}
+    (3/239)(239/3) = (-1)^{\left(\frac{3-1}2\right)\left(\frac{239-1}2\right)}
+  \end{gather*}
+  Well, we know that $239 \equiv 2 \gmod 3$, which is not a quadratic residue, so we know that $(239/3)$ is -1, so that must imply that $(3/239)=1$. Isn't that neat?
+\end{problem}
+Let's try another problem now:
+\begin{problem}
+  For which primes is 3 a quadratic residue?\gline
+  Via the Quadratic Reciprocity Law, wehave that:
+  \begin{align*}
+    (3/q)(q/3)&=(-1)^{\left(\frac{3-1}2\right)\left(\frac{q-1}2\right)}\\
+    &=(-1)^{\left(\frac{q-1}2\right)}
+  \end{align*}
+\end{problem}
+
+\end{document}

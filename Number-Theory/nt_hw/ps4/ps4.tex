@@ -1,0 +1,338 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Problem Set 4}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Section 1.1}
+
+\begin{enumerate}
+	\item Establish the formulas below by mathematical induction:
+	\begin{enumerate}
+		\item [(e)] $1^3 + 2^3 + 3^3+ \ldots + n^3 =\left[\frac{n(n+1)}{2}\right]^2$ for all $n\ge 1$\gline
+		To solve this problem, I will first establish my base case with $n = 1$, and then use weak induction to prove the remaining cases.
+		\begin{proof}
+			\textit{By Weak Induction.} We want to show that: 
+			\[\sum_{i=1}^{n}n^3 = \left(\frac{n(n+1)}2\right)\].
+		\end{proof}
+		\textbf{Base Case: } Let $n = 1$. We have that $\sum_{i=1}^{n}i^3 = 1$, and that $\left(\frac{n(n+1)}2\right)=1$. Thus the base case holds. \gline
+		\textbf{Inductive Step: }Assume we know that $\sum_{i=1}^{K}i^3 = \left(\frac{K(K+1)}2\right)^2$. We want to show that:
+		\[\sum_{i=1}^{K+1}(i)^3 = \left(\frac{(K+1)(K+2)}2\right)^2\]
+		Consider that:
+		\begin{align*}
+			\sum_{i=1}^{K+1}i^3 &=\sum_{i=1}^{K}i^3 + (K+1)^3\\
+			&= \left(\frac{K(K+1)}{2}\right)^2 + (K+1)^3\\
+			&= \frac{K^2(K^2+2K+1)}{4} + K^3 + 3K^2 + 3K + 1\\
+			&= \frac{K^4+2K^3+K^2 + 4(K^3+3K^2+3K+1)}{4}\\
+			&= \frac{K^4+6K^3+13K^2+12K+4}4\\
+			&= \frac{(K+1)(K+1)(K+2)(K+2)}{4}\\
+			&= \left(\frac{(K+1)(K+2)}{2}\right)^2
+		\end{align*}
+		Hence, for $n\ge 1$, $\sum_{i=1}^{K+1}(i)^3 = \left(\frac{(K+1)(K+2)}2\right)^2$.
+	\end{enumerate}
+	\item [11.] Show that the expression $(2n)!/2^nn!$ is an integer for all $n\ge 0$. \gline
+	I will attempt to show that for every $2^nn!$, there's a matching number for $(2n)!$.
+	\begin{proof}
+		\textit{By Weak Induction.} We want to show that for all $n\ge 0$, $(2n)!/2^nn!$ is an integer. \textbf{Base Case:} Consider the case where $n = 0$. Thus we have that $(2n)!/(2^nn!) = 1$, an integer. \gline
+		\newpage
+		\textbf{Inductive Step: } Assume that $(2K)!/(2^KK!)$ is an integer. We want to show that $(2(K+1))!/(2^{K+1}(K+1)!)$ is also an integer. \gline
+		Consider that:
+		\begin{align*}
+			\frac{(2(K+1))!}{2^{K+1}(K+1)!}&=\frac{2K!\cdot (2K+1)\cdot(2k+2)}{2^KK!\cdot2(K+1)}\\
+			&=\left(\frac{2K!}{2^KK!}\right)\cdot\frac{(2K+1)\cdot(2K+2)}{2(K+1)}\\
+			&=\left(\frac{2K!}{2^KK!}\right)\cdot (2K +1)
+		\end{align*}
+		Hence, because $\left(\frac{2K!}{2^KK!}\right)$ is an integer via our assumption, and $(2K +1)$ is an integer, we have that $\frac{(2(K+1))!}{2^{K+1}(K+1)!}$ is an integer, as desired. 
+	\end{proof}
+\end{enumerate}
+\subsection*{Section 2.3}
+\begin{enumerate}
+	\item [4.] For $n \ge 1$, use mathematical induction to establish each of the following divisibility statements:
+	\begin{enumerate}
+		\item [(c)] $5\mid 3^{3n+1}+2^{n+1}$\gline
+		I will show via induction that this statement is true. Not much else to say.
+		\begin{proof}
+			\textit{Via Weak Induction. }We want to show that $5\mid 3^{3n+1}+5^{2n-1}$.\gline
+			\textbf{Base Case: }Consider the case where $n = 1$. We have that $3^{3n+1} + 2^{n+1}=81+4 = 85$, which is divisible by 5. Thus our base case holds.\gline
+			\textbf{Inductive Step: } Assume that for $n=K$, $5\mid 3^{3K+1}+2^{K+1}$. We want to show that if $n = K+1$, it is implied that $5\mid 3^{3K+4}+2^{K+2}$.\gline
+			Consider that:
+			\begin{align*}
+				3^{3K+4}+2^{K+2} &= 3^{3K+1}3^3+2^{K+1}2\\
+				&= 3^{3K+1}(3^3 - 2 + 2)+2^{K+1}2\\
+				&= 2(3^{K+3} + 2^{K+1})+(3^3-2)3^{K+3}\\
+				&= 2(3^{K+3} + 2^{K+1})+(25)3^{K+3}
+			\end{align*}
+			Note that via our assumption, $(3^{K+3} + 2^{K+1})$ is a multiple of five. Hence, because $3^{3K+4}+2^{K+2}$ can be represented as a integer combination of multiples of 5, $ 5\mid 3^{3K+4}+2^{K+2}$.
+		\end{proof}
+		\item $21\mid 4^{n+1}+5^{2n-1}$\gline
+		Same thing here. Just going to use weak induction with a base case.
+		\begin{proof}
+			\textit{By Weak Induction.} We want to show via weak induction that for $n\ge 1$, $21\mid 4^{n+1}+5^{2n-1}$. \gline
+			\textbf{Base Case: }Let $n=1$. We have that $4^{n+1}+5^{2n-1} = 21$, which is trivially divisible by 21. \gline
+			\textbf{Inductive Step:} Assume that for $n =K$, $21\mid 4^{n+1}+5^{2n-1}$. We want to show for $n = K+1$ that $21\mid 4^{K+2}+5^{2K+1}$.\gline
+			Consider that:
+			\begin{align*}
+				4^{K+2}+5^{2K+1}&= 4^{K+1}4 + 5^{2K-1}5^2\\
+				&= 4^{K+1}(4+21-21) + 5^{2K-1}5^2\\
+				&= 5^2(4^{K+1}+5^{2K-1})-21\cdot4^{K+1}
+			\end{align*}
+			Thus, beause 21 divies $(4^{K+1}+5^{2K-1})$ via our assumption and 21 trivially divides $-21\cdot4^{K+1}$, we have that $21\mid 4^{K+2}+5^{2K+1}$.\gline
+			Hence, for $n\ge 1$, we have that $21\mid 4^{K+2}+5^{2K+1}$, as desired.
+		\end{proof}
+	\end{enumerate}
+\end{enumerate}
+\subsection*{Section 3.1}
+\begin{enumerate}
+	\item [3.] Prove each of the assertions below:
+	\begin{enumerate}
+		\item [(e)] The only prime of the form $n^2 -4$ is five. \gline
+		We will prove this by showing that the contrary is false. 
+		\begin{proof}
+			We want to show that there cannot exist a prime other than $5$ of the form $n^2 -4$.
+			\centerit{\textbf{Case 1: $n > 3$}}
+			Let $p$ be a prime and let $n>3$ such that $n^2-4 = (n+2)(n-2)$.\\
+			\footnotesize *We say $n>3$ to exclude the prime $5$ and non-positive numbers.\normalsize\gline
+			Thus, we have that the factors of $p$ are $(n+2)$ and $(n-2)$. However, because $n >3$, $(n+2)\ne 1$ and $(n-2)\ne 1$. Thus, $p$ has factors apart from 1 and itself, a contradiction.
+			\centerit{\textbf{Case 2: $n = 3$}}
+			Let $p = (n+2)(n-2)$ for $n = 3$. Thus, $p=5$, $p$'s factors are 5 and itself, and hence $p$ is prime.
+			\centerit{\textbf{Case 3: $n < 3$}}
+			Let $p$ be a prime such that $p = n^2-4$ for $n < 3$. Thus, $p$ is either 0 or negative, a contradiction, since primes must be positive.\gline
+			Hence, the only prime of the form $n^2 -4$ is five, as desired. 
+		\end{proof}
+	\end{enumerate}
+	\item [11.] Another unproven conjecture is that there are an infinitude of primes that are 1 less than a power of 2, such as 3 = $2^2 - 1$.
+	\begin{enumerate}
+		\item Find four more of these primes.\gline
+		I found four more of these primes with the following prorgam:
+\begin{adjustwidth}{2em}{2em}
+\begin{verbatim}
+long long unsigned int m = 8;
+for (int i = 3; i < 20; i++) {
+	printf(btostr(is_prime(m - 1)));
+	m*=2;
+}
+\end{verbatim}
+\end{adjustwidth}
+		These primes are 7, 31, 127, 8191, and 131071.
+		\item If $p = 2^k - 1$ is prime, show that $k$ is an odd integer, except when $k = 2$.\gline
+		I'll prove this my showing that no integer except when $k=2$ of the form $4n +3$ is prime. 
+		\begin{proof}
+			We want to show that if $p = 2^k - 1$ is prime, $k$ is an odd integer, except when $k = 2$. We accomplish this by showing that for all even positive $k$ for $k\ne 3$, $p = 2^k - 1$ is not prime. 
+			\centerit{\textbf{Case 1: $k > 3, \;k = 2n, n\in \Z$}}
+			Let $k$ be an even number greater than three such that $k = 2n,\;n\in\Z$. Thus we have that:
+			\begin{align*}
+				p &= 2^k - 1\\
+				&= 4^n - 1
+			\end{align*}
+			However, due to the hint given by the problem, any integer of the form $4^n - 1$ for $n\ge 1$ is divisible by three, and thus not prime unless equal to 3. Thus, for even numbered positive $k\ne 2$, $p= 2^k - 1$ is not prime. \gline
+			\centerit{\textbf{Case 2: }$k= 2$}
+			If $k = 2$, $p = 2^k - 1 = 3$, and 3 is prime. Thus, $k=2$ is the exception.\gline
+			Hence, if $p = 2^k - 1$ is prime, $k$ is an odd integer, except when $k = 2$, as desired. 
+		\end{proof}
+	\end{enumerate}
+\end{enumerate}
+\subsection*{Section 3.3}
+\begin{enumerate}
+	\item [9.]\begin{enumerate}
+		\item For $n > 3$, show that the integers $n, n + 2, n + 4$ cannot all be prime.
+		\begin{proof}
+			We want to show that for any integer $n$, $n, n + 2, n + 4$ cannot all be prime.\gline
+			Consider the representation of $n$ under the division algorithm with respect to $3$:
+			\begin{align*}
+				n &= 3q + r\quad \;q,r\in\Z
+			\end{align*}
+			We thus split the proof into three cases for $r=0,1,2$.
+			\centerit{\textbf{Case 1: $r = 0$}}
+			If $r = 0$, then $n$ is of the form $3q$, and thus not prime.
+			\centerit{\textbf{Case 2: $r = 1$}}
+			If $r = 1$, then $n + 2$ is of the form $3q + 3 = 3(q + 1)$, and thus $n + 2$ is not prime.
+			\centerit{\textbf{Case 3: $r = 2$}}
+			If $r = 2$, then $n + 4$ is of the form $3q + 6 = 3(q + 2)$, and thus $n + 6$ is not prime.\gline
+			Hence, because one of either $n, n+2,$ or $n+4$ is not prime under each case of the division algorithnm $n$, $n+2$, and $n+4$ cannot all be prime, as desired. 
+		\end{proof}
+		\item Three integers, $p$, $p+2$, $p+6$, which are all prime, are called a \textit{prime-triplet}. Find five sets of prime-triplets. \gline
+		With the attached program to this homework assignment labeled \texttt{p\_p+2\_p+6.cpp}, I found the following prime triplets:
+		\begin{align*}
+			&1, 3, 7\\
+			&5, 7, 11\\
+			&11, 13, 17\\
+			&17, 19, 23\\
+			&41, 43, 47
+		\end{align*}
+	\end{enumerate}
+	\pagebreak
+	\item [13.] Apply the same method of proof as in Theorem 3.6 to show that there are infinitely many primes of the form $6n + 5$.
+	\begin{adjustwidth}{2em}{2em}
+		\textit{Lemma 13.1} The multiplication of two integers of the form $6n+5$ results in an integer of the form $6n+1$:
+		\begin{align*}
+			(6n+5)\cdot(6n+5) &= 36n^2 + 60n + 25\\
+			&= 6(6n^2 + 10n+4)+ 1
+		\end{align*}
+	\end{adjustwidth}
+	\begin{adjustwidth}{2em}{2em}
+		\textit{Lemma 13.2} The multiplication of two integers of the form $6n+1$ results in an integer of the form $6n+1$:
+		\begin{align*}
+			(6n+1)\cdot(6n+1) &= 36n^2 + 12n + 1\\
+			&= 6(6n^2 + 2n)+ 1
+		\end{align*}
+	\end{adjustwidth}
+	\begin{proof}
+		\textit{By Contradiction. }We want to show that there are infinitely many primes of theform $6n +5$. For the sake of contradiction, let $N$ be a composite integer of the form $6n + 5$ given by:
+		\begin{align*}
+			N &= 6q_1q_2\cdots q_s - 1\\
+			&= 6(q_1q_2\cdots q_s - 1) + 5,
+		\end{align*}
+		where $q_1q_2\cdots q_3$ contains the finite number of primes of the form $6n +5$. Let $r_1r_2\cdots r_s$ be the prime factorization of $N$. Because $N$ is odd, we know that each prime is either of the form $6n+1$ or $6n +5$ (and not $6n+3$ because $6n+3$ is trivially not prime).\gline
+		Via Lemmas 13.1 and 13.2, we know that $N$ must contain at least one prime factor of the form $6n+5$. Let $r_i$ be one of these primes. This must mean that:
+		\begin{gather*}
+			r_i\in\{q_1,\ldots, q_s\},\;\;r\mid (q_1\cdots q_s)\\
+			r_i\mid N.
+		\end{gather*}
+		Thus, if $r_i\mid N$ and $r_i\mid (q_1\cdots q_s)$, then $r_i\mid (q_1\cdots q_s) - N$. Because $(q_1\cdots q_s) - N = 1$, we then have that $r\mid 1$, a contradiction, because no prime divides 1.\gline
+		Hence, there must be an infinite number of primes of the form $6n+5$, as desired. 
+	\end{proof}
+	\item [19.] Express the integers 25, 69, 81, 125 in the form as a sum of distinct odd primes.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}\hline 
+			num & n1 & n2 & n3\\\hline
+			25& 3& 5& 17\\\hline
+			69& 3& 5& 61\\\hline
+			81& 3& 5& 73\\\hline
+			125& 3& 13& 109\\\hline
+		\end{tabular}
+	\end{center}
+	See the attached program \texttt{sum\_distinct\_odd\_primes.cpp} for details on calculations.
+	
+\end{enumerate}
+
+
+\section*{Oops wasn't suppoed to do this}
+\begin{enumerate}
+	\item [13.] If $n > 1$ is an integer not of the form $6k+3$, prove that $n^2 + 2^n$ is composite.
+	\begin{proof}
+		We want to show that if $n > 1$ is an integer not of the form $6k+3$, $n^2 + 2^n$ is composite.
+		\centerit{\textbf{Case 1: $n$ of the form $6k+\text{even num}$}}
+		If $n$ is of the form $6k + 2n$ for $n\in \Z$, then $n$ is an even number greater than or equal to 6, and trivially $n^2 + 2^n$ is also even, and thus composite.
+		\centerit{\textbf{Case 2: $n$ is of the form $6k+1$}}
+		If $n$ is of the form $6k+1$, we have that:
+		\begin{align*}
+			n^2 + 2^n &= 36k^2 + 12k + 1 + 2^{6k}2\\
+			&= 36k^2 + 12k +1+2-2+4^{3k}2\\
+			&= 3(12k^2+4k+1)+2(4^{3k}-1)
+		\end{align*}
+		Thus, because both $3(12k^2+4k+1)$ is divisible by 3 and $2(4^{3k}-1)$ is divisible by 3 via a theorem provided in a hint, $n$ of the form, the number is composite and therefore not prime.
+		\centerit{\textbf{Case 3: $n$ is of the form $6k+5$}}
+		If $n$ is of the form $6k+5$, we have that:
+		\begin{align*}
+			n^2 + 2^n &= 36k^2 + 12k + 25 + 2^{6k}2^5\\
+			&= 36k^2 + 12k + (25 - 57) +57+ 2^{6k}2^5\\
+			&= 3(12k^2+4k+57)+2^5(4^{3k}-1)
+		\end{align*}
+		Thus, because both $3(12k^2+4k+1)$ is divisible by 3 and $2^5(4^{3k}-1)$ is divisible by 3 via a theorem provided in a hint, $n$ of the form, the number is composite and therefore not prime.
+	\end{proof}
+	\item [19] A positive integer n is called \textit{square-full}, or \textit{powerful}, if $p^2$  for every prime factor 
+	$p$ of $n$ (there are 992 \textit{square-full} numbers less than 250,000). If $n$ is \textit{square-full}, show that it can be written in the form $n = a^2 b^3$, with $a$ and $b$ positive integers.
+	\begin{proof}
+		Let $n$ be a number with prime factorization $p_1^2p_2^2\ldots$ We want to show that $n$ can be written in the form $a^2b^3$ for $a,b\in\Z$. \gline
+		We classify our prime factors into two categories: $h$-primes and $j$-primes. If a prime $p_i$ has an even exponent $k_i$, it is an $h$-prime. If a prime $p_i$ has an odd exponent $k_i$, it is a $j$-prime.\gline
+		If a prime is a $j$ prime, we take it's exponent $k$ and split it up via the division algorithm into $3k + 0$ or $3k + 2$. We call the remainder $r$, and the exponent $w$. Then, we set up our $a$ and $b$ as follow:
+		\begin{align*}
+			a&= (h_i^{k_i/2}\cdots\; j_x^{r/2}\cdots)\\
+			b&= (j_x^{w/3}\ldots)
+		\end{align*}
+		Thus, we have that:
+		\begin{align*}
+			a^2b^3 &= h_i\ldots j_w^{3w + r}\\
+			&= p_1^k\ldots p_t^k
+		\end{align*}
+		Hence, a \textit{square-full} integer $n$ can be represented in the form $a^2b^3$, as desired. 
+	\end{proof}
+	\begin{proof}
+		Let $n$ be a \textit{square-full} integer. We want to show that $n$ can be witten in the form $a^2b^3$. \gline
+		Because $n$ is \textit{square-full}, any complete prime factor power that divides of $n$ can be written in the form $p^{2k}$ or $p^{3 + 2r}$ for $k,r\in \Z$. \gline
+		Let $x_i$ and $y_i$ be unique prime factors of $n$ of the form $p^{2k}$ and $p^{3+2r}$, respectively. We can represent \textit{square-full} $n$ through these primes as:
+		\begin{align*}
+			n = (x_0^{2k_0}x_1^{2k_1}\cdots x_i^{2k_i}) \cdot (y_0^{3+2r_0}y_1^{3+2r_1}\cdots y_j^{3+2r_j})
+		\end{align*}
+		We select our $a$ and $b$ such that:
+		\begin{align*}
+			a &= x_0^{k_0} \ldots x_i^{k_i} \;\cdot\; y_0^{r_0}\ldots y_j^{r_j}\\
+			b &= y_0 \cdots y_j
+		\end{align*} 
+		Thus, we have that:
+		\begin{align*}
+			a^2b^3 &= (x_0^{2k_0}\cdots x_i^{2k_i}) \cdot (y_0^{2r_0}\cdots y_j^{2r_j})\cdot (y_0^3 \cdots y_j^3)\\
+			&=(x_0^{2k_0}\cdots x_i^{2k_i}) \cdot (y_0^{3+2r_0}\cdots y_j^{3+2r_j})\\
+			&= n
+		\end{align*}
+		Hence, we have shown that $n$ can be witten in the form $a^2b^3$, as desired. 
+	\end{proof}
+\end{enumerate}
+
+
+\end{document}

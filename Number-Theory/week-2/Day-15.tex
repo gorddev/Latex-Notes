@@ -1,0 +1,120 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Problem Set 8}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Last Time}
+\begin{itemize}
+	\item FLT: If $p$ is prime and $p\nmid a$ then $a^{p-1}\equiv 1\gmod p$. 
+	\item Corollary to FLT: If $p$ is prime, then $a^p\equiv a\gmod p$. 
+\end{itemize}
+Old news: $ax\equiv 1\gmod n$ has a solution if and only if $\gcd(a,n)= 1$. \\
+So... if $n=p$ is prime, and $a = 1,2,\ldots, p-1$, $\gcd(a,n)$ is definitely 1. \\
+Thus, every $a = 1,2,\ldots, p-1$ ``has an inverse''$\gmod p$.
+\subsection*{Inverses}
+We begin our discussion of inverses. A key definition is that:\gspc
+\begin{adjustwidth}{2em}{2em}
+	Two integers $a,b$ are invereses if $ab\equiv 1\gmod p$.
+\end{adjustwidth}\gspc
+Thus, we have that in $\gmod p$ for prime $p$, every $a \;(1\le a \le p - 1)$ has an inverse $\gmod p$.\gline
+Couple of key points:
+\begin{itemize}[itemsep=0pt, parsep=0pt]
+	\item $a = 1$ and $a = p-1$ are self-inverses. 
+	\item What about $a = 2,3,\ldots, p-2$?
+\end{itemize}
+Claim: $a = 2, 3, \ldots, p-2$ are not self-inverses.
+\begin{proof}
+	For the sake of contradiction, let $a^2\equiv 1\gmod p$. Thus, we have that $a^2 -1 \equiv 0 \gmod p$. \gline
+	It follows that $(a-1)(a+1)=a^2 - 1\equiv 0 \gmod p$\gline
+	So, $p\mid (a-1)(a+1)$ so either $p\mid a - 1$ or $p\mid a+1$\gline
+	If $2\le a\le p -2$, that implies that $1 \le a- 1 \le p-3$ and $3 \le a+1\le p-1$, but clearly because $p$ is prime $p\nmid a -1$ and $p\nmid a+1$, a contradiction.
+\end{proof}
+Here's a clear example, $p = 11$:
+\begin{align*}
+	2\cdot 3\cdot 4\cdot 4 \cdot 5 \cdot 6\cdot 8 \cdot 8 \cdot 9 \cdot 10 \equiv \gmod {11}
+\end{align*}
+We have that each number has a lil buddy that it likes:
+\begin{align*}
+	2\cdot 6 &\equiv 1 \mod 11\\
+	3\cdot 4 &\equiv 1 \mod 11\\
+	5\cdot 9 &\equiv 1 \mod 11\\
+	7\cdot 9 &\equiv 1 \mod 11
+\end{align*}
+This is a neat result, and we have a theorem name for it. 
+\subsection*{Wilson's Theorem}
+\begin{adjustwidth}{2em}{2em}
+	Let $p$ be a prime:
+	\begin{gather*}
+		(p-1)! \equiv -1 \gmod p
+	\end{gather*}
+	That's it. That's the theorem. 
+\end{adjustwidth}
+
+\end{document}

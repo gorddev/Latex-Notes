@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+  </component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="90d16b19-57ee-4986-9968-78a4d19c1116" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_gcd/euclid-alg/euclid-algorithm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_gcd/gcd-linear-combo.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_gcd/gcd.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_mods/Base.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_mods/convert_base.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_mods/mod_equation_solver.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_mods/power_modder.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_primes/prime_file_generator.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_primes/sum_distinct_odd_primes.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_utilities/arguments/arg_enforcer.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_utilities/arguments/arg_grabber.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_utilities/arguments/input_grabber.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_utilities/input_parsing/parse_equation.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_utilities/looping/input_looper.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/_utilities/to_strings.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/gcd.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/mods.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/primes.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/helpers/utilities.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/inc_all.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/programs/gcd-alg/euclidian-algorithm.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/programs/mods/mod_equation_solver.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/programs/mods/power_modder.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../nt_code/programs/primes/prime_factorization.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/Group Work/HW10.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/Group Work/HW10.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW1.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW1.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW11.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW11.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW12.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW12.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW13.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW13.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW2.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW2.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW3.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW3.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW4.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW4.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW5.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW5.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW7.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW7.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW8.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW8.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW9.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/HW9.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/beamer.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/beamer.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/dp3.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/dp3.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/equation.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/equation.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/main.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/main.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/portfolio.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/portfolio.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/presproof.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../archive/Abstract-Homework/presproof.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../classical/ps7.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/hw6/hw6.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/hw6/image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/hw6/image2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/hw7/hw7.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/hw7/image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/hw7/image2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/hw7/image3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/spherical/image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/spherical/image2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/spherical/image3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/spherical/image4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/spherical/image5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/spherical/image6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/spherical/markdown.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/spherical/spherical.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../multi/spherical/spherical.tex" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CMakeLists.txt" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="381yTnQ6VkRBgZzzWGFvzJrEvry" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C/C++ File.merced_primes.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.p_p+2_p+4.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.rel_prime_to_30.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gordie/Documents/Latex/Number-Theory/code/primes/helpers&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CPPToolchains&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/helpers" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/functions/primes" />
+      <recent name="$PROJECT_DIR$/helpers" />
+    </key>
+  </component>
+  <component name="RunManager" selected="C/C++ File.rel_prime_to_30.cpp">
+    <configuration name="isprime.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="primes" TARGET_NAME="isprime.cpp" CONFIG_NAME="isprime.cpp">
+      <option name="sourceFile" value="p_times_p_plus_2.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="isprime.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="primes" TARGET_NAME="isprime.cpp" CONFIG_NAME="isprime.cpp">
+      <option name="sourceFile" value="p_times_p_plus_2.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="merced_primes.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="primes" TARGET_NAME="merced_primes.cpp" CONFIG_NAME="merced_primes.cpp">
+      <option name="sourceFile" value="mersenne_primes.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="merced_primes.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="primes" TARGET_NAME="merced_primes.cpp" CONFIG_NAME="merced_primes.cpp">
+      <option name="sourceFile" value="mersenne_primes.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="p_p+2_p+4.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="primes" TARGET_NAME="p_p+2_p+4.cpp" CONFIG_NAME="p_p+2_p+4.cpp">
+      <option name="sourceFile" value="p_p+2_p+4.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rel_prime_to_30.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="primes" TARGET_NAME="rel_prime_to_30.cpp" CONFIG_NAME="rel_prime_to_30.cpp">
+      <option name="sourceFile" value="rel_prime_to_30.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="C/C++ File.isprime.cpp" />
+      <item itemvalue="C/C++ File.merced_primes.cpp" />
+      <item itemvalue="C/C++ File.p_p+2_p+4.cpp" />
+      <item itemvalue="C/C++ File.rel_prime_to_30.cpp" />
+    </list>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="90d16b19-57ee-4986-9968-78a4d19c1116" name="Changes" comment="" />
+      <created>1767981382048</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1767981382048</updated>
+      <workItem from="1767981383109" duration="1307000" />
+      <workItem from="1768209591329" duration="476000" />
+      <workItem from="1768210201133" duration="281000" />
+      <workItem from="1768211553474" duration="9000" />
+      <workItem from="1768211583620" duration="1600000" />
+      <workItem from="1768213812460" duration="868000" />
+      <workItem from="1768214700674" duration="199000" />
+      <workItem from="1768216372518" duration="26000" />
+      <workItem from="1768216412887" duration="155000" />
+      <workItem from="1768815281754" duration="13000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

@@ -1,0 +1,157 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+
+%This will shrink the page
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}{\,\text{mod}\,}
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[h]   
+    \centering          
+    \includegraphics[width=#2\textwidth]{#1}  
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}\\
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+%}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Problem Set 8}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+
+% Proof writing
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Section 4.4}
+\begin{enumerate}
+	\item Solve the following linear congruences:
+	\begin{enumerate}
+		\item $25x\equiv 15\,\gmod 29$\gline
+		First, we find the gcd between 25 and 29:
+		\begin{align*}
+			29 &= 1(25) + 4\\
+			25 &= 6(4) + 1\\
+			4 &= 4(1) + 0
+		\end{align*}
+		Thus our gcd is 1. We know that this problem has a solution because $1\mid 15$. \gline
+		Working backwards from the Euclidean algorithm gives:
+		\begin{align*}
+			1&= 25 - 6(4)\\
+			1&= 25 - 6(29 - 25)\\
+			1&= 7(25) - 6(29)
+		\end{align*}
+		This fortunately gives us an $x_0$ of $7\cdot 15 \equiv 18 \gmod 29$. Plugging into our equation gives:
+		\begin{align*}
+			x &= x_0 +\frac{29}{\gcd(25,29)}t\\
+			x &= 18 + 29t\\
+			&\equiv 18 \gmod 29
+		\end{align*}
+		Becaue $\gcd(25, 29) = 1$, we know there is one congruence, and that is 18.
+		\item [(d)] $36x\equiv 8 \gmod 102$\gline
+		First, we find the gcd between 36 and 102:
+		\begin{align*}
+			102 &= 2(36) + 30\\
+			36 &= 1(30) + 6 \\
+			30 &= 5(6) + 0
+		\end{align*}
+		Thus our gcd is 6. Because $6\nmid 8$, there are no solutions. 
+		\item [(e)] $34x \equiv 60 \gmod 98$
+		First, we find our gcd:
+		\begin{align*}
+			98 &= 2(34) + 30 \\
+			34 &= 1(30) + 4\\
+			30 &= 7(4) + 2\\
+			4 &= 2(2) + 1
+		\end{align*}
+		Thus our gcd is 2. Because $2\mid 60$, we continue with the reverse euclidean:
+		\begin{align*}
+			2&= 30 - 7(4)\\
+			2&= 30 - 7(34 - 30)\\
+			2&= 8(30) - 7(34)\\
+			2&= 8(98 - 2(34)) - 7(34)\\
+			2&= 8(98) - 23(34)
+		\end{align*}
+		Thus, we know that our $x_0$ is $-23\cdot 30\equiv -4\gmod 98$.
+		\pagebreak
+		Now, we know that our gcd is 2 so we will have 2 solutions such that:
+		\begin{align*}
+			x &= x_0 + \frac{n}{\gcd(a, n)}t \\
+			&= -4 + \frac{98}{2}t\\
+			&= -4 + 49t
+		\end{align*}
+		Hence, our two solutions are 45 and 94 for $t = 0, 1$. 
+	\end{enumerate}
+	\item [19.] Obtain the eight incongruent solutions of the linear congruence $3x + 4y \equiv 5\gmod 8$. \gline
+	To solve this problem, we will use the anology with Theorem 4.7 provided on page 81 that for $\gcd(a,n)=1$, we can write $ax\equiv c - by(\gmod n)$. In this problem, because $3$ is relatively prime to 5, we can do the same.\gline
+	We represent this problem in the form:
+	\begin{align*}
+		3x \equiv 5 - 4y\gmod 8
+	\end{align*}
+	Now, we simply solve for an incongruence for each version of $y$ under mod 8:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}\hline
+			$y$ & Eq. & Work& $x$ \\\hline
+			0 & $3x\equiv 5\gmod 8$ & $3(-1)\equiv 5\gmod 8$ & 7\\\hline
+			1 & $3x\equiv 1 \gmod 8$ & $3(3)\equiv 1 \gmod 8$ & 3\\\hline
+			2 & $3x\equiv 5 \gmod 8$ & $3(-1)\equiv 3 \gmod 8$ & 7\\\hline
+			3 & $3x\equiv 1\gmod 8$ & $3(3)\equiv 5 \gmod 8$ & 3\\\hline
+			4 & $3x \equiv 5\gmod 8$ & $3(-1) \equiv 7\gmod 8$ & 7\\\hline
+			5 & $3x \equiv 1 \gmod 8$ & $3(3)\equiv 4\gmod 8$ & 3\\\hline
+			6 & $3x \equiv 5 \gmod 8$ & $3(-1)\equiv 5\gmod 8$ & 7\\\hline
+			7 & $3x \equiv 1\gmod 8$ & $3(3)\equiv 1 \gmod 8$ & 3\\\hline
+		\end{tabular}
+	\end{center}
+	Thus, we end with the incongruent solutions: 
+	\[(7,0), (7,2), (7,4), (7,6), (3,1), (3,3), (3,5), (3,7)\]
+\end{enumerate}
+
+
+\end{document}
