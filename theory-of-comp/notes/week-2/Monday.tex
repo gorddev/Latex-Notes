@@ -1,0 +1,220 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{charter}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+\usepackage{graphicx}
+
+% SMALL PAGE COMMAND
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}\newcommand{\Q}{\mathbb{Q}}\newcommand{\C}{\mathbb{C}}
+\newcommand{\real}[1]{\text{Re}\left(#1\right)}
+\newcommand{\im}[1]{\text{Im}\left(#1\right)}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}[0]{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[2]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
+\end{figure}
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+
+% COLOR BOX
+\newmdenv[backgroundcolor=gray!8,
+  linewidth=0pt, innerleftmargin=0pt, innerrightmargin=0pt,
+  skipabove=\baselineskip, skipbelow=\baselineskip
+]{coloredadjust}
+
+% PROOF
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+% PROBLEM
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}
+   \textit{Problem. }#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+%% DEFINITION
+\newtcbtheorem[]{definition}{Definition}{enhanced,
+  colback=blue!2, colframe=blue!50!black, coltitle=blue!70!black,
+  fonttitle=\bfseries,
+  boxrule=0pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{dfn}
+
+%% CRITERION
+\newtcbtheorem[]{criterion}{Criterion}{enhanced,
+  colback=magenta!3, colframe=magenta!60!black, coltitle=magenta!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% COROLLARY
+\newtcbtheorem[]{corollary}{Corollary}{enhanced,
+  colback=orange!3, colframe=orange!80!black, coltitle=orange!50!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=1pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=5pt, outer arc=5pt,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% THEOREM
+\newtcbtheorem[]{theorem}{Theorem}{enhanced,
+  colback=green!2, colframe=green!40!black, coltitle=green!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=3pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt,arc=5pt, outer arc=5pt,
+  attach title to upper, title={#1},
+}{thm}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Feb 9th{}-{}Notes}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Computability}
+It is possible that there are some programs that are impossible or \textbf{not computable}. 
+
+In turn, this makes us think about some general questions:
+\begin{itemize}
+  \item What kinds of things are \textbf{computable}? That is, what is possible fo a computer to do? What is impossible?
+  \item What does ``computable'' mean?
+  \item What is a computer?
+\end{itemize}
+
+\subsection*{Deterministic Finite Automata}
+Consider a trffic light, which is like a simple computer. 
+
+We have three states: red, yellow, and green. 
+\begin{itemize}
+  \item If we are red, we can only move to green
+  \item If we are green, we can only move to yellow
+  \item If we are yellow, we can only move to red. 
+\end{itemize}
+\begin{definition}{Deterministic Finite Automata}{}\gline{}
+  A Deterministic finite automaton consist of:
+  \begin{itemize}[itemsep=0pt, parsep=0pt]
+    \item states
+    \item an alphabet
+    \item rules for transitions from each tate ofr each letter in the alphabet
+  \end{itemize}
+  And also:
+  \begin{itemize}[itemsep=0pt, parsep=0pt]
+    \item One state chosen to be the start state
+    \item States chosen to be the accept states
+  \end{itemize}
+\end{definition}
+We diagram the states like this:
+\gimage{image.png}{7cm}
+\begin{definition}{Deterministic Finite Automata}{}\gline{}
+  A deterministic finite automaton consists of:
+  \begin{itemize}[itemsep=1pt, parsep=1pt]
+    \item States
+    \item An alphabet
+    \item Rules for transition between each state
+  \end{itemize}
+  We can write this more mathematically:\gline{}
+  A (deterministic) \textbf{finite automaton} is a 5-tuple ($Q, \sum, \delta, q_0, F$). 
+  \begin{itemize}[itemsep=1pt, parsep=1pt]
+    \item $Q$ is a finite set of states
+    \item $\sum$ a finite set of input symbols
+    \item $\delta$ the transition function
+    \item $q_0\in Q$ the starting state
+    \item $F = \{q_i, \cdots\}$ Set of accepting states. 
+  \end{itemize}
+\end{definition}
+\begin{definition}{Regular Languages}{}\gline{}
+  A language is caled a \textbf{regular language} if some finite automaton recognizes it.
+  
+\end{definition}
+\section*{Feb 12th}
+\subsection*{Combinations of Languages}
+Today we are studing how to combine different regular languages together. A lot of these operations should be familiar if you took Discrete mathematics. The ones I think we will be using are below:\gline{}
+Union: $A\cap B = \{x, y\mid x\in A\text{ and } y\in B\}$\\
+Concatenation: $A\circ B = \{xy \mid x\in A, y\in B\}$\\
+Star: $A^*=\{x_1x_2x_3\cdots x_k\mid k\ge 0\text{ and each }x_1\in A\}$
+\subsection*{Concatenation}
+Let $A = \{1, 11, 111\}$ and $B=\{0,00\}$. Then:
+\begin{align*}
+  A\circ B &= \{10, 100, 110, 1100, 1110, 11100\}\\
+  B\circ A &= \{01, 011, 0111, 001, 0011, 00111\}
+\end{align*}
+Let $A\{0, 1, 01\}$ And $B = \{1, 01, 000\}$. Then:
+\begin{align*}
+  A \circ B &= \{01, 001, 0000, 11, 101, 1000, 011, 0101, 01000\}\\
+  B\circ A &= \{10, 11, 101, 010, 011, 0101, 0000, 0001, 00001\}
+\end{align*}
+\subsection*{Star}
+A* = $\{1, 11, 111\}.$ Then: 
+\begin{align*}
+  A^*=\{1, 11, 111, \cdots\}
+\end{align*}
+Let $B^* = \{0, 11\}$. Then:
+\begin{align*}
+ B^* = \{0, 11, 011, 110, 1111, 11011, \cdots\}
+\end{align*}
+Let $C^* = \{0, 1\}$. Then:
+\begin{align*}
+  C^* = \{0, 1, 01, 10, 010, \cdots\}
+\end{align*}
+For C* in particular, we typically call it ${\sum}^*=\{0, 1\}^*$.\gline{}
+A simplification that we can use is that for any $A^*$, we have that:
+\begin{align*}
+  A^* &= A\cup A \cup A\circ A \cup A \circ A \circ A \cup \ldots\\
+  &= \bigcup_{1=0}^\infty A^i
+\end{align*}
+Now, we're going to work on drawing some DFAs.\gline{}
+Let $A$ be the set of binary string that contains at least two 0's\gline{}
+Let $B$ be the set of binary string that end in 01.
+\begin{enumerate}
+  \item Draw a diagram for a DFA that recognizes $A\circ B$. 
+  \gimage{image2.png}{8cm}
+  \item Draw a driagram for a DFA that recognizes $A\cup B$.
+  \gimage{image3.png}{8cm}
+\end{enumerate}
+\end{document}

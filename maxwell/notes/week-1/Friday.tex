@@ -10,12 +10,14 @@
 \usepackage{charter}
 \usepackage{amsthm,letltxmacro}
 \usepackage{amssymb}
+\usepackage{float}
 \usepackage[most]{tcolorbox}
 \usepackage{enumerate}
 \usepackage{enumitem}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{changepage}
 \usepackage{mdframed}
+\usepackage{graphicx}
 
 %This will shrink the page
 \newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
@@ -36,12 +38,12 @@
 
 
 \newcommand{\gimage}[3]{
-\begin{figure}[h]   
-    \centering          
-    \includegraphics[width=#2\textwidth]{#1}  
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
     \caption{#3}
     \label{fig:#1}
-\end{figure}\\
+\end{figure}
 }
 
 \newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
@@ -168,7 +170,23 @@
 \newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
 \newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
 
-\subsection*{Pythagorean Triple}
-
+\subsection*{Introduction}
+\begin{itemize}[parsep=0pt, itemsep=0pt]
+    \item Remember to participate
+    \item Doing the problems is very different from having them explained to you. 
+    \item Consider doing senior seminar when I become a senior. They say ``it's a lot more lowkey than advanced lab''. Yea. That'd be nice. 
+\end{itemize}
+\subsection*{Cross product}
+Consider our various symbols for cross-product:
+\begin{gather*}
+    \hat{x}\;\hat{y}\;\hat{z}\;\hat{x}\;\hat{y}\\
+    \text{ The opposite cross product is just put negative. }
+\end{gather*}
+\textbf{Problem: } Find the angle between the body diagonals on the cube:
+Find the angle between the body diagonals of a cube. 
+\gimage{image1.png}{4cm}{caption}
+\begin{problem}
+    
+\end{problem}
 
 \end{document}

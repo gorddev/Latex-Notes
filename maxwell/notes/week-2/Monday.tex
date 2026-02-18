@@ -1,0 +1,317 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{charter}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+\usepackage{graphicx}
+
+% SMALL PAGE COMMAND
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}\newcommand{\Q}{\mathbb{Q}}\newcommand{\C}{\mathbb{C}}
+\newcommand{\real}[1]{\text{Re}\left(#1\right)}
+\newcommand{\im}[1]{\text{Im}\left(#1\right)}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}[0]{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[2]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
+\end{figure}
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+
+% COLOR BOX
+\newmdenv[backgroundcolor=gray!8,
+  linewidth=0pt, innerleftmargin=0pt, innerrightmargin=0pt,
+  skipabove=\baselineskip, skipbelow=\baselineskip
+]{coloredadjust}
+
+% PROOF
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+% PROBLEM
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}
+   \textit{Problem. }#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+%% DEFINITION
+\newtcbtheorem[]{definition}{Definition}{enhanced,
+  colback=blue!2, colframe=blue!50!black, coltitle=blue!70!black,
+  fonttitle=\bfseries,
+  boxrule=0pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{dfn}
+
+%% CRITERION
+\newtcbtheorem[]{criterion}{Criterion}{enhanced,
+  colback=magenta!3, colframe=magenta!60!black, coltitle=magenta!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% COROLLARY
+\newtcbtheorem[]{corollary}{Corollary}{enhanced,
+  colback=orange!3, colframe=orange!80!black, coltitle=orange!50!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=1pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=5pt, outer arc=5pt,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% THEOREM
+\newtcbtheorem[]{theorem}{Theorem}{enhanced,
+  colback=green!2, colframe=green!40!black, coltitle=green!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=3pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt,arc=5pt, outer arc=5pt,
+  attach title to upper, title={#1},
+}{thm}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Feb 9th{}-{}Notes}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+%%%%%%%%%%%%% PHYSICS SPECIFIC COMMANDS
+
+\newcommand{\vA}{\vec{\mathbf{A}}}
+\newcommand{\vB}{\vec{\mathbf{B}}}
+\newcommand{\vC}{\vec{\mathbf{C}}}
+\newcommand{\vZ}{\vec{\mathbf{0}}}
+\newcommand{\vv}{\vec{\mathbf{v}}}
+\newcommand{\norm}{\vec{\mathbf{n}}}
+\newcommand{\pvec}[1]{\left\langle#1\right\rangle}
+\newcommand{\ar}{\vec{\mathbf{r}}}
+\newcommand{\arhat}{\hat{\mathbf{r}}}
+\newcommand{\prt}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\prtd}[2]{\frac{\partial^2#1}{\partial{#2}^2}}
+\newcommand{\cpr}[1]{\left(#1\right)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% begin doc
+
+
+\begin{document}
+\subsection*{Gradients}
+Consider our Del operator:
+\begin{align*}
+  \nabla = \hat x \prt{}{x} + \hat y \prt{}{y} + \hat z\prt{}{z}
+\end{align*}
+When we take the Del of a scalar function, we call that the \textbf{gradient}. 
+\begin{align*}
+  \nabla T = \prt{T}{x}\hat x + \prt{T}{y}\hat y+\prt{T}{z}\hat z
+\end{align*}
+This gradient points in the direction of maximum change. Magnitude is the rate of change in that direction. \gline{}
+However, something interesting occurs when we look at the separation vector, $\mathbf r$. Let $\mathbf r$ be the separation vector with fixed point $\pvec{x', y', z'}$ to point $\pvec{x, y, z}$. We want to show that:
+\begin{align*}
+  \nabla(1/\ar) = -\arhat/r^3
+\end{align*}
+The proof is left as an exercise to the reader. 
+\subsection*{Divergence}
+Consider the formula for gradience:
+\begin{align*}
+  \nabla \cdot \vv = \prt{v_x}x + \prt{v_y}y + \prt{v_z}z
+\end{align*}
+It tells us whether our point is a source or a sink: are the fields pointing in and out.\gline{}
+Let's consider the problem with the vector function:
+\begin{align*}
+  \vv &= \frac{\arhat}{r^2}
+\end{align*}
+We first are going to sketch it, and then compute it's divergence. 
+\gimage{image.png}{5cm}
+When we try and compute the divergence, we get the following:
+\begin{align*}
+  \vv &= \frac{\arhat}{r^2}\\
+  \vv&= \frac{\pvec{r_i}}{(r_i^2)^{3/2}}\\
+  \prt{\vv}{r_i}\cpr{\frac{r_i/r}{\sqrt{r_i^2+\cdots}}^3}&=\frac{1}{r^3}-\frac{3r_i^2}{r^5}
+\end{align*}
+\begin{align*}
+  \sum_{i=1}^s\prt{\vv}{r_i} = \frac{3}{r^5}\left[1-\frac{1}{r^2}(r_i^2+\cdots)\right]=0
+\end{align*}
+\subsection*{Curl}
+Consider the curl, which represents the \textbf{tendency to rotate}:
+\begin{align*}
+  \nabla\times \vv = \begin{bmatrix}
+    \hat x& \hat y&\hat z\\\prt{}x&\prt{}y&\prt{}z\\v_x&v_y&v_z
+  \end{bmatrix}
+\end{align*}
+\newcommand{\del}{\nabla}
+Here are some simple product rules for the $\nabla$ operator:
+\begin{enumerate}[itemsep=1pt]
+  \item $\nabla(fg) = f(\nabla g) + g(\nabla f)$
+  \item $\nabla(\vA \cdot \vB)= \vA\times(\nabla\vB)+\vB\times(\nabla\times\vA)+(\vA\cdot\nabla)\vB+(\vB\cdot\nabla)\vA$
+  \item $\nabla(f\vA)=f(\nabla\cdot \vA)+\vA\cdot(\nabla f)$
+  \item $\del\cdot(\vA\times\vB)=\vB\cdot(\del\times\vA)-\vA\times(\nabla\times\vB)$
+  \item $\del\times(f\vA)=f(\nabla\times\vA)-\vA\times(\del f)$
+  \item $\del\times(\vA\times\vB)=(\vB\cdot\del)\vA-(\vA\times\del)\vB+\vA(\del\times\vB)-\vB(\del\cdot\vA)$
+\end{enumerate}
+\subsection*{Second Derivatives}
+Now, there are a couple of things we should know for second derivatives:
+\begin{enumerate}
+  \item Laplacian (divergence of a gradient)
+  \begin{align*}
+    \del\cdot(\del T)=\prtd{T}{x}+\prtd{T}y + \prtd{T}z
+  \end{align*}
+  Note that people also write it this way (laplacian of a vector):
+  \begin{align*}
+    \del^2\vv &= \del^2v_x\hat{x}+\del^2v_y \hat t + \del^2 v_z \hat z\\
+    &=\pvec{\del^2 v_x, \del^2v_y, \del^2 v_z}
+  \end{align*}
+  \item Now we consider the curl of a gradient, which is always zero:
+  \begin{align*}
+    \del\times(\del T)=0
+  \end{align*}
+  \item Gradient of a divergence
+  \begin{align*}
+    \del(\del\times\vv)
+  \end{align*}
+  \item Divergence of a curl
+  \begin{align*}
+    \del\times(\del\times\vv)=0
+  \end{align*}
+  \item Curl of a curl
+  \begin{align*}
+    \del\times(\del\times\vv)=\del(\del\times\vv)-\del^2\vv
+  \end{align*}
+\end{enumerate}
+
+\section*{Feb 13th}
+\subsection*{Integral types}
+\begin{align*}
+  \text{Line Integral: }&\int_{\vec a}^{\vec b}\vv \cdot d\vec \ell\\
+  &d\vec\ell = dx\hat x + dy \hat y + dx\hat z\\\\
+  \text{Surface Integral}&\int_\text{surface}\vv \cdot d\vec a\\
+  &\text{for closed surface: outward is positive direction}
+\end{align*}
+For example, take the surace integral of the bottom of a cube of length 2, along the bottom axis (which runs from (0,0) to (2,2)). OUr field vector is given by $\vv =\pvec{2xz, (x+2), y(x^2-3)}$. \gline{}
+\begin{align*}
+  &\int_0^2\int_0^2 \pvec{2xz, (x+2), y(x^2-3)}\cdot \pvec{0, 0, -1}\,dxdy\\
+  &= \int_0^2\int_0^2 -y(z^2 - 3)\\
+  &= \int_0^2 -y2(z^2 - 3) dy\\
+  &= -2\frac{1}2y^2(z^2 - 3)\Big|_0^2\\
+  &= -12
+\end{align*}
+\subsection*{Volume Integral}
+\begin{align*}
+  \int T \,&d\tau\\
+  &d\tau=dxdydz
+\end{align*}
+\subsection*{Fundamental Theorems}
+\begin{align*}
+  \text{Gradient:} \int_{\vec a}^{\vec b}(\del T)\cdot d\vec\ell = T(\vec b) - T(\vec a)
+\end{align*}
+\subsection*{Divergence}
+\begin{align*}
+  &\int_v (\del\cdot \vv)d\tau = \iint_S \vv\cdot d\vec a &d\vec\ell= dx\hat x + dy\hat y +dz\hat z\\
+  &\text{closed surface }d\vec a \text{ is out.}
+\end{align*}
+\subsection*{Curl}
+\begin{align*}
+  \underline{\int_S(\del\times \vv)\times d\vec a} = \oint_P \vv\cdot d\vec\ell\\
+\end{align*}
+\subsection*{Stoke's Theorem}
+\begin{align*}
+  \int_s(\del\times \vv)\cdot d\vec{a} = \oint \vv\cdot d\vec \ell
+\end{align*}
+\subsection*{Spherical}
+Here's how we do spherical coordinates:
+\gimage{image2.png}{5cm}
+Here, we have that:
+\begin{align*}
+  r: 0&\to\infty &z = r\cos\theta\\
+  \phi: 0&\to 2\pi &y=r\sin\theta\sin\phi\\
+  \theta: 0&\to \pi &z=r\sin\theta\cos\phi
+\end{align*}
+Then, when we write $d\vec \ell$, we have that:
+\begin{align*}
+  d\vec\ell = d\ell_r \hat r + d \ell_\theta\hat\theta + d\ell_\phi\hat\phi
+\end{align*}
+Note that $d \vec a$ depends on surface. Constant - gives direction. The other two are changing.\gline{}
+For example, a surface in the $xy$ plane, wehave that:
+\begin{align*}
+  \theta &\text{ constant }=\frac{\pi}2\\
+  d\vec a &= d\ell_r d\ell_\phi\hat\theta\\
+  &= dr\, r\sin\theta d\phi\hat\theta\\
+  &= r\,dr\,d\theta\hat\theta 
+\end{align*}
+\subsection*{Dirac Delta Function}
+Observe the dirac delta function:
+\begin{align*}
+  \delta(x) &= \begin{cases}
+    \infty,&x = 0\\
+    0 &x \ne 0
+  \end{cases}\\
+  \int_{-\infty}^{\infty}\delta(x) \,dx &= 1\\
+  \int_{-\infty}^{\infty}f(x)\delta(x) \,dx &= f(0)\\
+  \int_{-\infty}^{\infty}f(x)\delta(x - a) \,dx &= f(a)
+\end{align*}
+\pagebreak
+\subsection*{Vector Fields}
+\subsubsection*{Theorem 1}
+\[\del \times \vec F = 0\quad \vec F = -\del V\]
+\subsubsection*{Theorem 2}
+\[\del\cdot\vec F = 0\quad\vec F = \del\times\vec A\]
+
+\subsection*{Coulomb's Law}
+\begin{align*}
+  \vec F &= \frac{1}{4\pi\varepsilon_0}\frac{q_0 Q}{n^2}\hat{\mathbf n}\\
+  \vec E &= \frac{\vec F}{Q}\\
+  \vec E &=\frac{1}{4\pi \varepsilon_0}\sum_{i=1}^{n}\frac{q_i\hat {\mathbf{n}_i}^2}{n_i^2}
+\end{align*}
+\subsection*{Continuous Charge Distribution}
+\begin{align*}
+  \vec E (\vec r) = \frac{1}{4\pi\varepsilon_0}\int\frac{\hat{\mathbf{n}}}{n^2}\,dq
+\end{align*}
+\begin{adjustwidth}{14em}{14em}
+  \begin{align*}
+    &\text{line}\quad &dq = \lambda \;d\ell '\\
+    &\text{surface}\quad &sq = \sigma \;da'\\
+    &\text{volume}\quad &dq = e\;d\tau'
+  \end{align*}
+\end{adjustwidth}
+
+\end{document}

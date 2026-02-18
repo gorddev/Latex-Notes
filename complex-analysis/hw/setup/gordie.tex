@@ -1,0 +1,180 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% gordie's command for latex because latex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%% Color boxes
+
+% color box for a section
+\tcbset{sectionbox/.style={
+    colback=black!10!cyan!7,
+    colframe=black!50!cyan!80, 
+	  boxrule=1pt,
+    toprule=2.5pt,
+    sharp corners,
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+  }
+}
+
+% color box for a subsection
+\tcbset{subsectionbox/.style={
+    colback=gray!10!cyan!3,
+    colframe=gray!60!cyan!70, 
+	  boxrule=1pt,
+    sharp corners,
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+  }
+}
+
+% color box for a problem
+\tcbset{problembox/.style={
+    colback=gray!4,
+    colframe=gray!40, 
+	  boxrule=1.5pt,
+    toprule=1pt, 
+    arc=3pt,
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable
+  }
+}
+
+% color box for a proof
+\tcbset{proofbox/.style={
+    colback=gray!7,
+    colframe=gray!60, 
+	  boxrule=0pt,
+    leftrule=2.5pt, 
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable,
+    sharp corners
+  }
+}
+
+% color box for a problem
+\tcbset{lemmabox/.style={
+    colback=gray!7,
+    colframe=gray!50, 
+	  boxrule=0.7pt,
+    leftrule=2pt, 
+    arc=3pt,
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable,
+    sharp corners,
+    enhanced
+  }
+}
+
+% color box for a reflection
+\tcbset{reflectionbox/.style={
+    colback=black!30!cyan!7,
+    colframe=black!50!cyan!90, 
+	  boxrule=1pt,
+    leftrule=5pt, 
+    arc=5pt,
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable,
+    enhanced
+  }
+}
+
+% color box for a reflection
+\tcbset{gradebox/.style={
+    colback=black!30!green!7,
+    colframe=black!50!green!90, 
+	  boxrule=1pt,
+    arc=3pt,
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable,
+    enhanced
+  }
+}
+
+% color box for an image
+\newtcbox{\gimagebox}{
+  on line,
+  colback=gray!10,
+  colframe=black!90!white!60,
+  sharp corners,
+  boxsep=0pt
+}
+
+%%%%%%%%%% Title Formats
+
+% SECTION
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{}{0pt}{
+    \begin{tcolorbox}[sectionbox]#1\end{tcolorbox}
+  }[\vspace{-1.55cm}
+  \addcontentsline{toc}{section}{#1}]
+
+% SUBSECTION
+\titleformat{\subsection}
+{\normalfont\large\bfseries}{}{0pt}{
+\begin{tcolorbox}[subsectionbox]#1\end{tcolorbox}
+}[\vspace{-0.8cm}\addcontentsline{toc}{subsection}{#1}]
+
+
+%%%%%%%%%% Custom Environments
+
+% PROBLEM
+\renewenvironment{proof}[1]
+{\vspace{-0.1cm}\begin{tcolorbox}[proofbox]
+  \textit{Proof. }#1}
+{\qed\end{tcolorbox}\vspace{0.3em}}
+
+% PROBLEM
+\newenvironment{lemma}[2]
+{\vspace{-0.1cm}\begin{tcolorbox}[lemmabox]
+  \textit{Lemma #1. }#2}
+{\end{tcolorbox}\vspace{0.3em}}
+
+% PROBLEM
+\newenvironment{problem}[1]
+{\vspace{-0.05cm}\begin{tcolorbox}[problembox]
+  #1}
+{\end{tcolorbox}\vspace{0.3em}}
+
+% REFLECTION
+\newenvironment{reflection}[1]
+{\sffamily\vspace{-0.05cm}\begin{tcolorbox}[reflectionbox]
+  #1}
+{\end{tcolorbox}\vspace{0.3em}}
+
+% GRADE
+\newenvironment{grade}[1]
+{\sffamily\vspace{-0.05cm}\begin{tcolorbox}[gradebox]
+  \textbf{Grade: }#1}
+{\end{tcolorbox}\vspace{0.3em}}
+
+% IMAGE
+\newcommand{\gimage}[2]{
+  \begin{center}
+  \gimagebox{\includegraphics[width=#2]{#1}}
+  \end{center}
+}
+
+%%%%%%%%%%%%%% \newcommand definitions
+
+%%%%%%%%%% containers %%%%%%%%%%%%%%%%
+\newcommand{\cbr}[1]{\left[#1\right]} % contain in braces
+\newcommand{\ccbr}[1]{\left\{#1\right\}} % contain in curley braces
+\newcommand{\cpr}[1]{\left(#1\right)} % contain in parenthesis
+%%%%%%%%%% spacing %%%%%%%%%%%%%%%%
+\newcommand{\gline}[0]{\vspace{0.2cm}\\}
+%%%%%%%%%% notation %%%%%%%%%%%%%%%%
+\newcommand{\rmv}[1]{\,\backslash\hspace{-0.05cm}\left\{#1\right\}} % disclude from set
+%%%%%%%%%% formatting %%%%%%%%%%%%%%%%
+\newcommand{\gtabularcc}[4]{ % two side by side environments
+  \begin{center}
+    \begin{tabular}{c c}
+      \parbox{#1}{#3} &
+      \parbox{#2}{#4}
+    \end{tabular}
+  \end{center}
+}

@@ -1,0 +1,413 @@
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{charter}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+\usepackage{graphicx}
+
+% SMALL PAGE COMMAND
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}\newcommand{\Q}{\mathbb{Q}}\newcommand{\C}{\mathbb{C}}
+\newcommand{\real}[1]{\text{Re}\left(#1\right)}
+\newcommand{\im}[1]{\text{Im}\left(#1\right)}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}[0]{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+\newcommand{\prt}[2]{\frac{\partial#1}{\partial#2}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+
+%}
+
+% COLOR BOX
+\newmdenv[backgroundcolor=gray!8,
+  linewidth=0pt, innerleftmargin=0pt, innerrightmargin=0pt,
+  skipabove=\baselineskip, skipbelow=\baselineskip
+]{coloredadjust}
+
+% PROOF
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+% PROBLEM
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}
+   \textit{Problem. }#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+%% DEFINITION
+\newtcbtheorem[]{definition}{Definition}{enhanced,
+  colback=blue!2, colframe=blue!50!black, coltitle=blue!70!black,
+  fonttitle=\bfseries,
+  boxrule=0pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{dfn}
+
+%% CRITERION
+\newtcbtheorem[]{criterion}{Criterion}{enhanced,
+  colback=magenta!3, colframe=magenta!60!black, coltitle=magenta!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% COROLLARY
+\newtcbtheorem[]{corollary}{Corollary}{enhanced,
+  colback=orange!3, colframe=orange!80!black, coltitle=orange!50!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=1pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=5pt, outer arc=5pt,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% THEOREM
+\newtcbtheorem[]{theorem}{Theorem}{enhanced,
+  colback=green!2, colframe=green!40!black, coltitle=green!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=3pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt,arc=5pt, outer arc=5pt,
+  attach title to upper, title={#1},
+}{thm}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{PS1 - Maxwell's Equations}}}
+\setlength{\headheight}{10pt}
+
+
+% color commands
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+
+\newcommand{\cpr}[1]{\left(#1\right)}
+%%%%%%%%%%%%% PHYSICS SPECIFIC COMMANDS
+
+\newcommand{\vA}{\vec{\mathbf{A}}}
+\newcommand{\vB}{\vec{\mathbf{B}}}
+\newcommand{\vC}{\vec{\mathbf{C}}}
+\newcommand{\vZ}{\vec{\mathbf{0}}}
+\newcommand{\norm}{\vec{\mathbf{n}}}
+\newcommand{\pvec}[1]{\left\langle#1\right\rangle}
+\newcommand{\ar}{\vec{\mathbf{r}}}
+\newcommand{\arhat}{\hat{\mathbf{r}}}
+\newcommand{\vv}{\vec{\mathbf{v}}}
+\newcommand{\delfull}{\pvec{\prt{}{x}, \prt{}{y},\prt{}{z}}}
+\newcommand{\delinput}[3]{\pvec{\prt{}{x}\cpr{#1}, \prt{}{y}\cpr{#2},\prt{}{z}\cpr{#3}}}
+\newcommand{\dps}{\displaystyle}
+\newcommand{\delmatrix}[3]{\begin{bmatrix}\dps\hat x&\dps\hat y&\dps\hat z\\\dps\prt{}x&\dps\prt{}y&\dps\prt{}z\\\dps#1&\dps#2&\dps#3\end{bmatrix}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% begin doc
+
+
+\begin{document}
+Assigned problems:
+Chapter 1: 2, 4, 6, 7, 12, 15, 18, 26, 28
+\subsubsection*{Problem 2}
+\begin{problem}
+  Prove whether the cross product is associative or not. 
+  \begin{proof}
+    We want to show that the cross product is not associative via a counterexample.\gline
+    Let $\vA = \pvec{0, 1, 0}$, $\vB = \pvec{0, 1, 0}$, and $\vC = \pvec{1, 0, 0}$. Thus, we have that:
+    \begin{align*}
+      (\vA \times \vB)\times \vC &= \vec 0 \times \vC\\
+      &= \vec 0\\
+      \vA \times (\vB \times \vC) &= \vA \times \pvec{0, 0, 1}\\
+      &= \pvec{1, 0, 0}
+    \end{align*}
+    Thus, because there exists an example for which the statement does not hold, the statement is false. 
+  \end{proof}
+\end{problem}
+\subsubsection{Problem 4}
+Use the cross product to find the components of the unit vector $\norm$ perpindicular to the shaded plane.
+\gimage{image.png}{4cm}{Texbook diagram 1.11}
+\begin{problem}
+  Use the cross product to find the components of the unit vector $\norm$ perpindicular to the shaded plane. \gline
+  We want to find a vector perpindicular to the plane that the surface of the triangle rests on. We just pick two linearly independent vectors:
+  \begin{align*}
+    \vA &= \pvec{-1, 2, 0}\\
+    \vB &= \pvec{1, 0, -3}
+  \end{align*}
+  Taking the cross product gives us:
+  \begin{align*}
+    \vA \times\vB = \pvec{-6, -3, -2}
+  \end{align*}
+  Flipping the sign and taking the magnitude gives:
+  \begin{align*}
+    -(\vA \times\vB) &= (\vB \times \vA)\\
+    &=\pvec{6, 3, 2}\\\\
+    |\vB\times \vA| &= \sqrt{6^2 + 3^2 + 2^2}\\
+    &= 7\\\\
+    \norm &= \pvec{\frac{6}7,\frac{3}7, \frac{2}7}
+  \end{align*}
+  Thus, we have our unit vector. 
+\end{problem}
+\subsubsection*{Problem 6}
+Prove that:
+\begin{align*}
+  [\vA\times(\vB\times\vC)]+[\vB\times(\vC\times\vA)]+[\vC\times(\vA\times\vB)] = \vZ
+\end{align*}
+Under what conditions is the cross product associative. 
+\begin{problem}
+  Consider that $\vA\times(\vB\times\vC)=\vB(\vA\cdot\vC)-\vC(\vA\cdot\vB)$. Writing out all parts of the equation in this notation yields:
+  \begin{align*}
+    &\vB(\vA\cdot\vC)-\vC(\vA\cdot\vB) + \vC(\vB\cdot\vA)-\vA(\vB\cdot\vC) + \vA(\vC\cdot\vB)-\vB(\vC\cdot\vA)\\
+    &=\;\;\;\vB(\vA\cdot\vC)-\vB(\vC\cdot\vA)\\
+    &\quad-\vC(\vA\cdot\vB)+ \vC(\vB\cdot\vA)\\
+    &\quad-\vA(\vB\cdot\vC) + \vA(\vC\cdot\vB)
+  \end{align*}
+  Because dot product is commutative, all like terms cancel. Thus, the equation simplifies to $\vZ$. \gline
+  The cross product is then associative if all terms are scalar multiples of each other, or the vectors form a basis for their space. In other words, this occurs when $\vA \times (\vB \times \vC) = \vZ$. 
+\end{problem}
+\subsubsection*{Problem 7}
+Find the separation vector $\ar$ from the source point $\pvec{2, 8, 7}$ to the field point $\pvec{4, 6, 8}$. Determine it's magnitude $(r)$, and construct the unit vector $\arhat$. 
+\begin{problem}
+  First, we find our separation vector:
+  \begin{align*}
+    \ar &= \pvec{4 - 2, 6 -8 , 8-7}\\
+    &= \pvec{2, -2, 1}
+  \end{align*}
+  Then, we find the magnitude:
+  \begin{align*}
+    r&= \sqrt{2^2 + (-2)^2 + 1}\\
+    &= \sqrt{9}\\
+    &= 3
+  \end{align*}
+  Then, that gives us the normal:
+  \begin{align*}
+    \arhat = \pvec{\frac{2}3, \frac{-2}3, \frac{1}3}
+  \end{align*}
+\end{problem}
+\subsection*{Problem 12}
+The height of a certain hill (in feet) is given by:
+\begin{align*}
+  h(x,y) = 10(2xy - 3x^2 - 4y^2 - 18x + 28y +12)
+\end{align*}
+where $y$ is the distance (in miles) north, $x$ the distance easy of South hadley.
+\begin{enumerate}
+  \item Where is the top of the hill located?
+  \begin{problem}
+    To solve this, we will take the gradient of this function and find the maximum point by solving the Hessian.
+    \begin{align*}
+      \prt{}{x}h(x,y) &= 10(2y - 6x - 18)\\
+      &= 20(y - 3x - 9)\\
+      \prt{}yh(x,y)&= 10(2x - 8y + 28)\\
+      &= 20(x - 4y + 14)
+    \end{align*}
+    Solving the Hessian gives us:
+    \begin{align*}
+      \text{Det}\begin{bmatrix}
+        -6 & 0\\
+        0&-4
+      \end{bmatrix}=24
+    \end{align*}
+    Now, we can solve for each function equaling zero, which gives us the representative equations:
+    \begin{align*}
+      3x &= y - 9\\
+      x &= 4y -14\\
+    \end{align*}
+    Thus, substituting in $x$ gives:
+    \begin{align*}
+      3(4y-14)&= y -9\\
+      12y - 42 &= y - 9\\
+      11y &= 33\\
+      y &= 3\\
+      x &= -2
+    \end{align*}
+    Thus, we get that our point is a maximum with the hessian because both $f_{xx}$ and $f_{yy}$ are less than zero.\gline{}
+    Via our hessian, we know that this a maximum. 
+  \end{problem}
+  \item How high is the hill?
+  \begin{problem}
+    If we plug in our $x$ and $y$, we get that the hill's top height is at 72. 
+  \end{problem}
+  \item How steep is the slope (in feet per mile) at a point 1 mile north and 1 mile east of South Hadley? In what direction is the slope steepest, at that point?
+  \begin{problem}
+    If we plug in our $x$ and $y$ for that point, we get that via the gradient the directional derivative is:
+    \begin{align*}
+      \{-220, 220\}
+    \end{align*}
+    The unit vector for this point is just $\{-\frac{\sqrt 2}2, \frac{\sqrt 2}2\}$, our direction (given a total steepness of 311.1269).
+  \end{problem}
+\end{enumerate}
+\subsection*{Problem 15}
+Calculate the divergence of the following vector functions:
+\begin{enumerate}
+  \item $\vv_a =\pvec{x^2, 3xz^2, -2xz}$
+  \begin{problem}
+    \begin{align*}
+      \nabla&\cdot \vv_a\\
+      \delfull &\cdot \pvec{x^2, 3xz^2, -2xz}\\
+      \delinput{x^2}{2xz^2}{-2xz}&= (2x + 0 + -2x)\\
+      &= 0
+    \end{align*}
+  \end{problem}
+  \item $\vv_b = \pvec{xy, 2yz, 3xz}$
+  \begin{problem}
+    \begin{align*}
+      \nabla&\cdot \vv_a\\
+      \delfull&\cdot\pvec{xy, 2yz, 3xz}\\
+      \delinput{xy}{2yz}{3xz}&=(y + 2z + 3z)
+    \end{align*}
+  \end{problem}
+  \pagebreak
+  \item $\vv_c = \pvec{y^2, 2xy+z^2, 2yz}$
+  \begin{problem}
+    \begin{align*}
+      \nabla&\cdot \vv_a\\
+      \delfull&\cdot\pvec{y^2, 2xy+z^2, 2yz}\\
+      \delinput{y^2}{2xy+z^2}{2yz}&=(0+2x+2y)
+    \end{align*}
+  \end{problem}
+\end{enumerate}
+\subsection*{Problem 18}
+Calculate the curls of the vector function in Prob. 1.15.
+\begin{enumerate}
+  \item $\vv_a =\pvec{x^2, 3xz^2, -2xz}$
+  \begin{problem}
+    \begin{align*}
+      \delmatrix{x^2}{3xz^2}{-2xz}&\Rightarrow \pvec{0 - 4xz, 0 +2z, 3z^2-0}\\
+      &\Rightarrow \pvec{-6xz, 2z, 3z^2}
+    \end{align*}
+  \end{problem}
+  \item $\vv_b = \pvec{xy, 2yz, 3xz}$
+  \begin{problem}
+    \begin{align*}
+      \delmatrix{xy}{2yz}{3xz}&\Rightarrow \pvec{0 - 2y, 0 - 3z, 0 - x}\\
+      &\Rightarrow \pvec{-2y, -3z, -x}
+    \end{align*}
+  \end{problem}
+  \item $\vv_c = \pvec{y^2, 2xy+z^2, 2yz}$
+  \begin{problem}
+    \begin{align*}
+      \delmatrix{y^2}{2xy+z^2}{2yz}&\Rightarrow \pvec{2z - 2z, 0 - 0, 2y - 2y}\\
+      &\Rightarrow\pvec{0, 0, 0}
+    \end{align*}
+  \end{problem}
+\end{enumerate}
+\pagebreak
+\subsection*{Problem 26}
+Calculate the Laplacian of the following function:
+\newcommand{\laplace}{\prt{^2}{x^2}+\prt{^2}{y^2}+\prt{^2}{z^2}}
+\newcommand{\prts}[2]{\prt{^2#1}{#2^2}}
+\begin{enumerate}
+  \item $T_a = x^2 + 2xy + 3z + 4$
+  \begin{problem}
+    We just apply the Laplacian to this function:
+    \begin{align*}
+      \cpr{\laplace}&\Rightarrow x^2 + 2xy+3z+4\\
+      \prts{T_a}{x} &= 2\\
+      \prts{T_a}{y}&= 0\\
+      \prts{T_a}{z}&= 0\\
+      2 + 0 + 0 &= 2
+    \end{align*}
+  \end{problem}
+  \item $T_b = \sin x\sin y\sin z$
+  \begin{problem}
+    \begin{align*}
+      \cpr{\laplace}&\Rightarrow\sin x\sin y\sin z\\
+      \prts{T_b}{x}&= \prt{}{x}\cpr{\cos x\sin y\sin z} = -\sin x \sin y \sin z\\
+      \prts{T_b}{y}&= \prt{}{y}\cpr{\sin x \cos y \sin z} = -\sin x \sin y \sin z\\
+      \prts{T_b}{z}&= \prt{}{z}\cpr{\sin z \sin y\cos z} = -\sin x\sin y\sin z\\
+      +\cdots &= 3\sin x\sin y \sin z
+    \end{align*}
+  \end{problem}
+  \item $T_c = e^{-5x}\sin 4y\cos 3z$
+  \begin{problem}
+    \begin{align*}
+      \cpr{\laplace}&\Rightarrow e^{-5x}\sin 4y\cos 3z\\
+      \prts{T_c}{x}&= \prt{}{x}\cpr{-5e^{-5x}\sin 4y\cos 3z}= 25e^{-5x}\sin 4y\cos 3z\\
+      \prts{T_c}{y}&= -16e^{-5x}\sin 4y\cos 3z\\
+      \prts{T_c}{z}&= -9e^{-5x}\sin 4y\cos 3z\\
+      0&= (25 -16 - 9)(25e^{-5x}\sin 4y\cos 3z)
+    \end{align*}
+  \end{problem}
+  \pagebreak
+  \item $\vv = \pvec{x^2, 3xz^2, -2xz}$
+  \begin{problem}
+    \begin{align*}
+      \cpr{\laplace}&\Rightarrow \vv = \pvec{x^2, 3xz^2, -2xz}\\
+      \cpr{\laplace}{x^2}&= 2\\
+      \cpr{\laplace}{3xz^2}&= 6x\\
+      \cpr{\laplace}{-2xz}&= 0\\
+      \pvec{2, 6x, 0}
+    \end{align*}
+  \end{problem}
+\end{enumerate}
+\subsection*{Problem 28}
+Prove the curl of the gradient is always zero. 
+\begin{proof}
+  We want to show that the curl of a gradient is always zero. That is, that $\nabla \times (\nabla f(\vv)) = 0$. Consider that:
+  \begin{align*}
+    \nabla f(\vv)&= \pvec{\prt{f}{x}, \prt{f}{y}, \prt{f}{z}}
+  \end{align*}
+  Thus, we have that:
+  \begin{align*}
+    \text{Det}\delmatrix{\prt{f}{x}}{\prt{f}{y}}{\prt{f}{z}}&= \cdots\\
+    \cdots =&\pvec{ \prt{f^2}{yz}-\prt{f^2}{zy}, \prt{f^2}{xz}-\prt{f^2}{zx}, \prt{f^2}{xy}-\prt{f^2}{yx}}
+  \end{align*}
+  Note that for any variable $x_1, x_2$, we have that $\prt{f^2}{x_1x_2} = \prt{f^2}{x_2x_1}$. Thus, all of our terms cross cancel, and we are left with the vector:
+  \begin{align*}
+    \pvec{0, 0, 0}.
+  \end{align*}
+\end{proof}\vspace{0.4cm}
+We check our solution with the function in Problem 1.11. Consider the function $x^2y^3z^4$. Our gradient is given by:
+\begin{align*}
+  \pvec{2xy^3z^4, 3x^2y^2z^4, 4x^2y^3 z^3}
+\end{align*}
+Taking our cross product with respect to the del operator gives us:
+\begin{align*}
+  \text{Det}\delmatrix{2xy^3z^4}{3x^2y^2z^4}{4x^2y^3 z^3} &= \cdots\\
+  \cdots = \langle12x^2y^2z^3 - 12x^2y^2z^3&, 8xy^3z^3 - 8xy^3z^3, 6xy^2z^3 - 6xy^2z^3\rangle\\
+  &= \pvec{0,0,0}
+\end{align*}
+\end{document}

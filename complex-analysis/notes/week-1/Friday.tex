@@ -1,0 +1,251 @@
+%document class
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{charter}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+\usepackage{graphicx}
+
+% SMALL PAGE COMMAND
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}\newcommand{\Q}{\mathbb{Q}}\newcommand{\C}{\mathbb{C}}
+\newcommand{\real}[1]{\text{Re}\left(#1\right)}
+\newcommand{\im}[1]{\text{Im}\left(#1\right)}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}[0]{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[3]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
+    \caption{#3}
+    \label{fig:#1}
+\end{figure}
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+
+%}
+
+% COLOR BOX
+\newmdenv[backgroundcolor=gray!8,
+  linewidth=0pt, innerleftmargin=0pt, innerrightmargin=0pt,
+  skipabove=\baselineskip, skipbelow=\baselineskip
+]{coloredadjust}
+
+% PROOF
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+% PROBLEM
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}
+   \textit{Problem. }#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+%% DEFINITION
+\newtcbtheorem[]{definition}{Definition}{enhanced,
+  colback=blue!2, colframe=blue!50!black, coltitle=blue!70!black,
+  fonttitle=\bfseries,
+  boxrule=0pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{dfn}
+
+%% CRITERION
+\newtcbtheorem[]{criterion}{Criterion}{enhanced,
+  colback=magenta!3, colframe=magenta!60!black, coltitle=magenta!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% COROLLARY
+\newtcbtheorem[]{corollary}{Corollary}{enhanced,
+  colback=orange!3, colframe=orange!80!black, coltitle=orange!50!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=1pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=5pt, outer arc=5pt,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% THEOREM
+\newtcbtheorem[]{theorem}{Theorem}{enhanced,
+  colback=green!2, colframe=green!40!black, coltitle=green!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=3pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt,arc=5pt, outer arc=5pt,
+  attach title to upper, title={#1},
+}{thm}
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Feb 6th{}-{}Notes}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+\begin{document}
+
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+\subsection*{Introduction}
+First, we started with introductions for Professor Stoertz. Professor Stoertz has two cats: Reese and Hank. Also two dogs: a husky and a part-husky named Lulu.
+\subsection*{Class Expectations}
+There's a couple of expectations student should be aware of:
+\begin{itemize}
+  \item AI Use is strongly discouraged, but if used, students should cite it. 
+  \item Email professor stoertz frequently. 
+  \item Now for some learning goals: \begin{itemize}
+    \item Adopt a growth mindset.
+    \item Work to improve teamwork skills.
+    \item Leard the methods and language of Complex Analysis. 
+  \end{itemize}
+  \item Components of the grade: \begin{itemize}
+    \item \textbf{10\% Active Learning and Engagemenet}
+    \item \textbf{10\% Daily Preview Activities}
+    \item \textbf{35\% Weekly written Homework assignments} \begin{itemize}
+      \item Assignments will be posted onOverleaf and will be due on Fridays (\textit{mostly}) by 8:00pm
+      \item Then, we grade ourselves on the following criteria: \begin{itemize}
+        \item Accuracy of grade you have given yourself
+        \item Accuracy and quality of your grading
+        \item A good-faith attempt at every problemClear communication of solutions
+        \item A collaboration statement
+        \item Reflections
+        \item *\textit{Lowest homework grade will be dropped}
+      \end{itemize}
+    \end{itemize}
+    \item \textbf{HW \#0} - If we drop in by Feb. 20th, we get two more dropped preview assignments and more more dropped homework
+    \item \textbf{30\% Three Midtern Exams} - A portion of these exams could be take-home.
+    \item \textbf{15\% Final Project} - Three or four student teams on a project with a 10 min presentation during the final period. 
+  \end{itemize}
+  \item Also remember to have fun and learn. 
+\end{itemize}
+\subsection*{1.1 - The Algebra of Complex Numbers}
+First, we cover the basic sets of numbers
+\begin{align*}
+  \N &= \{0, 1, 2\}\\
+  \Z &= \{-2, -1, 0, 1, 2\}\\
+  \Q &= \{\frac{a}b \mid a\in \Z, b\in \N \backslash\{0\}\}\\
+  \R &= \text{ Solving Equations like } x^2 - 2 = 0\\
+  \C &= \{a+bi\mid a,b\in\R\}
+\end{align*}
+\newpage
+\begin{definition}{Complex Numbers}{}\gline{}
+  Denote by $i$ the number $\sqrt{-1}$. We define the \ul{set of complex numbers}
+  \begin{align*}
+    \C =\{a+bi\mid a,b\in\R\}
+  \end{align*}
+  \centerit{\ul{\textbf{Equality}}}
+  Two complex numbers $a+bi$ and $c+di$ are said to be equal if and only if:
+  \begin{align*}
+    a = c \text{ and } b = d
+  \end{align*}
+  \centerit{\ul{\textbf{Addition}}}
+  We add complex numbers with the following formula;
+  \begin{gather*}
+    (a+bi) + (c + di) = (a+c) + (c + d)i
+  \end{gather*}
+  \centerit{\ul{\textbf{Multiplication}}}
+  We multiply complex numbers with the following formula;
+  \begin{align*}
+    (a+bi)(c+di)&= (ac + adi + bci + bdi^2)\\
+    &= (ac-bd) + (ad+bc)i
+  \end{align*}
+\end{definition}
+We will cover all the axioms of $\C$ at a later point. 
+\begin{theorem}{$\C$ is a field}{}\gline{}
+  \textit{Note: }$\C$ is not an ordered field, meaning that there is no '$<$' relation.
+\end{theorem}
+Now, we work on several different problems:
+\begin{enumerate}
+  \item Express the following complex numbers for $a+ bi$.
+  \begin{enumerate}
+    \item $(a+3i)+(4-i)$
+    \[(4 + a)-2i\]
+    \item $(2+3i)(4-i)$
+    \begin{gather*}
+      8 + 3 - 2i + 12 i\\
+      11 + 10i
+    \end{gather*}
+    \item $\displaystyle\frac{2+3i}{4-i}$
+    \begin{align*}
+      \frac{(2+3i)}{4-i}&= \frac{(2+3i)(4+i)}{(4-i)(4+i)}\\
+      &= \left(\frac{5 + 14i}{15}\right)
+    \end{align*}
+  \end{enumerate}
+  \item Find all solutions to $x^2 = 3 + 4i$. 
+\end{enumerate}
+\begin{definition}{Complex Conjugate}{}\gline{}
+  The \ul{complex conjugate} of $z = a+bi$ is the number $\bar z = a - bi$. 
+\end{definition}
+
+\begin{definition}{Real \& Imaginary Part}{}\gline{}
+  The \ul{real part} of $z = a+bi$ is $\real{z} = a$. \\
+  The \ul{imaginary part} of $z = a+bi$ is $\im{z} = b$. \gline{}
+  \textit{Note: }$\real{z},\im{z}\in \R$. 
+\end{definition}
+
+\begin{enumerate}
+  \item [2.] Find all solutions to $z^2 = 3+ 4i$.
+  \begin{problem}
+    We want to use the formula $z = (a+bi)$. Thus, we get that:
+    \begin{align*}
+      z^2 = a^2 + 2abi - b^2
+    \end{align*}
+    Then, we find that:
+    \begin{align*}
+      3&= a^2 - b^2\\
+      4 &= 2(ab) \quad\rightarrow \quad 2 &= (ab)
+    \end{align*}
+    So we get the solutions $(a,b) = (2, 1), (-2, -1)$.
+  \end{problem}
+  \item [3.] Find all solutions to $x^3 = 1$. 
+  \begin{problem}
+    We represent $z$ as $z = (a+bi)$. Thus, we find that:
+    \begin{align*}
+      z^3 &= a^3 + 3 a^2 b i + 3 a b^2 i^2 + b^3 i^3\\
+      &= a^3 - 3ab + 3a^2bi - b^3 i
+    \end{align*}
+    And we get the following system of equations:
+    \begin{align*}
+      a^3 - 3ab &= 1\\
+      3a^2b - b^3 &= 0
+    \end{align*}
+    For $a, b\ne 0$, we find that $3a^2 = b^2$. WLOG $a = b$ or $a = -b$. 
+  \end{problem}
+\end{enumerate}
+\end{document}

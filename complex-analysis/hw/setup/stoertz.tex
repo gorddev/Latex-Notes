@@ -1,0 +1,33 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% All of prof. stoertz's custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\makeatletter
+%  \@removefromreset{subsection}{section}
+%\makeatother
+%\renewcommand{\thesection}{}
+%\titleformat{\section}
+%{\normalfont\Large\bfseries}{}{0pt}{}
+%\renewcommand{\thesubsection}{Problem \arabic{subsection}}
+\titleformat{\subsection}
+{\normalfont\large\bfseries}{}{0pt}{}
+
+% Theorem Environments
+\theoremstyle{definition}
+\newtheorem{conjecture}[section]{Conjecture}
+\newtheorem*{definition}{Definition}
+\newtheorem*{claim}{Claim}
+\newtheorem{theorem}{Theorem}[section]
+\newcounter{tmp}
+\newtheorem{question}[theorem]{Question}
+\newtheorem*{answer}{Answer}
+\newtheorem{challenge}[section]{Challenge}
+\newtheorem*{postulate}{Postulate}
+
+% stoertz commands
+\newcommand{\lcu}{\left\lbrace}\newcommand{\rcu}{\right\rbrace}\newcommand{\lbr}{\left[}\newcommand{\rbr}{\right]}\newcommand{\lpa}{\left(}\newcommand{\rpa}{\right)}\newcommand{\lan}{\left\langle}\newcommand{\ran}{\right\rangle}\newcommand{\bfi}{\mathbf{i}}\newcommand{\bfj}{\mathbf{j}}\newcommand{\bfk}{\mathbf{k}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}\newcommand{\Z}{\mathbb{Z}}\newcommand{\Q}{\mathbb{Q}}\newcommand{\C}{\mathbb{C}}\newcommand{\F}{\mathbb{F}}\newcommand{\T}{\mathbb{T}}\newcommand{\Epsilon}{\mathcal{E}}\newcommand{\blue}[1]{\textcolor{blue}{#1}}\renewcommand{\Re}{\operatorname{Re}}\renewcommand{\Im}{\operatorname{Im}}\newcommand{\Arg}{\operatorname{Arg}}\newcommand{\Log}{\operatorname{Log}}
+
+% setup for the title, author, exct. 
+\title{\vspace{-1.7cm}\bfseries Homework for Math 340 (Spring 26)\vspace{-0.3cm}}
+\author{\bfseries Gordie!}
+\date{\vspace{-0.2cm}\ttfamily\today}

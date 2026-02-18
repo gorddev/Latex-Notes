@@ -1,0 +1,305 @@
+%document class
+\documentclass[10pt,twocolumn]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{charter}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+\usepackage{graphicx}
+
+% SMALL PAGE COMMAND
+\newcommand{\smallpage}{  \setlength\oddsidemargin{.25in}
+            \setlength\textwidth{6in}
+            \setlength\topmargin{0in}
+            \setlength\textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}\newcommand{\Q}{\mathbb{Q}}\newcommand{\C}{\mathbb{C}}
+\newcommand{\real}[1]{\text{Re}\left(#1\right)}
+\newcommand{\im}[1]{\text{Im}\left(#1\right)}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}[0]{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+\newcommand{\gbar}[1]{\overline{#1}}
+\newcommand{\cpr}[1]{\left(#1\right)}
+\newcommand{\ccbr}[1]{\left\{#1\right\}}
+\renewcommand{\Re}[1]{\text{Re}\left(#1\right)}
+\renewcommand{\Im}[1]{\text{Im}\left(#1\right)}
+\newcommand{\cis}{\,\mathrm{cis}\,}
+\newcommand{\Arg}{\mathrm{Arg}\,}
+\newcommand{\ahline}{\\[3pt]\hline\\[-8pt]}
+
+
+\newcommand{\gimage}[2]{\vspace{-0.25cm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
+\end{figure}\vspace{-0.4cm}
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+
+%}
+
+% COLOR BOX
+\newmdenv[backgroundcolor=gray!8,
+  linewidth=0pt, innerleftmargin=0pt, innerrightmargin=0pt,
+  skipabove=\baselineskip, skipbelow=\baselineskip
+]{coloredadjust}
+
+% PROOF
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+% PROBLEM
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+%% DEFINITION
+\newtcbtheorem[]{definition}{Definition}{enhanced,
+  colback=gray!2, colframe=gray!50!black, coltitle=gray!30!black,
+  fonttitle=\bfseries, breakable,
+  boxrule=0pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{dfn}
+
+%% CRITERION
+\newtcbtheorem[]{criterion}{Criterion}{enhanced,
+  colback=magenta!3, colframe=magenta!60!black, coltitle=magenta!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% COROLLARY
+\newtcbtheorem[]{corollary}{Corollary}{enhanced,
+  colback=cyan!2, colframe=cyan!60!black, coltitle=cyan!30!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=1pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, sharp corners,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% THEOREM
+\newtcbtheorem[]{theorem}{Theorem}{enhanced,
+  colback=blue!2, colframe=blue!60!cyan!30!gray, coltitle=blue!40!cyan!50!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=4pt, bottomrule=2pt, leftrule=1.5pt, rightrule=1.5pt,
+  sharp corners,
+  breakable,
+  attach title to upper, title={#1},
+}{thm}
+
+\newenvironment{example}{
+  \begin{tcolorbox}[colback=green!2, colframe=green!40!black, coltitle=green!20!black, sharp corners]
+    \textit{Example. }
+}{\end{tcolorbox}}
+
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Complex Analysis Notes}}}
+%\rfoot{\thepage/\pageref{LastPage} }
+\setlength{\headheight}{10pt}
+
+\begin{document}
+\small
+
+\subsection*{1.2 Point Representation of Complex Numbers}
+There is a natural bijection between $\C$ and the $xy$-coordinate system $\R^2$:
+\begin{align*}
+  a + bi \leftrightarrow (a,b)
+\end{align*}
+\begin{theorem}{Properties of Complex Nums}{}
+  \begin{enumerate}
+    \item $\gbar{ x \pm w} = \bar z \pm \bar w$
+    \item $\gbar{zw} = \bar z \cdot \bar w$
+    \item $\gbar{\cpr{\frac{z}w}} = \frac{\bar z}{\bar w}$
+    \item $\Re{z} = \frac{z + \bar z}{z}$
+    \item $\Im{z}= \frac{z - \bar z}{zi}$
+  \end{enumerate}
+\end{theorem}
+\begin{definition}{Modulus}{}\gline{}
+  The \ul{modulus} of $z = a+bi$ is:
+  \begin{align*}
+    |z| = \sqrt{a^2 + b^2}
+  \end{align*}
+  We can imagine this as the distance from the origin:
+  \gimage{image1.png}{3cm}
+\end{definition}
+
+\begin{theorem}{Properties of the Modulus}{}
+  \begin{enumerate}
+    \item $|z| = |\bar z|$
+    \item $|z| = z$ iff. $z$ is a nonnegative real number
+    \item $z\bar z = |z|^2$
+    \item $|z+w| \le |z| + |w|$
+    \item $|z-w| \ge ||z|-|w||$
+    \item $|zw| = |z|\cdot|w|$
+    \item $\left|\frac{z}{w}\right|=\frac{|z|}{|w|}$
+  \end{enumerate}
+\end{theorem}
+\subsection*{1.3 Vector and Polar Forms}
+We saw last time that complex addition behaves like vector addition.\gline{}
+Now, consider \ul{Polar Form}:
+\gimage{image3.png}{7cm}
+More formalized, for \textit{any $z\in\C$ of the form $a + bi$}, we can write:
+\begin{align*}
+  z = &= a + bi\\
+  &= r(\cos\theta +i\sin\theta)\\
+  &= r\cis\theta
+\end{align*}
+In this case, we write $r = \sqrt{a^2 + b^2}=|z|$. Note that $\theta$ is defined as counter-clockwise from the positive real axis. \gline{}
+Here's some quick conversion equations:
+\begin{align*}
+  \mathrm{Polar}&\to\mathrm{Cartesian}\\
+  x &= r\cos\theta\\
+  y&= r\sin\theta\\
+  \mathrm{Cartesian}&\to\mathrm{Polar}\\
+  r &= \sqrt{x^2 + y^2}\\
+  \theta &= \tan^{-1}\cpr{\frac{y}x}^*
+\end{align*}
+\textit{*Note: If $\theta$ is actually in the 2nd or 3rd quadrant, you'll need to add $\pi$ to $\tan^{-1}\cpr{\frac{y}x}$ to get a valid angle for $\theta$}\gline{}
+\begin{definition}{Argument of $z$}{}\gline{}
+  The \ul{argument of $z$}, denoted $\arg(z)$, is the set ofall positive values of $\theta$ in the polar form of $z$. Note that $\arg(z)$ is undefined for $z = 0$.  
+  \begin{example}
+    Let $z = -3 -3i$. Then, $\arg(z)=\ccbr{\frac{5\pi}4 + 2\pi k\mid k\in \Z}$.
+  \end{example}
+\end{definition}
+\begin{definition}{Principal Argument of Z}{}\gline{}
+  The \ul{principle oargument of $z$}, denoted $\Arg{z}$, is the element of $\arg(z)$ whose value is in the interval $(-\pi, \pi]$.
+  \begin{corollary}{Branch of $\arg(z)$}{}\gline{}
+    The notation $\arg_\tau(z)$ will denote the element of $\arg(z)$ whose value lies in the interval $(\tau, \tau + 2\pi]$. This is called a \ul{branch} of $\arg(z)$. 
+  \end{corollary}
+\end{definition}
+
+\subsubsection*{Complex Multiplcation}
+Consider the following algebra:
+\begin{align*} 
+  \mathrm{If }z &= r(\cos\theta+i\sin\theta)\mathrm{ and }w=s(\cos\phi+i\sin\phi)\\
+  zw&= r (\cos\theta+i\sin\theta)s(\cos\theta+i\sin\phi)\\
+  &= rs((\cos\theta\cos\phi-\sin\theta\sin\phi))\\&\quad+i((\sin\theta\cos\phi + \cos\theta\sin\phi))\\
+  &= rs(\cos(\theta+\phi)+i\sin(\theta+\phi))
+\end{align*}
+\subsection*{1.4 The Complex Exponential}
+First, we begin with Euler's formula and how we can formulate powers of imaginary numbers. 
+\begin{definition}{Euler's Formula}{}\gline{}
+  Given $y\in\R$, we define $e^{iy}$ to be:
+  \begin{align*}
+    e^{iy}=\cos y + i \sin y \text{ (Euler's Formula)}
+  \end{align*}
+  More generally, for $z = x + iy$, we define:
+  \begin{align*}
+    e^{z}&= e^x(\cos y + i\sin y)
+  \end{align*}
+\end{definition}
+Note that this function agrees with the formula for real-valued inputs, because if $iy = 0$, then $e^z = e^x$. If you remember Taylor or Maclauren series, you may note that the expansion of $e^x$ is deeply related to sines and cosines, and this is that relationship embodied. \gline{}
+This is also a much shorter way to use polar coordinates. \gline{}From now on, we'll write the polar form of any given $z$ as:
+\begin{align*}
+  x = re^{i\theta}, \text{ where }r = |z| \text{ and }\theta\in\arg(z)
+\end{align*}
+\begin{example}
+  Let $z = \sqrt 3 + i$. Then:
+  \begin{align*}
+    e^z = e^{\sqrt 3 + 1} &= e^{\sqrt 3}\cdot e^i\\
+    &\approx 5.652\cdot e^{i}
+  \end{align*}
+  So, $e^{\sqrt 3 + i}$ has $r = e^{\sqrt 3}$ and $\theta = 1$. 
+\end{example}
+We can formulate some general properties for multiplication as well. Consider this formulation:
+\begin{align*}
+  z &= re^{i\theta} \text{ and } w= se^{i\phi}, \text{ then}\\
+  zw&= (re^{i\theta}(se^{i\phi}))\\
+  &= rse^{i\theta + \phi}\ahline
+  \frac{z}w &= \frac{r}se^{i(\theta - \phi)}\\
+  z^n&= r^ne^{in\theta}\text{, for }n\in\Z\\
+  \frac{1}z&= \frac{1}re^{-i\theta}
+\end{align*}
+\subsubsection*{1.4 Exercises - Complex Exponentials}
+\begin{enumerate}
+  \item Write the following complex numbers in polar form $re^{i\theta}$.
+  \begin{enumerate}
+    \item $e^{e^i}$
+    \begin{problem}
+      \begin{align*}
+        e^{\cos(1) + i\sin(1)}&= e^{\cos 1}e^{i\sin 1}\\
+        &= e^{\cos 1}(\cos\sin 1 \\&\quad\quad+ i \sin\sin 1)
+      \end{align*}
+    \end{problem}
+    \item $(2 - 3i)^4$
+    \begin{problem}
+      \begin{align*}
+        |2 - 3i| = \sqrt{13}\\
+        \arctan\cpr{\frac{-3}2} = -0.98\ahline
+        (\sqrt{13}e^{-0.98})^4 = 169e^{i(-3.92)}
+      \end{align*}
+    \end{problem}
+    \item $\frac{1+\sqrt 3i}{2-2i}$
+    \begin{problem}
+      \begin{align*}
+      \frac{1+\sqrt 3i}{2-2i}&= \frac{2e^{i\frac{\pi}3}}{2\sqrt 2 e^{i\cpr{\frac{-\pi}4}}}\\
+      &= \frac{\sqrt 2}2 e^{i\frac{\pi}2}
+    \end{align*}
+    \end{problem}
+  \end{enumerate}
+\end{enumerate}
+There are some more useful facts that we can utilize to easily take advantage of Euler's formula.
+\begin{theorem}{Properties of Euler's Formula}{}
+  \begin{enumerate}
+    \item $|e^{i\theta}|=1, \forall \theta \in \R$
+    \item $|re^{i\theta}|=r$
+    \item $e^0=e^{i0}=1,\quad\quad e^{i(2\pi k)}=1$
+    \item $e^{i\frac{\pi}2}= i$
+    \item $\cos\theta = \Re{e^{i\theta}}=\frac{e^{i\theta + e^{-i\theta}}}2$
+    \item $\sin \theta = \Im{e^{i\theta}}$
+    \item $e^{i\pi}=-1\quad\text{ or }\quad e^{i\pi}+1=0$
+  \end{enumerate}
+\end{theorem}
+Now, there's also one more formula that we should be aware of that comes from the textbook as well. It's kind of a relation to Euler's equation.
+\begin{theorem}{DeMoirre's Formula}{}\gline{}
+  $\forall\theta\in \R, \text{ and } \forall n \in \N$, 
+  \begin{align*}
+    \cos(n\theta)+i\sin(n\theta)
+  \end{align*}
+\end{theorem}
+\subsubsection*{\ul{$e^{z}$ as a mapping}}
+We can imagine $e^z$ as a mapping from imaginary to real. For example,
+\gimage{image4.png}{6cm}
+
+
+
+
+
+
+
+
+
+\end{document}

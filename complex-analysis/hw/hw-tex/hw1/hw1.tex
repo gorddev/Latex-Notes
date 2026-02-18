@@ -1,0 +1,422 @@
+\section*{HW 1: Due Friday 2/13 by 8:00pm \\ Self Grade (due Monday 2/16 by 10:40am): **/20} 
+
+%%%%%%%%%%%%%%%% HW1
+\subsection*{HW 1a} 
+\begin{enumerate}
+    % question 1
+	\item Write the number $\lbr \dfrac{2+i}{6i -(1-2i)}\rbr^2$ in the form $a+bi$.
+    \begin{problem}
+        We proceed with algebraic manipulation.
+        \begin{align*}
+            \cbr{\frac{2+i}{6i-(1-2i)}}^2 &= \cbr{\frac{(2+i)^2}{(-1+8i)^2}}\\
+            &= \cbr{\frac{4+4i-1}{1 -16i - 64}}\\
+            &= \cbr{\frac{3+4i}{-63 - 16i}}\\
+            &= \cbr{\frac{(3+4i)(-63+16i)}{(-63-16i)(-63+16i)}}\\
+            &= \cbr{\frac{-253 -204i}{63^2+16^2}} \text{ note the pythag. triple}\\
+            &={\boxed{\cbr{\cpr{\frac{1}{65^2}}(253-204i)}}}
+        \end{align*}
+    \end{problem}
+
+	% question 2
+	\item Prove that if $z_1 z_2 = 0$, then $z_1=0$ or $z_2=0$.
+    \begin{proof}
+        For the sake of contradiction, let $z_1,z_2\in \C$ such that $z_1 = a +bi, z_2=c+di$, $z_1z_2 = 0$, but $z_1,z_2\ne 0$. ($a,b,c,d\in\R$).\gline{}
+        We want to show that this forces a contradiction.\gline{}
+        Consider that $z_1z_2 = ac + adi + cbi - bd$. Because both $\Re(z_1z_2) = 0$ and $\Im(z_1z_2)=0$, we have that:
+        \begin{align}
+            ac - bd &= 0,\\
+            adi + cbi &= 0.
+        \end{align} 
+        Because $adi + cbi = 0, ad = -cb$. Now we briefly show that $a,b,c,d \ne0$ such that we can divide them.\gline{}
+        \begin{lemma}{1}
+            We want to show that $a,b,c,d \ne 0$. \gline{}
+            Without loss of generality, consider the case where $d =0$. Via equation (1), then $c$ or $b= 0$.\gline{}
+            However, if $c$ is zero, $z_2 = 0$: a contradiction. \gline{}
+            If $b$ is zero, then via equation (2), then either $a$ or $c$ is zero, meaning that $z_1$ or $z_2=0$, a contradiction.\gline{}
+            This process applies for every variable in the equations. Thus, $a,b,c,d \ne 0$. 
+        \end{lemma}
+        Hence, via Lemma 1, because we do not have a divide by zero error, we have that:
+        \begin{align*}
+            a &= \frac{bd}c, \text{ and}\\
+            a &= -\frac{cb}d.
+        \end{align*}
+        Substitution gives us that:
+        \begin{align*}
+            \frac{bd}c &= -\frac{cb}d,\\
+            d^2 &= -c^2.
+        \end{align*}
+        However, because $d, c\in\R\rmv{0}$, then $d^2, c^2 > 0$. Thus, $d^2$ cannot equal a negative number. But, as shown above, $d^2 = -c^2$, a contradiction.\gline{}
+        Hence, because assuming that $z_1, z_2\ne 0$ leads to a contradiction, it must hold that $z_1$ or $z_2=0$.
+    \end{proof}
+    \begin{grade}
+        1.5 points
+        \begin{itemize}[itemsep=0pt, parsep=0pt]
+            \item Proof is written in complete sentences
+            \item Math notation is typed in math mode
+            \item Proof is correct (-0.5pts). Very convoluded proof that isn't simple at all. 
+        \end{itemize}
+    \end{grade}
+
+
+	% question 3
+	\item Show that $\Re(iz) = -\Im(z)$ for every $z\in \C$.
+    
+    \begin{proof}
+        Let $z\in \C$ such that $z = a + bi, \;\;a,b\in\R$. We want to show that $\Re(iz) = -\Im(z)$. \gline{}
+        Consider that:
+        \begin{align*}
+            z &= a + bi&\Im(z) = b\\
+            iz &= ia - b&\Re(iz) = -b\\
+        \end{align*}
+        Thus, we have that $\Im(z) = -\Re(iz)$
+    \end{proof}
+
+
+
+	% question 4
+	\item Solve each of the following equations for $z$.
+    \begin{enumerate}
+
+        % question 4a
+        \item $iz = 4-iz$
+        
+        \begin{problem}
+            We proceed via algebraic manipulation:
+            \begin{align*}
+                iz &= 4 - iz\\
+                2iz &= 4\\
+                iz &= 2\\
+                z &= 2/i = 2i/i^2 = \boxed{-2i}\\
+            \end{align*}
+        \end{problem}
+        
+
+
+
+        % question 4b
+        \item $\dfrac{z}{1-z} = 1-5i$
+        
+        \begin{problem}
+            We proceed via algebraic manipulation:
+            \begin{align*}
+                \frac{z}{1-z}&= 1 - 5i\\
+                z &= (1-5i)(1-z)\\
+                z&= (1 -5i - z + 5iz)\\
+                2z &= 1 - 5i + 5iz\\
+                2z - 5iz &= 1 - 5i\\
+                z(2 - 5i) &= 1 - 5i\\
+                z &= \frac{(1-5i)}{2 - 5i}\\
+                z&= \frac{(1-5i)(2+5i)}{(2-5i)(2+5i)}\\
+                z&= \frac{2-10i+5i+25}{29}\\
+                z&= \cpr{\frac{1}{29}}(27 - 5i)
+            \end{align*}
+        \end{problem}
+        
+
+
+
+
+        % question 4c
+        \item $(2-i)z +8z^2 =0$
+        
+        \begin{problem}
+            Consider the case where $z \ne 0$. 
+            \begin{align*}
+                (2-i)z &= -8z^2\\
+                (2-i) &= -8z\\
+                z &= \boxed{-\cpr{\frac{1}8}(2-i)}
+            \end{align*}
+            Consider the case where $z = 0$. Then the equation is satisfied. \gline{}
+            Thus our solutions are $z = \ccbr{0, -\cpr{\frac{1}8}(2-i)}$
+        \end{problem}
+        
+
+
+
+
+        % question 4d
+        \item $z^2 +16 =0$
+        
+        \begin{problem}
+            We proceed via algebraic manipulation:
+            \begin{align*}
+                z^2 + 16&= 0\\
+                z^2 &= -16\\
+                \pm z &= \sqrt{-16}\\
+                \pm z &= 4i
+            \end{align*}
+            Thus, our solutions are $z = (4i, -4i)$. 
+        \end{problem}
+        
+
+
+
+        % question 4e
+        \item $z^4 -16 =0$
+        
+        \begin{problem}
+            We proceed via algebraic manipulation:
+            \begin{align*}
+                z^4 - 16 &= 0\\
+                z^4 &= 16\\
+                z^2 &= \pm \sqrt{16} = \pm 4\\
+                z &= \mp \sqrt{\pm 4} = \mp 2 \sqrt{\pm 1}
+            \end{align*}
+            Thus, we have four solutions: $z = (2, -2, 2i, -2i)$
+        \end{problem}
+        \begin{grade}
+            2/2.
+            \begin{itemize}[itemsep=0pt, parsep=0pt]
+                \item Found all foru solutions (1pt)
+                \item Showed all work for each step. 
+            \end{itemize}
+        \end{grade}
+    \end{enumerate}
+
+    % question 5
+    \item Find two complex numbers that add to $2$ and multiply to $3$.
+    \begin{problem}
+        To solve this problem, we use the representation of $z_1, z_2\in\C$ for $z_1 = a+bi, \;z_2 = c + di$, $a,b,c,d\in\R$. \gline{}
+        Consider that:
+        \begin{align}
+            z_1z_2 = ac - bd + adi + cbi=3
+        \end{align}
+        We know the imaginary part must add to zero, and the real part must add to 2, so:
+        \begin{align*}
+            bi &= -di\\
+            b &= -d\\
+            a + c &= 2
+        \end{align*}
+        We simplify equation (3) to be:
+        \begin{align}
+            z_1z_2 = ac + d^2 + (a-c)di=3
+        \end{align}
+        We also know that $(a-c)di = 0$ because there is no imaginary part to 3. Now, we let $(a-c) = 0$. This gives us that $a = 1$ and $c = 1$, which satisfied $a+c =2$. Now, we have that:
+        \begin{align*}
+            z_1z_2 = 1 + d^2 = 3
+        \end{align*}
+        Thus, the solution follows that $d = \sqrt{2}$. Thus, because $d = -b$, we have that:
+        \begin{align*}
+            z_1 &= 1 - i \sqrt{2}\\
+            z_2 &= 1 + i \sqrt{2}
+        \end{align*}
+        We verify this solution below:
+        \begin{align*}
+            (1-i\sqrt{2})(1+i\sqrt{2})=1^2 + \sqrt{2}^2&= 3\\
+            (1-i\sqrt{2}) + (1+i\sqrt{2})&= 2
+        \end{align*}
+    \end{problem}
+    \begin{grade}
+        1.5/2
+        \begin{itemize}[itemsep=0pt, parsep=0pt]
+            \item I found one of the solution paris. Although they are the same,I didn't specify both (-0.5pt).
+            \item Showed sufficient work
+        \end{itemize}
+    \end{grade}
+\end{enumerate}
+
+
+
+\subsection*{HW 1b} 
+\begin{enumerate}
+
+    % problem 6
+	\setcounter{enumi}{5}
+	\item Show that the points $3+i$, $6$, and $4+4i$ are the vertices of a right triangle.
+		\begin{problem}
+            We will show that the dot product between two edges of the triangle is zero, and thus via the bijection to $\R^2$, they are perpendicular.\gline{}
+            Consider that:
+            \begin{align*}
+                (3 + i) - (6-0i) &= (-3 + i)\\
+                (4+4i) - (3 + i) &= (1 + 3i)
+            \end{align*}
+            Now, consider the bijection to $\R^2$: $(-3, 1), (1, 3)$. Clearly, the dot product is zero, the vectors are orthogonal, and two of the triangle's edges are perpendicular. Thus, the triangle is a right triangle. 
+        \end{problem}
+	
+
+
+    % problem 7
+	\item Sketch the set of points $z$ in the complex plane that satisfies each of the following equations. ({\it Note: If you are already using \LaTeX to type up your answers, you can use the ``includegraphics'' command to include a photo of your graph. Google is your friend if you're not sure what to do.})
+	\begin{enumerate}
+
+
+
+
+        % part 7a
+		\item $|z-2-i| < 1$
+			\begin{problem}
+                Below is a filled in circle circle up to but not including $r =1$, positioned at $(2,i)$:
+                \begin{gimage}{hw-tex/hw1/image.png}{5cm}\end{gimage}
+            \end{problem}
+
+
+
+
+        % part 7b
+		\item $\Re(z) \geq 4$
+		
+        \begin{problem}
+            Below is a region filled from $Re(z) \ge 4$, extending to $\infty$ in the positive direction:
+            \begin{gimage}{hw-tex/hw1/image2.png}{5cm}\end{gimage}
+        \end{problem}
+		
+
+
+
+        % part 7c
+		\item $|z-1| = |z+i|$
+		
+        \begin{problem}
+            First I will do some math to help me visualize the problem:
+            \gtabularcc{5cm}{3cm}{
+            \begin{align*}
+                z &= a + bi\\
+                |z - 1| &= \sqrt{(a-1)^2 + b^2}\\
+                |z+1| &= \sqrt{(a^2) + (b + 1)^2}\\
+                \sqrt{(a-1)^2 + b^2}&=\sqrt{(a^2) + (b + 1)^2}\\
+                a^2 - 2a + 1 + b^2 &= a^2 + b^2 + 2b + 1\\
+                -2a &= 2b\\
+                -a &= b
+            \end{align*}}
+            {\gimage{hw-tex/hw1/image3.png}{3cm}}
+        \end{problem}
+        
+
+
+
+        % part 7d
+        \item $|z|=\Re(z)+3$
+        
+        \begin{problem}
+            I will again do some math to help me visualize the problem algebraically:
+            \gtabularcc{5cm}{3cm} {
+            \begin{align*}
+                z &= a + bi\\
+                |z| &= \Re(z) + 3\\
+                \sqrt{a^2+b^2}&=a + 3, \text{ for }a\ge -3\\
+                a^2 + b^2 &= a^2 +6a + 9\\
+                b^2 &= 6a + 9\\
+                \frac{b^2}{6}-\frac{3}2 &= a, \text{ a sideways parabola}
+            \end{align*}
+            } {\gimage{hw-tex/hw1/image4.png}{3cm}}
+        \end{problem}
+        \begin{grade}
+            2/2. All pictures are correct. 
+        \end{grade}
+	\end{enumerate}
+	
+	
+
+
+
+
+    % problem 8
+	\item Prove that $|\Re(z)| \leq |z|$ for every complex number $z$. 
+	
+    \begin{proof}
+        Let $z\in\C$ be a complex number of the form $a + bi$, $a, b \in \R$. We want to show that $|\Re(z)|\le |z|$.\gline{}
+        Consider that:
+        \begin{align*}
+            |\Re(z)|&= \sqrt{a^2}, \text{ and that:}\\
+            |z|&= \sqrt{a^2 + b^2}.
+        \end{align*}
+        Thus, because $a^2, b^2 \ge 0$, note that $a^2 \le a^2 + b^2$. Because the square root function is strictly increasing for elements in $\R^+\cup \{0\}$ :
+        \begin{align*}
+            \text{if } a^2 &\le a^2 + b^2,\text{ it follows that }\\
+            \sqrt{a^2} &\le \sqrt{a^2 + b^2}, \text{ and hence, }\\
+            |\Re(z)| &\le |z| .
+        \end{align*}
+    \end{proof}
+	\pagebreak
+
+
+
+
+    % problem 9
+	\item Prove that $|zw| = |z| |w|$ for any complex numbers $z$ and $w$. This is something we observed on the worksheet but didn't prove. ({\it Hint: There are several ways to prove this, but one way is to prove that $|zw|^2 = (|z||w|)^2$ by using the properties of the conjugate that $z\overline{z} = |z|^2$ and $\overline{zw} = \overline{z}\, \overline{w}$.})
+    \begin{proof}
+        Let $z,w\in\C$ of the form $a +bi, c+di$, respectively for $a, b, c, d\in\R$.\gline{}
+        We want to show that $|zw|=|z||w|$.\gline{}
+        Consider that,
+        \begin{align*}
+            |zw| &= |ac + adi + bci - bd|\\
+            &= \sqrt{(ac-bd)^2 + (ad + bc)^2}\\
+            &= \sqrt{a^2c^2 - 2abcd + b^2d^2 + a^2d^2 + 2abcd + b^2c^2}\\
+            &= \sqrt{a^2c^2 + a^2d^2 + b^2c^2 + b^2d^2}.
+        \end{align*}
+        Additionally, we can calculation $|z||w|$ via the properties of powers that they are distributive:
+        \begin{align*}
+            |z||w|&= \sqrt{a^2+b^2}\sqrt{c^2+d^2}\\
+            &= \sqrt{(a^2+b^2)(c^2+d^2)}\\
+            &= \sqrt{a^2c^2+a^2d^2+b^2c^2+b^2d^2}
+        \end{align*}
+        Hence, $|zw|=|z||w|$.\qed\gline{}
+        For a more elegant proof, consider that $z\bar z = |z|^2$. Thus, we have that:
+        \begin{align*}
+            |zw|^2 &= zw\overline{zw}\\
+            &= z\bar z w \bar w \\
+            &= |z|^2|w|^2 = (|z||w|)^2
+        \end{align*}
+        Hence, because $|zw|^2 = (|z||w|)^2$, it follows that $|zw| = |z||w|$. 
+    \end{proof}
+    \begin{grade}
+        2/2 Points.
+        \begin{itemize}[itemsep=0pt, parsep=0pt]
+            \item Proof is written in complete sentences.
+            \item Typed in math notation
+            \item The proof is correct. 
+        \end{itemize}
+    \end{grade}
+		
+	\item Let $a_1, a_2, \ldots, a_n$ be real constants. Show that if $z_0$ is a solution of the equation\\ $z^n +a_1z^{n-1} + a_2z^{n-2} + \cdots + a_n =0$, then so is $\bar{z_0}$.
+    
+    \begin{proof}
+        Let $a_1, a_2, \ldots, a_n\in\R$, and let $z_0\in\C$ be a solution to the equation $z^n +a_1z^{n-1} + a_2z^{n-2} + \cdots + a_n =0$. We want to show that $\bar{z_0}$ is also a solution to this equation.\gline{}
+        Consider that if:
+        \begin{align*}
+            z^n +a_1z^{n-1} + a_2z^{n-2} + \cdots + a_n &=0, \text{ that, }\\
+            \overline{z^n +a_1z^{n-1} + a_2z^{n-2} + \cdots + a_n} &= \bar{0},
+        \end{align*}
+        Via the properties of complex numbers, we have that:
+        \begin{align*}
+            \overline{z^n +a_1z^{n-1} + a_2z^{n-2} + \cdots + a_n} &= \bar{0},\\
+            \overline{z^n} + \overline{a_1z^{n-1}}+\overline{a_2z^{n-2}} + \cdots \overline{a_n} &= 0
+        \end{align*}
+        Because $a_i\in\R$, $\overline{a_i} = a_i$. Furthermore, because $\overline{zz}=\bar z\cdot\bar z$, we have that $\overline{z^k}=\overline{z}^k$.
+        \begin{align*}
+            \bar{z}^n + a_1 \bar{z}^{n-1} + a_2\bar{z}^{n-2}+\cdots + a_n &= 0
+        \end{align*}
+        Thus, if $z_0$ is a solution to the equation, so is $\bar z_0$. 
+    \end{proof}
+    \begin{grade}
+        2/2
+        \begin{itemize}[parsep=0pt, itemsep=0pt]
+            \item I did the proof the same way, just packwards. Instead of plugging in the complex conjugate, I just took the complex conjugate of the entire thing, which I think still works.
+            \item Proof is written in complete sentences
+            \item It's typed in math mode
+            \item Proof is correct. 
+        \end{itemize}
+    \end{grade}
+    
+\end{enumerate}
+
+
+
+
+% reflection
+\subsection*{Reflection Questions for HW 1}
+    \begin{itemize}
+        \item What do you understand well and what is working well for you in learning the material?
+
+        \begin{reflection}
+            I currently think that I'm understanding complex operations relatively well. The problems started off kind of simple so I think that it made it a bit easier. I'm not sure exactly \textit{how much work} I'm supposed to show for each problem, so I kind of assumed where it just asked me to solve a problem, I would just show the algebra, but for \textbf{proofs}, I worked a bit harder to show my work.\gline{}
+            I'm honestly more nervous to see where the semester goes cause I never know how overwhelmed or lost Im going to be, but we'll cross that bridge when we get there. 
+        \end{reflection}
+
+        \item What do you need to keep studying and what are some habits you can change/pick up to learn the material better?
+
+        \begin{reflection}
+            I think I kind of struggle with an issue of trying to start writing out the problem before I've actually solved it, because I think the solution will come as I write it out, but I should really do more scratch work because I've had to go back on some of my solutions because I pursued the wrong route to solve the problem. \gline{}
+            With one of the questions, I think I lost points where I didn't think it was super fair. The question asked ``Find two complex numbers that add to 2 and multiply to 3'', so I didn't think I needed to specify all solutions pairs, but that's what the rubric said. 
+        \end{reflection}
+    \end{itemize}
