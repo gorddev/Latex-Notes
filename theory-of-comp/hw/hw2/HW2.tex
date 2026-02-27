@@ -1,0 +1,249 @@
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{charter}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+\usepackage{graphicx}
+
+% SMALL PAGE COMMAND
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}\newcommand{\Q}{\mathbb{Q}}\newcommand{\C}{\mathbb{C}}
+\newcommand{\real}[1]{\text{Re}\left(#1\right)}
+\newcommand{\im}[1]{\text{Im}\left(#1\right)}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}[0]{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[2]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
+\end{figure}
+}
+
+\newcommand{\gimageR}[3]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2,angle=#3]{#1}
+\end{figure}
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+\newcommand{\prt}[2]{\frac{\partial#1}{\partial#2}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+
+%}
+
+% COLOR BOX
+\newmdenv[backgroundcolor=gray!8,
+  linewidth=0pt, innerleftmargin=0pt, innerrightmargin=0pt,
+  skipabove=\baselineskip, skipbelow=\baselineskip
+]{coloredadjust}
+
+% PROOF
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+% PROBLEM
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}
+   \textit{Problem. }#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+%% DEFINITION
+\newtcbtheorem[]{definition}{Definition}{enhanced,
+  colback=blue!2, colframe=blue!50!black, coltitle=blue!70!black,
+  fonttitle=\bfseries,
+  boxrule=0pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{dfn}
+
+%% CRITERION
+\newtcbtheorem[]{criterion}{Criterion}{enhanced,
+  colback=magenta!3, colframe=magenta!60!black, coltitle=magenta!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% COROLLARY
+\newtcbtheorem[]{corollary}{Corollary}{enhanced,
+  colback=orange!3, colframe=orange!80!black, coltitle=orange!50!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=1pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=5pt, outer arc=5pt,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% THEOREM
+\newtcbtheorem[]{theorem}{Theorem}{enhanced,
+  colback=green!2, colframe=green!40!black, coltitle=green!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=3pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt,arc=5pt, outer arc=5pt,
+  attach title to upper, title={#1},
+}{thm}
+
+
+
+
+% color commands
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+
+\newcommand{\cpr}[1]{\left(#1\right)}
+%%%%%%%%%%%%% PHYSICS SPECIFIC COMMANDS
+
+\newcommand{\vA}{\vec{\mathbf{A}}}
+\newcommand{\vB}{\vec{\mathbf{B}}}
+\newcommand{\vC}{\vec{\mathbf{C}}}
+\newcommand{\vZ}{\vec{\mathbf{0}}}
+\newcommand{\norm}{\vec{\mathbf{n}}}
+\newcommand{\pvec}[1]{\left\langle#1\right\rangle}
+\newcommand{\ar}{\vec{\mathbf{r}}}
+\newcommand{\arhat}{\hat{\mathbf{r}}}
+\newcommand{\vv}{\vec{\mathbf{v}}}
+\newcommand{\delfull}{\pvec{\prt{}{x}, \prt{}{y},\prt{}{z}}}
+\newcommand{\delinput}[3]{\pvec{\prt{}{x}\cpr{#1}, \prt{}{y}\cpr{#2},\prt{}{z}\cpr{#3}}}
+\newcommand{\dps}{\displaystyle}
+\newcommand{\delmatrix}[3]{\begin{bmatrix}\dps\hat x&\dps\hat y&\dps\hat z\\\dps\prt{}x&\dps\prt{}y&\dps\prt{}z\\\dps#1&\dps#2&\dps#3\end{bmatrix}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% begin doc
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{HW2 - Theory of Computation}}}
+\setlength{\headheight}{10pt}
+
+
+
+\begin{document}
+
+\begin{enumerate}
+  \item Write out the formal definition for the NFA with state diagram pictured below:
+  \gimage{image.png}{5cm}
+  \begin{problem}
+    Let $A = \{0\}$. Let $B = \{1\}$. This NFA can be described as:
+    \begin{align*}
+      A^*\cup(A \circ B^*)
+    \end{align*}
+    We write out the formal classification of this NFA as:
+    \begin{align*}
+      \Sigma = \{0, 1\}, \quad q_0 = q_1, \quad F = \{q_2,q_3\},\quad Q = \{q_1, q_2, q_3\}
+    \end{align*}
+    \begin{center}
+      \begin{tabular}{c||c|c|c}
+        $\delta$ & $q_1$ & $q_2$ & $q_3$\\\hline\hline
+        0 & $q_1$ & $q_2$ & $\emptyset$\\\hline
+        1 & $\emptyset$ & $\emptyset$ & $q_3$ \\\hline
+        $\varepsilon$ & $q_2$ & $\emptyset$ & $\emptyset$
+      \end{tabular}
+    \end{center}
+  \end{problem}
+  \item Draw a state diagram for NFAs that recognizes the fllowing set of binary strings
+  \begin{enumerate}
+    \item The language of strings that contains exactly one 1 followed by an odd number of zeros. 
+    \begin{problem}
+      I'll assume that we can have any number of zeros beforehand because it doesn't specify that in the question.
+      \gimage{image2.png}{7cm}
+    \end{problem}
+    \item Binary strings that contain at least one 1 and where all 0s are followed by a 1.
+    \begin{problem}
+      Here, we just ensure that all 0s are followed by a 1, which puts us into the accepting state.
+      \gimage{image3.png}{6cm}
+    \end{problem}
+  \end{enumerate}
+  \item Consider the NFA with the previous state diagram. 
+  \gimage{image4.png}{7cm}
+  \begin{enumerate}
+    \item Give five examples of strings recognized and five examples of strings not recognized by this NFA.
+    \begin{problem}
+      Here are five strings that are recognized:
+      \begin{align*}
+        \{00, 11, 0011, 0000, 1111\}
+      \end{align*}
+      Here are five strings that are not recognized:
+      \begin{align*}
+        \{01, 10, 010, 101, 0010\}
+      \end{align*}
+    \end{problem}
+    \item Describe the language recognized by this NFA.
+    \begin{problem}
+      It recognizes all nonempty binary strings where every 0 or 1 is followed by a 0 or 1, respectively. 
+    \end{problem}
+  \end{enumerate}
+  \item Find DFAs that recognizes the same language as the NFAs with diagrams below. What is their language?
+  \begin{enumerate}
+    \item {$\cdots$}\\
+    \gimage{image5.png}{5cm}\vspace{-0.5cm}
+    \begin{problem}
+      Here is the DFA that I envisioned:
+      \gimage{image6.png}{5cm}
+      It describes the language of all binary strings that do not start with zero. 
+    \end{problem}
+    \item $\cdots$\\
+    \gimage{image7.png}{5cm}
+    \begin{problem}
+      Here is the DFA that I envisioned for this problem:
+      \gimage{image8.png}{5cm}
+      It describes all binary strings where no 1s follow a 0. 
+    \end{problem}
+  \end{enumerate}
+  \item Consider the languages $A=\{0^k:k\ge 0\}$ (strings with zero or more 0s, but no 1s) and $B = \{01\}$ (only one string, 01).
+  \begin{enumerate}
+    \item Draw an NFA that recognizes $A$. Draw an NFA that recognizes $B$. 
+    \gimage{image9.png}{5cm}
+    \item Draw the diagram for an NFA that recognizes $A^c$.
+    \gimage{image10.png}{5cm}
+    \pagebreak
+    \item Draw the diagram from an NFA that recognizes the language $A\cup B$. 
+    \gimage{image11.png}{5cm}
+    \item Draw the diagram for an NFA that recognizes the language $A\circ B$
+    \gimage{image12.png}{5cm}
+    \item Draw the diagram for an NFA that reocgnizes the language $B^*$. 
+    \gimage{image13.png}{5cm}
+  \end{enumerate}
+\end{enumerate}
+
+
+\end{document}

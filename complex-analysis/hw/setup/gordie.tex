@@ -82,6 +82,19 @@
   }
 }
 
+% color box for a subproblem
+\tcbset{subproblembox/.style={
+    colback=gray!12,
+    colframe=gray!80, 
+	  boxrule=0.5pt,
+    leftrule=2.5pt, 
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable,
+    sharp corners
+  }
+}
+
 % color box for a reflection
 \tcbset{gradebox/.style={
     colback=black!30!green!7,
@@ -151,6 +164,12 @@
 {\sffamily\vspace{-0.05cm}\begin{tcolorbox}[gradebox]
   \textbf{Grade: }#1}
 {\end{tcolorbox}\vspace{0.3em}}
+
+% SUBPROBLEM
+\newenvironment{subproblem}[2]
+  {\vspace{-0.1cm}\begin{tcolorbox}[subproblembox]
+   \textit{#1}#2}
+  {\end{tcolorbox}\vspace{0.3em}}
 
 % IMAGE
 \newcommand{\gimage}[2]{

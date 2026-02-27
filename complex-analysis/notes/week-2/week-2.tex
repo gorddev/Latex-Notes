@@ -1,6 +1,8 @@
 %document class
-\documentclass[10pt,twocolumn]{book}
+\documentclass[10pt]{paper}
 %%%% Page Info + Commands %%%%%{
+\usepackage[paperwidth=16cm, paperheight=20cm, margin=2cm]{geometry}
+
 
 %packages
 \usepackage{pgfplots}
@@ -13,7 +15,7 @@
 \usepackage{fancyhdr}
 \usepackage{float}
 \usepackage[most]{tcolorbox}
-\usepackage{enumerate}
+\usepackage{enumerate} 
 \usepackage{enumitem}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{changepage}
@@ -21,10 +23,10 @@
 \usepackage{graphicx}
 
 % SMALL PAGE COMMAND
-\newcommand{\smallpage}{  \setlength\oddsidemargin{.25in}
-            \setlength\textwidth{6in}
-            \setlength\topmargin{0in}
-            \setlength\textheight{9in}}
+%\newcommand{\smallpage}{  \setlength\oddsidemargin{-0.3in}
+            %\setlength\textwidth{6.5in}
+            %\setlength\topmargin{-0.5in}
+            %\setlength\textheight{21cm}}
 
 
 % Commands for sets of numbers
@@ -85,7 +87,7 @@
 
 %% DEFINITION
 \newtcbtheorem[]{definition}{Definition}{enhanced,
-  colback=gray!2, colframe=gray!50!black, coltitle=gray!30!black,
+  colback=gray!2, colframe=gray!30!white, coltitle=gray!30!black,
   fonttitle=\bfseries, breakable,
   boxrule=0pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
   attach title to upper, title={#1},
@@ -109,31 +111,158 @@
 
 %% THEOREM
 \newtcbtheorem[]{theorem}{Theorem}{enhanced,
-  colback=blue!2, colframe=blue!60!cyan!30!gray, coltitle=blue!40!cyan!50!black,
+  colback=blue!2, colframe=blue!10!white!90!black, coltitle=cyan!30!black,
   fonttitle=\bfseries,
-  boxrule=4pt, toprule=4pt, bottomrule=2pt, leftrule=1.5pt, rightrule=1.5pt,
+  boxrule=1pt, toprule=1.5pt, bottomrule=1.5pt, leftrule=4pt, rightrule=1.5pt,
   sharp corners,
   breakable,
   attach title to upper, title={#1},
 }{thm}
 
-\newenvironment{example}{
-  \begin{tcolorbox}[colback=green!2, colframe=green!40!black, coltitle=green!20!black, sharp corners]
+\renewenvironment{example}{
+  \begin{tcolorbox}[colback=gray!2, colframe=gray!40!white, coltitle=green!20!black, boxrule=3pt, sharp corners]
     \textit{Example. }
 }{\end{tcolorbox}}
 
 
 %%%% Page Setup %%%%%%%
-\smallpage\sloppy
+%\smallpage\sloppy
 \pagestyle{fancy}
 \lhead{\large{\textbf{Complex Analysis Notes}}}
 %\rfoot{\thepage/\pageref{LastPage} }
-\setlength{\headheight}{10pt}
+\setlength{\headheight}{18pt}
 
 \begin{document}
 \small
 
-\subsection*{1.2 Point Representation of Complex Numbers}
+\section{Chapter 1}
+
+\subsection*{Introduction}
+First, we started with introductions for Professor Stoertz. Professor Stoertz has two cats: Reese and Hank. Also two dogs: a husky and a part-husky named Lulu.
+\subsection*{Class Expectations}
+There's a couple of expectations student should be aware of:
+\begin{itemize}
+  \item AI Use is strongly discouraged, but if used, students should cite it. 
+  \item Email professor stoertz frequently. 
+  \item Now for some learning goals: \begin{itemize}
+    \item Adopt a growth mindset.
+    \item Work to improve teamwork skills.
+    \item Leard the methods and language of Complex Analysis. 
+  \end{itemize}
+  \item Components of the grade: \begin{itemize}
+    \item \textbf{10\% Active Learning and Engagemenet}
+    \item \textbf{10\% Daily Preview Activities}
+    \item \textbf{35\% Weekly written Homework assignments} \begin{itemize}
+      \item Assignments will be posted onOverleaf and will be due on Fridays (\textit{mostly}) by 8:00pm
+      \item Then, we grade ourselves on the following criteria: \begin{itemize}
+        \item Accuracy of grade you have given yourself
+        \item Accuracy and quality of your grading
+        \item A good-faith attempt at every problemClear communication of solutions
+        \item A collaboration statement
+        \item Reflections
+        \item *\textit{Lowest homework grade will be dropped}
+      \end{itemize}
+    \end{itemize}
+    \item \textbf{HW \#0} - If we drop in by Feb. 20th, we get two more dropped preview assignments and more more dropped homework
+    \item \textbf{30\% Three Midtern Exams} - A portion of these exams could be take-home.
+    \item \textbf{15\% Final Project} - Three or four student teams on a project with a 10 min presentation during the final period. 
+  \end{itemize}
+  \item Also remember to have fun and learn. 
+\end{itemize}
+\subsection{The Algebra of Complex Numbers}
+First, we cover the basic sets of numbers
+\begin{align*}
+  \N &= \{0, 1, 2\}\\
+  \Z &= \{-2, -1, 0, 1, 2\}\\
+  \Q &= \{\frac{a}b \mid a\in \Z, b\in \N \backslash\{0\}\}\\
+  \R &= \text{ Solving Equations like } x^2 - 2 = 0\\
+  \C &= \{a+bi\mid a,b\in\R\}
+\end{align*}
+\begin{definition}{Complex Numbers}{}\gline{}
+  Denote by $i$ the number $\sqrt{-1}$. We define the \ul{set of complex numbers}
+  \begin{align*}
+    \C =\{a+bi\mid a,b\in\R\}
+  \end{align*}
+  \centerit{\ul{\textbf{Equality}}}
+  Two complex numbers $a+bi$ and $c+di$ are said to be equal if and only if:
+  \begin{align*}
+    a = c \text{ and } b = d
+  \end{align*}
+  \centerit{\ul{\textbf{Addition}}}
+  We add complex numbers with the following formula;
+  \begin{gather*}
+    (a+bi) + (c + di) = (a+c) + (c + d)i
+  \end{gather*}
+  \centerit{\ul{\textbf{Multiplication}}}
+  We multiply complex numbers with the following formula;
+  \begin{align*}
+    (a+bi)(c+di)&= (ac + adi + bci + bdi^2)\\
+    &= (ac-bd) + (ad+bc)i
+  \end{align*}
+\end{definition}
+We will cover all the axioms of $\C$ at a later point. 
+\begin{theorem}{$\C$ is a field}{}\gline{}
+  \textit{Note: }$\C$ is not an ordered field, meaning that there is no '$<$' relation.
+\end{theorem}
+Now, we work on several different problems:
+\begin{enumerate}
+  \item Express the following complex numbers for $a+ bi$.
+  \begin{enumerate}
+    \item $(a+3i)+(4-i)$
+    \[(4 + a)-2i\]
+    \item $(2+3i)(4-i)$
+    \begin{gather*}
+      8 + 3 - 2i + 12 i\\
+      11 + 10i
+    \end{gather*}
+    \item $\displaystyle\frac{2+3i}{4-i}$
+    \begin{align*}
+      \frac{(2+3i)}{4-i}&= \frac{(2+3i)(4+i)}{(4-i)(4+i)}\\
+      &= \left(\frac{5 + 14i}{15}\right)
+    \end{align*}
+  \end{enumerate}
+  \item Find all solutions to $x^2 = 3 + 4i$. 
+\end{enumerate}
+\begin{definition}{Complex Conjugate}{}\gline{}
+  The \ul{complex conjugate} of $z = a+bi$ is the number $\bar z = a - bi$. 
+\end{definition}
+
+\begin{definition}{Real \& Imaginary Part}{}\gline{}
+  The \ul{real part} of $z = a+bi$ is $\real{z} = a$. \\
+  The \ul{imaginary part} of $z = a+bi$ is $\im{z} = b$. \gline{}
+  \textit{Note: }$\real{z},\im{z}\in \R$. 
+\end{definition}
+
+\begin{enumerate}
+  \item [2.] Find all solutions to $z^2 = 3+ 4i$.
+  \begin{problem}
+    We want to use the formula $z = (a+bi)$. Thus, we get that:
+    \begin{align*}
+      z^2 = a^2 + 2abi - b^2
+    \end{align*}
+    Then, we find that:
+    \begin{align*}
+      3&= a^2 - b^2\\
+      4 &= 2(ab) \quad\rightarrow \quad 2 &= (ab)
+    \end{align*}
+    So we get the solutions $(a,b) = (2, 1), (-2, -1)$.
+  \end{problem}
+  \item [3.] Find all solutions to $x^3 = 1$. 
+  \begin{problem}
+    We represent $z$ as $z = (a+bi)$. Thus, we find that:
+    \begin{align*}
+      z^3 &= a^3 + 3 a^2 b i + 3 a b^2 i^2 + b^3 i^3\\
+      &= a^3 - 3ab + 3a^2bi - b^3 i
+    \end{align*}
+    And we get the following system of equations:
+    \begin{align*}
+      a^3 - 3ab &= 1\\
+      3a^2b - b^3 &= 0
+    \end{align*}
+    For $a, b\ne 0$, we find that $3a^2 = b^2$. WLOG $a = b$ or $a = -b$. 
+  \end{problem}
+\end{enumerate}
+\subsection{Point Representation of Complex Numbers}
 There is a natural bijection between $\C$ and the $xy$-coordinate system $\R^2$:
 \begin{align*}
   a + bi \leftrightarrow (a,b)
@@ -167,7 +296,7 @@ There is a natural bijection between $\C$ and the $xy$-coordinate system $\R^2$:
     \item $\left|\frac{z}{w}\right|=\frac{|z|}{|w|}$
   \end{enumerate}
 \end{theorem}
-\subsection*{1.3 Vector and Polar Forms}
+\subsection{Vector and Polar Forms}
 We saw last time that complex addition behaves like vector addition.\gline{}
 Now, consider \ul{Polar Form}:
 \gimage{image3.png}{7cm}
@@ -209,7 +338,7 @@ Consider the following algebra:
   &= rs((\cos\theta\cos\phi-\sin\theta\sin\phi))\\&\quad+i((\sin\theta\cos\phi + \cos\theta\sin\phi))\\
   &= rs(\cos(\theta+\phi)+i\sin(\theta+\phi))
 \end{align*}
-\subsection*{1.4 The Complex Exponential}
+\subsection{The Complex Exponential}
 First, we begin with Euler's formula and how we can formulate powers of imaginary numbers. 
 \begin{definition}{Euler's Formula}{}\gline{}
   Given $y\in\R$, we define $e^{iy}$ to be:
@@ -243,7 +372,7 @@ We can formulate some general properties for multiplication as well. Consider th
   z^n&= r^ne^{in\theta}\text{, for }n\in\Z\\
   \frac{1}z&= \frac{1}re^{-i\theta}
 \end{align*}
-\subsubsection*{1.4 Exercises - Complex Exponentials}
+\subsubsection{Exercises - Complex Exponentials}
 \begin{enumerate}
   \item Write the following complex numbers in polar form $re^{i\theta}$.
   \begin{enumerate}
@@ -290,16 +419,186 @@ Now, there's also one more formula that we should be aware of that comes from th
     \cos(n\theta)+i\sin(n\theta)
   \end{align*}
 \end{theorem}
-\subsubsection*{\ul{$e^{z}$ as a mapping}}
+\subsubsection{\ul{$e^{z}$ as a mapping}}
 We can imagine $e^z$ as a mapping from imaginary to real. For example,
 \gimage{image4.png}{6cm}
+\subsection{Powers and Roots}
+\begin{definition}{The $n$-th roots of unit}{}
+  \begin{align*}
+    \omega{n_k}=e^{i\frac{2\pi k}n}\quad k = 0,1,\ldots, n-1
+  \end{align*}
+  are the solutions to $z^n = 1$. We define:
+  \begin{align*}
+    \omega_n = \omega_{n,1}=e^{i\frac{2\pi}n}
+  \end{align*}
+  to be the \ul{principle $n^\text{th}$ root of unity}.
+\end{definition}
+\newcommand{\enth}{$n^\text{th}$} The \enth roots of unity:
+\begin{itemize}
+  \item are the verteices of a regular $n-$gon inscribed in the unit circle.
+  \item if non-real, they come in conjugate pairs (if $z_0$ is a solution to $z^n = 1$, so is $\bar{z_0}$)
+  \item can be written $\omega_{n,k}=(\omega_n)^k$, where $\omega_n$ is the principal one. 
+\end{itemize}
+\subsection{General Roots}
+Let $z = re^{i\theta}$. Say we want the solutions to ${S}^n = z$.
+\begin{itemize}
+  \item The \ul{principal \enth root of $z$ is}:
+  \begin{align*}
+    S = \sqrt[n]r e^{i\frac{\Arg{z}}n} = r^{\frac{1}n}e^{i\frac{\Arg{z}}n}
+  \end{align*}
+  \item The whole set of \enth roots of $z$ are:
+  \begin{align*}
+    S = r^{\frac{1}n}e^{i\cpr{\frac{\theta+2\pi k}n}}\quad k = 0,1,\ldots, n -1
+  \end{align*}
+  Note 1: We can think of this four ways.
+  \begin{itemize}
+    \item Integral of taking the \enth root of $4re^{i\theta}$, take hte \enth root of $re^{i\theta + 2\pi k}$:
+    \begin{align*}
+      S = r^{\frac{1}n}e^{i\cpr{\frac{\theta+2\pi k}n}}
+    \end{align*}
+  \end{itemize}
+\end{itemize}
+\subsection{Planar Sets}
+\begin{definition}{Open Disk}{}\gline{}
+  Given $z\in\C$ and $r>0$, the \ul{open disk} of radius $r$ centered at $z$ is:
+  \begin{align*}
+    D(z, r)=D_r(z)=D_z(r)=\{w\in\C\mid |w-z|<r\}
+  \end{align*}
+  This is also called a (circular) neighborhood of $z$. 
+\end{definition}
 
+\begin{definition}{Interior Point}{}\gline{}
+  A point $z\in A$ is an \ul{interior point} of $A$ if there exists $\varepsilon > 0$ such that $D_\varepsilon(z) \subseteq A$.
+\end{definition}
+\begin{definition}{Exterior Point}{}\gline{}
+  A point $z\in\C$ is an \ul{exterior point} of $A$ if there exists $\varepsilon > 0$ such that $D_\varepsilon(z)\subseteq \C\backslash A$, the complement of $A$.
+\end{definition}
+\begin{definition}{Boundary Point}{}\gline{}
+  A point $z\in\C$ is a \ul{boundary point} of $A$ if $z$ is neither an interior point nor an exterior point of $A$. 
+  \begin{theorem}{Boundary Point Cont.}{}\gline{}
+    $z$ is a boundary point of $A$ if and only if for all $\varepsilon > 0$, $D_\varepsilon(z)$ contians points in $A$ and points in $\C\backslash A$.
+  \end{theorem}
+\end{definition}
+\begin{definition}{Open Set}{}\gline{}
+  A set $A\subseteq\C$ is \ul{open} if every $z\in A $ is an interior point of $A$.\gline{}
+  \textit{Note:} Equivalently, $A$ is open if $\forall z\in A, \exists\varepsilon > 0$ such that $D_\varepsilon(z)\subseteq A$. 
+\end{definition}
+\begin{definition}{Closed Set}{}\gline{}
+  A set $A\subseteq \C$ is \ul{closed} if its complement is open.
+  \begin{theorem}{Closet Set Cont.}{}\gline{}
+    $A$ is closed if and only if $A$ contains all of its boundary points. 
+  \end{theorem}
+  \textit{Note:} $\C$ and $\emptyset$ are the only sets that are both open and closed. 
+\end{definition}
+\begin{definition}{Subsets of $A$}{}\gline{}
+  For a set $A\subseteq \C$,
+  \begin{itemize}
+    \item The \ul{interior of $A$} \texttt{int}($A$), or $\mathring{A}$, is the set of all interior points of $A$
+    \item The \ul{exterior of $A$}, \texttt{ext}($A$) is the set of all exterior points of $A$
+    \item The \ul{boundary of $A$}, $\partial(A)$, is the set of all boundary points of $A$.
+    \item The \ul{closure of $A$}, \texttt{cl}($A$) or $\bar A$, is $A\cup \partial(A)$. 
+  \end{itemize}
+  \begin{theorem}{Interior of $A$ cont.}{}\gline{}
+    The $\texttt{int}(A)$ is the largest open set contained in $A$
+  \end{theorem}
+  \begin{theorem}{Closure of $A$ cont.}{}\gline{}
+     $\bar A$ is the smallest closed set contained in $A$
+  \end{theorem}
+\end{definition}
+\begin{definition}{Connected}{}\gline{}
+  An open set $A\subseteq \C$ is \ul{connected} (or \ul{path-connected}) if every pari of points in $A$ can be joined by a polygonal path fully contained in $A$.
+\end{definition}
+\begin{definition}{Domain}{}\gline{}
+  A \ul{domain} is a nonempty open connected set. A \ul{region} is a domain together with some or none of its boundary points.\gline{}
+  \textit{Convention: }For any domain, any region created from it will be considered connected. 
+\end{definition}
+\begin{definition}{Bounded}{}\gline{}
+  A set $A\subseteq \C$ is \ul{bounded} if there exists $R > 0$ such that $|z|<R$ for all $z\in \C$. If a set if not bounded, we say it is $\ul{unbounded}$. 
+\end{definition}
+\begin{definition}{Compact}{}\gline{}
+  A set $A\subseteq \C$ is \ul{compact} if it is closed and bounded. 
+\end{definition}
+\begin{theorem}{}{}\gline{}
+  Suppose $u(x,y)$ is a real-valued function defined on a domain $D$. 
+  \begin{align*}
+    &\text{If }\frac{\partial u}{\partial x}=\frac{\partial u}{\partial y}=0\\
+    &\text{on all of }D\text{, then }u\text{ is constant of }D.
+  \end{align*}
+  \begin{example}
+    Suppose $u(x,y)$ satisfies $\frac{\partial u}{\partial y}= x$ and $\frac{\partial u}{\partial x} = y$ on a domain $D$. Prove that $u(x,y) = xy+c$ for some constant $c$. 
+    \begin{proof}
+      Define $v(x,y) = u(x,y)-xy$ on $D$.
+      \begin{align*}
+        \text{Then, }&\frac{\partial v}{\partial x}=\frac{\partial u}{\partial x}-y = y-y = 0\text{, and}\\
+        &\frac{\partial v}{\partial y}=\frac{\partial u}{\partial y}-x = x-x = 0.
+      \end{align*} 
+      So $v(x,y) = c$ for some constant $c$. Hence $u(x,y) = xy+c$ on $D$.
+    \end{proof}
+  \end{example}
+\end{theorem}
 
-
-
-
-
-
-
-
+\subsection{Stereographic Projection}
+$s:S^2\to\C$ is given by:
+\begin{align*}
+  &S(x_1,x_2,x_3)=\begin{cases}
+    \frac{x_1}{1-x_3}+i\frac{x_2}{1-x_3}&\text{if }x_3\ne 1\\
+    \infty &\text{if }x_3 = 1
+  \end{cases}\\
+  &s^{-1}(z)=\begin{cases}
+    \cpr{\frac{2\Re{z}}{|z|^2+1}, \frac{2\Im{z}}{|z|^2+1}, \frac{|z|^2-1}{|z|^2+1}}&\text{if }x_3\ne 1\\
+    (0,0,1)&\text{if }x_3 = \infty
+  \end{cases}
+\end{align*}
+In this context, we call $S^2$ the \ul{Reimann Sphere}.
+\section*{Chapter 2}
+\subsection*{2.2-1 Limits of Sequences and Functions}
+\begin{definition}{Sequence of Complex Numbers}{}\gline{}
+  A sequence of complex numbers $\{z_n\}^\infty_{n=1}$ \ul{converges to $z_0\in\C$} if for every $\varepsilon>0$, there exists $N\in\N$ such that if $n>N$, then $|z_n-z_0|<0$. 
+\end{definition}
+We say that:
+\begin{itemize}
+  \item $z_n$ converges to $z_0$
+  \item $z_0$ is the limit of $z_n$
+  \item $\lim_{n\to\infty}z_n = z_0$
+  \item $z_n\to z_0$ as $n\to\infty$
+\end{itemize}
+Take as a give the following properties:
+\begin{itemize}
+  \item $\lim_{n\to\infty}\frac{1}n = 0$
+  \item $\displaystyle \lim_{n\to\infty}\frac{an^k + \text{ lower power stuff}}{bn^k + \text{ lower power stuff}} = \frac{a}b$
+  \item If $|z|<1,\quad \lim_{n\to\infty}z^n = 0$
+  \item If $\{z_n\}_{n=1}^\infty$ does not converge to any $z_0\in\C$, we say $\{z_n\}^\infty_{n=1}$ \ul{diverges}.
+\end{itemize}
+\begin{definition}{Limit of a Function}{}\gline{}
+  Let $f$ be defined on a deleted neighborhood of $z_0$. Then, $\lim_{z\to z_0}w_0\in\C$ if for every $\varepsilon > 0$, there exists $\delta >0$ such that if $ 0 < |z- z_0|<\delta$, then 
+  \[|f(z) - w_0|<\varepsilon\]
+\end{definition}
+\begin{theorem}{}{}\gline{}
+  Sequence limits and function limits are unique.\gline{}
+  \textbf{Fact: }If you can plug $z_0$ info $f$ and get an unambiguous answer, then $\lim_{z\to z_0}f(z)=f(z_0)$. 
+  \begin{corollary}{Limit Laws}{}\gline{}
+    Suppose $\lim_{z\to z_0}f(z) = A\in |C$ and $\lim_{z\to z_0}g(z) = B\in\C$. Then, 
+    \begin{itemize}
+      \item $\lim_{z\to z_0}(f(z)\pm g(z)) = A\pm B$;
+      \item $\lim_{z\to z_0}(f(z)\cdot g(z))=A\cdot B$;
+      \item $\displaystyle\lim_{z\to z_0}\frac{f(z)}{g(z)}=\frac{A}B\quad \text{ if } B\ne A$. 
+    \end{itemize}
+  \end{corollary}
+\end{theorem}
+Here is some pretty helpful limit laws that would be pretty good to know:
+\begin{theorem}{Limit Shit}{}\gline{}
+  $|z_n|\to 0$ as $n\to\infty$ iff $z_n\to 0$ as $n\to\infty$.
+  \begin{enumerate}
+    \item \begin{enumerate}
+      \item [(a)]$\displaystyle\left\{\cpr{\frac{i}2}^n\right\}_{n=1}^\infty \Rightarrow \left\{\frac{i}2, -\frac{1}{4}, -\frac{i}8, \frac{1}{16},\cdots\right\}$
+      \item [(b)]$\displaystyle\left\{(2i)^n\right\}_{n=1}^\infty \Rightarrow \{2i, -4, -8i, 16, 32i\}$
+    \end{enumerate}
+    \item \begin{enumerate}
+      \item [(c)] $\displaystyle \lim_{z\to 0}\frac{1}z = \infty$.
+    \end{enumerate}
+    \item \begin{enumerate}
+      \item [(d)] $f(x+iy) = \frac{x^2y}{x^4 + y^4} \Rightarrow\;$does not converge. 
+    \end{enumerate}
+  \end{enumerate}
+\end{theorem}
 \end{document}

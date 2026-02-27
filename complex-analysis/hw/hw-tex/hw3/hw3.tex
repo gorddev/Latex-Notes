@@ -1,0 +1,337 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% HW 3 %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{HW 3: Due Friday 2/27 by 8:00pm \\ Self Grade (due Monday 3/02 by 10:40am): **/12} 
+
+\subsection*{HW 3a - Section 1.6}
+\begin{enumerate}
+	\item Consider the following sets:
+	\begin{itemize}
+		\item $\{z \in \mathbb{C} \mid |z-2-2i| \leq 1\} \cap \{z \in \mathbb{C} \mid |z-2-4i| < 2\}$
+		\item $\{z \in \mathbb{C} \mid 1 \leq |z-1| \leq 2\} \cup \{1\}$
+	\end{itemize}
+	\begin{enumerate}
+		\item Sketch each set.
+		\gtabularcc{5cm}{5cm}{\gimage{hw-tex/hw3/image.png}{4cm}\begin{gather*}\{z \in \mathbb{C} \mid |z-2-2i| \leq 1\} \;\cap\\ \{z \in \mathbb{C} \mid |z-2-4i| < 2\}\end{gather*}}{\gimage{hw-tex/hw3/image1.png}{4cm}\begin{gather*}\{z\in\C\mid 1\le |z-1|\le 2\}\cup\{1\}\end{gather*}}
+		\item Mark each set as being open, closed, or neither.
+		\begin{problem}
+			The first set is not open, because the points along the top edge are boundary points and contained within the set. It's complement is also not open, because its boundary points lie on the bottom edge of the enclosed area. Thus, the first set is \textbf{neither}.\gline{}
+			Consider the complement of the second set. None of its points are boundary points, and all lie on its interior. Thus it is open, and its complement must be closed by definition. Thus, the second set is \textbf{closed}.
+		\end{problem}
+		\item Mark each set as being connected or not connected.
+		\begin{problem}
+			The first set is \textbf{connected}. Consider the straight line between any two points. It is contained within the set. \gline{}
+			The second set is \textbf{not connected}. Consider the point $\{1\}$. There is no path from 1 to any other point in the set. 
+		\end{problem}
+		\item Mark each set as being a domain and/or region or neither.
+		\begin{problem}
+			Neither set is a domain, because neither set is open. However, the first set is a \textbf{region}. This is because it is connected, and regions are allowed to contain their boundary points. 
+		\end{problem}
+		\item Mark each set as being bounded or unbounded.
+		\begin{problem}
+			Both sets are \textbf{bounded}. Consider $R = 100$. Both sets are completely contained within that circle. 
+		\end{problem}
+		\item Determine the boundary $\partial S$ of each set. 
+		\begin{problem}
+			For the first question, we need to solve for the intersection points of the circles:
+			\begin{align*}
+				|x+yi-2-2i|-1 &= |x+yi - 2 - 4i| - 2\\
+				(x - 2)^2 + (y-2)^2 - 1 &= (x-2)^2 + (y-4)^2 - 4\\
+				y^2 -4y + 4&= y^2 - 8y + 16 - 3\\
+				4y&= 9\\
+				y&= 2.25
+			\end{align*}
+			With $y = 2.25$, we have two solutions for $x$:
+			\begin{align*}
+				(x-2)^2 + (y-2)^2 = 1\\
+				(x-2)^2 &= \frac{15}{16}\\
+				x^2 - 4x + 4&=\pm\cpr{\frac{15}{16}}^2
+			\end{align*}
+			Plugging into the quadratic formula (and discarding the solutions for the bottom of the circle) gives us $x = \{1.03175, 2.96825\}$. Converting back into angles for each circle, for the circle of radius 1, we get:
+			\begin{align*}
+				\tan^{-1}\cpr{\frac{0.25}{2.96825-2}}&=0.252679\\
+				(\pi - 0.252679)&= 2.8889136536
+			\end{align*}
+			For the circle of radius 2, we find that:
+			\begin{align*}
+				\tan^{-1}\cpr{\frac{(2.25-4)}{2.96825 - 2}} &= -0.5327172946\\
+				\pi + 0.5327172946 &= 3.6743099482
+			\end{align*}
+			Thus, we have that the boundary points for this region are given by the union of the codomains of each of the following functions:
+			\begin{align*}
+				f(\theta) = e^{i\theta} + 2 + 2i, \quad \theta\in\,\approx[0.25, 2.89]\\
+				g(\theta) = 2e^{i\theta} + 2 + 4i,\quad\theta\in\,\approx[3.67, 5.75]
+			\end{align*}
+			The next set is significantly easier. It is given by the union of the codomains of the following functions and $\{1\}$:
+			\begin{align*}
+				f(z) = |z-1| =1, \quad z\in\C\\
+				g(z) = |z-1| = 2, \quad z\in\C
+			\end{align*}
+		\end{problem}
+		\pagebreak
+		\item  Take a picture of your graphs (with markings from parts (b)-(f)). Use the ``includegraphics'' command to insert your pictures here. Use Google if you're unsure how to accomplish that. 
+		\begin{problem}
+			Oops I didn't read this part. When I read ``mark'' I quite literally thought it meant solve. 
+		\end{problem}
+	\end{enumerate}
+
+	
+	\item Prove that if $S$ and $T$ are domains that have at least one point in common, then $S \cup T$ is a domain.\\
+		({\it Note: A picture is good enough for me here.})
+		\begin{problem}
+			Let me begin by asserting that if $S$ and $T$ are domains that have at least one point in common, they must have an infinite amount of points in common, because I'm pretty sure if they didn't have an infinite amount of points in common, they'd be closed sets, but closed sets can't be domains.\gline{}
+			Ok, now for the actual problem.
+			\begin{proof}
+				Let $S$ and $T$ be domains with one point in common. We want to show that $S \cup T$ is also a domain.\gline{}
+				To show $S \cup T$ is a domain, we must show that $S\cup T$ is \textbf{closed}, \textbf{connected}, and \textbf{nonempty}.\gline{}
+				\textbf{Closed: }The union of two closed sets is also closed, so $S \cup T$ must be closed.\gline{}
+				\textbf{Connected: }Consider the point that connects $S$ and $T$. Becuase $S$ is connected, and $T$ is connected, that means that any point in $S$ is connected to all points in $T$, and vise-versa. Thus $S\cup T$ is connected.\gline{}
+				\textbf{Empty: }Because $S$ and $T$ are domains, they are not empty. Thus, because the union of two nonempty sets is also nonempty, $S\cup T$ is nonempty.\gline{}
+				Hence, because $S\cup T$ is connected, closed, and nonempty, $S\cup T$ is a domain. 
+			\end{proof}
+		\end{problem}
+		
+	\item Let $u(x,y) = 
+		\begin{cases}
+      	1, & |z| < 1 \\
+      	0 & |z| >2 \\
+		\end{cases}.$
+	\begin{enumerate}
+		\item Show that $\partial u/\partial x =0$ and $\partial u/ \partial y = 0$ in the open set $D = \{z \in \mathbb{C} \mid |z| < 1\} \cup \{z \in \mathbb{C} \mid |z|>2\}$.
+		\begin{problem}
+			Let $z = x+yi$. Thus, we have that $|z| = \sqrt{x^2 + y^2}$. \gline{}
+			Consider the case where $\sqrt{x^2 + y^2} > 2$. Thus we have that:
+			\begin{align*}
+				\sqrt{x^2 + y^2} = 0\\
+				\frac{\partial \sqrt{x^2 + y^2}}{\partial x} = \frac{\partial 0 }{\partial x }= 0\\
+				\frac{\partial \sqrt{x^2 + y^2}}{\partial y} = \frac{\partial 0 }{\partial y }= 0
+			\end{align*}
+			The same applies for the the case where $|z|<1$, except where the term in our derivate is 1. 
+		\end{problem}
+		\item Notice that $u$ is not constant in $D$. Why doesn't this contradict Theorem 1 from Section 1.6?
+		\begin{problem}
+			This is because $u$ is not defined for $1 \le |z| \le 2$.
+		\end{problem}
+	\end{enumerate}
+	
+	
+	\item The notion of ``connectedness'' also applies to closed sets, though the definition is slightly altered.\\
+	\textbf{Def'n:} We say that a closed set $S\subseteq \C$ is \emph{connected} if it cannot be written as the union of two nonempty disjoint (nonintersecting) closed sets. A closed set is also sometimes called a \emph{continuum}.\\
+	
+	Determine which of the following sets are continua.
+	\begin{enumerate}
+		\item $\{z : |z-3| = 4\}$.
+		\begin{problem}
+			This is connected. Along the circle this equation describes, you can always find another point on the circle infinitely close to the next. That means that in the case of any disjoint sets, you can find an element between those two disjoint sets. Thus, this cannot be written as the union of a non-infinite number of disjoint sets. 
+		\end{problem}
+		\item $\{z : |z| = 1\} \cup \{z : |z|=3\}$.
+		\begin{problem}
+			This is not connected. Right here, it's written as the union of two closed disjoint sets. 
+		\end{problem}
+		\item $\{1, -1, i\}$.
+		\begin{problem}
+			This one's also not connected. Consider $\{1, -1\}\cup\{i\}$. That's a union of two closed disjoint sets. 
+		\end{problem}
+		\item $\{z : |z-1| \geq 2\}$.
+		\begin{problem}
+			This one is connected. Consider the connected closed set given by $|z-1|=2$. Assume for the sake of contradiction that  We know via the explantion in part $(a)$ that this \textit{cannot} be split apart into disjoint sets. Thus at a minimum, we must have:
+			\begin{align*}
+				\{z:|z-1|=2\}\cup \cpr{\bigcup_{n=0}^\text{finite num}\text{\{some other closed disjointed sets\}} }
+			\end{align*}
+			However, note that this ``other closed disjointed set'' must be ${z:|z-1|>2}$ in order to cover the set. However, this set is \textbf{not closed}. Thus, this set must be connected. 
+		\end{problem}
+		
+	\end{enumerate}
+\end{enumerate}
+
+
+
+
+\subsection*{HW 3b - Section 1.7}
+\begin{enumerate}
+\setcounter{enumi}{4}
+    \item For each of the following points in $\mathbb{C}$, determine its stereographic projection on the Riemann sphere.
+    \begin{enumerate}
+        \item $-i$
+		\begin{problem}
+			In order to find the point in $S$ (the Reimann sphere), we use the reverse stereographic projection:
+			\begin{align*}
+				s^{-1}(z)=\begin{cases}
+					\cpr{\frac{2\Re{z}}{|z|^2+1},\frac{2\Im(z)}{|z|^2+1}, \frac{|z|^2-1}{|z|^2+1}}\quad \text{if }x_3\ne 1\\
+					(0,0,1)\quad\text{if }x = \infty
+				\end{cases}
+			\end{align*}
+			Applying this formula gives us the location:
+			\begin{align*}
+				(0, -1,0) 
+			\end{align*}
+		\end{problem}
+        \item $-2+3i$
+		\begin{problem}
+			We will apply the reverse projection formulation again:
+			\begin{align*}
+				\cpr{\frac{-4}{14},\frac{6}{14},\frac{13-1}{14}} = \cpr{\frac{-2}7, \frac{3}{7}, \frac{6}7}
+			\end{align*}
+		\end{problem}
+    \end{enumerate}
+
+    \item Describe in words or graph the projections on the Riemann sphere of the following sets in the extended complex plane. 
+    \begin{enumerate}
+        \item $\{z \in \mathbb{C} \mid \Im(z) <0\}$
+		\begin{problem}
+			The point on the Riemann sphere may lie anywhere in the $-\text{Im}(z)$ half of the 3-dimensional sphere. While within the sphere, the projection has negative $z$, and outside the sphere, it has positive $z$. As it approaches towards infinity, it approaches the north pole of the Riemann sphere. 
+		\end{problem}
+        \item $\{z \in \mathbb{C} \mid \Re(z) = -\Im(z) \} \cup \{ \infty\}$
+		\begin{problem}
+			This projection is defined as the projection of the equivalent line in $\R^2$, $y = -x$, onto the Riemann sphere. Essentially, this just slices the Riemann sphere along the diagonal in a circular cross-section. We can define the cross section via this function:
+			\begin{align*}
+				f(\theta) = \cpr{\cos\theta,\sin\theta, -\cos\theta}, \;\theta:[0, \pi]
+			\end{align*}
+		\end{problem}
+    \end{enumerate}
+    
+    \item Let $f:\widehat{\C} \to \widehat{\C}$ be defined by $f(z) = \frac{1}{z}$. It is assumed here that $f(0) = \infty$ and $f(\infty) = 0$. Prove that $f$ corresponds to a rotation of the Riemann sphere by an angle of $\pi$ about the $x_1$-axis under stereographic projection.\\
+    ({\it Hint: Rotation by $\pi$ about the $x_1$ axis can be expressed as $(x_1, x_2, x_3) \mapsto (x_1, -x_2, -x_3)$. So your goal is to show that, if $s^{-1}(z) = (x_1, x_2, x_3)$, then $s^{-1}(1/z) = (x_1, -x_2, -x_3)$.})
+	\begin{proof}
+		Let $f:\widehat\C\to\widehat\C$ be defined by $f(z)=\displaystyle\frac{1}z$, for $z = a + bi$. We want to show that $f$ correspons to a rotation of of the Riemann sphere by an angle of $\pi$ about $x_1$.
+		\begin{subproblem}{}
+		Consider that a rotation about the Riemann sphere by $\pi$ corresponds to the mapping from $(x_1, x_2, x_3)\to(x_1, -x_2, -x_3)$. 
+		\end{subproblem}
+		Let $s^{-1}(z)=(x_1,x_2,x_3)$. Now, because $z$ is complex, we write:
+		\begin{align*}
+			\frac{1}z = \frac{\bar z}{z\cdot \bar z} = \frac{\bar z}{|z|^2}.
+		\end{align*}
+		Thus, applying the reverse projection onto the Riemann sphere, we find that:
+		\begin{align*}
+			s^{-1}(z)&=\begin{cases}\newcommand{\z}{\frac{\bar z}{|z|^2}}
+					\cpr{\frac{2\Re{\z}}{|\z|^2+1},\frac{2\Im(\z)}{|\z|^2+1}, \frac{|\z|^2-1}{|\z|^2+1}}
+				\end{cases}\\
+				&= \cpr{\frac{1}{|z|}\frac{2\Re(\frac{\bar z}{|z|})}{|z|^{-1}+1}, \frac{1}{|z|}\frac{2\Im(\frac{\bar z}{|z|})}{|z|^{-1}+1},\frac{|z|^{-1}-1}{|z|^{-1}+1}}\Rightarrow \text{ mult by }\frac{|z|}{|z|}\\
+				&= \cpr{\frac{2\Re(z)}{1+|z|}, \frac{-2\Im(\bar z)}{1+|z|},-\frac{|z|-1}{|z|+1}}\\
+				&= (x_1, -x_2, -x_3)
+		\end{align*}
+		Thus, we have that $\frac{1}z$ does indeed rotate about the Riemann sphere on the $x_1$ axis by $\pi$. 
+	\end{proof}
+\end{enumerate}
+
+
+
+
+\subsection*{HW 3c - Section 2.1}
+\begin{enumerate}
+\setcounter{enumi}{7}
+\item In this question we investigate the complex exponential function $f(z) = e^z$.
+	\begin{enumerate}
+		\item Write $f(z)$ in the form $u(x,y) + iv(x,y)$.
+		\begin{problem}
+			\begin{align*}
+				f(z) &= e^xe^{yi}\\
+				&=e^x(\cos(y) + i\sin(y))\\
+				&= u(x,y) + iv(x,y)\\\\
+				\{u(x,y) = e^x&\cos(y), \quad v(x,y) = e^x\sin(y)\}
+			\end{align*}
+		\end{problem}
+		\item Describe the domain of definition of $f(z)$.
+		\begin{problem}
+			$f(z) : \widehat\C \to \widehat\C$ is defined for all complex numbers $z$. 
+		\end{problem}
+		\item Is $f(z)$ injective on its domain of definition? If yes, prove it. If not, identify distinct $z_1$ and $z_2$ such that $f(z_1) = f(z_2)$.
+		\begin{proof}
+			We want to show that $f(z)$ is not injective, such that if $f(z_1) = f(z_2) $, that does not imply $ z_1 = z_2$.\gline{}
+			Consider the values $z_0 = 0, z_1 = 2\pi i$,  Thus, we have that:
+			\begin{align*}
+				f(z_0) = 1\\
+				f(z_1) = 1
+			\end{align*}
+			Hence, $f(z)$ is not injective. 
+		\end{proof}
+		\pagebreak
+		\item Is $f(z)$ surjective onto $\mathbb{C}$? If yes, prove it. If not, identify $w$ such that $f(z) \neq w$ for any $z$ in the domain of $f$.
+		\begin{proof}
+			We want to show that $f(z)$ is not surjective. Note that $e^x > 0$. \gline{}
+			Consider $w = 0 + 0i$. Also consider that for some $\theta \in \R$, if $\sin\theta = 0, \cos\theta\ne 0$, and vise-versa. Thus, not both $\Re(z)$ and $\Im(z)$ can simultaneously be 0. \gline{}
+			Hence, $f(z)$ is not surjective. 
+		\end{proof}
+		\item Describe the image of the vertical line $\Re(z) = 1$ under $f(z)$. 
+		\begin{problem}
+			It is just a vertical line that oscillates completely vertically around ${1 + 0i}$ with image: $\{1+bi\mid -1\ge b\le 1\}$.
+		\end{problem}
+		\item Describe the image of the horizontal line $\Im(z) = \pi/6$.
+		\begin{problem}
+			It is just a horizontal lines that starts vertically at $\sin(\pi/6)$ and horizontally at $\cos(\pi/6)$, never moving back on itself, extending towards positive $\infty$ in the real direction. 
+		\end{problem}
+		\item Describe the image of the horizontal strip $0 \leq \Im(z) \leq \pi/6$.
+		\begin{problem}
+			With $e^x = 1$, it is just a curve thats an arc of a circle down to the real axis. If you introduce variation in $e^x$, it just amplifies the height and final stopping distance of the circle on the real axis. It will always reach a maximum height of $e^x\sin(y)$ and a max horizontal distance of $e^x\cos(y)$. 	
+		\end{problem}
+	\end{enumerate}
+	
+	\item In this question we investigate the inversion mapping $f(z) = 1/z$.
+	\begin{enumerate}
+		\item Describe the domain of definition of $f(z)$.
+		\begin{problem}
+			The domain of this function is $\widehat\C\,\backslash\{0\}$.
+		\end{problem}
+		\item Is $f(z)$ injective on its domain of definition? If yes, prove it. If not, identify distinct $z_1$ and $z_2$ such that $f(z_1) = f(z_2)$.
+		\begin{problem}
+			First, consider that:
+			\begin{align*}
+				\frac{1}{z} = \frac{\bar z}{|z|^2} = \frac{1}{|z|^2}(\bar z)
+			\end{align*}
+			Note that $\bar z$ is just of the form $a - bi$, so that means every output is unique, and because we just multiply by the scalar $\frac{1}{|z|^2}$ (which is nonzero because our function is not defined for $z = 0$), we maintain that injectivity. 
+		\end{problem}
+		\item Is $f(z)$ surjective onto $\mathbb{C}$? If yes, prove it. If not, identify $w$ such that $f(z) \neq w$ for any $z$ in the domain of definition of $f$.
+		\begin{problem}
+			$f(z)$ is not surjective onto $\C$, becuase $f(z)$ can never equal $w = 0$. For $w = 0$, we would have to have $\frac{1}{|z|^2}=0$ (which is impossible), or have that $\bar z = 0$. However, we already established that $z \ne 0$ because $f$ is not defined for $z = 0$, so $\bar z \ne 0$. Thus, $f(z)$ cannot equal $w = 0$. 
+		\end{problem}
+		\item Show that $f(z)$ maps the circle $|z| = r$ onto the circle $|w| = 1/r$.
+		\begin{problem}
+			Consider again that:
+			\begin{align*}
+				\frac{1}{z} = \frac{|\bar z|}{|z|^2} = \frac{1}{|z|^2}(\bar z)
+			\end{align*}
+			We just rewrite as:
+			\begin{align*}
+				\frac{1}{|z|^2}(\bar z) = \frac{\bar z}{r^2}
+			\end{align*}
+			Thus, for any $|z|$, because $|z|=|\bar z|$, we have that:
+			\begin{align*}
+				\frac{|\bar z|}{r^2}=
+				\frac{|z|}{r^2}=\frac{r}{r^2}=\frac{1}r
+			\end{align*}
+		\end{problem}
+		\item Show that $f(z)$ maps the ray $\Arg(z) = \theta$, where $-\pi < \theta < \pi$ onto the ray $\Arg(w) = -\theta$.
+		\begin{problem}
+			Let $z$ be of the form $re^{i\theta}$. Thus, we have that:
+			\begin{align*}
+				f(z) = \frac{1}{re^{i\theta}} = \frac{1}re^{-i\theta}
+			\end{align*}
+			Thus, any angular mapping from $z \to f(z)$ will negate the sign of the angle, thus giving $\Arg(w) =-\theta$ (so long as we maintain that with $\Arg(w) = -\theta$, the $-\theta$ for $\theta = \pi$ goes to 0). 
+		\end{problem}
+		\item Describe the image of the punctured unit disk  $0 < |z| < 1$.
+		\begin{problem}
+			It just appears like a normal circle, but with the bounds and endpoints removed. If we apply the transformation of $f(z)$, (via the last problem), it is that very same circle except now with radius $\frac{1}r$. (Making sure that we don't have the zero is important because otherwise the function would be undefined). 
+		\end{problem}
+	\end{enumerate}
+\end{enumerate}
+\begin{reflection}
+	\textbf{Collaboration Statement:} I did not work with anyone else on this assignment. I looked up how to do the Riemann coordinate projections onto the sphere and watched a video because I didn't take notes that day of class apart from the formula. 
+\end{reflection}
+\pagebreak
+
+
+\subsection*{Reflection Questions for HW 3}
+    \begin{itemize}
+        \item What do you understand well and what is working well for you in learning the material?
+
+
+        \item What do you need to keep studying and what are some habits you can change/pick up to learn the material better?
+
+    \end{itemize}
+
+
+

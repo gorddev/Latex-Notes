@@ -1,0 +1,404 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% HW 2 %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{HW 2: Due Friday 2/20 by 8:00pm \\ Self Grade (due Monday 2/23 by 10:40am): 6.75/20} 
+
+\subsection*{HW 2a - Section 1.3} 
+\begin{enumerate}
+	\item Write each complex number in polar form:
+	\begin{enumerate}
+		\item $-1+\sqrt{3}i$
+			\begin{problem}
+				To write in polar form, we first fine the modulus:
+				\begin{align*}
+					\sqrt{(-1)^2 + \sqrt{3}^2} = \sqrt{4} = 2.
+				\end{align*}
+				Now, we find the angle between $-1$ and $\sqrt{3}i$:
+				\begin{align*}
+					\tan^{-1}\cpr{-\frac{\sqrt{3}}1}=-\frac{\pi}3
+				\end{align*}
+				Plugging everything in, we have the polar form:
+			\begin{align*}
+				2\,\text{cis}\cpr{-\frac{\pi}3}
+			\end{align*}
+			\end{problem}
+			
+		\item $2+2i$
+			\begin{problem}
+				First, we find the modulus:
+				\begin{align*}
+					\sqrt{2^2 + 2^2}= \sqrt{8}= 2\sqrt 2
+				\end{align*}
+				Next, we find the angle between 2 and 2, which is clearly going to be $\frac{\pi}4$ or $45^\text{o}$. \gline{}Thus, we get in polar form:
+					\begin{align*}
+						2\sqrt{2}\,\text{cis}\cpr{\frac{\pi}4}
+					\end{align*}
+			\end{problem}
+			
+		\item $\frac{-1+\sqrt{3}i}{2+2i}$
+		
+			\begin{problem}
+				First, we simplify by multiplying by the complex conjugate on both sides of the equation:
+				\begin{align*}
+					\frac{-1+\sqrt{3}i}{2+2i}\cdot \frac{2-2i}{2-2i}&=\frac{-2+2\sqrt{3}i+2i+2\sqrt 3}{8}\\
+					&= \cpr{\frac{1}4}\cpr{\sqrt{3}-1+(\sqrt{3}+1)i}
+				\end{align*}
+				Now, solving for the modulus gives:
+				\begin{align*}
+					\left|\frac{-1+\sqrt{3}i}{2+2i}\right|=\frac{1}{16}\sqrt{(\sqrt{3}-1)^2 + (\sqrt{3}+1)^2} &= \frac{\sqrt{2}}2
+				\end{align*}
+				Next, we solve for the angle. Given that our imaginary and real parts as deduced above are $\sqrt 3 - 1$ and $(\sqrt 3 + 1)i$, plugging into arctan gives:
+				\begin{align*}
+					\tan^{-1}\cpr{\frac{\sqrt 3 +1}{\sqrt 3  -1}}&=\frac{5\pi}{12}
+				\end{align*}
+				Thus, we get our number in polar form:
+				\begin{align*}
+					\frac{\sqrt 2}2\,\text{cis}\cpr{\frac{5\pi}{12}}
+				\end{align*}
+			\end{problem}
+	\end{enumerate}
+	
+	
+	\item Find the following. ({\it Hint throughout: If you try to find and simplify each complex number first, you're going to have a bad time.})
+	\begin{enumerate}
+		\item $\left|\frac{2i(3-i)^4}{(i+2)^2}\right|$
+		
+			\begin{problem}
+				First, we're going to convert each number to polar form:
+				\begin{align*}
+					2i &= 2\cdot e^{i(\pi/2)}.\\
+					3-i &\rightarrow \sqrt{3^2 + 1} = \sqrt{10}\\
+					&\rightarrow \tan^{-1}\cpr{\frac{1}{\sqrt{3}}}=\frac{\pi}6\\
+					&= \sqrt{10}\cdot e^{i(\pi/6)}\\
+					i+2 &\rightarrow \sqrt{2^2 + 1} = \sqrt{5}\\
+					&\rightarrow \tan^{-1}\cpr{\frac{1}2}\\
+					&= \sqrt{5}\cdot e ^{i\tan^{-1}(1/2)}
+				\end{align*}
+				Then, we can simplify a lot easier via exponent rules:
+				\begin{align*}
+					2\cdot e^{i(\pi/2)}\cdot \sqrt{10}^4\cdot e^{i4\cdot(\pi/6)} = 200 e^{i(7\pi/6)}
+				\end{align*}
+				Now, we don't care about the angle in the denominator (or the numerator), so we get the final result:
+				\begin{align*}
+					\left|\frac{2i(3-i)^4}{(i+2)^2}\right|=\frac{200}{\sqrt 5^2}=40
+				\end{align*}
+			\end{problem}
+		\item $\left|\frac{(2-\sqrt{3}i)^{10}}{(2+\sqrt{3}i)^{10}}\right|$
+		
+			\begin{problem}
+				Now that we know the Modulus distributes in, I already know that the answer here will be 1. This is because:
+				\begin{align*}
+					|2-\sqrt 3 i| = |2+\sqrt 3 i|
+				\end{align*}
+				So we get that:
+				\begin{align*}
+					\left|\frac{(2-\sqrt{3}i)^{10}}{(2+\sqrt{3}i)^{10}}\right| &= \frac{|2-\sqrt 3 i|^{10}}{|2+\sqrt 3 i|^{10}}
+				\end{align*}
+			\end{problem}
+			
+		\item $\Arg(-4-4i)$
+		
+			\begin{problem}
+				I see immediately that this angle, unit vector-wise, is $\langle -1, -1\rangle$. Thus, I immediately know that $\arg(-4-4i)=5\pi/4$. However, in $\Arg{z}$, this would be $-3\pi/4$. 
+			\end{problem}
+		
+		\item $\Arg\left((1-\sqrt{3}i)^{10}\right)$
+		
+			\begin{problem}
+				From earlier, I know that $\tan^{-1}\cpr{\frac{-\sqrt{3}}1}=\frac{-\pi}3$. Via the rules of complex powers, I know that the angle is $10\cdot \frac{-\pi}3$, which simplifies to $\frac{-4\pi}3$, which in $\Arg{z}$ is $\frac{2}3\pi$. 
+			\end{problem}
+		
+		% grade grade grade
+		\begin{grade}
+			2/2. Got each question correct. 
+		\end{grade}
+	\end{enumerate}
+	
+	\item Show geometrically that the complex numbers $z$ and $w$ satisfy $|z+w| = |z|+|w|$ if and only if $\arg(z) = \arg(w)$.
+	
+		\begin{proof}
+			Let $z, w\in\C$. We want to show that $|z+w| = |z|+|w|$ if and only if $\arg(z) = \arg(w)$.\gline{}
+			Let us first assume that $|z+w| = |z| +|w|$. We want to show that $\arg(z) = \arg(w)$. Consider the bijection from the complex numbers to $\R^2$. 
+		\end{proof}
+		\begin{grade}
+			0/2. I completely forgot to finish the question. Oops. 
+		\end{grade}
+\end{enumerate}
+
+
+
+
+\subsection*{HW 2b - Section 1.4}
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item Write each of the given numbers in rectangular form $a+bi$:
+	\begin{enumerate}
+		\item $e^{-i\pi/6}$
+		\begin{problem}
+			First, we convert for $e^{i\theta}$ to the $\text{cis}$ form:
+			\begin{align*}
+				e^{-i\pi/6}&=\cos(\pi/6) + \sin(\pi/6)\\
+				&= \boxed{\frac{\sqrt{3}}2 + i\frac{1}2}
+			\end{align*}
+		\end{problem}
+		\item $2e^{4+i\pi/3}$
+		\begin{problem}
+			First, consider that $2e^{4+i\pi/3}=2e^4e^{i\pi/3}$. Thus, we get in cis form that:
+			\begin{align*}
+				2e^4e^{i\pi/6}&=2e^4(\cos(\pi/3)+i\sin(\pi/3))\\
+				&= \boxed{2e^4\frac{1}2 + i2e^4\frac{\sqrt{3}}2}
+			\end{align*}
+		\end{problem}
+	
+	\end{enumerate}
+	
+	\item Write each of the given numbers in polar form $re^{i\theta}$:
+	\begin{enumerate}
+		\item $-7\pi(\sqrt{3}-i)$
+		\begin{problem}
+			First, let's calculate the modulus:
+			\begin{align*}
+				|-7\pi(\sqrt{3}-i)| &= 7\pi\sqrt{3 + 1}\\
+				&= 14\pi
+			\end{align*}
+			Next, let's calculate the angle with the arctan function:
+			\begin{align*}
+				\tan^{-1}\cpr{\frac{1}{\sqrt 3}}=\frac{\pi}6
+			\end{align*}
+			Thus, we get that our answer in polar form is $14\pi e^{i\pi/6}$
+		\end{problem}
+		\item $\left(\cos \frac{5\pi}{12} + i \sin \frac{5\pi}{12} \right)^3$
+		\begin{problem}
+			We'll immediately perform the conversion because this is set up very nicely for us:
+			\begin{align*}
+				\cos\cpr{\frac{5\pi}{12}}+i\sin\cpr{\frac{5\pi}{12}} = e^{i5\pi/6}
+			\end{align*}
+			Then, taking that to the power of three (which is just adding the angle 3 times) gives:
+			\begin{align*}
+				\cpr{e^{i\frac{5\pi}6}}^3 = e^{i\frac{15\pi}6}=\boxed{e^{i\frac{1}2}}
+			\end{align*}
+			Note that we simplify at the end via the fact that $e^{i\theta} = e^{i(\theta + 2\pi)}$. 
+		\end{problem}
+		\item $\frac{3i}{5e^{4+2i}}$
+		\begin{problem}
+			For this problem, I'll start by converting the top equation to polar form so I can use the power rule:
+			\begin{align*}
+				3i = 3e^{i\frac{\pi}2}
+			\end{align*}
+			Then, we can perform some simplification:
+			\begin{align*}
+				\frac{3i}{5e{4+2i}}=\frac{3}{5e^4}\cdot\frac{e^{i\,\pi/2}}{e^{2i}} = \frac{3}{5e^4}e^{i(\pi/2-2)}
+			\end{align*}
+		\end{problem}
+		\begin{grade}
+			1.5/2 Points. 
+			\begin{itemize}
+				\item -0.25 pts. Part a. Forgot a negative sin on the arctan calculation. 
+				\item -0.25 pts, part b. I kind of got it write, and wrote the anser in the form $e^{i(\theta + 2\pi)}$, for $\theta = \frac{1}2$, but it was a generalized form. 
+				\item Part c completely correct. 
+			\end{itemize}
+		\end{grade}
+	\end{enumerate}
+	
+	\item Consider the function $z: [0,2\pi] \to \mathbb{C}$ defined by $z(t) = e^{it}$. 
+	\begin{enumerate}
+		\item Explain how you know that the function $z(t)$ parametrizes (traces) the unit circle $|z|=1$ in the counterclockwise direction as $t$ increases from $0$ to $2\pi$. 
+		\begin{problem}
+			I know that this function does this because as we increase $t$, that's equivalent to increasing angle on the function $\cos(t) + i\sin(t)$, which gives a counterclockwise rotation. Because there is no scalar in front of the $e$, I know that means it will be of radius 1. 
+		\end{problem}
+		\item Describe the curve parametrized by the function $w: [0, 1/2] \to \mathbb{C}$ defined by $w(t) = 2e^{i2\pi t}$.
+		\begin{problem}
+			This is very similar to the previous one, except it traces the circle of radius 2, only traces half the circle, and only happens as $t$ goes to $1/2$. I know this because the final angle when $t=1/2$ is $\pi$, which is halfway around the circle of radius 2. 
+		\end{problem}
+		\item Describe the curve parametrized by the function $u: [0, 2\pi] \to \mathbb{C}$ defined by $u(t) = 3e^{-it} + 2-i$.
+		\begin{problem}
+			First, let's specify that the circle is ceneterd at $x = \{-2, i\}$ Then, at that point, we trace the circle of radius 3 completely all the way around clockwise, because there is a negative in front of t. 
+		\end{problem}
+		\begin{grade}
+			2.25/3 Points. 
+			\begin{itemize}
+				\item -0.25pts Described part (a) and (a) appropriately (but could have used a little more detail in that it only rotatates around once in part (a)). 
+				\item -0.5pts Part (c). I described the center of the circle as being at $\{-2, i\}$, when it is at $\{2, -i\}$. 
+			\end{itemize}
+			Otherwise, there is work and full sentences to describe each step. 
+		\end{grade}
+	\end{enumerate}
+
+	\item Use DeMoivre's formula together with the binomial formula to derive the identity
+	\[\sin(4\theta) = 4\cos^3(\theta)\sin(\theta) - 4\cos(\theta)\sin^3(\theta). \]
+		({\it Hint: See Example 4 from Section 1.4 in the textbook for the idea.})
+	\begin{problem}
+		Consider that via DeMoivre's formula, that $(\cos\theta + i\sin\theta)^n=\cos(n\theta)+i\sin(n\theta)$. Also consider that $i^4 = 1$. Thus, we have that:
+		\begin{align*}
+			(\cos\theta + i\sin(\theta))^4&= \cos(4\theta)+i\sin(4\theta)\\
+			-i(\cos\theta + i\sin\theta)^4 + i\cos4\theta &= \sin4\theta
+		\end{align*}
+		Now, we expand via the binomial formula:
+		\begin{align*}
+			-i[\cos^4\theta + 4i\cos^3\theta\sin\theta -6 \cos^2\theta\sin^2\theta -4i\cos\theta\sin^3\theta+\sin^4\theta] +i\cos4\theta
+		\end{align*}
+		Then, we can simply a bit by multiplying out the $i$:
+		\begin{align*}
+			-i\cos^4\theta -i\sin^4\theta +6i\cos^2\theta\sin^2\theta + 4\cos^3\theta\sin\theta - 4\cos\theta\sin^3\theta + i\cos 4\theta
+		\end{align*}
+		Furthermore, with the $\cos^4, \sin^4,$ and $\cos^2\sin^2$ terms, we have various identities to help us out. Consider that:
+		\begin{align*}
+			\cos^4\theta + \sin^4\theta &= \frac{3}4+\frac{1}4\cos(4\theta)\\
+			\sin^2\theta\cos^2\theta &= \frac{1}8(1-\cos(4t))
+		\end{align*}
+		Luckily, because of the 6 term in front of the $\sin^2\cos^2$ term, the fractions simplify to $\frac{3}4$. Thus, we are left with (for $\cos 4\theta$ terms):
+		\begin{align*}
+			-i\frac{1}4\cos(4\theta)-i\frac{3}{4}\cos 4\theta + i\cos 4\theta = 0
+		\end{align*}
+		Thus, the rest of our terms cancel and we are left with the identity:
+		\begin{align*}
+			\sin(4\theta) = 4\cos^3\theta\sin\theta - 4\cos\theta\sin^3\theta
+		\end{align*}
+		Hooray!
+	\end{problem}
+\end{enumerate}
+
+
+\subsection*{HW 2c - Section 1.5}
+\begin{enumerate}
+    \setcounter{enumi}{7}
+    \item Find all the values of the following:
+    \begin{enumerate}
+        \item $1^{1/4}$
+		\begin{problem}
+			For this problem, we know that our values are $\pm 1$ and $\pm i$. However, generally, we use the formula for the whole set of n-th roots with:
+			\begin{align*}
+				\sqrt[n]r\,e^{i\frac{\Arg(z)}n}
+			\end{align*}
+			And in this case, $\Arg(1)=0$, so we get our angles of $0, \pi/2, \pi, 3\pi/4$.
+		\end{problem}
+    
+        \item $i^{1/4}$
+		\begin{problem}
+			In this case, we have that $r=1$ and that $\Arg(z) = \pi$. Thus, we get respective angles of $\pi/4$, $3\pi/4, 5\pi/4, 7\pi/4$.\gline{}
+			Thus our formula is $z=\pm\sqrt 2 \mp i\sqrt 2$
+		\end{problem}
+
+        \item $(1-\sqrt{3}i)^{1/5}$
+		\begin{problem}
+			We follow the same process as above. First, we find the principle angle between the real and imaginary plane:
+			\begin{align*}
+				\Arg(1 - \sqrt 3i) = \tan^{-1}\cpr{-\frac{\sqrt{3}}{1}}= -\frac{\pi}3
+			\end{align*}
+			Next, take note that $r = \sqrt{3 + 1} = 2$. \gline{}
+			With our formula, we get the angles:
+			\begin{align*}
+				-(\pi/15),\pi/3, 11\pi/5, 17\pi/15, 23\pi/15
+			\end{align*}
+			Then, we get all the solutions:
+			\begin{align*}
+				2^{1/5}(e^{i\text{angle (look above)}})
+			\end{align*}
+		\end{problem}
+    \end{enumerate}
+
+    \item Find all values of $z$ satisfying the following equations:
+    \begin{enumerate}
+        \item $z^3+27 =0$
+        \begin{problem}
+			We begin by reformulating the problem: $z = (-27)^{1/3}$. Then, we see that $\Arg(-27) = 0$. Then, we get our values for angles as:
+			\begin{align*}
+				0, 2\pi/3, 4\pi/3
+			\end{align*}
+			We know that $r = 3$, and thus we have that:
+			\begin{align*}
+				z = 3, 3e^{i(2\pi/3)}, 3e^{i(4\pi/3)}
+			\end{align*}
+		\end{problem}
+        \item $z^2=1-i$
+		\begin{problem}
+			We'll solve this for $z = a+bi$. Thus, we get that:
+			\begin{align*}
+				z^2 = a^2 - b^2 + 2abi = 1-i
+			\end{align*}
+			Then, we get that $ab = -1/2$, and that $a^2 - b^2 = 1$. Finally, we know that $|z| = \sqrt{2}$, so $a^2 + b^2 = \sqrt{2}$.\gline{}
+			Thus, we know that $a^2 - b^2 + a^2 + b^2 = 1 + \sqrt{2}$, so $2a = (\sqrt{2} + 1)/2$.\gline{}
+			This means that $b = (\sqrt{2} - 1)/2$. \gline{}
+			Hence, we know that:
+			\begin{align*}
+				z = \pm a - \pm bi
+			\end{align*}
+			For $a,b$ as defined above. 
+		\end{problem}
+		\begin{grade}
+			1/3 points. 
+			\begin{itemize}
+				\item -0.5pts, missing a negative sign on the `3' solution in part (a).
+				\item -1.5pts, missing the third solution for part (b), and the first two solutions for $a$ and $b$ are incorrect, because believe it or not, $\sqrt{2}^2 = 2$, and does not equal $\sqrt{2}$. 
+			\end{itemize}
+		\end{grade}
+    \end{enumerate}
+    
+    \item Find all four roots of the equation $z^4+1 =0$, and use them to deduce the factorization $z^4+1 = (z^2-\sqrt{2}z+1)(z^2+\sqrt{2}z+1)$. (Notice that this factorization is nice because all the coefficients are real numbers, just like the coefficients of the original polynomial. If you've taken Abstract Algebra, this question should remind you of reducible polynomials, splitting fields, and field extensions.)
+	\begin{problem}
+		First, we rewrite the equation in the form $z = (-1)^{1/4}$. Then, we note that $\Arg(z)= \pi$, and that $r = 1$. Thus, our angles are:
+		\begin{align*}
+			\pi/4, 3\pi/4, 5\pi/4, 7\pi/4
+		\end{align*}
+		Thus, we get the four solutions, (with the formula for $cos\theta + i\sin\theta$) of:
+		\begin{align*}
+			z = \pm \frac{\sqrt 2}2 \mp i\frac{\sqrt 2}2
+		\end{align*}
+		From this formulation, we know that $z$ can be represented at the power of four of any of it's representations. If we write:
+		\begin{align*}
+			z^2 \Rightarrow (z^2 - \sqrt 2 z + 1)
+		\end{align*}
+		This is an equivalent representation of $z^2$ that we can use to formulate $z^4$ with:
+		\begin{align*}
+			z^4+1 = (z^2-\sqrt{2}z+1)(z^2+\sqrt{2}z+1)
+		\end{align*}
+	\end{problem}
+    
+    \item Suppose that $\alpha$ and $\beta$ are an $n$th and $m$th roots of unity, respectively. Show that $\alpha\beta$ is a $k$th root of unity for some $k$.
+	\begin{proof}
+		Let $\alpha$ and $\beta$ be $n$th roots of unity. We want to show that $\alpha\beta$ is some $k$th root of unity. \gline{}
+		Thus, we can write $\alpha = e^{i2\pi k_0/n},\;\; \beta = e^{i2\pi k_1/m}$. Thus, we have that:
+		\begin{align*}
+			\alpha\beta = e^{i(\frac{2\pi k}n + \frac{2\pi k}m)}
+		\end{align*}
+		Simplifying so we have a like denominator, we have that:
+		\begin{align*}
+			\alpha\beta = e^{i(\frac{2\pi k m}{nm} + \frac{2\pi k n }{nm})}=e^{i(\frac{2\pi(2\pi* (k_0 m+k_1n))}{nm})}
+		\end{align*}
+		Hence, $\alpha\beta$ is also a root of unity. 
+	\end{proof}
+	\begin{grade}
+		2/2. Proof is complete and correct and in math notation. 
+	\end{grade}
+\end{enumerate}
+
+\begin{reflection}
+	\textbf{Collaboration Statement: } I worked with TJ a bit on the first couple of problems of this assignment in the CIR room. I also helped Acja a bit for problem 7. 
+\end{reflection}
+
+
+\subsection*{Reflection Questions for HW 2}
+    \begin{itemize}
+        \item What do you understand well and what is working well for you in learning the material?
+
+        \begin{reflection}
+			I think I got a much stronger grasp of solving for roots of unity and understanding how to convert numbers between each different coodinate system. Although I've been tired during class, I still think I've been learning the material, which I'm very happy about. Also I think my LaTeX formatting is consistently getting better with time.
+		\end{reflection}
+
+        \item What do you need to keep studying and what are some habits you can change/pick up to learn the material better?
+
+        \begin{reflection}
+			I really need to focus a lot more on details. There's a couple of small things that I missed that would have been very easy to correct, like:
+			\begin{itemize}[itemsep=0pt, parsep=0pt]
+				\item Not remembering to finish question 3. 
+				\item Dropping negative signs
+				\item Not writing answers in the form the question asks for. 
+				\item Simple calculation errors (e.g. ($\sqrt{2}^2 = \sqrt{2}$))
+			\end{itemize}
+			I dont think it's because I don't understand the material, but more that I'm not completing the homework to the standards I set for myself, and missing out on clear avenues to demonstrate proficiency. 
+		\end{reflection}
+    \end{itemize}
