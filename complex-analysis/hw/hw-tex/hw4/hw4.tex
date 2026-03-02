@@ -1,0 +1,128 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% HW 4 %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{HW 4: Due Wednesday 3/04 by 8:00pm \\ Self Grade (due Friday 3/06 by 10:40am): **/12} 
+\subsection*{HW 4a - Section 2.2-1}
+\begin{enumerate}
+\item Find each of the following limits.
+	\begin{enumerate}
+	\item $\lim_{n\to \infty} \frac{n(2+i)}{n+1}$
+	\begin{problem}
+		The limit in this case will be $2+i$. This is because as $n\to\infty$, we see:
+		\begin{align*}
+			\frac{\infty(2+i)}{\infty} \Rightarrow (2+i)
+		\end{align*}
+	\end{problem}
+	\item $\lim_{n\to \infty} \lpa\frac{1-i}{4}\rpa ^n$
+	\begin{problem}
+		It will helpful to observe the behavior of $(1-i)$ with additonal powers:
+		\begin{align*}
+			(1-i)^2 &= 2i \\
+			(1-i)^3 &= 2i-2\\
+			(1-i)^4 &= -4
+		\end{align*}
+		Thus we can continuously look at consecutive powers of 2 of the equation. Here, we have that:
+		\begin{align*}
+			n =4 &\Rightarrow \frac{-4}{4^4} = -4^{-3}\\
+			n = 8 &\Rightarrow \frac{4^2}{4^8} = \ 4^{-6}\\
+			n = 16 &\Rightarrow \frac{4^4}{4^{16}} =  4^{-12}
+		\end{align*}
+		Thus, the denominator outpaces the numerator without bound, and thus the limit is 0. 
+	\end{problem}
+	\item $\lim_{z\to 2} \frac{z^2 +3}{iz}$
+	\begin{problem}
+		Because the limit exists at $2$, we just evaluate for 2:
+		\begin{align*}
+			\lim_{z\to2}\frac{z^2+3}{iz}=\frac{7}{2i}=-\frac{14i}{4}
+		\end{align*}
+	\end{problem}
+
+	\item $\lim_{z\to i} \frac{z^2-2zi -1}{z^4-1}$
+	\begin{problem}
+		First, we try evaluating the limit via factoring:
+		\begin{align*}
+			\frac{z^2-2zi -1}{z^4-1} &= \frac{(z-i)(z-i)}{(z^2+1)(z^2-1)}\\
+			&= \frac{(z-i)(z-i)}{(z-i)(z+i)(z-1)(z+1)}\\
+			&=\frac{(z-i)}{(z-1)^2(z+i)}
+		\end{align*}
+		Then, as we take the limit as $z\to i$, we just get 0. 
+	\end{problem}
+	
+	\item $\lim_{\Delta z \to 0} \frac{(z_0 + \Delta z)^2 -z_0^2}{\Delta z}$
+	\begin{problem}
+		This limit exists for thi question. Consider that:
+		\begin{align*}
+			\lim_{\Delta z\to0}\cpr{\frac{(z_0+\Delta z)^2 - z_0^2}{\Delta z}}&=\lim_{\Delta z\to0}\cpr{\frac{z_0^2 + 2z_0\Delta z + \Delta z^2 - z_0^2}{\Delta z}}\\
+			&= \lim_{\Delta z\to0}\cpr{2z_0 + \Delta z}\\
+			&= 2z_0
+		\end{align*}
+	\end{problem}
+	\end{enumerate}
+
+\item \begin{enumerate}
+	\item Determine the following limits, if they exist. If they do not exist, explain why. ({\it Note: $\infty$ is a valid answer to a limit.})
+		\begin{enumerate}
+		\item $\lim_{x\to \infty} e^x$
+			\begin{problem}
+				The limit is just $\infty$ here. 
+			\end{problem}
+		\item $\lim_{x\to -\infty} e^x$
+			\begin{problem}
+				The limit is 0 here, because negative exponents get closer to 0. 
+			\end{problem}
+		\item $\lim_{y\to \infty} e^{iy}$
+			\begin{problem}
+				I don't think the limit exists, because this is just rotating around the complex and real plane over and over again and never converges to a single value. 
+			\end{problem}
+		\item $\lim_{y\to -\infty} e^{iy}$
+		\begin{problem}
+			This is the same as the last problem, it just rotates clockwise now forever, never settling on a value. The limit doesn't exist. 
+		\end{problem}
+		\end{enumerate}
+	\pagebreak
+	\item The function $f(z) = e^z$ is defined for all of $\C$. Suppose we wanted to extend the domain of definition of $f$ to the extended complex plane. Based on your answer in (a), is this possible? If so, what value should we assign to $f(\infty)$? If not, explain why not.
+	\begin{problem}
+		I think this is probably not possbile. If we were to assign it to infinity, all infinities would need to eventually lead to the same path. However, with each infinity, it leads to a different result, and that means that there's no well-defined output for $f(\infty)$, so we can't extend it. 
+	\end{problem}
+	\end{enumerate}
+\end{enumerate}
+
+
+\subsection*{HW 4b - Section 2.2-2}
+\begin{enumerate}
+\setcounter{enumi}{2}
+\item Suppose $f(z)$ is continuous at $z_0$. Prove that $\overline{f(z)}$,  $\Re(z)$, and $\Im(z)$ are all continuous at $z_0$ by writing each one as a combination of continuous functions.
+
+\item Explain why each function $f(z)$ is continuous at $z_0$, then evaluate $\lim_{z \to z_0} f(z)$.
+\begin{enumerate}
+	\item $f(z) = |3z^2-5|, \quad z_0 = 2+i$
+	\begin{problem}
+		
+	\end{problem}
+	\item $f(x+iy) = x^2-y^2, \quad z_0 = e^{i\pi/4}$
+	
+	\item $f(z) = \frac{\overline{z}-z^3}{(2z-i)^4}, \quad z_0 = i$
+
+\end{enumerate}
+
+\item Let $f(z)$ be defined by
+	\[f(z) = \begin{cases} 2z/(z+1) &\text{ if } z\neq 0,\\ 1 &\text{ if } z=0 \end{cases}. \]
+At which points does $f(z)$ have a finite limit, and at which points is it continuous? Which of the discontinuities of $f$ are removable?
+
+\end{enumerate}
+
+
+
+
+\subsection*{Reflection Questions for HW 4}
+    \begin{itemize}
+        \item What do you understand well and what is working well for you in learning the material?
+
+
+        \item What do you need to keep studying and what are some habits you can change/pick up to learn the material better?
+
+    \end{itemize}

@@ -132,368 +132,114 @@
 
 
 \begin{document}
-\LetLtxMacro{\oldint}{\int}
-\renewcommand{\int}[2]{{\oldint_{#1}^{#2}\!}}
-\noindent Assigned Problems:\\
-\textbf{Chatper 1: }29, 33, 36, 40, 43, 48, 52\\
-\textbf{Chapter 2: }1
-\subsection*{Chapter 1}
-\subsubsection*{Problem 29}
-Calculate the line integral of the function $\vv = \pvec{x^2, 2yz, y^2}$ from the origin to the point $\pvec{1, 1, 1}$ by three different routes.
-\begin{enumerate}
-  \item [(a)] $\pvec{0, 0, 0} \to \pvec{1, 0, 0}\to \pvec{1, 1, 0}\to \pvec{1, 1, 1}$
-  \begin{problem}
-    We begin by paramaterizing the curve for each part of the problem. \gline{}
-    For $\pvec{0,0,0}\to\pvec{1,0,0}$, we paramaterize with $\vec r(t)= \pvec{t,0,0}$, $\vec r'(t) = \pvec{1, 0, 0}$. Solving the integral for $t:[0, 1]$ gives:
-    \begin{align*}
-      \int{0}   1\pvec{t^2, 0, 0}\cdot \pvec{1, 0 ,0} \,dt=\left[\cpr{\frac{t^3}3}\Big|_0^1\right]=\frac{1}3
-    \end{align*}
-    For $\pvec{1, 0, 0}\to \pvec{1, 1,0}$, we paramaterize as $\vec r(t) = \pvec{1, t, 0}, \vec r '(t) = \pvec{0, 1, 0}$. Solving the integral for $t:[0, 1]$ gives:
-    \begin{align*}
-      \int{0}   1 \pvec{1, 0, t^2}\cdot\pvec{0, 1, 0}\,dt = 0
-    \end{align*}
-    For $\pvec{1, 1,0}\to \pvec{1, 1, 1}$, we paramaterize as $\vec r(t) = \pvec{1, 1, t}, \vec r'(t) = \pvec{0, 0, 1}$. Solving the integral for $t:[0,1]$ gives:
-    \begin{align*}
-      \int{0}   1 \pvec{1, 2t, 1}\cdot \pvec{0, 0, 1}\, dt = \int{0}   1 1\,dt = 1
-    \end{align*}
-    Adding together all of our integrals gives:
-    \begin{align*}
-      \frac{1}3 + 0 + 1 = \boxed{\frac{4}3}
-    \end{align*}
-  \end{problem}
-  \item [(b)]$\pvec{0,0,0}\to\pvec{0,0,1}\to\pvec{0, 1, 1}\to\pvec{1, 1, 1}$
-  \begin{problem}
-    We follow the same process as the previous question. We will paramaterize the curve for each part of the problem. \gline{}
-    For $\pvec{0,0,0}\to\pvec{0,0,1}$, we paramaterize as $\vec r (t) = \pvec{0, 0, t}, \vec r'(t) = \pvec{0, 0, 1}$. For $t: 0\to 1$, we have that:
-    \begin{align*}
-      \int{0}   1 \pvec{0, 0, 0}\cdot\pvec{0,0, 1}\,dt= 0
-    \end{align*}
-    For $\pvec{0,0,1}\to\pvec{0, 1, 1}$, we paramaterize as $\vec r(t)= \pvec{0, t, 1},r'(t) = \pvec{0, 1, 0}$. For $t:0 \to 1$, we have that:
-    \begin{align*}
-      \int{0}   1 \pvec{0, 2t, 1}\cdot\pvec{0, 1, 0}\,dt = \int{0}   1 2t \, dt = t^2\Big|_0^1 = 1
-    \end{align*}
-    Finally, for $\pvec{0,1,1}\to\pvec{1,1,1}$, we paramaterize as $\vec r(t)=\pvec{t,1,1}, r'(t)=\pvec{1, 0, 0}$ for $t:0\to 1$.
-    \begin{align*}
-      \int{0}   1\pvec{t^2, 2, 1}\cdot\pvec{1, 0,0}\,dt=\int{0}   1 t^2\,dt = \frac{1}3t^3\Big|_0^1=\frac{1}3
-    \end{align*}
-    Adding up all of our integrals gives:
-    \begin{align*}
-      1 + 0 +\frac{1}3=\boxed{\frac{4}3}
-    \end{align*}
-  \end{problem}
-  \item [(c)]The direct straight line.
-  \begin{problem}
-    We will imagine our curve as going directly from $\pvec{0, 0,0}\to\pvec{1, 1,1}$. Thus, we have our paramaterization as $\vec r(t) = \pvec{t, t, t}\, r'(t)=\pvec{1, 1, 1}$, for $t:[0, 1]$. Plugging into our integral gives:
-    \begin{align*}
-      \int{0}   1\pvec{t^2, 2t^2, t^2}\cdot\pvec{1, 1, 1}\,dt &= \int{0}   1 4t^2\,dt\\
-      &= \frac{4}3t^3\Big|_0^1\\
-      &= \boxed{\frac{4}3}
-    \end{align*}
-  \end{problem}
-  \item [(d)] What is the line integral aournd the closed loop that goes \textit{out} along path (a) and \textit{back} along path (b)?
-  \begin{problem}
-    If we reverse the integrals along path $b$, we get that the line integral is just negative of our intiial result, so we get that:
-    \begin{align*}
-      \frac{4}3-\frac{4}3 = 0
-    \end{align*}
-    However, there is a more intuitive solution to this problem. Consider the potential function $f(x, y, z) = \frac{1}3x^3 + y^2z$. Note that $\nabla f(x,y,z) = \vv$. Thus, because we can generate a potential function for our vector field, our vector field is conservative.\gline{}
-    Thus, the solution to this problem (and any point where the start and end paths are the same), is zero. We can check our potential function against each part of this problem:
-    \begin{align*}
-      f(1, 1, 1) - f(0, 0, 0) = \frac{4}3
-    \end{align*}
-  \end{problem}
-\end{enumerate}
-\newpage
-\subsubsection*{Problem 33}
-Test the divergence theorem for the function $\vv = \pvec{xy, 2yz,3zx}$. Take your volume as the cube shown below, with sides of length two:
-\gimage{image.png}{4cm}
+
+
+\newcommand{\vE}{{\mathbf{E}}}
+\newcommand{\vr}{{\mathbf{r}}}
+\newcommand{\etahat}{\hat{\mathbf{\eta}}}
+\textbf{Chapter 2 problems:} 6, 7, 12, 15, 18, 22, 29
+\subsection*{Problem 6}
+Find the electric field a distance $z$ above the center of a flat circular dist of radius $R$ that carries a uniform surface charge $\sigma$. What does your formula give in the limit $R\to\infty$? Also check the case $z\gg R$. 
 \begin{problem}
-  To show the divergence theorem holds for this box, we will show that:
+  Via the textbook, we have that the formula for an electric field of surface charge is given by:
   \begin{align*}
-    \iint_S \vv\cdot d\vec S \,dS = \iiint_V \nabla\cdot \vv \, dV
+    \vE(\vr) = \frac{1}{4\pi \varepsilon_0}\int \frac{\sigma(\vr')}{\eta^2}\hat\eta \,da'
   \end{align*}
-  First, we check the brute force way, with each side of the cube.
-  \begin{subproblem}{Subproblem}
-    \textbf{Bottom Side.} Consider for the bottom side of the cube, we have our surface as $S(u,v) = \pvec{u, v, 0}$, for $u, v: [0, 2]$. Now, we calcualte $S_u \times S_v$ to be:
-    \begin{align*}
-      \crossprod{1}{0}{0}{0}{1}{0} = \pvec{0,0, 1}
-    \end{align*}
-    Now, dotting our surface with our field gives:
-    \begin{align*}
-      \int{0}   2\int{0}   2 \pvec{uv, 0, 0}\cdot \pvec{0, 0, 1}\,du\,dv = {0}
-    \end{align*}
-    \textbf{Top Side.} On the top side of the cube, we model our surface as $S = \pvec{u, v, 2}$ for $u,v:[0, 2]$. We calculate our cross product to be the same as the \textbf{Bottom Side}, $\pvec{0, 0, 1}$. Plugging into our integral gives:
-    \begin{align*}
-      \int{0}2\int{0}2 \pvec{uv, 4v, 6u}\cdot\pvec{0, 0, 1}\,du dv &= \int 0 212\,dv\\
-      &= \boxed{24}
-    \end{align*}
-    \textbf{Left Side.} On the left size of the box, we paramaterize our surface as $S(u,v)=\pvec{u, 0, v}$, for $u,v:[0,2]$. Calculating the cross product of $S_u, S_v$ gives us:
-    \begin{align*}
-      \crossprod{0}{0}{1}{1}{0}{0}=\pvec{0, -1, 0}
-    \end{align*}
-    Plugging our paramaterization into the surface integral gives:
-    \begin{align*}
-      \int 0 2\int 0 2\pvec{0, 0, 3uv}\cdot\pvec{0, 1, 0}\,dudv = 0
-    \end{align*}
-  \end{subproblem}
-  \begin{subproblem}{}
-    \textbf{Right Side}. For the side of the cube, our paramaterization is $S(u,v)=\pvec{u, 2, v}$ for $u,v:[0,2]$. The cross product is the same as above. Plugging in our paramaterization gives:
-    \begin{align*}
-      \int 0 2\int 0 2 \pvec{2u, 4v, 3uv}\cdot\pvec{0, 1, 0}\,dudv &= \int 0 2-8v\,dv\\
-      &=-4v^2\Big|_0^2 = \boxed{16}
-    \end{align*}
-    \textbf{Back Side.} For the back side of the cube, we paramaterize as $S(u,v) = \pvec{0, u, v}$. Calculating the cross product gives:
-    \begin{align*}
-      \crossprod{0}{1}{0}{0}{0}{1}=\pvec{1, 0, 0}
-    \end{align*}
-    Plugging our paramaterization into the integral gives:
-    \begin{align*}
-      \int02\int02\pvec{0, 2uv, 0}\cdot\pvec{1, 0, 0}\,dudv = \boxed{0}
-    \end{align*}
-    \textbf{Front Side.} For the front side of the cube, we paramaterize with $S(u,v)=\pvec{2, u, v}$. The cross product is the same as above. Plugging into the surface integral gives:
-    \begin{align*}
-      \int02\int02\pvec{2u, 2uv, 6v}\cdot\pvec{1, 0, 0}\,dudv &= \int02 4 \,dv=\boxed{8}
-    \end{align*}
-    Adding up all of our results together gives:
-    \begin{align*}
-      0 + 0 + 0 + 24 + 8 + 16 = \boxed{48}
-    \end{align*}
-  \end{subproblem}
-  Now, we check if this aligns with our expectations for the divergence theorem. 
-  \begin{subproblem}{Subproblem.}
-    We want to check to see if $\iiint_V \nabla\cdot \vv\,dV = 16$. Our cube follows the simple paramaterization: $V(x,y,z)=\pvec{x,y,z}$, for $x,y,z:[0, 2]$. Now, we calculate the divergence:
-    \begin{align*}
-      \nabla\cdot \vv = y+2z+3x.
-    \end{align*}
-    Plugging into our equation gives us:
-    \begin{align*}
-      \int02\int02\int02 3x + y + 2z\,dxdydz &= \int02\int02 6 + 2y + 4z\,dydz\\
-      &= \int02 12 + 4 + 8z\,dz\\
-      &= 24 + 8 + 16 = \boxed{48}
-    \end{align*}
-  \end{subproblem}
-  Thus, the divergence theorem holds in this case, and is significantly easier than taking a total of six surface integrals. 
+  Thus, in order to solve this equation, we note that our integral must cover from $[0,2\pi]$ and from $[0, R]$. Furthermore, we know that in this case, $da' = \sigma d\ell'$.\gline{}
+  When we integrate out from 0 to $R$, the charge stored in each ring is equal to $\sigma 2\pi \cdot r$, where $r$ is our integration variable. Thus, in Cylindrical coordinates, we have:
+  \begin{align*}
+    \frac{1}{4\pi\varepsilon_0}\int_0^{2\pi}\int_0^R \frac{\sigma\cdot 2\pi\cdot \pvec{r\cos\phi, r\sin\phi, -z}}{(r^2 + z^2)^{3/2}}r\, dr d\phi\\
+  \end{align*}
+  Solving this integral with Mathematica gives us that:
+  \begin{align*}
+    \vE = \frac{\sigma}{2\varepsilon_0}\cpr{1-\frac{z}{\sqrt{R^2 + z^2}}}
+  \end{align*}
+  If we observe, as $R\to\infty$, our equation evaluates to $\frac{\sigma}{2\varepsilon_0}$. However, as $z\to\infty$, we get that the electirc field goes to 0. 
 \end{problem}
-\subsubsection*{Problem 36}
-\begin{enumerate}
-  \item [(a)] Show that:
-  \begin{align*}
-    \int S{}f(\nabla\times \vA)\cdot d\vec a = \int S{}[\vA \times(\nabla f)]\cdot d\vec a + \oint_P f\vA \cdot d\vec\ell
-  \end{align*}
-  \begin{problem}
-    Consider that via the product rule, we have that:
-    $$\nabla \times (f\vA)=f(\nabla\times A )- \vA \times(\nabla f).$$
-    Thus, we have that:
-    \begin{align*}
-      \int S{}f(\nabla\times\vA)\cdot d\vec a = \int S{}\nabla \times (f\vA) +  \vA \times(\nabla f)\cdot d\vec a
-    \end{align*} 
-    Note that via Stoke's theorem, we have that:
-    $$\int S{} \nabla\times(f\vA)=\oint_P f\vA \cdot d\vec\ell$$
-    Thus, we have the relation:
-    \begin{align*}
-      \int S{}f(\nabla\times \vA)\cdot d\vec a = \int S{}[\vA \times(\nabla f)]\cdot d\vec a + \oint_P f\vA \cdot d\vec\ell.
-    \end{align*}
-  \end{problem}
-  \item [(b)] Show that:
-  \begin{align*}
-    \int V{} \vB\cdot(\nabla\times\vA)d\tau = \int V{}\vA\cdot(\nabla\times\vB)d\tau + \oint_S(\vA\times\vB)\cdot d\vec a
-  \end{align*}
-  \begin{problem}
-    Via one of the product rules, we have that: 
-    $$\nabla\times(\vA\times\vB)=\vB\cdot(\nabla\times \vA)-\vA\cdot(\nabla F).$$
-    Thus, we have that:
-    \begin{align*}
-      \int V{}\vB\cdot(\nabla\times\vA)d\tau = \int V{}\nabla\cdot(\vA\times\vB)+\vA\cdot(\nabla\times \vB)
-    \end{align*}
-    I notice something resembling the divergence theorem, so we substitute in for our answer:
-    \begin{align*}
-      \int V{} \vB\cdot(\nabla\times\vA)d\tau =  \oint_S(\vA\times\vB)\cdot d\vec a+\int V{}\vA\cdot(\nabla\times\vB)d\tau 
-    \end{align*}
-  \end{problem}
-\end{enumerate}
-\subsubsection*{Probelm 40}
-Compute the divergence of the function:
-\begin{align*}
-  \vv = \pvec{r\cos\theta, r\sin\theta, r\sin\theta\cos\phi}
-\end{align*}
-Check the divergence theorem for this function, using as your volume the inverted hemispherical bowl of radius $R$, resting on the $xy$ plane and centered at the origin. 
+\subsection*{Problem 7}
+Find the electric field a distance $z$ from the center of a spherical surface of radius $R$ that carries a uniform charge density $\sigma$. Treat the case $z < R$ (inside) as well as $z>R$ (outside). Express your answers in terms of the total charge $q$ on the sphere.
 \begin{problem}
-  We will compute the divergence, and check the divergence theorem for this function. 
-  \begin{subproblem}{Solving the Divergence.}
-    First, we check the divergence. Note that our $\nabla$ is different for spherical:
-    \begin{align*}
-      \nabla = \pvec{\prt{}r, \quad\frac{1}{r}\prt{}{\theta},\quad \frac{1}{r\sin\theta}\prt{}{\phi}}
-    \end{align*}
-    Now, we begin solving:
-    \begin{align*}
-      \nabla\cdot\vv &= \frac{1}{r^2}\prt{}r(r\,r\cos\theta)+\frac{1}{r\sin\theta}\prt{}{\theta}(r\,r\sin\theta\sin\theta) + \frac{1}{r\sin\theta}\prt{}{\phi}(r\sin\theta\cos\phi)\\
-      &=5\cos\theta - \sin\phi
-    \end{align*}
-  \end{subproblem}
-  Next, we solve the divergence theorem here:
-  \begin{subproblem}{Checking Divergence Theorem. }
-    So first we'll prove the $\int V{}$ part of the problem:
-    \begin{align*}
-      \int V{}(\nabla\cdot\vv)d\tau &= \int0{\pi/2}\int0{2\pi}\int0{R}(5\cos\theta - \sin\phi)r^2\sin\theta \,drd\theta d\phi\\
-      &= \int0{\pi/2}\int0{2\pi}\frac{1}3R^3(5\cos\theta - \sin\phi)r^2\sin\theta\\
-      &\to \text{sin goes to 0}\\
-      &\Rightarrow \cos\theta\sin\theta = \frac{1}2\sin(2\theta)\\
-      &= -\frac{10\pi}{3}R^3\frac{1}4\cos\theta \Big|_0^{\pi/2}\\
-      &= \frac{5\pi}{3}R^3
-    \end{align*}
-    Next, we'll show that this works with the surface integral. 
-  \end{subproblem}
-\end{problem}
-\subsection*{Problem 43}
-\begin{enumerate}
-  \item Find the divergence of the function:
+  This problem is somewhat similar to the previous, in that we just take a surface integral to determine the electric field. In this case, we have that:
   \begin{align*}
-    \vv = \pvec{s(2+\sin^2\theta), s\,\sin\phi\cos\phi, 3z}
+    r' &= \pvec{z\cos\theta\sin\phi, z\sin\theta\sin\phi,z\cos\phi}\\
+    &=\pvec{r, \theta, \phi}\Rightarrow \text{ in spherical.}
   \end{align*}
-  \begin{problem}
-    Note that our divergence formula is a little bit different:
-    \begin{align*}
-      \nabla\cdot f =\pvec{ \frac{1}{s}\prt{f_s}{s},\frac{1}s\prt{f_\phi}\phi,\prt{f_z}{z} }
-    \end{align*}
-    Now, we solve for the divergence. 
-    \begin{align*}
-      \nabla\cdot \vv &= \frac{1}s\cdot\prt{s(2+\sin^2\theta)}{s} + \frac{1}s\prt{s^2\sin\phi\cos\phi}{\phi}+\prt{3z}{z}\\
-      &= 2(2+\sin^2\theta)+(\cos^2\theta - \sin^2\theta)+3\\
-      &= 4 + 2\sin^2\theta - \sin^\theta +\cos^2\theta + 3\\
-      &= 8
-    \end{align*}
-  \end{problem}
-  \item Now, we have to test for the divergence theorem. 
-  \begin{problem}
-    First, we apply the actual divergence theorem.
-    \begin{subproblem}{Divergence Theorem.}
-      Here, because we just have a constant, 8, for our divergence, the integral simplifies to:
-      \begin{align*}
-        8\cdot\iiint_V 1 dV
-      \end{align*}
-      So this is just the area of the quarter cylinder, which is $\frac{1}4(5*4\pi)\cdot 8 = 8*5\pi = 40\pi$
-    \end{subproblem}
-    Next, we test for each surface fo the cylinder. 
-    \begin{subproblem}{Solving Surface Integrals.}\gline{}
-      \textbf{Bottom: } Paramaterization: $\pvec{2, t, 0}, '\to\pvec{0,1,0}$ $t:[0,\pi/2]\Rightarrow \vv\cdot d\vec a = 0$.
-      \textbf{Top: }$\pvec{2, t, 5} '\to\pvec{0, 1,0}, t:[0, \pi/2]\Rightarrow 15\cdot\int02 s\int0{\pi/2}d\phi=15\pi$ \\
-      \textbf{Front:} Mathematics gives $25\pi$.\\
-      \textbf{Left and back side: }0\gline{}
-      Total: $40\pi$.
-    \end{subproblem}
-    Thus, the divergence theorem holds
-  \end{problem}
-  \item [(c)] The curl here will be 0. 
-\end{enumerate}
-\subsection*{Problem 48}
-Evaluate the following integrals:
-\begin{enumerate}
-  \item [(a)] $\int{}{} (r^2+\vec r \cdot \vec a + a^2)\delta^3(\vec r - \vec a)$
-  \begin{problem}
-    So we evaluate the value of $\vec r$ at $\vec a$. Thus, we just get:
-    \begin{align*}
-      \int{}{}a^2 + \vec a \cdot \vec a + a^2 \,dr = 3a^2
-    \end{align*}
-  \end{problem}
-  \pagebreak
-  \item [(b)] $\int{}{}(\vec r - \vec b)^2\frac{1}{125}\delta^3(5\vec r)d\tau$
-  \begin{problem}
-    All we do is evaluate it when $\vec r=\vec0$.This just gives us:
-    \begin{align*}
-      (\vec b^2)\frac{1}{125}.
-    \end{align*}
-    Because $\vec b = \pvec{4, 3}$, we have that $|b|^2 =25$, so we just get a result of $\boxed{\frac{25}{125}=\frac{1}5}$.
-  \end{problem}
-  \item [(c)]$\int{V}{}[r^4+r^2(\vec r \cdot \vec c)+c^4]\delta^3(\vec r - \vec c)d\tau$, sphere of radius 6, for $\vec c = \pvec{5, 3, 2}$.
-  \begin{problem}
-    Thus, we evaluate $\vec r$ at $\vec c$. We get:
-    \begin{align*}
-      \int{V}{}{c^4 + c^2(\vec c \cdot \vec c) + c^4}\,d\tau = \int{V}{}3c^4\,d\tau.
-    \end{align*}
-    Note that $c^4$ here is $1444$. This is actually outside of our sphere, so the resulting integral is probably zero. I'm not gonna check.  
-  \end{problem}
-  \item [(d)]$\int{V}{}\vec r \cdot (\vec d - \vec r)\delta^3(\vec e - \vec r)d\tau$. Here, $\vec d = \pvec{1,2, 3}, \vec e = \pvec{3, 2, 1}$, $V$ is a sphere of radius 1.5 at $\pvec{2, 2, 2}$. 
-  \begin{problem}
-    We begin by evaluating the integral at $\vec e = \vec r$. Thus, we have:
-    \begin{align*}
-      \vec e \cdot(\vec d - \vec e)
-    \end{align*} 
-    Thus, we just evaluate and get:
-    \begin{align*}
-      \pvec{3, 2, 1}\cdot\pvec{-2,0,2}= -4
-    \end{align*}
-  \end{problem}
-\end{enumerate}
-\subsubsection*{Problem 52}
-For Theorem 2, show that $(d)\Rightarrow (a), (a)\Rightarrow (c), (c)\Rightarrow(b), (b)\Rightarrow (c), $and $(c)\Rightarrow (a)$.  
-\begin{problem}
-  \begin{subproblem}
-    First we show $(d)\Rightarrow(a)$.\gline{}
-    Consider that $F$ is the curl of a vector function. $F=-\nabla \vA$. Thus, we have that:
-    \begin{align*}
-      \nabla\cdot(\nabla\times \vA)
-    \end{align*}
-    Note that with our $\nabla\cdot \vA$, we have that:
-    \begin{align*}
-      \nabla\times\vA=\pvec{\prt{a_2}{z}-\prt{a_3}{y}, \prt{a_1}{z} - \prt{a_3}{a}, \prt{a_2}{x}-\prt{a_1}{y}}
-    \end{align*}
-    Then, because partials distribute with $\nabla$, we basically just end up with a bunch of terms that cancel, like for:
-  \end{subproblem}
-  \begin{subproblem}{}
-    \begin{align*}
-      \nabla = \pvec{\prt{}{x},\prt{}{y},\prt{}{z}}
-    \end{align*}
-    We get $\nabla\cdot(\nabla\times\vA)=\vec 0$
-  \end{subproblem}
-  \begin{subproblem}{}
-    Next, we show $(a)\Rightarrow(c)$.\gline{}
-    We assume $\nabla\cdot F = 0$.This one's pretty simple. Via the divergence theorem, we convert:
-    \begin{align*}
-      \oint F \cdot d\vec a = \iiint_V \nabla\cdot F = 0
-    \end{align*}
-  \end{subproblem}
-  \begin{subproblem}{}
-    Next,we show that $(c)\Rightarrow(b)$. \gline{}
-    We assume that $\oint F\cdot d\vec a=0$. Note that for any given surface, we know that via green's theorem, that if we combine any number of line integrals that go back to the same point, we get:
-    \begin{align*}
-      \int{I_1}{}F\cdot d\vec a + \int{I_2}{}F\cdot d\vec a \cdot  + \cdots =\oint F\cdot d\vec a = 0
-    \end{align*}
-    Thus, regardless of surface, boundary line is identical. 
-  \end{subproblem}
-  \begin{subproblem}{}
-    Now, we show that $(c)\Rightarrow (b)$. This is the same exact proof as the last problem, beacuse it's an equality proof, so it's automatically an ``if an only if'' proof. 
-  \end{subproblem}
-  \begin{subproblem}{}
-    Next, we will show $(a)\Rightarrow(c)$. The proof from $(c)\Rightarrow(a)$ is also an equality proof, so $(c)\Rightarrow (a) \implies (a)\Rightarrow(c)$ for my example.  
-  \end{subproblem}
+  However, we're going to simplify this problem by just points the sphere in the direction of the $z$, because this is symmetrical. Thus we get that $z$ is just going to rest at $\pvec{z, 0, 0}$.\gline{} 
+  Now, to get the distance to $z$, it's simply just the $\sqrt{R^2 + z^2 + R\cos\phi}$ in each of the spherical directions. Now, with that $dq = \sigma R^2\sin\phi d\phi d\theta$, we get the disgusting integral 
+  \begin{align*}
+    &=\frac{1}{4\pi\varepsilon_0}\int_0^{2\pi}\int_0^{\pi}\frac{\sigma R^2 (z-R\cos\phi)}{(R^2+z^2-2Rz\cos\phi)^{3/2}}d\phi d\theta\\
+    &=\frac{1}{4\pi\varepsilon_0}(2\pi R^2\sigma)\int_0^\pi \frac{(z-R\cos\phi)\sin\phi}{(R^2+z^2-2Rz\cos\theta)^{3/2}}\\
+    &\text{Solving using mathematica gives: }\\
+    &=\frac{1}{4\pi\varepsilon_0}\frac{2\pi R^2\sigma}{z^2}\cpr{\frac{(z-R)}{|z-R|}-\frac{(z+R)}{|z+R|}}
+  \end{align*}
+  Via this formulation, if $z > R$, then $\vE = \frac{1}{4\pi\varepsilon_0}\frac{4\sigma\pi R^2}{z^2}$. However, if inside the sphere, because the electric field from all directions will cancel out, we have that $\vE = 0$. 
 \end{problem}
-\subsection*{Chapter 2}
-\subsubsection*{Problem 1}
-\begin{enumerate}
-  \item [(a)] Twelve equal charges, $q$, are situated at the corners of a regular 12-sided polygon. What is the net force on a test charge $Q$ at the center. 
-  \begin{problem}
-    The net force on this test charge is 0, because for each charge, there is another equal charge equidistance, but opposite in unit vector from it, so thus, force cancels. 
-  \end{problem}
-  \pagebreak
-  \item[(b)] Suppose \textit{one} of the 12 $q$s is removed (at 6 o-clock). What is the force on $Q$? Explain your reasoning.
-  \begin{problem}
-    The same cancelation applies to all the charges in the previous problem, \textit{except} the one at 12 o'clock, so the unit vector will point directly down from it:
-    \begin{align*}
-      \vec F = \frac{1}{4\pi\varepsilon_0}\cdot\frac{Qq}{r^2}\cdot \hat r
-    \end{align*}
-    Here, $\hat r = \pvec{0, -1, 0}$ if we assume our polygon is bound in the x-y plane, and $r$ is the distance from center to one point of the polygon. 
-  \end{problem}
-  \item[(c)] Now 13 equal charges, $q$, are placed at the corners of a regular 13-sided polygon. What is the force on a test charge $Q$ at the center?
-  \begin{problem}
-    Now, this one appears a little more complicated, but I think it's still just $\textbf{zero}$. Every charge pulls equally on the charge at fixed intervals of angles around $Q$. Thus, if the net force was \textit{not} zero, then there is a charge that the Force \textit{leans} towards. However, this is not possible because all charges are indistinguishable from one another. Thus the net charge must be zero. 
-  \end{problem}
-  \item[(d)] If one of the 13$q$s is removed, what is the force on $Q$? 
-  \begin{problem}
-    Instead of treating these as charge pairs, imagine we just placed a charge of $-q$ at the place where we removed that $q$ instead of removing it. It's an equivalent system in terms of electric field. Thus, we just point towards that charge:
-    \begin{align*}
-      \vec F = \frac{1}{4\pi\varepsilon_0}\cdot\frac{Qq}{r^2}\cdot\hat r
-    \end{align*}
-    Where $\hat r$ points towards the 'missing' charge. 
-  \end{problem}
-\end{enumerate}
+\subsection*{Chapter Problem 12}
+Use Gauss' law to find the electric field inside and outside a spherical shell of radius $R$ that carries a uniform surface charge density $\sigma$. Compare your answer to Prob. 2.7; notive how much quicker and easier Gauss' method is. 
+\begin{problem}
+  Ok, this problem will be way simpler because of the niceties of Gauss' law. We know that the surface area of the sphere is $4\pi^2 r^2$. Thus, we get to go like:
+  \begin{align*}
+    |E|(4\pi r^2) = \frac{Q_\text{enclosed}}{\varepsilon_0}
+  \end{align*}
+  For $Q_\text{enclosed}$ by the entire surface, we have that it's just $\sigma 4\pi R^2$. Thus, we have that:
+  \begin{align*}
+    |E| = \frac{Q_\text{enclosed}}{\varepsilon_0 4\pi^2 r^2}=\frac{4\pi R^2\sigma}{4\pi r^2\varepsilon_0} = \frac{\sigma R^2}{r^2\varepsilon_0}\hat r
+  \end{align*}
+\end{problem}
+\subsection*{Problem 15}
+Find the electric field inside a sphere that carries a charge density proportional to the distance from the center, $\rho = kr$ for some constant $k$. [\textit{Caution:} This charge density is \textit{not} uniform, and you must \textit{integrate} to get the enclosed charge.]
+\begin{problem}
+  Ok, for this one, we will first calculate the total charge enclosed for the constant given by $\rho$. 
+  \begin{align*}
+    Q&=\int_0^\pi\int_0^{2\pi}\int_0^R kr\,r^2\sin\phi\,drd\theta d\phi\\
+    &=\int_0^\pi\int_0^{2\pi}\left[\frac{r^4}{4}k\sin\phi\right]\,d\theta d\phi\\
+    &= R^4\pi k
+  \end{align*}
+  Now we apply Gauss' formula:
+  \begin{align*}
+    |E|A &= \frac{Q_\text{enclosed}}{\varepsilon_0}\Rightarrow A = 4\pi R^2\\
+    |E| &= \frac{1}{4\varepsilon_0}kr^2 \hat r
+  \end{align*}
+\end{problem}
+\subsection*{Problem 18}
+An infinite plane slab, of thickness $2d$ carries a uniform volume charge density $\rho$. Find the electric field, as a function of $y = 0$ at the center. Plot $E$ versus $y$, calling $E$ positive when $\vE$ point in the $+y$ direction and negative when it points in the $-y$ direction.
+\begin{problem}
+  \gimage{image.png}{8cm}
+\end{problem}
+\subsection*{Problem 22}
+Find he potential inside and outside a uniformly charge solid sphere whose radius is $R$ and whose total charge is $q$. Use infinity as your reference point. Compute the gradient of $V$ in each region, and check that it yields the correct field. Sketch $V(r)$. 
+
+\begin{problem}
+  First note that starting from infinite, we have that:
+  \begin{align*}
+    V(r)=\int_r^\infty \vE \,d\ell
+  \end{align*}
+  Very far away from the sphere, we treat it like a point charge, such that:
+  \begin{align*}
+    \frac{1}{4\pi\varepsilon_0}\frac{q}{r^2}
+  \end{align*}
+  However, inside the sphere we need Gauss' law:
+  \begin{align*}
+    \frac{Q}{\frac{4}3\pi R^3}
+  \end{align*}
+  Substituting in for our electric field gives:
+  \begin{align*}
+    Q_\text{enclosed} = \cpr{\frac{q}{\frac{4}3\pi R^3}}\cpr{\frac{4}3\pi r^3}\Rightarrow q\frac{r^3}{R^3}
+  \end{align*}
+  Then, solving for $E$ in Gauss' equationjust gives us:
+  \begin{align*}
+    \vE = \frac{1}{4\pi\varepsilon_0}\frac{qr}{R^3}\hat r
+  \end{align*}
+  Sketching this, we get:
+  \gimage{image2.png}{8cm}
+\end{problem}
+\subsection*{Probelm 29}
+Use equation 2.29 to calculate the potential inside a uniformly charged solid sphere of radius $R$ and total charge $q$. 
+\begin{problem}
+  Equation 2.29 is given as:
+  \begin{align*}
+    V(\vr)=\frac{1}{4\pi\varepsilon_0}\int \frac{\rho(\vr')}{\eta}\,d\tau'
+  \end{align*}
+  I actually am really lost on how to do this. 
+\end{problem}
 \end{document}

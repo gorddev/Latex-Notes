@@ -48,6 +48,7 @@
 \newcommand{\cis}{\,\mathrm{cis}\,}
 \newcommand{\Arg}{\mathrm{Arg}\,}
 \newcommand{\ahline}{\\[3pt]\hline\\[-8pt]}
+\newcommand{\gensep}{parsep=0pt, itemsep=0pt}
 
 
 \newcommand{\gimage}[2]{\vspace{-0.25cm}
@@ -121,7 +122,7 @@
 
 \renewenvironment{example}{
   \begin{tcolorbox}[colback=gray!2, colframe=gray!40!white, coltitle=green!20!black, boxrule=3pt, sharp corners]
-    \textit{Example. }
+    \textit{Example.}
 }{\end{tcolorbox}}
 
 
@@ -282,7 +283,7 @@ There is a natural bijection between $\C$ and the $xy$-coordinate system $\R^2$:
     |z| = \sqrt{a^2 + b^2}
   \end{align*}
   We can imagine this as the distance from the origin:
-  \gimage{image1.png}{3cm}
+  \gimage{images/image1.png}{3cm}
 \end{definition}
 
 \begin{theorem}{Properties of the Modulus}{}
@@ -299,7 +300,7 @@ There is a natural bijection between $\C$ and the $xy$-coordinate system $\R^2$:
 \subsection{Vector and Polar Forms}
 We saw last time that complex addition behaves like vector addition.\gline{}
 Now, consider \ul{Polar Form}:
-\gimage{image3.png}{7cm}
+\gimage{images/image3.png}{7cm}
 More formalized, for \textit{any $z\in\C$ of the form $a + bi$}, we can write:
 \begin{align*}
   z = &= a + bi\\
@@ -421,7 +422,7 @@ Now, there's also one more formula that we should be aware of that comes from th
 \end{theorem}
 \subsubsection{\ul{$e^{z}$ as a mapping}}
 We can imagine $e^z$ as a mapping from imaginary to real. For example,
-\gimage{image4.png}{6cm}
+\gimage{images/image4.png}{6cm}
 \subsection{Powers and Roots}
 \begin{definition}{The $n$-th roots of unit}{}
   \begin{align*}
@@ -550,8 +551,9 @@ $s:S^2\to\C$ is given by:
   \end{cases}
 \end{align*}
 In this context, we call $S^2$ the \ul{Reimann Sphere}.
-\section*{Chapter 2}
-\subsection*{2.2-1 Limits of Sequences and Functions}
+\section{Chapter 2}
+\subsection{Limits \& Continuity}
+\subsubsection{Limits of Sequences and Functions}
 \begin{definition}{Sequence of Complex Numbers}{}\gline{}
   A sequence of complex numbers $\{z_n\}^\infty_{n=1}$ \ul{converges to $z_0\in\C$} if for every $\varepsilon>0$, there exists $N\in\N$ such that if $n>N$, then $|z_n-z_0|<0$. 
 \end{definition}
@@ -601,4 +603,118 @@ Here is some pretty helpful limit laws that would be pretty good to know:
     \end{enumerate}
   \end{enumerate}
 \end{theorem}
+\newpage
+\subsubsection{Continuity}
+Recall:
+\begin{theorem}{Limit}{}\gline{}
+  Let $f$ be defined on a deleted neighborhood of $z_0$. Then $\lim_{z\to z_0}f(z)=w_0$ if for all $\varepsilon>0$, there exists $\delta> 0$ s.t. if $0<|z-z_0|<\delta$, then $|f(z)-w_0|<\varepsilon|$. 
+\end{theorem}
+\begin{theorem}{Sequential Characterizatino of Continuity}{}\gline{}
+  Let $f$ be defined on a deleted neighborhood of $z_0$. Then, $\lim_{z\to z_0}f(z) = w_0$ if and only if for all sequences $\{z_n\}$ that converge to $z_0$, the sequence $\{f(z_n)\}$ converges to $w_0$. 
+\end{theorem}
+\begin{definition}{Continuous at a Point}{}\gline{}
+  Let $f$ be defined on a neighborhood of $Z$. Then $f$ is \ul{continuous at $z_0$} if for all $\varepsilon> 0$, there exists $\delta > 0$ such that if:
+  \begin{align*}
+    |z-z_0|<\delta,\text{ then } |f(z)-f(z_0)|<\varepsilon
+  \end{align*}
+\end{definition}
+\begin{theorem}{Relation between limits and continuity}{}\gline{}
+  $f$ is continuous at $z_0$ if and only if $\lim_{z\to z_0}f(z) = f(z_0)$.
+\end{theorem}
+\noindent Essentially, from these thms and defs, we have three ways to fail at cont. at $z_0$:
+\begin{itemize}
+  \item $f(z_0)$ is undefined.
+  \item $\lim_{z\to z_0}f(z)$ does not exist.
+  \item $\lim_{z\to z_0}f(z)\ne f(z_0)$
+\end{itemize} 
+\begin{example}
+  $\Arg(z)$ is discontinuous on the negative real axis since $\lim_{z\to z_0}\Arg(z)$ does not exist if $z_0 < 0$. (Consider moving from $-1 \to 1$, you jump from $\pi$ to $0$)
+\end{example}
+\begin{example}
+  \begin{align*}
+    f(z)=\begin{cases}
+      \frac{z^2+9}{z-3i}&\text{if } z\ne 3i\\
+      4&\text{if } z = 3i
+    \end{cases}
+  \end{align*}
+  $f$ is discontinuous at $z_0 = 3i$, since:
+  \begin{align*}
+    \lim_{z\to 3i}f(z) = 6i \ne 4 = f(3i)
+  \end{align*}
+  Quote Prof. Stoertz: ``This is a stupid function.''
+\end{example}
+\begin{example}
+  $f(z) = \bar z$ is continuous on $\C$. 
+  \begin{proof}
+    Let $z_0\in\C$, and let $\varepsilon > 0$. We want to show that $\exists\delta > 0$ such that if $|z-z_0|<\delta$, then $|\bar z - \bar z| < \varepsilon$. \gline{}
+    Choose $\delta = \varepsilon$, and let $z\in \C$ satisfying $|z-z_0|<\delta$. Then, we must have that:
+    \begin{align*}
+      |\bar z - \bar z_0|=|\overline{z-z_0}|=|z-z_0| < \delta = \varepsilon
+    \end{align*}
+    Hence, $f$ is continuous at $z_0$. 
+  \end{proof}
+\end{example}
+\begin{theorem}{Properties of Continuity}{}\gline{}
+  Let $f$ and $g$ be continuous at $z_0$. Then,
+  \begin{itemize}
+    \item $f+g$ is continuous at $z_0$. 
+    \item $f\cdot g$ is continuous at $z_0$
+    \item $\frac{f}g$ is continuous at $z_0$ if $g(z_0)\ne 0$. 
+  \end{itemize}
+  \begin{corollary}{Consequences}{}
+    \begin{itemize}
+      \item $f(z)=c$ is continuous on $\C$
+      \item All polynomials are continuous on $\C$
+      \item Rational function $f(z) = \frac{p(z)}{q(z)}$ where $p$ and $q$ are polynomials are ocntinuous everywhere that $q(z) \ne 0$. 
+    \end{itemize}
+  \end{corollary}
+\end{theorem}
+\begin{theorem}{}{}\gline{}
+  Suppose $f$ is continuous on a region $A$, and $g$ is continuous on a region $B$ containing $f(A)$.\gline{}
+  Then $g\circ f$ is continuous on $A$. 
+\end{theorem}
+\begin{criterion}{}{}\gline{}
+  \noindent\textit{Note: }If $f$ is continuous at $z_0$, then $\lim_{z\to z_0}f(z_0)= f(z_0)$, so just plug in. 
+\end{criterion}
+\begin{definition}{Removable Discontinuity}{}\gline{}
+  We say a function $f$ has a \ul{removable discontinuity} or \ul{removable singularity} of $z_0$ if $f(z_0)$ is undefined but $\lim_{z\to Z_0}f(z)$ exists and is finite.  
+\end{definition}
+
+\addtocounter{subsection}{1}
+\subsection{Analyticity}
+\begin{definition}{Differentiability at $z_0$}{}\gline{}
+  Let $D$ be a domain in $\C$. A function $f:D\to\C$ is \ul{differentiable at $z_0\in D$} if:
+  \begin{align*}
+    \lim_{\Delta z \to 0}\frac{f(z_0+\Delta z) - f(z_0)}{\Delta z}\quad\cpr{=\lim_{ z \to z_0}\frac{f(z)-f(z_0)}{z-z_0}}
+  \end{align*}
+  exists and is finite.
+\end{definition}
+\noindent Remeber from Calc I that for a function $f: \R\to\R$, if $f$ is differentiable at $x_0$, we have that:
+\begin{itemize}[itemsep=0pt, parsep=0pt]
+  \item $f$ is constant at $x_0$
+  \item $f'(x_0)$ is the slope of the tangent line, i.e. for $x$ near $x_0$  if we change $x$ by 1 unit, we expect $f$ to change by roughly $f'(z_0)$ units.
+  \begin{itemize}[itemsep=0pt, parsep=0pt]
+    \item So $f'(z_0)$ acts like a scaling factor near $x_0$
+  \end{itemize}
+\end{itemize}
+However, things work a little differently for complex numbers. \gline{}
+\pagebreak
+\subsubsection{Complex Differential}
+\ul{Much} stronger condition than real differential, since we must first have that:
+\begin{align*}
+  \lim_{\Delta z \to 0}\frac{f(z_0+\Delta z) - f(z_0)}{\Delta z}
+\end{align*}
+But the limits must exist and agree along \ul{every} path to $z_0$. \gline{}
+There's some consequences to this. If $f$ is differentiable at $z_0$, then:
+\begin{itemize}[parsep=0pt, itemsep=0pt]
+  \item $f$ is continuous at $z_0$
+  \item $f$ is infinitely differentiable at $z_0$
+  \item $f$ can be written as an infinite series that converges on a disk $D(z_0)$
+  \item If we write $f(x+iy) = u(x,y)+ iv(x,y)$, $u$ and $v$ must have a very special relationship\ldots
+\end{itemize}
+\begin{definition}{}{}\gline{}
+  Let $D$ be a domain in $\C$ and let $z_0\in D$. We say $f:D\to\C$ is \ul{analytic/holomorphic at $z_0$} if $f$ is differentiable on a neighborhood $D_r(z_0)$. 
+
+\end{definition}
+
 \end{document}

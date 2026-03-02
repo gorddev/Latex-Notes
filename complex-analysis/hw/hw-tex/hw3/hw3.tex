@@ -78,7 +78,17 @@
 			Oops I didn't read this part. When I read ``mark'' I quite literally thought it meant solve. 
 		\end{problem}
 	\end{enumerate}
-
+	\begin{grade}
+		Full credit. Listed each attribute correctly:
+		\begin{itemize}[itemsep=0pt, parsep=0pt]
+			\item Neither/Closed
+			\item Connected/disconnected
+			\item Region/Neither
+			\item Bounded/Bounded
+			\item Boundaries defined. 
+		\end{itemize}
+		Note: It's important to note that I defined the boundary regions mathematically rather than visually. 
+	\end{grade}
 	
 	\item Prove that if $S$ and $T$ are domains that have at least one point in common, then $S \cup T$ is a domain.\\
 		({\it Note: A picture is good enough for me here.})
@@ -94,7 +104,10 @@
 				Hence, because $S\cup T$ is connected, closed, and nonempty, $S\cup T$ is a domain. 
 			\end{proof}
 		\end{problem}
-		
+		\begin{grade}
+			0.5/2. \gline{}
+			I'm not sure what to give myself here because I didn't draw a picture, but I did do a proof. So I'm just not going to give myself any points except the 0.5 free points.
+		\end{grade}
 	\item Let $u(x,y) = 
 		\begin{cases}
       	1, & |z| < 1 \\
@@ -146,8 +159,11 @@
 		\end{problem}
 		
 	\end{enumerate}
+	\begin{grade}
+		1.5/2\gline{}
+		I'm going to give myself off a half point, because I didn't use the term continua, and instead called it ``connected'' or ``not connected''.
+	\end{grade}
 \end{enumerate}
-
 
 
 
@@ -178,6 +194,10 @@
 			\end{align*}
 		\end{problem}
     \end{enumerate}
+	\begin{grade}
+		2/2 Points.\gline{}
+		I feel like I described them correctly, even though they didn't necessarily match the solution key word for word, I think they are describing the same thing when I re-read my descriptions. 
+	\end{grade}
 
     \item Describe in words or graph the projections on the Riemann sphere of the following sets in the extended complex plane. 
     \begin{enumerate}
@@ -210,12 +230,21 @@
 			s^{-1}(z)&=\begin{cases}\newcommand{\z}{\frac{\bar z}{|z|^2}}
 					\cpr{\frac{2\Re{\z}}{|\z|^2+1},\frac{2\Im(\z)}{|\z|^2+1}, \frac{|\z|^2-1}{|\z|^2+1}}
 				\end{cases}\\
-				&= \cpr{\frac{1}{|z|}\frac{2\Re(\frac{\bar z}{|z|})}{|z|^{-1}+1}, \frac{1}{|z|}\frac{2\Im(\frac{\bar z}{|z|})}{|z|^{-1}+1},\frac{|z|^{-1}-1}{|z|^{-1}+1}}\Rightarrow \text{ mult by }\frac{|z|}{|z|}\\
-				&= \cpr{\frac{2\Re(z)}{1+|z|}, \frac{-2\Im(\bar z)}{1+|z|},-\frac{|z|-1}{|z|+1}}\\
-				&= (x_1, -x_2, -x_3)
+				&= \cpr{\frac{1}{|z|}\frac{2\Re(\frac{\bar z}{|z|})}{|z|^{-1}+1}, \frac{1}{|z|}\frac{2\Im(\frac{\bar z}{|z|})}{|z|^{-1}+1},\frac{|z|^{-1}-1}{|z|^{-1}+1}}\Rightarrow \text{ mult by }\frac{|z|^2}{|z|^2}\\
+				&= \cpr{\frac{2\Re(z)}{1+|z|^2}, \frac{-2\Im(\bar z)}{1+|z|^2},-\frac{|z|^2-1}{|z|^2+1}}\\
+				&= (x_1, -x_2, -x_3)\Rightarrow \text{ via standard reverse projection.}
 		\end{align*}
 		Thus, we have that $\frac{1}z$ does indeed rotate about the Riemann sphere on the $x_1$ axis by $\pi$. 
 	\end{proof}
+	\begin{grade}
+		2/2 Points. \gline{}
+		My solution method was different because I kept everything in terms of the imaginary numbers, but I think it's still correct.
+		\begin{itemize}[parsep=0pt, itemsep=0pt]
+			\item Proof is in complete sentences.
+			\item Math notation is typed in math mod and (somewhat) easy to read
+			\item Proof is correct. 
+		\end{itemize}
+	\end{grade}
 \end{enumerate}
 
 
@@ -249,7 +278,6 @@
 			\end{align*}
 			Hence, $f(z)$ is not injective. 
 		\end{proof}
-		\pagebreak
 		\item Is $f(z)$ surjective onto $\mathbb{C}$? If yes, prove it. If not, identify $w$ such that $f(z) \neq w$ for any $z$ in the domain of $f$.
 		\begin{proof}
 			We want to show that $f(z)$ is not surjective. Note that $e^x > 0$. \gline{}
@@ -268,6 +296,18 @@
 		\begin{problem}
 			With $e^x = 1$, it is just a curve thats an arc of a circle down to the real axis. If you introduce variation in $e^x$, it just amplifies the height and final stopping distance of the circle on the real axis. It will always reach a maximum height of $e^x\sin(y)$ and a max horizontal distance of $e^x\cos(y)$. 	
 		\end{problem}
+		\begin{grade}
+			2.75/3 pts
+			\begin{itemize}[itemsep=0pt, parsep=0pt]
+				\item Split formula correectly
+				\item -0.25 pts, Described the domain as $\hat\C$ instead of $\C$. 
+				\item Described as non-injective
+				\item Described as not surjective
+				\item -0.5pts Incorrect description, not a circle
+				\item Described a ray in the most convoluted way possible
+				\item Described correctly but weirdly. 
+			\end{itemize}
+		\end{grade}
 	\end{enumerate}
 	
 	\item In this question we investigate the inversion mapping $f(z) = 1/z$.
@@ -321,16 +361,18 @@
 \begin{reflection}
 	\textbf{Collaboration Statement:} I did not work with anyone else on this assignment. I looked up how to do the Riemann coordinate projections onto the sphere and watched a video because I didn't take notes that day of class apart from the formula. 
 \end{reflection}
-\pagebreak
-
 
 \subsection*{Reflection Questions for HW 3}
     \begin{itemize}
         \item What do you understand well and what is working well for you in learning the material?
-
-
+		\begin{reflection}
+			I think I'm understanding and paying attention more when doing my homework, as my answers are more detailed and I feel like I'm improving in terms of my effort in bredth of homework answers.\gline{}
+			I also think this will help me on the exam.
+		\end{reflection}
         \item What do you need to keep studying and what are some habits you can change/pick up to learn the material better?
-
+		\begin{reflection}
+			I think I still need to pay more attention to details still. I end up using the wrong terms, or end up answer the wrong questions. Sometimes I answer too thoroughly too and then I end up answering incorrectly. 
+		\end{reflection}
     \end{itemize}
 
 
