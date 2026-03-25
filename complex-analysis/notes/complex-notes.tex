@@ -12,6 +12,7 @@
 \usepackage{charter}
 \usepackage{amsthm,letltxmacro}
 \usepackage{amssymb}
+\usepackage{mathrsfs}
 \usepackage{fancyhdr}
 \usepackage{float}
 \usepackage[most]{tcolorbox}
@@ -49,6 +50,7 @@
 \newcommand{\Arg}{\mathrm{Arg}\,}
 \newcommand{\ahline}{\\[3pt]\hline\\[-8pt]}
 \newcommand{\gensep}{parsep=0pt, itemsep=0pt}
+\newcommand{\prt}[2]{\frac{\partial #1}{\partial #2}}
 
 
 \newcommand{\gimage}[2]{\vspace{-0.25cm}
@@ -83,7 +85,7 @@
 % PROBLEM
 \newenvironment{problem}[1]
   {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}#1}
-  {\endoldproof
+  {
 \end{adjustwidth}\end{coloredadjust}\gspc}
 
 %% DEFINITION
@@ -121,7 +123,7 @@
 }{thm}
 
 \renewenvironment{example}{
-  \begin{tcolorbox}[colback=gray!2, colframe=gray!40!white, coltitle=green!20!black, boxrule=3pt, sharp corners]
+  \begin{tcolorbox}[colback=gray!2, colframe=gray!40!white, coltitle=green!20!black, boxrule=3pt, sharp corners, breakable]
     \textit{Example.}
 }{\end{tcolorbox}}
 
@@ -712,9 +714,398 @@ There's some consequences to this. If $f$ is differentiable at $z_0$, then:
   \item $f$ can be written as an infinite series that converges on a disk $D(z_0)$
   \item If we write $f(x+iy) = u(x,y)+ iv(x,y)$, $u$ and $v$ must have a very special relationship\ldots
 \end{itemize}
-\begin{definition}{}{}\gline{}
+\begin{definition}{Analytic/Holomorphic at $x_0$}{}\gline{}
   Let $D$ be a domain in $\C$ and let $z_0\in D$. We say $f:D\to\C$ is \ul{analytic/holomorphic at $z_0$} if $f$ is differentiable on a neighborhood $D_r(z_0)$. 
-
+  \begin{definition}{Analytic/Holomorphic on $D$}{}\gline{}
+    We say $f$ is \ul{analytic on $D$} if $f$ is analytic at every point of $D$.
+  \end{definition}
+  \begin{definition}{Entire}{}\gline{}
+    If $f$ is holomorphic on $\C$, we say $f$ is \ul{entire}.
+  \end{definition}
 \end{definition}
+\begin{theorem}{Complex Derivative Properties}{}\gline{}
+  Let $f$ and $g$ be holomorphic on a domain $D$ and let $a,b\in\C$. 
+  \begin{itemize}
+    \item ($a\cdot f(z) + b\cdot g(z))'=af'(z) + b'(z) $
+    \item $\cpr{(fg)(z)}' = f'g + f g'\quad\Rightarrow$ Product Rule
+    \item $\cpr{\frac{f}g}'=\frac{f'g-fg'}{g^2}\quad\quad\quad\Rightarrow$ Quotient Rule
+  \end{itemize}
+  If $g$ is holomorphic at $z$, and $f$ is holomorphic at $g(z)$, then:
+  \begin{align*}
+    (f(g(z)))' = f'(g(z))\cdot g'(z)
+  \end{align*}
+  And we also have access to the power rule, such that $\forall n\in \Z, \cpr{z^n}^1=nz^{n-1}$. Also we have the log $e$ rule!
+  \begin{align*}
+    \cpr{e^z}'=e^z
+  \end{align*}
+\end{theorem}
+\subsection{Cauchy-Riemann}
+\subsubsection{The Cauchy-Riemann Equations}
+\begin{theorem}{Defining the Derivative}{}\gline{}
+  Let $f(z) = u(x,y)+iv(x,y)$. If $f'(z_0)$ exists for $z_0 = x_0 + iy_0$, then:
+  \begin{itemize}
+    \item Each of $u_x, u_y, v_x, v_y$ exists at $z_0$;
+    \item The Cauchy-Riemann equations $u_x = v_y$ nad $u_y = -v_x$ hold at $z_0$;
+    \item Thus, as below, \begin{align*}
+      \text{We have that: }f'(z_0)&=u_x(x_0,y_0)+iv_x(x_0,y_0)\\
+      &= v_y(x_0,y_0)-iu_y(x_0,y_0)
+    \end{align*}
+  \end{itemize}
+  \begin{corollary}{}{}\gline{}
+    If $u_x(x_0,y_0)\ne v_y(x_0,y_0)$ on $u_y(x_0,y_0)\ne-v_x(x_0,y_0)$, then $f$ is not differentiable at $z_0=x_0+iy_0$. 
+  \end{corollary}
+\end{theorem}
+\noindent Is the reverse of this theorem true? If $f$ satisfies the Cauchy-Riemann equations at $z_0$, is $f$ differentiable at $z_0$? \textit{Not necessarily. }\gline{}
+\begin{example}
+  \begin{align*}
+    f(z)=\begin{cases}
+      (x^{4/3}y^{5/3}+ix^{5/3}y^{4/3})/(x^2+y^2)&\text{if }z\ne 0\\
+      0&\text{if }z =0
+    \end{cases}
+  \end{align*}
+  At $z_0 = 0$, $f$ satisfies the Cauchy-Riemann equations, but along the line, $y=x$ look what happens when we evaluate the limit:
+  \begin{align*}
+    \lim_{z\to0}\frac{f(z)-f(z)}{z-0}
+  \end{align*}
+  This limit disagrees witht he partial derivatives. Here, the partials for $f$ are constant at $(0,0)$. 
+\end{example}
+\begin{theorem}{Differentiability with Cauchy-Riemann}{}\gline{}
+  Let $f(z) = u(x,y) + iv(x,y)$ be defined on a domain $D$.
+  \begin{itemize}
+    \item If $u_x,u_y, v_x, v_y$ exist at $z_0$, are continuous at $z_0$, and satisfy the Cauchy-Riemann equations at $z_0$, then $f$ is differentiable at $z_0$.
+    \item If $u_x,u_y, v_x, v_y$ exist are continuous, and satisfy the Cauchy-Riemann equations all of $D$, then $f$ is analytic on $D$.
+  \end{itemize}
+\end{theorem}
+\noindent There are some interesting consequences to the Cauchy Riemann equations:\gline{}
+Image that $f(x+iy)=u(x,y)+iv(x,y))$ as a real-vector valued function:
+\begin{align*}
+  f\begin{pmatrix}
+    x\\y
+  \end{pmatrix} = \begin{pmatrix}
+    u(x,y)\\v(x,y)
+  \end{pmatrix}
+\end{align*}
+Taking the Jacobiam matrix, we get that:
+\begin{align*}
+  J_f = \begin{pmatrix}
+    u_x&u_y\\v_x&v_y
+  \end{pmatrix}
+\end{align*}
+If $f$ is $\C-$differentiable at $z_0$, then:
+\begin{align*}
+  J_f(x_0,y_0)&=\begin{pmatrix}
+    u_x&-v_x\\v_x&u_x
+  \end{pmatrix}\\
+  &=\begin{pmatrix}
+    \Re{f'(z_0)}&-\Im{f'(z_0)}\\
+    \Im{f'(z_0)}&{ }\Re{f'(z_0)}
+  \end{pmatrix}\\
+  &= \begin{pmatrix}
+    r_0\cos\theta_0&-r_0\sin\theta_0\\
+    r_0\sin\theta_0&r_0\cos\theta_0
+  \end{pmatrix}\\
+  &= r_0\begin{pmatrix}
+    \cos\theta_0&-\sin\theta_0\\
+    \sin\theta_0&\cos\theta_0
+  \end{pmatrix}\\
+  &= (\text{scale by }r_0)\cdot(\text{rotation by }\theta_0)
+\end{align*}
+This further enforces the idea that if $f$ is differentiable at $z_0$, then $f$ behaves like a scale and rotation near $z_0$:
+\begin{align*}
+  \cpr{\text{assuming that }f'(z_0)\ne 0}
+\end{align*}
+\begin{example}
+  $f(z)=z^2$ at $z_0 = 0$.
+  \gimage{images/image5.png}{7cm}
+\end{example}
+\noindent Now, recall a theorem from Section 1.6:
+\begin{adjustwidth}{2em}{2em}\vspace{0.1cm}
+  If $u(x,y)$ is real-valued on a domain $D$, and $u_x = u_y = 0$ on all of $D$, then $u$ is constant on $D$.\vspace{0.1cm}
+\end{adjustwidth}
+Refer to \textbf{Theorem 10} in this document. We can actually use Cauchy-Riemann equations to show that this is true. 
+
+\begin{example}
+  Supose $f$ is analytic on a domain $D$, and thqt $\Re{f(z)}$ is constnat on $D$. Then, $f$ is constant on $D$.
+  \begin{proof}
+    Since $f$ is analytic, we have that:
+    \begin{align*}
+      f(z) = u(x,y) + iv(x,y), \text{ and }u(x,y)\text{ is constant.}
+    \end{align*}
+    Then, we must hav e that $u_x=0$ nad $u_y = 0$ on all of $D$. \gline{}
+    However, since $f$ is analytic on $D$, by the Cauchy-Riemann equations, $v_y=u_x$, and $v_x = -u_y=0$ on $D$. \gline{}
+    So $f'(z)= u_x(x,y) + iv_x(x,y)=0\to i0=0$\gline{}
+    Hence, $f$ is constant on $D$. 
+  \end{proof}
+\end{example}
+
+\subsubsection{Proving the Cauchy-Riemann Equations}
+{
+\newcommand{\zo}{z_0}\newcommand{\de}{\Delta}
+\begin{theorem}{}{}\gline{}
+  Let $f(z) = u(x,y) + iv(x,y)$. If $f'(z)$ exists at $z_0 = x_0 + iy_0$, then:
+  \begin{itemize}
+    \item Each of $u_x, u_y, v_x, v_y$ exists at $z_0$;
+    \item The C-R equations $u_x = v_y$ and $u_y = -v_x$ hold at $z_0$;
+    \item We have $f'(z_0) = u_x(x_0,y_0$) + $iv_x(x_0, y_0) = v_y(x_0,y_0) - iu_y(x_0,y_0)$
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  Suppose $f'(z_0)$ exists, that is:
+  \begin{align*}
+    \lim_{\de z \to 0}\frac{f(\zo + \de z)-f(\zo)}{\de z}\text{ exists and is finite}
+  \end{align*}
+  Let us write $f(\zo + \de z) = u(x_0 + \de x,y_0 + \de y) + iv(x_0 + \de x, y_0 + \de y)$.\gline{}
+  So we may write:
+  \begin{adjustwidth}{-2em}{-2em}
+    \begin{align*}
+      f'(\zo) = \lim_{\parbox{0.7cm}{\hspace{0cm}$\scriptscriptstyle\de x\to 0$\vspace{-0.2cm}\\\noindent\hspace{-0.2cm}$\scriptscriptstyle\de y \to 0$}}\frac{u(x_0 + \de , y_0 + \de y)+iv(x_0+ \de x , y_0 + \de y)- (u(x_0, y_0) + iv(x_0, y_0))}{\de x + i \de y}
+    \end{align*}
+  \end{adjustwidth}
+  Since this limit exists, it exists along every path $\de z\to 0$. So we may approach along the horizontal line $\de y = 0$, giving us:
+  \begin{align*}
+    f'(z_0)&=\lim_{\de z\to 0}\frac{u(x_0 + \de x, y_0)+iv(x_0  \de x, y_0)- u(x_0, y_0) - iv(x_0, y_0)}{\de x}\\
+    &= \lim_{\de x \to 0}\frac{u(x_0 + \de  x, y_0)= \frac{u(x_0,y_0)}{\de x}}{\de x}+ i\frac{(v(x_0 \de x, y_0)-v(x_0, y_0))}{\de x}\\
+    &= u_x(x_0, y_0)+ iv_x(x_0, y_0)
+  \end{align*}
+  Similarly we may approach along the veritcal line $\de x = 0$, giving us:
+  \begin{align*}
+    f'(z_0) &= \lim_{\de y \to 0}\frac{u(x_0, y_0 + \de y)+iv(x_0, y_0 + \de y)-u(x_0, y_0) -iv(x_0, y_0)}{i\de y}\\
+    &= \frac{u_y(x_0, y_0)}{i}v_y(x_0, y_0) = v_y(x_0, y_0)-iu_y(x_0, y_0)
+  \end{align*}
+  \begin{align*}
+    \text{So: }f'(z_0)&= u_x(x_0, y_0)+iv_x(x_0, y_0)\\
+    &= v_y(x_0, y_0)-iu_y(x_0, y_0)
+  \end{align*}
+  Hence, $u_x(x_0, y_0)=v_y(x_0, y_0)$, and $u_y(x_0, y_0)=-v_x(x_0, y_0)$.
+\end{proof}
+\pagebreak
+Now, remember the mean value theorem from calculus:
+\begin{theorem}{Mean Value Theorem}{}\gline{}
+  If $f: [a,b]\to \R$ is continuous on $[a,b]$ and is differentiable on $(a,b)$, then there exists $c^*\in(a,b)$ such that:
+  \begin{align*}
+    f'(x) = \frac{f(b)-f(a)}{b-a}
+  \end{align*}
+  This gives us the following equalities:
+  \begin{align*}
+    f'(c^*)(b-a) &= f(b) - f(a)\\
+    f'(c^*)(\de x) &= f(a+ \de x)-f(a)
+  \end{align*}
+\end{theorem}
+
+\begin{theorem}{Cauchy-Riemann Equations Reverse Dir.}{}\gline{}
+  Let $f(z) = u(x,y) + iv(x,y)$ be defined on a domain $D$ contianing the point $z_0$. If $u_x, u_y, v_x, v_y$ exist on $D$, are continuous at $z_0$, and $u_x(x_0,y_0)=v_y(x_0,y_0)$ and $u_y(x_0, y_0)=-v_x(x_0, y_0)$, then $f$ is differentiable on $z$. 
+\end{theorem}
+\begin{proof}
+  We want to show that:
+  \begin{align*}
+    \lim_{\de z \to 0}\frac{f(z_0 + \de z)-f(z_0)}{\de z}\text{ exists and is finite}
+  \end{align*}
+  First, we rewrite this limit as:
+  \begin{align*}
+    \lim_{\parbox{0.7cm}{\hspace{0cm}$\scriptscriptstyle\de x\to 0$\vspace{-0.2cm}\\\noindent\hspace{-0.2cm}$\scriptscriptstyle\de y \to 0$}}\frac{[u(x_0 + \de x, y_0 + \de y)-u(x_0, y_0)]+i[v(x_0 + \de x,y_0 + \de y)-v(x_0, y_0)]}{\de x + i \de y}
+  \end{align*}
+  Let us focus on the first bracketed term. We may write:
+  \begin{align*}
+    u(x_0 + \de x, y_0 + \de y)- u(x_0, y_0)&= u(x_0+ \de x, y_0 + \de y) - u(x_0, y_0 + \de y) &(1)\\
+    &\quad+ u(x_0, y_0 + \de y) - u(x_0, y_0) &(2)
+  \end{align*}
+  For (1), since $u$ is differentiable on $D$, $u$ is differentiable along the line $\Im{z} = y_0 + \de y$. Along that line, we apply the \color{blue}\textbf{Mean Value Theorem }\color{black} to $\frac{\partial u}{\partial x}$ to conclude that there exists $x^*$ between $x_0$ and $x_0 + \de x$ such that:
+  \begin{align*}
+    u(x_0 + \de x, y_0 + \de y )- u(x_0 , y_0) = \frac{\partial u}{\partial x}(x^*, y_0 + \delta y)\cdot \de x
+  \end{align*}
+  \begin{problem}
+    Quick tangent: Remember that continuity means that $\forall \varepsilon> 0, \exists \delta > 0$ such that:
+    \begin{align*}
+      |(\de x, \de y)|<\delta \implies |u(x_0 + \de x, y_0 + \de y)-u(x_0, y_0)|<\varepsilon
+    \end{align*}
+  \end{problem}
+  Continuing here, because $\frac{\partial u}{\partial x}(x_0, y_0)+\varepsilon_{1}$, where $\varepsilon_1 \to 0$ as $\de x \to 0$ and $\de y \to 0$, i.e. $\varepsilon_1\to 0$ as $\de z \to 0$. \gline{}
+  In summary, we have rewritten (1) as:
+  \begin{align*}
+    \cpr{\frac{\partial u}{\partial x}(x_0, y_0)+\varepsilon_1}\cdot \de x
+  \end{align*}
+  Similarly we may write (2) as:
+  \begin{align*}
+    \cpr{\frac{\partial u}{\partial y}(x_0,y_0)+\varepsilon_2}\de y
+  \end{align*}
+  Where $\varepsilon_2\to0$ as $\de z \to 0$. So our total bracketed term satisfies:
+  \begin{align*}
+    u(x_0 + \de x, y_0 + \de y)- u(x_0, y_0) = \cpr{\frac{\partial u}{\partial x}(x_0, y_0)+ \varepsilon_1}\de x + \cpr{\frac{\partial u}{\partial y}+\varepsilon_2}\de y
+  \end{align*}
+  We may apply the same reasoning to the second bracketed term, giving us that:
+  {\newcommand{\xoyo}{(x_0, y_0)}\newcommand{\limterm}{\parbox{0.7cm}{\hspace{0cm}$\scriptscriptstyle\de x\to 0$\vspace{-0.2cm}\\\noindent\hspace{-0.2cm}$\scriptscriptstyle\de y \to 0$}}
+  \begin{adjustwidth}{-3em}{-2em}
+  \begin{align*}
+    &\lim_{\de z \to 0}\frac{f(z + \de z)-f(z_0)}{\de z}\\
+    &= \lim_{\limterm}\frac{\cpr{\prt{u}x\xoyo+\varepsilon_1}\de x + \cpr{\prt{u}y + \varepsilon_2}\de y + i\cpr{\cpr{\prt{v}x\xoyo + \varepsilon_3}\de x + \cpr{\prt{v}y\xoyo + \varepsilon_4}\de y}}{\de x + i \de y}\\
+    &= \lim_{\limterm}\frac{\cpr{\prt{u}x\xoyo + i \prt{v}y\xoyo}\de x + \cpr{\prt{u}y\xoyo}\de y}{\de x + i\de y}+\frac{\varepsilon_1+i\varepsilon_3 \de x + i(\varepsilon_2 + i\varepsilon_4) \de y}{\de x + i \de y}
+  \end{align*}
+  \end{adjustwidth}
+  For the latter term note that:
+  \begin{align*}
+    \left|\frac{(\varepsilon_1 + i\varepsilon_2) \de x + (\varepsilon_2 + i\varepsilon_4)\de y}{\de x + i\de y}\right|&\le\left|\frac{\de x}{\de x + i\de y}\right||\varepsilon_1 + i \varepsilon_3| + \left|\frac{\de y}{\de x + i \de{y}}\right||\varepsilon_2 + i\varepsilon_4|\\
+    &\le |\varepsilon_1 + i\varepsilon_3| + |\varepsilon_2 + i\varepsilon_4| \to 0 \text{ as }\de z \to 0
+  \end{align*}
+  Now, we may apply the Cauchy-Riemann equations to the former term to get:
+  \begin{align*}
+    \frac{\cpr{\prt{u}x\xoyo + i\prt{v}x\xoyo}\de x + i \cpr{\prt{u}x\xoyo + i \cpr{\prt{v}x\xoyo}}\de y}{\de x + i \de y}
+  \end{align*}
+  Note that those two terms are idential via the C-R equations, so we finally get that:
+  \begin{align*}
+    &= \frac{\cpr{\prt{u}x\xoyo + i \prt{v}x\xoyo}(\de x + i \de y)}{\de x + i\de y}\\
+    &= \prt{u}x\xoyo + i \prt{v}x\xoyo
+  \end{align*}
+  So, finally, we get that:
+  \begin{align*}
+    \lim_{\de z \to 0}\frac{f(z_0 + \de z) - f(\zo)}{\de z} = \left[\prt{u}x\xoyo + i\prt{v}y\xoyo\right]
+  \end{align*}
+  Hence, $f'(z_0)$ exists and is finite. 
+  }
+\end{proof}
+  That's it oh my god. 
+}
+\subsection*{Harmonic Functinos}
+\begin{definition}{Harmonic Function}{}\gline{}
+  A real-valued function of two variables $\phi(x,y)$ is said to be \ul{harmonic} if it satisfied Laplace's equation:
+  \begin{align*}
+    \phi_{xx}+\phi_{yy}=0
+  \end{align*}
+\end{definition}
+Here's a list of possible applications of harmonic functions:
+\begin{itemize}
+  \item Fluid following
+  \item Electrostatics
+  \item Gravitation
+  \item Heat flow
+\end{itemize}
+\begin{definition}{Holomorphic implies Harmonic}{}\gline{}
+  Let $f(z) = u(x,y) + iv(x,y)$ be holophorphic on a domain $D$. Then $u(x,y)$ and $v(x,y)$ are harmonic. 
+\end{definition}
+\begin{definition}{Harmonic Conjugate}{}\gline{}
+  If $u(x,y)$is harmonic on a disk, then there exists a harmonic function $v(x,y)$ such that $f(z) = u(x,y) + iv(x,y)$ is holomorphic on that disk. 
+  
+\end{definition}
+Now, we're going to talk about level curves:
+\begin{theorem}{}{}\gline{}
+  Let $f(z) =u(x,y) + iv(x,y)$ be holomorphic on a domain $D$. Then, the level curves of $u(x,y)$ are orthogonal to the leve curves of $v(x,y)
+$ except at points where $f'(z) = 0$.  
+\end{theorem}
+\subsection{Complex Dynamics: Iteration \& Fixed Ponts}
+Complex dynamics is the study of the iteration of complex-valued functions. Most commonly:
+\begin{align*}
+  f:\C \to \C\text{ or }f:\hat\C\to\hat\C \text{ is holomorphic or rational }
+\end{align*}
+We use the notation: $f^n=f\circ f\circ\cdots\circ f$ is the $n$-fold iterate of $f$.\gline{}
+\begin{definition}{Forward Orbit}{}\gline{}
+  The \ul{forward orbit} of $z$ under $f$ is:
+  \begin{align*}
+    O^+(z)=\left\{f^n(z):n\in\Z\right\}
+  \end{align*}
+\end{definition}
+A natural question to ask, ``given a $z$ or given an $f$, does the sequence have a limit or not?'' So let's do that.\gline{}
+We ask if $\displaystyle\lim_{n\to\infty}f^n(z)$ exists.
+\begin{example}
+  $f(z) = z^2$\gline{}
+  Note that $f^n(z) = z^{(2^n)}$
+\end{example}
+A big questino for any given $f$: What $z$-values have behavior that is sensitive to initial conditions?
+\begin{definition}{Fatou set/Julia set}{}\gline{}
+  We define the \ul{Fatou set} of $f$, denoted $F(f)$, as the set of all inputs to $f$ whose behavior is not sensitive to initial conditions (think stable behavior).\gline{}
+  We define the \ul{Julia set} of $f$, denoted ${J}(f)$, as the set of all inputs whose behavior is sensitive to initial conditions (think chaotic behavior).
+\end{definition}
+\begin{definition}{Fixed Point}{}\gline{}
+  A point $z_0$ is called a \ul{fixed point} of $f$ if $f(z_0)=z_0$. We define the \ul{multiplier} of a fixed point $z_0$ as:
+  \begin{itemize}
+    \item $f'(z_0)$ if $z_0\ne \infty$;
+    \item $\displaystyle \frac{d}{dz}\cpr{\frac{1}{f\cpr{\frac{1}z}}}\Bigg|_{z=0} \quad \text{ if }z_0 = \infty$
+  \end{itemize}
+\end{definition}
+\begin{definition}{Attracting/Repelling}{}\gline{}
+  We say a fixed point $z_0$ is \ul{attracting} if $f^n(z) \to z_0$ for all $z$ in some neighborhood of $z_0$. \gline{}
+  We say a fixed point of $z_0$ is \ul{repelling} if there exists a neighborhood $U$ of $z_0$ such that the only forward orbit fully contained in $U$ is the forward orbit of the fixed point $z_0$. 
+  
+\end{definition}
+\begin{theorem}{}{}\gline{}
+  Let $z_0$ be a fixed point of a holomorphic or rational $f'$ on $f$:
+  \begin{itemize}
+    \item $z_0$ is attracting iff $|f'(z)|<1$
+    \item If $f'(z_0) = 0$, we call $z_0$ \ul{superattracting}.
+    \item $z_0$ is repelling if $|f'(z_0)| > 1$. 
+  \end{itemize} 
+\end{theorem}
+\begin{theorem}{}{}\gline{}
+  Let $f$ be either holomorphic on $\C$ or rational, and suppose $f$ has degree at least 2. 
+  \begin{enumerate}
+    \item $F(f)$ is open;
+    \item $J(f)$ is nonempty, closed, and has no isolated points
+    \item $F(f)$ contains all attracting fixed points. 
+    \item $J(f)$ contains all repelling fixed points
+    \item If $U$ is open and $U\cap J(f)$ is nonempty, then, $O^+(U)$ is all of $\hat\C$ minus at most 2 points. x
+  \end{enumerate}
+  
+\end{theorem}
+
+\subsection*{Complex Dynamics: Critical Orbits and the Mandelbrot Set}
+
+\begin{definition}{Critical Number}{}
+  A complex number $z$ is caleld a \ul{critical number} of a function $f$ if $f'(z) = 0$ or $f'(z)$ is undefined. 
+\end{definition}
+
+In dynamics, the \ul{critical orbits}, i.e. the forward orbits of the critical numbers, are of particular interest. 
+\begin{example}
+  Let $f(z) = z^2 + c$, where $c$ is a compex parameter. \gline{}
+  Since $f'(z) = 2z$, $z=0$ is the only critical number. 
+\end{example}
+
+\section{Chapter 3}
+\addtocounter{subsection}{2}
+\subsection{The Logarithmic Function}
+
+Recall: in the real setting, $e^x$ and $\ln(x)$ are inverse functions.\gline{}
+In the complx setting, $e^z$ is not 1-1, so constructing an ``inverse'' is more complicated. 
+\begin{definition}{Undoing the Complex Logarithmic Function}{}\gline{}
+  If $z\ne 0$, we define $\log(z)$ to be the infinite set:
+  \begin{align*}
+    \log(z) &= \ln|z|+i\arg{z}\\
+    &= \ln|z|+i(\Arg(z) + 2\pi k), \quad k\in \Z
+  \end{align*}
+  where $\ln|z|$ is the real valued natural logarithm.
+\end{definition}
+Here are some basic properties of the natural logarithm:
+\begin{itemize}[parsep=0pt, itemsep=0pt]
+  \item $z = e^{\log(z)}$
+  \item $\log(e^z)=z+2\pi ki,\quad k\in \Z$
+  \item $\log(z_1z_2) = \log(z_1) + \log(z_2)$
+  \item $\log\cpr{\frac{z_1}{z_2}}=\log(z_1)-\log(z_2)$
+\end{itemize}
+\begin{definition}{Principal Logarithm}{}\gline
+    We define the \underline{principal logarithm of $z$}, denoted Log $z$, as:
+    \begin{align*}
+      \text{Log } z = \ln|z|+i\Arg(z)
+    \end{align*}
+  \end{definition}
+Now, let us concern ourselves with the Analyticity of Log($z$):
+\begin{theorem}{}{Analyticity of Log $z$}\gline{}
+  The function $\text{Log}(z) = \ln|z| + i\Arg (z)$ is analytic on $\C \backslash (-\infty, 0]$, and:
+  \begin{align*}
+    \frac{d}{dz}\cpr{\text{Log }z}=\frac{1}z
+  \end{align*}
+  \begin{corollary}{}{}\gline{}
+    $\Arg(z)$ is harmonic on $\C\backslash(-\infty, 0]$, and $\ln|z|$ is harmonic on $\C\backslash\{0\}$
+  \end{corollary}
+\end{theorem}
+\begin{definition}{}{}\gline{}
+  For any $\tau \in \R$, we define the \ul{branch of log $z$ w.r.t $\tau$}, denoted $\mathscr{L}_\tau$, or $\log_\tau$, by:
+  \begin{align*}
+    \log_\tau(z) = \ln|z| + i \arg_\tau(z)
+  \end{align*}
+  where $\arg_\tau(z)$ is the value of $\arg(z)$ in $(\tau, \tau + 2\pi]$. We call $\theta = \tau$ the \ul{branch cut}/\ul{branch line} of $\log_\tau$ and $0$ is the branch point. 
+\end{definition}
+\begin{example}
+  For example, we want to find a branch of $f(z) = \log(2z^4 -1)$ that is holomorphic at 0, so we can then find $f(0)$ and $f'(0)$\gline{}
+  Write $f(z) = g(h(z))$, where $g(z) = \log(z)$, and $h(z) = 2z^4 - 1$. Then, $h$ is entire, and $h(0) = -1$. So we need a branch of $\log(z)$ that is holomorphic at $-1$. Note that $\text{Log}(z)$ does not work, but for example, $\log_0(z)$ does. 
+\end{example}
+
 
 \end{document}

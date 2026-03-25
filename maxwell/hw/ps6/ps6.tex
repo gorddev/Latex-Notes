@@ -1,0 +1,372 @@
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{charter}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{graphicx}
+
+% SMALL PAGE COMMAND
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}\newcommand{\Q}{\mathbb{Q}}\newcommand{\C}{\mathbb{C}}
+\newcommand{\real}[1]{\text{Re}\left(#1\right)}
+\newcommand{\im}[1]{\text{Im}\left(#1\right)}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}[0]{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[2]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
+\end{figure}
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+\newcommand{\prt}[2]{\frac{\partial#1}{\partial#2}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+
+%}
+
+% COLOR BOX
+
+\tcbset{problembox/.style={
+    colback=gray!4,
+    colframe=gray!50, 
+	  boxrule=0pt,
+    leftrule=2.5pt, 
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable,
+    sharp corners
+  }
+}
+
+\tcbset{subproblembox/.style={
+    colback=gray!12,
+    colframe=gray!80, 
+	  boxrule=0.5pt,
+    leftrule=2.5pt, 
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable,
+    sharp corners
+  }
+}
+
+% PROBLEM
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{tcolorbox}[problembox]
+   \textit{Problem. }#1}
+  {\end{tcolorbox}\gspc}
+
+  \newenvironment{subproblem}[2]
+  {\vspace{-0.1cm}\begin{tcolorbox}[subproblembox]
+   \textit{#1 }#2}
+  {\end{tcolorbox}\gspc}
+
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{PS6 - Maxwell's Equations}}}
+\setlength{\headheight}{10pt}
+
+
+% color commands
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+
+\newcommand{\cpr}[1]{\left(#1\right)}
+%%%%%%%%%%%%% PHYSICS SPECIFIC COMMANDS
+
+\newcommand{\vA}{\vec{\mathbf{A}}}
+\newcommand{\vB}{\vec{\mathbf{B}}}
+\newcommand{\vC}{\vec{\mathbf{C}}}
+\newcommand{\vZ}{\vec{\mathbf{0}}}
+\newcommand{\unit}[1]{\mathbf{\hat{#1}}}
+\newcommand{\pvec}[1]{\left\langle#1\right\rangle}
+\newcommand{\ar}{\vec{\mathbf{r}}}
+\newcommand{\arhat}{\hat{\mathbf{r}}}
+\newcommand{\vv}{\vec{\mathbf{v}}}
+\newcommand{\delfull}{\pvec{\prt{}{x}, \prt{}{y},\prt{}{z}}}
+\newcommand{\delinput}[3]{\pvec{\prt{}{x}\cpr{#1}, \prt{}{y}\cpr{#2},\prt{}{z}\cpr{#3}}}
+\newcommand{\crossprod}[6]{\text{Det}\left|\begin{matrix}\hat{\textbf{i}}&\hat{\textbf{j}} &\hat{\textbf{k}}\\#1 & #2 & #3\\#4 & #5&#6\end{matrix}\right|}
+\newcommand{\dps}{\displaystyle}
+\newcommand{\delmatrix}[3]{\begin{bmatrix}\dps\hat x&\dps\hat y&\dps\hat z\\\dps\prt{}x&\dps\prt{}y&\dps\prt{}z\\\dps#1&\dps#2&\dps#3\end{bmatrix}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% begin doc
+
+
+\begin{document}
+\newcommand{\vE}{{\mathbf{E}}}
+\newcommand{\vr}{{\mathbf{r}}}
+\newcommand{\fpie}{\frac{1}{4\pi\varepsilon_0}}
+
+\section*{Chapter 3}
+\subsection*{Problem 31}
+Four particles are placed as shown in Fig. 3.31, each a distance $a$ from the origin. Find a simple approximate formula for the potential, valid at points far from the origin. 
+\begin{problem}
+  For any given distribution, we have the dipole distribution formulas:
+  \begin{align*}
+    \boxed{V_\text{dip}(\vr)=\fpie\frac{\vec p \cdot \hat r}{r^2}}
+  \end{align*}
+  And the formula for $\vec p$ is defined as:
+  \begin{align*}
+    \boxed{\vec p \equiv \int \vr'\rho(\vr')\,d\tau'}
+  \end{align*}
+  However, in this case, because we have four discrete charges, we just use the formula:
+  \begin{align*}
+    \vec p = \sum_{i = 1}^{n}q_i\vr'_i
+  \end{align*}
+  Thus, for any given point $\vr'$ is the location of each charge (in form $\pvec{r, \phi}$):
+  \begin{align*}
+    -2q &\to \pvec{-a, 0}\to \pvec{a, \pi}\\
+    -2q &\to \pvec{a, 0}\to \pvec{a, \pi/2}\\
+    3q &\to \pvec{0, a}\to \pvec{a, 0}\\
+    q &\to \pvec{0, -a} \to \pvec{a, 3\pi/2}
+  \end{align*}
+  Thus, the distance between our chosen point $\vr$ and any given charge is:
+  \begin{align*}
+    \sqrt{\vr^2 + \vr'^2 - 2\vr\vr'\cos\phi}
+  \end{align*}
+  All of the points on the $x$ axis cancel out, so we are left with the total vector:
+  \begin{align*}
+    \pvec{2qa, 0, 0}
+  \end{align*}
+  In polar coordinates this is given as $2qa\cos\phi$. Thus, according to our dipole moment formula, the final answer is:
+  \begin{align*}
+    V_\text{dip}(\vr) = \fpie \frac{2qa\cos\phi}{r^2}
+  \end{align*}
+\end{problem}
+
+\subsection*{Problem 32}
+\begin{problem}
+  Now we are going to begin solving this with the integral formula established above, because now it's a distribution with a surface charge:
+  \begin{align*}
+    \vec p \equiv \int \vr' \sigma d\tau'
+  \end{align*}
+  \begin{subproblem}{Part $a$}
+    Integrating $\vr'$ with respect to the angle $k\cos\theta$:
+    \begin{align*}
+      \int_0^{2\pi}\int_0^\pi\vr' k\cos\theta R^2 \sin\theta 
+    \end{align*}
+    Here, $r' = r\hat r = \pvec{0, 0, Rz\cos\theta}$. We don't care about the other components because they are symmetric and will cancel out to zero. Thus, we integrate (using $R$ because it is a shell):
+    \begin{align*}
+      \int_0^{2\pi}\int_0^\pi R\cos\theta k\cos\theta R^2\sin\theta &= 2\pi kR^3\int_0^{2\pi}\cos^2\theta \sin\theta\\
+      &= 2\pi k R^3\left[-\frac{\cos^3\theta}3\Bigg|_0^\pi\right]\\
+      &= \frac{4\pi k R^3}{3}\unit{z} = \vec p
+    \end{align*}
+    Plugging that into our dipole moemnt formula gives us:
+    \begin{align*}
+      V_\text{dip}(\vr) = \fpie \frac{4\pi k R^3}{r^23}\unit{z}\cdot \hat r
+    \end{align*}
+    Here, the $\unit{z}\cdot \hat r$ is going to be $\cos\theta$, so our final formula is:
+    \begin{align*}
+      \boxed{V = \fpie \frac{4\pi k R^3}{r^23}\cos\theta}
+    \end{align*}
+  \end{subproblem}
+\end{problem}
+
+\subsection*{Chapter 4}
+\subsection*{Problem 10}
+A sphere of radius $R$ carries a polarization:
+\begin{align*}
+  \mathbf{P}(\mathbf r) = k\mathbf{r}
+\end{align*}
+where $k$ is a constant and $\vr$ is the vector from the center.
+\begin{enumerate}[itemsep=0pt, parsep=0pt]
+  \item Calculate the bound charges $\sigma_b$ and $\rho_b$.
+  \begin{problem}
+    To find the charges, all we do is use the basic formulations:
+    \begin{align*}
+      \sigma_b &= \mathbf{P}\cdot \unit{n}\\
+      \rho_b &= -\nabla \cdot \mathbf P
+    \end{align*}
+    We calculate that:
+    \begin{align*}
+      \sigma_b &= kR\\
+      \rho_b &= -3k
+    \end{align*}
+  \end{problem}
+  \item Find the field inside and outside the sphere. 
+  \begin{problem}
+    We use the formulation:
+    \begin{align*}
+      V(\vr) = \fpie\oint_S\frac{\sigma_b}{r}\,da' + \fpie\int_V\frac{\rho_b}{r'}\,d\tau'
+    \end{align*}
+    Inside the sphere, there is no surface charge, so we just integrate with respect to $\rho$ and arrivate at:
+    \begin{align*}
+      V = \fpie\int_V\frac{\rho_b}rr'^2\sin\theta\,d\tau' &= \frac{1}{6\varepsilon_0}\rho r^2
+    \end{align*}
+    Taking the gradient gives the electric field:
+    \begin{align*}
+      \vE&=\frac{\rho}{3\varepsilon_0}\vr\\
+      &=-\frac{k}{\varepsilon_0}\vr
+    \end{align*}
+  \end{problem}
+\end{enumerate}
+
+\subsection*{Problem 15}
+A thick spherical shell (inner radius $a$, outer radius $b$) is made of dielectric material with a ``frozen-in'' polarization.
+\begin{align*}
+  \mathbf P(\vr) = \frac{k}r\unit{r}
+\end{align*}
+where $k$ is a constant and $r$ is the distance from the center. Find the electric field in all three regions by two different methods:
+\begin{enumerate}
+  \item[(a)] Locate all the bound charge, and use Gauss' law to calculate the field it produces. 
+  \begin{problem}
+    We have two sets of bounds charges: inside the sphere and outside the sphere. We will calculate both with the formula $\sigma_b = \mathcal P \cdot \unit{n}$. Will also calculate the volume charge with the formula $-\nabla \cdot \mathcal P$. 
+    \begin{align*}
+      \sigma_{b, in}&=\frac{k}r\unit r \cdot \unit n \\
+      &= -\frac{k}a \rightarrow\text{ negative because of opposite unit vector}\\
+      \sigma_{b, out} &= \frac{k}b\\
+      \rho &= -\nabla\cdot P \\
+      &= -\frac{1}{r^2}\prt{}{r}\cpr{r^2\frac{k}r \hat r}\\
+      &= -\frac{k}{r^2}
+    \end{align*}
+    Now that we have all the charges we can use Gauss' law:
+    \begin{align*}
+      \vE_{r<a} &= 0, \text{ because no charge inside}\\
+      \vE_{a<r<b} &= \frac{1}{4\pi r^2\varepsilon_0}\left[-\frac{k\cdot 4\pi a^2}{a} - 4\pi k(r- a)\right]\\
+      &= \frac{1}{4\pi r^2\varepsilon_0}\left[-4\pi rk\right]\\
+      &= -\frac{k}{r\varepsilon_0}\unit{r}
+    \end{align*}
+  \end{problem}
+  \item[(b)] Use equation 4.23 to find $\mathbf D$, and then get $\mathbf E$ from Eq. 4.21. 
+  \begin{problem}
+    Equation 4.23 reads as:
+    \begin{align*}
+      \boxed{\oint \mathbf D\cdot d\mathbf a = Q_{f\text{enc}}}
+    \end{align*}
+    Now, we just get to solve really quickly for the electric field. Because the total charge enclosed is 0, we are just left with our polarization, and can use the formula:
+    \begin{align*}
+      \mathbf D  - \mathcal P &=\varepsilon_0 \vE\\
+      \frac{k}r\unit{r}&= \varepsilon_0 \vE\\
+      \vE &= \frac{k}{r\varepsilon_0}\unit{r}
+    \end{align*}
+    This was so much easier oh my goodness. 
+  \end{problem}
+\end{enumerate}
+
+\subsection*{Problem 4.18}
+The space between the plates of a parallel-plate capacitor is filled with two slabs on linear dielectric material. Each slab has thickness $a$, so the total distance between the plates is $2a$. Slab 1 has a dielectric constant of $2$, and slab 2 has a dielectric constant of 1.5. The free charge density on the top place is $\sigma$ an on the bottom plate $-\sigma$. 
+
+\begin{problem}
+  First, we identify the free charges: the sides of the capacitors, which have total charge $\sigma A$ and $-\sigma A$. 
+  \begin{subproblem}{Part (a)}
+    To find the electric displacement, we have two sources, the top an the bottom. Forming our Gaussian pillbox gives us a total area $2A$. Thus, solving for our dielectric on both sides gives:
+    \begin{align*}
+      \oint_S \mathbf D \, d\vA &= Q_\text{free}\\
+      Q_\text{top} = \sigma/2
+    \end{align*}
+    Thus, our total dielectric (combining both because $dA$ points in the name direction) gives $\mathbf D = \sigma\unit{z}$.\gline{}
+  \end{subproblem}
+
+  \begin{subproblem}{Part (b)}
+    Now, to solve for the electric field, all we do is include the $\epsilon$ term.
+    \begin{align*}
+      \vE_\text{1} &= \frac{\sigma}{2\varepsilon}\unit{z}\\
+      \vE_\text{2} &= \frac{2\sigma}{3\varepsilon_0}\unit{z}
+    \end{align*}
+  \end{subproblem}
+
+  \begin{subproblem}{Part (c)}
+    Now to find the polarization in each slab, we use the formula:
+    \begin{align*}
+      \mathcal P&=\mathbf D - \epsilon\vE\\
+      \mathcal P_1 &= (\sigma - \sigma/2) = \sigma/2\unit{z}\\
+      \mathcal P_2 &= (\sigma - 2\sigma/3) = \sigma/3\unit{z}
+    \end{align*}
+  \end{subproblem}
+  \begin{subproblem}{Part (d)}
+    Find the potential difference between the plates:
+    \begin{align*}
+      \oint E_1 \, da+ \oint E_2\, da &= \frac{\sigma a}{2\varepsilon_0} + \frac{\sigma 2a}{3\varepsilon_0}\\
+      &=\frac{7\sigma a}{6\varepsilon_0}
+    \end{align*}
+  \end{subproblem}
+  \begin{subproblem}{Part (e)}
+    In order to find the location and amount of all bound charge, I will ignore the sides because we aren't necessarily given side lengths, and it's perpendicular to the Dielectric anyways so there's no point in solving for it.\gline{}
+    Given our polarization, we can calculate the bounds charge with the formula:
+    \begin{align*}
+      \sigma_b = \mathcal P \cdot \unit{n}
+    \end{align*}
+    For the bottom slab, we have the unit vector pointing down and pointing up out of the Dielectric surface. This goes the same for the top, so for each surface, we get:
+    \begin{align*}
+      &\text{Slab 1: }\sigma_\text{bottom} = -\sigma/2,\quad \sigma_\text{top} = \sigma/2\\
+      &\text{Slab 2: }\sigma_\text{bottom} = -\sigma/3,\quad \sigma_\text{top} = \sigma/3
+    \end{align*}
+  \end{subproblem}
+  \begin{subproblem}{Part (f)}
+    First, we consider the Gaussian surface that encloses this space:
+    \begin{align*}
+      \oint_S E\cdot d\vA &= Q_\text{enc}/\varepsilon_0\\
+      |E|\cdot 2A&= \sigma_\text{tot} A/\varepsilon_0\\
+      |E|&= \sigma_\text{tot}/2\varepsilon_0
+    \end{align*}
+    Now, if we imagine each slab of our surface and the component of $d\vA$, we get that for the first slab, we have the charges:
+    \begin{align*}
+      &\text{Slab 1: }-1\cdot(-\sigma + \sigma/3) + 1\cdot(\sigma/2 + \sigma/2 + \sigma - \sigma/3) = 4\sigma/3 \implies 2\sigma/3\varepsilon_0\\
+      &\text{Slab 2: }\;\;1\cdot(\sigma - \sigma/2)-1\cdot(\sigma - \sigma/2 + \sigma/3 - \sigma/3)= \sigma \implies \sigma/2\varepsilon_0
+    \end{align*}
+  \end{subproblem}
+
+\end{problem}
+
+\subsection*{Problem 20}
+A sphere of linear dielectric material has embedded in it a uniform free charge density $\rho$. Find the potential at the center of the sphere, if its radius is $R$ and the dielectric constant is $\epsilon_r$. 
+\begin{problem}
+  So here, first we want to solve for $\mathbf D$ with our $Q_\text{enc}$, which is trivially $4\pi R^3/3$. Solving for $\mathbf D$ gives:
+  \begin{align*}
+    |\mathbf D |4\pi r^2&= 4\pi \rho r^3/3\\
+    |\mathbf D | &= r\rho/3
+  \end{align*}
+  Now, solving for our electric field gives us:
+  \begin{align*}
+    \vE_\text{in} &= r\rho/(3\varepsilon_0 \epsilon_r)\quad r< R\\
+    \vE_\text{out} &= \frac{R^3}{3\varepsilon_0}\frac{\rho}{r^2}
+  \end{align*}
+  Now, all we do is integrate from infinity inwards to get the potential:
+  \begin{align*}
+    \int_\infty^R \vE_\text{out}\cdot dl + \int_R^0 \vE_\text{in}\cdot dl
+  \end{align*}
+  Solving each integral gives:
+  \begin{align*}
+    \frac{-R^3}{3\varepsilon_0}\frac{\rho}{r}+\Bigg|_\infty^R\frac{r^2\rho}{6\varepsilon_0\epsilon_r}\Bigg|_R^0 &= -\frac{\rho R^2}{3\varepsilon_0}\cpr{1+\frac{1}{2\epsilon_r}}=-V
+  \end{align*}
+\end{problem}
+\end{document}

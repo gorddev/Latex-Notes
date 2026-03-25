@@ -1,0 +1,75 @@
+\documentclass[10pt,twocolumn]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{amsmath, amsfonts, amssymb, mathrsfs}
+\usepackage{graphicx, fancyhdr}
+\usepackage{charter}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{lettrine}
+\usepackage[dvipsnames]{xcolor}
+
+% SMALL PAGE COMMAND
+\newcommand{\smallpage}{  \setlength\oddsidemargin{.25in}
+            \setlength\textwidth{5.5in}
+            \setlength\topmargin{0in}
+            \setlength\textheight{9in}}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}[0]{\gspc\\} % 1.5 space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\prt}[2]{\frac{\partial#1}{\partial#2}}
+
+% COLOR BOX
+
+\tcbset{problembox/.style={
+    colback=gray!4, colframe=gray!50,  boxrule=2.5pt,
+    leftrule=2.5pt, left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm, breakable, sharp corners
+  }
+}
+
+\tcbset{subproblembox/.style={
+    colback=gray!12, colframe=gray!80, boxrule=0.5pt,
+    leftrule=2.5pt, left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm, breakable, sharp corners
+  }
+}
+
+% PROBLEM
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{tcolorbox}[problembox]#1}
+  {\end{tcolorbox}\gspc}
+
+  \newenvironment{subproblem}[2]
+  {\vspace{-0.1cm}\begin{tcolorbox}[subproblembox]
+   \textit{#1 }#2}
+  {\end{tcolorbox}\gspc}
+
+% parenthesis and fractions
+\newcommand{\cpr}[1]{\left(#1\right)}     % close parenthesis
+\newcommand{\cprf}[2]{\cpr{\frac{#1}{#2}}}% close parenthesis frac
+%%%%%%%%%%%%% PHYSICS SPECIFIC COMMANDS
+\newcommand{\gvec}[1]{{\mathbf{#1}}}
+\newcommand{\gvem}[1]{{\mathcal{\vec{#1}}}}
+\newcommand{\vA}{\gvec{A}}
+\newcommand{\vB}{\gvec{B}}
+\newcommand{\vC}{\gvec{C}}
+\newcommand{\vv}{\gvec{v}}
+\newcommand{\unit}[1]{\mathbf{\hat{#1}}}
+\newcommand{\pvec}[1]{\left\langle#1\right\rangle}
+\newcommand{\giint}{\int\hspace{-0.27cm}\int}
+\newcommand{\giiint}{\int\hspace{-0.27cm}\int\hspace{-0.27cm}\int}
+
+
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{Eatquation Sheet}}}
+\setlength{\headheight}{10pt}

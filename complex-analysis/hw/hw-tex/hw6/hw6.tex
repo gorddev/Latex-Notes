@@ -1,0 +1,214 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% HW 6 %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\newcommand{\prt}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\prtt}[2]{\frac{\partial^2#1}{\partial#2^2}}
+\section*{HW 6: Due Friday 3/20 by 8:00pm \\ Self Grade (due Monday 3/23 by 10:40am): **/12} 
+\subsection*{HW 6a - Section 2.5}
+\begin{enumerate}
+\item Verify that each function $u$ is harmonic, then find a harmonic conjugate for $u$.
+\begin{enumerate}
+\item $u=-y$
+\begin{problem}
+	Let us calculate all the second order partials of $u$:
+	\begin{align*}
+		\prt{^2u}{x^2} = 0&, \quad \prt{^2u}{y^2} = 0\\
+		\prt{^2u}{xy} = 0&, \quad\prt{^2u}{xy} =0 
+	\end{align*}
+	Note that $0$ is continuous, and it satisfies laplace's equation because $0 + 0 = 0$. Now, we want to find a function $iv$ that when added to $u$ makes $u$ analytic. We look for an equation that satisfies:
+	\begin{align*}
+		\prt{u}{x}  &= \prt{u}{y}\\
+		\prt{u}{y} &= -\prt{v}{x}
+	\end{align*}
+	Here, we have that $\prt{u}x = 0$, so $\prt{u}{y} = 0$, and we have that $\prt{u}{y} = -1$, so $\prt{v}{x} = 1$. Integrating gives us that $v = x + C + K \to v = x + \tilde C$.
+\end{problem}
+
+\item $u = e^x \sin y$
+\begin{problem}
+	Now, we calculate the second order partials so we can check they are continuous:
+	\begin{align*}
+		\prt{^2e^x\sin y}{x^2} = e^x\sin y&,\quad \prt{^2e^x\sin y}{y^2} = -e^x\sin y\\
+		\prt{^2e^x\sin y}{xy}=e^x\cos y&, \quad \prt{^2e^x\sin y}{yx} = e^x\cos y
+	\end{align*}
+	They are all continuous because they are the composition of two continuous funtions $e^x, \cos y, \sin y$. Now, we find the $v$ such that $u + iv$ is analytic. Consider the partials:
+	\begin{align*}
+		\prt{u}{x} = e^x\sin y &= \prt{v}{y}\\
+		\prt{u}{y} = e^x\cos y &= -\prt{v}x
+	\end{align*}
+	Taking the integrals with respect to each equation gives:
+	\begin{align*}
+		\int e^x\sin y\,dy &= -e^x\cos y +C\\
+		-\int e^x\sin y\, dx &= -e^x \cos y+C
+	\end{align*}
+	Thus, we have that $\boxed{v = -e^x\cos y + C}$. 
+\end{problem}
+\end{enumerate}
+
+\item Suppose that $u$ and $v$ are harmonic on a domain $D$. Determine if each statement is true or false. If true, prove it. If false, provide a counterexample.
+	\begin{enumerate}
+		\item The sum $u+v$ is harmonic in $D$.
+		\begin{proof}
+			Let $u$ and $v$ be harmonic functions. We want to show that the sum $u+v$ is harmonic\gline{}
+			Consider that the composition via addition of two continuous functions are continuous. Thus, because  derivatives are distributive, the sum of all the second partials of $u$ and $v$ are equal to the the partial of $u +v$. Hence, because the composition of continuous functions, $u+v$ is also continuous. \gline{}
+			Furthermore, we know that they satisfy laplace's equations. Because partials are distributive, we know that:
+			\begin{align*}
+				\prt{^2(u+v)}{x^2} &= \prt{^2u}{x^2} + \prt{^2v}{y^2}\\
+				\prt{^2(u+v)}{y^2} &= \prt{^2v}{y^2}+\prt{^2u}{y^2}
+			\end{align*}
+	
+    Because $u$ and $v$ are harmonic, we know that:
+    \begin{align*}
+      \prt{^2u}{x^2}+\prt{^2u}{y^2} &= 0\\
+      \prt{^2v}{y^2}+\prt{v}{y^2}&=0, \text{ so it follows that:}\\
+       \prt{^2u}{x^2}+\prt{^2u}{y^2}+ \prt{^2v}{y^2}+\prt{v}{y^2} = 0
+    \end{align*}
+    \end{proof}
+		\item The product $uv$ is harmonic in $D$.
+		\begin{problem}
+			This statement is not true. Consider the two harmonic functions $u = x$ and $v = x$. We have for both of these that all second order partials are continuous:
+			\begin{align*}
+				\prtt{v}{x} = 0, \quad\prtt{u}{y} = 0, \quad\prt{^2v}{xy} = 0
+			\end{align*}
+			Trivially, they satisfy Laplace's equations. 
+			However, consider that $uv = x^2$. If we take the second order partials of $uv$, we have that:
+			\begin{align*}
+				\prtt{uv}{x} = 2&, \quad \prtt{uv}{y} = 0\\
+				\prtt{uv}{x} + \prtt{uv}y &\ne 0 
+			\end{align*}
+			Thus, if two functions are harmonic, this does not imply that their product is harmonic. 
+		\end{problem}
+	\end{enumerate}
+
+\item Show that if $\phi(x,y)$ and $\psi(x,y)$ are harmonic, then $u$ and $v$ defined by
+	\[u(x,y) = \phi_x \phi_y +\psi_x \psi_y \text{ and } v(x,y) = \frac{1}{2} \lpa \phi_x^2 +\psi_x^2 -\phi_y^2 -\psi_y^2 \rpa \]
+	satisfy the Cauchy-Riemann equations.\\
+	({\it Hint: To show that $u_x = v_y$ and $u_y = -v_x$, show that $u_x -v_y =0$ and $u_y +v_x =0$.})
+
+	\begin{problem}
+		First, we begin with the things that we know. Because $u$ and $v$ are hamonic, let's get Laplace's equation written out for each one:
+		\begin{gather*}
+			\prtt{u}{x} = \phi_y\prtt{\phi_x}{x} + \psi_y\prtt{\psi_x}{x},\qquad \prtt{u}{y}= \phi_x\prtt{\phi_y}y + \psi_x\prtt{\psi_y}y\\\\\hline\\
+			\prtt{v}{x}=\prtt{\phi_x}{x}\phi_x + \cpr{\prt{\phi_x}x}^2 + \prtt{\psi_x}{x}\psi_x + \cpr{\prt{\psi_x}x}^2\\
+			\prtt{v}{y}=\prtt{\phi_y}{y}\phi_y + \cpr{\prt{\phi_y}y}^2 + \prtt{\psi_y}{y}\psi_y + \cpr{\prt{\psi_y}y}^2
+		\end{gather*}
+		This is helpful because via the first equation we know that:
+		\begin{align*}
+			\phi_y\prtt{\phi_x}{x} + \psi_y\prtt{\psi_x}{x}+ \phi_x\prtt{\phi_y}y + \psi_x\prtt{\psi_y}y = 0
+		\end{align*}
+		Now, let us attempt to find the harmonic conjugate of the first equation. Writing out the first order partials of the first equation gives:
+		\begin{align*}
+			\prt{\phi_x}{x} = \phi_y\prt{\phi_x}x + \psi_y\prt{\psi_x}x, \qquad \phi_x\prt{\phi_y}y + \psi_x\prt{\psi_y}y
+		\end{align*}
+	\end{problem}
+\end{enumerate}
+
+
+
+
+\subsection*{HW 6b - Section CD-1}
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item For each of the following functions, determine the fixed points, and determine whether they are attracting, repelling, or neither.
+	\begin{enumerate}
+	\item $f(z) = z^2 +z +1$
+	\begin{problem}
+		In order to find the fixed points, we want to find the points where $f(z) = z$. Thus, we set $f(z) =z$ and solve:
+		\begin{align*}
+			z^2 + z + 1 &= z\\
+			z^2 + 1 &= 0
+		\end{align*}
+		Now, we find the points where $z^2 = -1$, which is just $\pm i$. However, note that we are missing the case where $z = \infty$, where this also holds. Now we calculate $f'(z)$:
+		\begin{align*}
+			f'(z) = 2z + 1
+		\end{align*}
+		For $f'(\pm i)$, we have a multiplier of $\pm 2i +1$, which clearly has a modulus greater than 1, so they are \underline{repelling}. For infinity, we have the equation:
+		\begin{align*}
+			\displaystyle \frac{d}{dz}\cpr{\frac{1}{f\cpr{\frac{1}z}}}\Bigg|_{z=0} \quad \text{ if }z_0 = \infty
+		\end{align*}
+		We have that $f\cpr{\frac{1}z} = z^{-2}+z^{-1}+1$. Now, we get to take the derivative of this lovely equation:
+		\begin{align*}
+			\frac{d}{dz}\cpr{(z^{-2}+z^{-1}+1)^{-1}} &= \frac{-2z^{-3}-z^{-2}}{(z^{-2}+z^{-1}+1)^{2}}
+		\end{align*}
+		Note that near zero, the denominator has a higher negative power, so it skyrockets to a 'higher infinity' than the numerator, and the equation collapses to zero. Thus, the equation equals 0, and the multiplier is 0. Because the multiplier is 0, so is the modulus, and thus $\infty$ is super-attracting. 
+	\end{problem}
+	
+	\item $f(z) = z^3 +z^2 +\frac{3}{4} z - \frac{1}{4}$
+	\begin{problem}
+		First, let's solve for the fixed points of this equation. We set it equal to z and find:
+		\begin{align*}
+			z^3 + z^2 + \frac{3}4z-\frac{1}4 &= z\\
+			z^3 + z^2-\frac{1}4z - \frac{1}4 &= 0
+		\end{align*}
+		Now, we attempt to solve for the roots of a cubic equation. It's pretty easy to see that $\frac{1}2$ is a root of this equation because the first term evaluates to $\frac{1}8$, and the second $\frac{1}4$ and the third $-\frac{1}8$. Because of the layout of this equation, we also know that $-\frac{1}2$ is also a solution. We can then use polynomial factoring to solve for the last possible root:
+		\begin{align*}
+			\cpr{z+\frac{1}2}\cpr{z-\frac{1}2}\cpr{z -a}&= z^3 +z^2 -\frac{1}{4} z - \frac{1}{4}
+		\end{align*}
+		In fact, we don't need to use polynomial division. Because the last term $-\frac{1}4$ is equal to $-\frac{1}{2}\cdot \frac{1}2$, we know that our last root must leave it unaffected, which gives a root of $-1$. Even though all of our roots are real, we don't need to concern ourselves with imaginary roots because of the fundamental theorem of Algebra.\gline{}
+		Now that we have all of the fixed points $(1/2, -1/2, -1)$, we calculate their multipliers under $f'(z)$:
+		\begin{align*}
+			f'(z) &= 3z^2 + 2z + \frac{3}4\\
+			f'\cpr{\frac{1}2} &= \frac{5}2\\
+			f'\cpr{-\frac{1}2} &= \frac{1}2\\
+			f'\cpr{-1}&=\frac{7}4
+		\end{align*}
+		Thus, we have that the fixed points $1/2$ and -1, they are repelling points, while $-1/2$ is an attracting fixed point. \gline{}
+		Next step: $\infty$. This is clearly a fixed point of our equation, so we need to transform our equation like in the previous problem to treat $\infty$ as the ``origin.'' First, consider $f(1/z)$.\gline{}
+		\begin{align*}
+			f(1/z) &= z^{-3}+z^{-2}+\frac{3}4z^{-1}-\frac{1}4\\
+			\frac{1}{f(1/z)}&= \frac{1}{z^{-3}+z^{-2}+\frac{3}4z^{-1}-\frac{1}4}\\
+			\frac{d}{dz}\cpr{\frac{1}{f(1/z)}}&= \frac{-3z^{-4}-2z^{-3}-0.75z^{-2}}{\cpr{z^{-3}+z^{-2}+\frac{3}4z^{-1}-\frac{1}4}^2}
+		\end{align*}
+		The highest negative exponent in our denominator is $z^{-6}$, while in the numerator it is $z^{-4}$. Thus, as $z$ approaches zero, our equation approaches 0. Hence, $\infty$ is a superattracting fixed point. In fact, I think this will be the case for all polynomials that have at least degree with $z^2$. 
+	
+	\end{problem}
+	\end{enumerate}
+	
+\item Let $f$ be entire. The general Newton's method function for approximating the zeroes of $f$ is given by
+	\[N(z) = z- \frac{f(z)}{f'(z)}. \]
+The idea behind Newton's method is that the orbits of $N$ will converge to the zeroes of $f$.
+
+Your task is to prove that this method works. In other words, first prove that the zeroes of $f$ are the same as the fixed points of $N$ (except possibly for fixed points where $f'(z) =0$). Then prove that every such fixed point of $N$ is an attracting fixed point. 
+
+\begin{proof}
+	We want to show that the fixed points of $N$ are the zeroes of $f(z)$ for the function:
+	\begin{align*}
+		N(z) = z - \frac{f(z)}{f'(z)}
+	\end{align*}
+	Let $z_0$ be a fixed point of $N$. Thus we have that:
+	\begin{align*}
+		N(z_0) &= z_0\\
+		&=z_0 - \frac{f(z_0)}{f'(z_0)}
+	\end{align*}
+	Thus, it must follow for nonzero $f'(z_0)$ that $f(z_0)/f'(z_0)= 0$. The only possibilities for $f(z_0)/f'(z_0)$ to equal zero are if:
+	\begin{itemize}[itemsep=0pt, parsep=0pt]
+		\item  $f(z_0) = 0$, or 
+		\item $f'(z_0)$ is equal to an $\infty$ of higher magnitude than $f(z_0)$. 
+	\end{itemize} 
+	Thus, all of $f(z)$'s zeroes are fixed points of $N$. Now, consider the derivative of $N$ with respect to $z$:
+	\begin{align*}
+		\cpr{\frac{d}{dz}(N(z))}&= 1 - f'(z)f'(z)^{-1}-\frac{f(z)f''(z_0)}{f''(z)}\\
+		&= \frac{f(z)f''(z_0)}{f'(z)^2}
+	\end{align*}
+	Now, because $f'(z_0)=0$, we know that $N'(z_0) = 0$. Thus, because $|N'(z_0)| = 0$, $z_0$ is a superattracting fixed point of $N$. 
+\end{proof}
+
+\end{enumerate}
+
+\begin{reflection}
+	\textbf{Collaboration Statement: }I did not collaborate with anyone on this assignment. 
+\end{reflection}
+
+
+
+\subsection*{Reflection Questions for HW 6}
+    \begin{itemize}
+        \item What do you understand well and what is working well for you in learning the material?
+
+
+        \item What do you need to keep studying and what are some habits you can change/pick up to learn the material better?
+
+    \end{itemize}

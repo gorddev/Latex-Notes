@@ -1,0 +1,34 @@
+\input{setup.tex}
+
+\begin{document}
+\noindent
+\textbf{Gauss' Law}
+\begin{gather*}
+	\boxed{\oint \gvec{E}\cdot d\vA = \frac{Q_\text{enc}}{\varepsilon_0}}
+\end{gather*}
+\textbf{Stokes' Theorem}
+\begin{gather*}
+	\boxed{\oint_C \gvec{F}\cdot d\gvec{r} = \int\hspace{-0.27cm}\int_S(\nabla\times \gvec{F})\cdot ds\gvec{S}}
+\end{gather*}
+\textbf{Divergence Theorem}
+\begin{gather*}
+	\boxed{\giiint_V(\nabla\cdot \gvec{F})\,dV = \int\hspace{-0.26cm} \int_S(\gvec{F}\cdot\unit{n}\,dS)}
+\end{gather*}
+
+\subsection*{Dielectrics}
+\begin{problem}
+	Surface \& Area Charge
+	\begin{align*}
+		\rho_b &= -\nabla \cdot \gvem{P}\\
+		\sigma_b &= \gvem{P}\cdot\unit{n}\\
+		\gvec{D} &= \epsilon \gvec{E} + \gvem{P}
+	\end{align*}
+	Key Formulations
+	\begin{gather*}
+		\boxed{\boxed{\oint \gvec{D}\cdot d\vA = Q_\text{free}}}\\
+		\boxed{\gvem{P}=\varepsilon_0\chi_\varepsilon\gvec{E}}\\
+		\boxed{\epsilon = \varepsilon_0 (1 + \chi_e),\quad \epsilon_R = \frac{\epsilon}{\varepsilon_0}}
+	\end{gather*}
+\end{problem}
+
+\end{document}

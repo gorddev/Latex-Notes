@@ -1,0 +1,172 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% HW 5 %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{HW 5: Due Friday 3/13 by 8:00pm \\ Self Grade (due Monday 3/16 by 10:40am): 10/12} 
+\subsection*{HW 5a - Section 2.3}
+\begin{enumerate}
+    \item Calculate the derivative of $g(z) = \frac{4iz^2-3z}{z^3+2}$, and determine any points at which the function is not analytic.
+
+	\begin{problem}
+		This function is not analytic anywhere where $z^3 = -2$. Thus, we solve the inequality $(-2)^{1/3}$ for the roots of unity. Note that $\Arg(-2) = \pi$. \gline{}
+		\begin{align*}
+			\sqrt[3]2e^{i(\pi+2\pi k)/3},\quad k=0,\ldots,n-1
+		\end{align*}
+		Thus our solutions for undefined are:
+		\begin{align*}
+			\sqrt[3]2e^{i\pi/3},\sqrt[3]2e^{i\pi}=-\sqrt[3]2, \sqrt[3]e^{5\pi/3}
+		\end{align*}
+		Now, we just calculate the derivative with the product rule:
+		\begin{align*}
+			\frac{d}{dz}(4iz^2-3z)(z^3+2)^{-1} &= (8iz - 3)(z^2+2)^{-1}-3z^2(-4iz^2-3z)(z^3+2)^{-2}
+		\end{align*}
+	\end{problem}
+	\begin{grade}
+		2/2 Points.
+		\begin{itemize}[parsep=0pt, itemsep=0pt]
+			\item Calculated the correct derivative, just written in a different form.
+			\item Found the points where it wouldn't be analytic as well (also written in a different form.)
+		\end{itemize}
+	\end{grade}
+
+    \item Suppose $f$ is a function about which we know the following information.
+    	\begin{itemize}
+    	\item $f$ is analytic on the disk $D_2(1+i)$.
+    	\item $f(1+i) = 2i$
+    	\item $f'(1+i) = -3\sqrt{2} +3\sqrt{2}\,i$
+    	\end{itemize}
+    Let $w = 1+\sqrt{2}/2 +i(1+\sqrt{2}/2)$. Estimate the value of $f(w)$. ({\it Hint: $f$ behaves approximately like a scale and rotation near $z_0=1+i$.})
+	\begin{problem}
+		In this case, we treat $f'$ as a linear scalar with which we can approximate the change from $f(1+i)$ (treating it like a slope). Thus, we write:
+		\begin{align*}
+			\frac{\sqrt{2}}2f'(1+i) = -3 + 3i
+		\end{align*}
+		Thus, adding our $f(1+i)$ gives us:
+		\begin{align*}
+			-3+3i + 2i = -3 + 5i
+		\end{align*}
+	\end{problem}
+	\begin{grade}
+		0.5/2 Points
+		\begin{itemize}[itemsep=0pt, parsep=0pt]
+			\item Didn't get correct calculations on either part, as I forgot to subtract $w$ in order to find the $\Delta z$. 
+		\end{itemize}
+	\end{grade}
+    
+    \item Let $f(z) =z^3+1$, and let $z_1 = \frac{-1+i\sqrt{3}}{2}$ and $z_2 =\frac{-1-i\sqrt{3}}{2}$. Show that there is no point $w$ on the line segment from $z_1$ to $z_2$ such that
+
+    \[f(z_2) - f(z_1) = f'(w)(z_2-z_1).\]
+
+    This shows that the Mean Value Theorem from single-variable Calculus does not hold for complex functions.
+	\begin{problem}
+		Consider that $f'(z) = 3z^2$. Also consider that $z_2 -z_1=i\sqrt3$. Thus, $f(z_1) = 1$, $f(z_2) = 1$, so $f(z_2) - f(z_1)=0$.\gline{}
+		However, note that on the line segment from $\left[\frac{-1+i\sqrt3}2,\frac{-1-i\sqrt3}2\right]$. We can imagine this as us keeping $x$ the same and moving $y$ from $i\sqrt3 /2$ to $-i\sqrt3 /2$.\gline{}
+		Thus, if we plug in generic values for our w, with $x = \frac{-1}2$ and $iy = is$, we get:
+		\begin{align*}
+			f'(w)= 3z^2 = 3\cpr{\frac{-1}2 + is}^2
+		\end{align*} 
+		Thus, the question is, is there any $is$ in the range [$i\sqrt3 /2$, $-i\sqrt3 /2$] such that $is = 1/2$? No, becaus it is always imaginary.\gline{}
+		Thus, the Mean value theorem does not hold in the complex world. 
+	\end{problem}
+	\begin{grade}
+		3/3 Points.
+		\begin{itemize}[parsep=0pt, itemsep=0pt]
+			\item Made the correct argument with a (seemingly) correct proof that showed that there's no point where the derivative was zero.
+			\item I used a different wording where I established that $x = -1/2$, so thus the y-component needed to be $iy = \frac{1}2$, which was not possible in this case, so $x + iy \ne 0$ anywhere in the range. 
+		\end{itemize}
+	\end{grade}
+\end{enumerate}
+
+
+
+
+\subsection*{HW 5b - Section 2.4}
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item Prove that the function $f(x+iy) = 2y-ix$ is nowhere differentiable.
+\begin{proof}
+	We want to show via the Cauchy-Riemann equations that $f(x + yi)$ is nowhere differentiable. \gline{}
+	\begin{align*}
+		\frac{\partial u}{\partial x} = 0,\quad \frac{\partial v}{\partial y}=0\\
+		\frac{\partial u}{\partial y} = 2,\quad\frac{\partial v}{\partial x} = -i
+	\end{align*}
+	Because in no case does $2 = i$, thus $f(x+iy)$ is nowhere differentiable.  
+\end{proof}
+\begin{grade}
+	1.5/2 The proof was mostly correct, however, I accidentally wrote that $\partial v / \partial x = -i$, which is not correct.
+\end{grade}
+\item Suppose that $f(z)$ and $\overline{f(z)}$ are analytic on a domain $D$. Show that $f$ is constant on $D$. 
+\begin{proof}
+	We want to show that $f$ is constant on $D$. \gline{}
+	Consider that both $f(z)$ and $\overline{f(z)}$ must satisfy the Cauchy-Riemann equations, and that:
+	\begin{align*}
+		\frac{\partial u}{\partial x} &=\frac{\partial \bar u}{\partial x}\quad&
+		\frac{\partial u}{\partial y} = \frac{\partial \bar u}{\partial y}\\
+		\frac{\partial v}{\partial x} &=-\frac{\partial \bar v}{\partial x}\quad&
+		\frac{\partial v}{\partial y} = -\frac{\partial \bar v}{\partial y}
+	\end{align*}
+	However, because we also must satisfy the cauchy Riemann equations simultaneously, we run into a little bit of an issue:
+	\begin{align*}
+		\frac{\partial u}{\partial x}&= -\frac{\partial\bar u}{\partial x}&\frac{\partial u}{\partial y}= -\frac{\partial\bar u}{\partial y}\\
+		\frac{\partial v}{\partial x}&= -\frac{\partial v}{\partial x}&\frac{\partial v}{\partial y}=-\frac{\partial v}{\partial y}
+	\end{align*}
+	The only time when any number $n = -n$, is when $n = 0$. Thus, all the partials are zero, which means that $f$ must be constant. 
+\end{proof}
+\begin{grade}
+	2/2. Correctly showed that $f$ is constant for this function.
+\end{grade}
+	
+\item The complex-valued cosine function is defined by
+	\[\cos(z) = \frac{e^{iz} + e^{-iz}}{2}. \]
+Prove that $\cos(z)$ is entire by verifying that $u_x$, $u_y$, $v_x$, and $v_y$ are continuous on $\C$, and that the C-R equations are satisfied on $\C$.
+\begin{proof}
+	We want to show via. the Cauchy-Riemann equations that the complex-valued cosine function is entire.\gline{}
+	Consider splitting $\cos(z)$ into its representative parts:
+	\begin{align*}
+		\frac{1}2\left[e^x(\cos y + i\sin y) + e^{-x}(\cos y - i\sin(y))\right]
+	\end{align*}
+	Splitting up into real and imaginary parts gives us that:
+	\begin{align*}
+		u(x,y) &= 0.5\cdot\cos y\cdot(e^x + e^{-x})\\
+		v(x,y) &= 0.5\cdot\sin y\cdot(e^x - e^{-x})
+	\end{align*}
+	Taking the respective partials of $u$ and $v$ gives us:
+	\begin{align*}
+		u_x &= 0.5\cdot\cos y \cdot (e^x-e^{-x})\\
+		u_y &= -0.5\cdot\sin y \cdot(e^x + e^{-x})\\
+		v_x &= 0.5\cdot\sin y \cdot(e^x + e^{-x})\\
+		v_y &= 0.5\cdot\cos y \cdot (e^x - e^{-x})
+	\end{align*}
+	Because all these functions are compositions of other continuous functions ($\cos$, $\sin$, $e^{x}$, and $e^{-x}$), all the partials are continuous as well. Thus, we can start comparing the Cauchy-Riemann equations:
+	\begin{align*}
+		u_x = v_y\\
+		u_y = -v_x
+	\end{align*}
+	Thus, the Cauchy-Riemann equations hold, and $\cos(z)$ is entire on all of $\C$. 
+\end{proof}
+\begin{grade}
+	2/2. The proof is correct and the justification is correct as well. 
+\end{grade}
+\end{enumerate}
+
+\begin{reflection}
+	\textbf{Collaboration Statement:} I did not work with anyone else on this assignment, as I was too tired to. 
+\end{reflection}
+
+
+
+\subsection*{Reflection Questions for HW 5}
+    \begin{itemize}
+        \item What do you understand well and what is working well for you in learning the material?
+		\begin{reflection}
+			I think the homeworks are going a bit better this time around, and I'm paying more attention to detail. Struggling with sleep is always an issue as I just don't pay as much attention, but I'm doing my best to work through it and I think that showed in this assignment, especially with the last problem. 
+		\end{reflection}
+
+        \item What do you need to keep studying and what are some habits you can change/pick up to learn the material better?
+		\begin{reflection}
+			I need to pay more attention still and try and absorb the material better in class, as well as attempt to the homework when I am clear on mind. Then, I end up doing a better job an not making mistakes like I did on question 2, which was just a flop. 
+		\end{reflection}
+
+    \end{itemize}

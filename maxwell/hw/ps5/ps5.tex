@@ -1,0 +1,251 @@
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{charter}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{graphicx}
+
+% SMALL PAGE COMMAND
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}\newcommand{\Q}{\mathbb{Q}}\newcommand{\C}{\mathbb{C}}
+\newcommand{\real}[1]{\text{Re}\left(#1\right)}
+\newcommand{\im}[1]{\text{Im}\left(#1\right)}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}[0]{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[2]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
+\end{figure}
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+\newcommand{\prt}[2]{\frac{\partial#1}{\partial#2}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+
+%}
+
+% COLOR BOX
+
+\tcbset{problembox/.style={
+    colback=gray!4,
+    colframe=gray!50, 
+	  boxrule=0pt,
+    leftrule=2.5pt, 
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable,
+    sharp corners
+  }
+}
+
+\tcbset{subproblembox/.style={
+    colback=gray!12,
+    colframe=gray!80, 
+	  boxrule=0.5pt,
+    leftrule=2.5pt, 
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable,
+    sharp corners
+  }
+}
+
+% PROBLEM
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{tcolorbox}[problembox]
+   \textit{Problem. }#1}
+  {\end{tcolorbox}\gspc}
+
+  \newenvironment{subproblem}[2]
+  {\vspace{-0.1cm}\begin{tcolorbox}[subproblembox]
+   \textit{#1 }#2}
+  {\end{tcolorbox}\gspc}
+
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{PS5 - Maxwell's Equations}}}
+\setlength{\headheight}{10pt}
+
+
+% color commands
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+
+\newcommand{\cpr}[1]{\left(#1\right)}
+%%%%%%%%%%%%% PHYSICS SPECIFIC COMMANDS
+
+\newcommand{\vA}{\vec{\mathbf{A}}}
+\newcommand{\vB}{\vec{\mathbf{B}}}
+\newcommand{\vC}{\vec{\mathbf{C}}}
+\newcommand{\vZ}{\vec{\mathbf{0}}}
+\newcommand{\norm}{\vec{\mathbf{n}}}
+\newcommand{\pvec}[1]{\left\langle#1\right\rangle}
+\newcommand{\ar}{\vec{\mathbf{r}}}
+\newcommand{\arhat}{\hat{\mathbf{r}}}
+\newcommand{\vv}{\vec{\mathbf{v}}}
+\newcommand{\delfull}{\pvec{\prt{}{x}, \prt{}{y},\prt{}{z}}}
+\newcommand{\delinput}[3]{\pvec{\prt{}{x}\cpr{#1}, \prt{}{y}\cpr{#2},\prt{}{z}\cpr{#3}}}
+\newcommand{\crossprod}[6]{\text{Det}\left|\begin{matrix}\hat{\textbf{i}}&\hat{\textbf{j}} &\hat{\textbf{k}}\\#1 & #2 & #3\\#4 & #5&#6\end{matrix}\right|}
+\newcommand{\dps}{\displaystyle}
+\newcommand{\delmatrix}[3]{\begin{bmatrix}\dps\hat x&\dps\hat y&\dps\hat z\\\dps\prt{}x&\dps\prt{}y&\dps\prt{}z\\\dps#1&\dps#2&\dps#3\end{bmatrix}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% begin doc
+
+
+\begin{document}
+
+
+\newcommand{\vE}{{\mathbf{E}}}
+\newcommand{\vr}{{\mathbf{r}}}
+\newcommand{\fpie}{\frac{1}{4\pi\varepsilon_0}}
+
+\textbf{Chapter 3: }7, 15, 17
+
+\section*{Chapter 3}
+\subsection*{Problem 7}
+Find the force on the charge $+q$ in Fig 3.14
+\begin{problem}
+  To find the force on the charge $+q$, we will create a point-charge configuration that satisfies $V = 0$ on the plate. Thus, we'll put a charge of $+2q$ at $z = -d$, and $-q$ at $z = -2q$.\gline{}
+  Thus, we can just calculate the accumulated charge all the way throughout with simple force equations:
+  \begin{align*}
+    \vec F &= \fpie\left[\frac{-2q^2}{(2d)^2}+\frac{2q^2}{(4d)^2}+\frac{-q^2}{(6d)^2}\right]\\
+    &= \fpie \frac{q^2}{d^2} \left[-\frac{1}2+\frac{1}8+\frac{1}{36}\right]\\
+    &= -\frac{1}{\pi\varepsilon_0}\frac{q^2}{d^2}\cpr{\frac{29}{288}}
+  \end{align*}
+\end{problem}
+\subsection*{Problem 15}
+Find the potential in the infinite slot of Ex. 3.3 if theboundary at $z = 0$ consists of two metal strips: one, from $y=0$ to $y = a/2$, is held at a constant potential $V_0$, adn the other, from $y = a/2$ to $y = a$, is at potential $-V_0$.
+\begin{problem}
+  For this one, we're going to use Fourier's trick in order to help us solve this problem. \gline{}
+  First, we always begine with Laplace's equation, which tells us that:
+  \begin{align*}
+    \prt{^2V}{x^2}+\prt{^2V}{y^2} = 0
+  \end{align*}
+  Here, our boundary conditions tell us that:
+  \begin{align*}
+    V = \begin{cases}
+      V_0 &\text{ if }0\le y < a/2, x = 0\\
+      -V_0 &\text{ if }a/2 \le y < a, x = 0\\
+      0 &\text{ if }y = a\\
+      0 &\text{ if }y = 0
+    \end{cases}
+  \end{align*}
+  Via separation of variables, we get that:
+  \begin{align}
+    \frac{1}X\frac{d^2X}{dx^2}+\frac{1}Y\frac{d^2Y}{dy^2} = 0
+  \end{align}
+  And because each must be opposite of one another, we write that:
+  \begin{align*}
+    \frac{d^2X}{dx} = k^2X, &\quad\frac{d^2Y}{dy} = -k^2Y
+  \end{align*}
+  Because of our problem, we get two different possible differential equations. In this case, because $X$'s value will either exponentiall grow or exponentially decay, we assign:
+  \begin{align}
+    X(x) = Ae^{kx}+Be^{-kx},&\quad Y(y) = C\sin ky + D \cos ky
+  \end{align}
+  Where $V(x,y) = X(x)Y(y)$. We eliminate the $\cos$ component of our equation because we know that when $y = 0$ or $y = a$, it has to dissapear. We also know that there is no exponential growth in the $x$ component, so we eliminate the term $Ae^{kx}$. Thus, we are left with:
+  \begin{align}
+    (B\cdot D)e^{-n\pi x /a}\sin(n\pi y/a)
+  \end{align}
+  We simplify $B\cdot D$ to $C$. Now, we need every possible solution to this equation, so we sum them together:
+  \begin{align}
+    V_0(y) = \sum_{n=1}^{\infty}C_n e^{-n\pi x/a}\sin(n\pi y /a)
+  \end{align}
+  With fourier's trick, we know that we can solve for $C_n$ by introducing a new $n'$ such that the below integral has to simplify to $C_n$:
+  \begin{align}
+    C_n = \frac{2}a\int_0^aV_0\sin(n\pi y /a)\sin(n'\pi y/a)\,dy
+  \end{align}
+  Thus, now we can split our integral from $0$ to $a/2$ and $a/2$ to $a$ because of the voltage difference. Thus, for any $C_n$ (we pull out $V_0$ because it is constant under y), we have that:
+  \begin{align*}
+    C_n &= \frac{2}aV_0\left[\int_0^{a/2}\sin(n\pi y/a) - \int_{a/2}^a \sin(n\pi y/a)\right]\\
+    &= \frac{2}aV_0\frac{a}{n\pi}\left[-\cos(n\pi y/a)\Big|_0^{a/2} + \cos(n\pi y/a)\Big|_{a/2}^a\right]\\
+    &= \frac{2}aV_0\frac{a}{n\pi}\left[1 + \cos(n\pi) - 2\cos\cpr{\frac{n\pi}2}\right]
+  \end{align*}
+  Now, it really justspends on what our $n$ is. Here, it's 4 if $n \equiv 2\mod(4)$, otherwise, it's zero because the $n$s oppose each other in sign, or the angle is 0 on the cosine. Thus, we just sum over all the times when $n = 2$:
+  \begin{align*}
+    \sum_{n=2+4i}^\infty\frac{8V_0}{\pi}\frac{e^{-\pi nx/a}\sin(n\pi y /a)}n
+  \end{align*}
+\end{problem}
+\subsection*{Problem 17}
+A rectangular pipe, running parallel to the $z$-axis from $-\infty$ to $\infty$ has three grounded metal sides, at $y= 0, y=a, $ and $z = 0$. The fourth side, at $x = b$, is maintained at a specified potential $V_0(y)$. 
+\begin{itemize}
+  \item [i.]Develop a general formula for the potential inside the pipe. 
+  \begin{problem}
+    First, I think it'll be helpful to deifne our boundary conditions right out of the gate:
+    \begin{align*}
+      V = \begin{cases}
+        0&\quad \text{ if }x = 0,\text{ or }y = 0, a\\
+        V_0(y)&\quad \text{ if }x = b
+      \end{cases}
+    \end{align*}
+    Now with our differential equation guesses, we should elimate some of the solutions that don't work, such as:
+    \begin{align*}
+      D\cos(ky)
+    \end{align*}
+    We can't necessarily elminate the $Ae^{kx}$ solution beause we don't know if there is the possibility of an exponentially growing solution with the $V_0(y)$ side of rectangle. Thus, we set up our $V$:
+    \begin{align*}
+      V(x,y) = C\sin(\pi n y /a)\left[Ae^{\pi n x/a}+Be^{-\pi n x /a}\right]
+    \end{align*}
+    Because the $x$ parts of the equation must be equal in magnitude because when $x = 0$, the entire equation must be zero, and thus $A = -B$. Thus our final summation is:
+    \begin{align*}
+      V(x,y) = \sum_{n=1}^\infty \left[C \cpr{e^{-\pi nx/a}-e^{\pi nx/a}}\sin(\pi n y /a)\right]
+    \end{align*}
+    Plugging into our integral for $y$, we can remove the x component, set $x = b$ and we get that:
+    \begin{align*}
+      C_n = \frac{2}{a\cpr{e^{-\pi nb/a}-e^{\pi nb/a}}}\int_0^a\sin(\pi n y /a)V_0(y)\, dy
+    \end{align*}
+    Note that we can't remove the $V_0(y)$ from the integral this time because it is dependent on $y$. 
+  \end{problem}
+  \item Find the potential explicitly, for the case when $V_0(y) = V_0$ (a constant)
+  \begin{problem}
+    Now, we just solve the integral that we set up in the previous problem, simple as that. We find that:
+    \begin{align*}
+      \int_0^a\sin(\pi n y /a)V_0(y)\, dy &= \frac{aV_0}{\pi n}\left[\cos(\pi n y/a)\Big|_0^a\right]\\
+      &= \frac{aV_0}{\pi n}\cpr{\cos(\pi n) - 1}
+    \end{align*}
+    Thus, the equation is zero if $n$ is even, but $-2$ if $n$ is odd. \gline{}
+    Plugging everything back in together (hooray) gives us:
+    \begin{align*}
+      \sum_{n = 1 + 2i}^\infty\frac{2}{\cpr{e^{-\pi nb/a}-e^{\pi nb/a}}}\cdot \frac{V_0}{\pi n}\cdot 2 \cdot \cpr{e^{-\pi nx/a}-e^{\pi nx/a}}
+    \end{align*}
+  \end{problem}
+\end{itemize}
+\end{document}

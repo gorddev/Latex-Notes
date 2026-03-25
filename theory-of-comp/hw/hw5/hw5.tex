@@ -1,0 +1,183 @@
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{charter}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{graphicx}
+
+% SMALL PAGE COMMAND
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}\newcommand{\Q}{\mathbb{Q}}\newcommand{\C}{\mathbb{C}}
+\newcommand{\real}[1]{\text{Re}\left(#1\right)}
+\newcommand{\im}[1]{\text{Im}\left(#1\right)}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}[0]{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[2]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
+\end{figure}
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+\newcommand{\prt}[2]{\frac{\partial#1}{\partial#2}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+
+%}
+
+% COLOR BOX
+
+\tcbset{problembox/.style={
+    colback=gray!4,
+    colframe=gray!50, 
+	  boxrule=0pt,
+    leftrule=2.5pt, 
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable,
+    sharp corners
+  }
+}
+
+\tcbset{subproblembox/.style={
+    colback=gray!12,
+    colframe=gray!80, 
+	  boxrule=0.5pt,
+    leftrule=2.5pt, 
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable,
+    sharp corners
+  }
+}
+
+% PROBLEM
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{tcolorbox}[problembox]
+   \textit{Proof. }#1}
+  {\end{tcolorbox}\gspc}
+
+  \newenvironment{subproblem}[2]
+  {\vspace{-0.1cm}\begin{tcolorbox}[subproblembox]
+   \textit{#1 }#2}
+  {\end{tcolorbox}\gspc}
+
+
+
+
+
+% color commands
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+
+\newcommand{\cpr}[1]{\left(#1\right)}
+%%%%%%%%%%%%% PHYSICS SPECIFIC COMMANDS
+
+\newcommand{\vA}{\vec{\mathbf{A}}}
+\newcommand{\vB}{\vec{\mathbf{B}}}
+\newcommand{\vC}{\vec{\mathbf{C}}}
+\newcommand{\vZ}{\vec{\mathbf{0}}}
+\newcommand{\norm}{\vec{\mathbf{n}}}
+\newcommand{\pvec}[1]{\left\langle#1\right\rangle}
+\newcommand{\ar}{\vec{\mathbf{r}}}
+\newcommand{\arhat}{\hat{\mathbf{r}}}
+\newcommand{\vv}{\vec{\mathbf{v}}}
+\newcommand{\delfull}{\pvec{\prt{}{x}, \prt{}{y},\prt{}{z}}}
+\newcommand{\delinput}[3]{\pvec{\prt{}{x}\cpr{#1}, \prt{}{y}\cpr{#2},\prt{}{z}\cpr{#3}}}
+\newcommand{\crossprod}[6]{\text{Det}\left|\begin{matrix}\hat{\textbf{i}}&\hat{\textbf{j}} &\hat{\textbf{k}}\\#1 & #2 & #3\\#4 & #5&#6\end{matrix}\right|}
+\newcommand{\dps}{\displaystyle}
+\newcommand{\delmatrix}[3]{\begin{bmatrix}\dps\hat x&\dps\hat y&\dps\hat z\\\dps\prt{}x&\dps\prt{}y&\dps\prt{}z\\\dps#1&\dps#2&\dps#3\end{bmatrix}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% begin doc
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{HW5 - Theory of Computation}}}
+\setlength{\headheight}{10pt}
+
+
+\begin{document}
+
+\subsection*{Problem 1}
+Let $A$ be the language of strings with twice as many 1's as 0's over the alphabet $\{0, 1\}$. Use the pumping lemma for regular langauges to prove that $A$ is not regular. 
+\begin{problem}
+  Assume for the sake of contradiction that $A$ is a regular language with pumping length $p$. Thus, for a string $s = 1^{2p}0^p\in A$, we must have an $xyz = s$ satisfying:
+  \begin{itemize}[itemsep=0pt, parsep=0pt]
+    \item $|y|> 0$, 
+    \item $|xy| \le p$, and
+    \item $xy^iz \in A$ for $i \in \N$. 
+  \end{itemize}
+  However, because $|y|>0$ and $|xy| < p$, we must have that $x$ and $y$ are made exclusively of 1's. Thus, although $xyz \in A$, $xy^0z\notin A$ because there are fewer than two times the number of 1s than 0s. \gline{}
+  Hence, $A$ is not regular.\qed
+\end{problem}
+
+\subsection*{Problem 2}
+Let $B$ be the language of strings with more 1's than 0's over the alphabet $\{0, 1\}$. Prove that $B$ is not regular. 
+\begin{problem}
+  Assume for the sake of contradiction that $B$ is a regular language with pumping length $p$. Consider the string $\displaystyle s = 0^p\,1\,1^p\in B$. Because $B$ is regular, there must exist an $xyz = s$ satisfying:
+  \begin{itemize}[itemsep=0pt, parsep=0pt]
+    \item $|y|> 0$, 
+    \item $|xy| \le p$, and
+    \item $xy^iz \in A$ for $i \in \N$. 
+  \end{itemize}
+  However, because $|xy|\le p$, we know that $x$ and $y$ are made up of exclusively 0's. Furthermore, because $|y|\ge 1$, we know $y$ must contain at least one 0. Thus, the string:
+  \begin{align*}
+    xy^2z = 0^{p+n}1^{p+1}\notin A, \text{ with }n \ge 1
+  \end{align*}
+  The number of ones is not greater than the number of zeros, and thus the string does not satisfy the pumping lemma and $B$ is not regular.  
+\end{problem}
+
+\subsection*{Problem 3}
+Draw the following pushdown automata for each language:
+\begin{enumerate}
+  \item [a.] $\{0^k1^{2k}\mid k\ge 0\}$ This language consists of strings with zero or more 0's, followed by twice as many 1's.
+  \gimage{image.png}{12cm} 
+  \item [b.] $\{0^k1^l\mid l \ge k\}$
+  \gimage{image2.png}{12cm}
+\end{enumerate}
+
+\subsection*{Problem 4}
+Consider the following pushdown automata with diagrams below. For each diagram describe the language that is recognized by the pushdown automata. 
+\begin{enumerate}
+  \item [a.] The language that is described by a. is  $\{(00) | (11)\}^*$. Essentially, its just where all 0s come in strings of consecutive even counts, and all 1s come in strings of consecutive even counts e.g (0000), (111111), but not (000). 
+  \item [b.] The language that is described by b. is the language that contains an even number of characters. 
+\end{enumerate}
+
+\end{document}

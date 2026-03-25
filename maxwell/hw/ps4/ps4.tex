@@ -1,0 +1,297 @@
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{charter}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{graphicx}
+
+% SMALL PAGE COMMAND
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}\newcommand{\Q}{\mathbb{Q}}\newcommand{\C}{\mathbb{C}}
+\newcommand{\real}[1]{\text{Re}\left(#1\right)}
+\newcommand{\im}[1]{\text{Im}\left(#1\right)}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}[0]{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[2]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
+\end{figure}
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+\newcommand{\prt}[2]{\frac{\partial#1}{\partial#2}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+
+%}
+
+% COLOR BOX
+
+\tcbset{problembox/.style={
+    colback=gray!4,
+    colframe=gray!50, 
+	  boxrule=0pt,
+    leftrule=2.5pt, 
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable,
+    sharp corners
+  }
+}
+
+\tcbset{subproblembox/.style={
+    colback=gray!12,
+    colframe=gray!80, 
+	  boxrule=0.5pt,
+    leftrule=2.5pt, 
+    left=2mm, right=2mm, top=1mm, bottom=1mm,
+    boxsep=2mm,
+    breakable,
+    sharp corners
+  }
+}
+
+% PROBLEM
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{tcolorbox}[problembox]
+   \textit{Problem. }#1}
+  {\end{tcolorbox}\gspc}
+
+  \newenvironment{subproblem}[2]
+  {\vspace{-0.1cm}\begin{tcolorbox}[subproblembox]
+   \textit{#1 }#2}
+  {\end{tcolorbox}\gspc}
+
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{PS2 - Maxwell's Equations}}}
+\setlength{\headheight}{10pt}
+
+
+% color commands
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+
+\newcommand{\cpr}[1]{\left(#1\right)}
+%%%%%%%%%%%%% PHYSICS SPECIFIC COMMANDS
+
+\newcommand{\vA}{\vec{\mathbf{A}}}
+\newcommand{\vB}{\vec{\mathbf{B}}}
+\newcommand{\vC}{\vec{\mathbf{C}}}
+\newcommand{\vZ}{\vec{\mathbf{0}}}
+\newcommand{\norm}{\vec{\mathbf{n}}}
+\newcommand{\pvec}[1]{\left\langle#1\right\rangle}
+\newcommand{\ar}{\vec{\mathbf{r}}}
+\newcommand{\arhat}{\hat{\mathbf{r}}}
+\newcommand{\vv}{\vec{\mathbf{v}}}
+\newcommand{\delfull}{\pvec{\prt{}{x}, \prt{}{y},\prt{}{z}}}
+\newcommand{\delinput}[3]{\pvec{\prt{}{x}\cpr{#1}, \prt{}{y}\cpr{#2},\prt{}{z}\cpr{#3}}}
+\newcommand{\crossprod}[6]{\text{Det}\left|\begin{matrix}\hat{\textbf{i}}&\hat{\textbf{j}} &\hat{\textbf{k}}\\#1 & #2 & #3\\#4 & #5&#6\end{matrix}\right|}
+\newcommand{\dps}{\displaystyle}
+\newcommand{\delmatrix}[3]{\begin{bmatrix}\dps\hat x&\dps\hat y&\dps\hat z\\\dps\prt{}x&\dps\prt{}y&\dps\prt{}z\\\dps#1&\dps#2&\dps#3\end{bmatrix}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% begin doc
+
+
+\begin{document}
+
+
+\newcommand{\vE}{{\mathbf{E}}}
+\newcommand{\vr}{{\mathbf{r}}}
+\newcommand{\etahat}{\hat{\mathbf{\eta}}}
+
+\noindent\textbf{Chapter 2: }32, 37, 44\gline{}
+\textbf{Chapter 3: }3
+\section*{Chapter 2}
+\subsection*{Problem 32}
+\begin{enumerate}
+  \item [(a)] Three charges are situated at the corners of a square(side length $a$). How much work does it take to bring in another charge, $+q$, from far away and place it in the fourth corner?
+  \begin{problem}
+    First, we need to calculate the work to bring it close to one particle, and then we add the other particle's work together as shown in equaiton (2.40). \gline{}
+    Consider that the work to bring one charge to another  is:
+    \begin{align*}
+      W = \frac{1}{4\pi\varepsilon_0}q_2\cpr{\frac{q_1}{r_{12}}}
+    \end{align*}
+    where $r_{12}$ is the distance between both particles. We essentially repeat this process for all four particles:
+    \begin{align*}
+      W = \frac{1}{4\pi\varepsilon_0}q_4\cpr{\frac{q_1}{r_{14}}+\frac{q_2}{r_{24}} + \frac{q_3}{r_{34}}}
+    \end{align*}
+    Calculating each of our variables, we find that:
+    \begin{align*}
+      r_{14} &= a\\
+      r_{24} &= a\sqrt2\\
+      r_{34}&=a
+    \end{align*}
+    Plugging into our equation we get:
+    \begin{align*}
+      W&=\frac{1}{4\pi\varepsilon_0}q\cpr{\frac{-q}{a}+\frac{q\sqrt{2}}{2a}+\frac{-q}{a}}\\
+      &= \frac{1}{4\pi\varepsilon_0}q^2\cpr{\frac{\sqrt{2}-4}{2a}}
+    \end{align*}
+  \end{problem}
+  \item [(b)] How much work does it take to assemble the entire configuration of four charges?
+  \begin{problem}
+    To solve this problem, we essentially just add up all of the works together, including the one found in the previous problem:
+    \begin{align*}
+      W_1 &= 0\\
+      W_2 &= \frac{1}{4\pi\varepsilon_0}\frac{-q^2}{a}\\
+      W_3 &= \frac{1}{4\pi\varepsilon_0}{-q}\cpr{\frac{-q}{a}+\frac{q}{a\sqrt2}}\\
+      W_4&= \text{ prev problem}
+    \end{align*}
+    Adding all of them together gives us:
+    \begin{align*}
+      W &= \frac{1}{4\pi\varepsilon_0}{q^2}{a}\cpr{-1+\frac{\sqrt2}2-1-1+\frac{\sqrt2}2-1}\\
+      &=\frac{1}{4\pi\varepsilon_0}\frac{q^2}{a}\cpr{\sqrt2 - 4}
+    \end{align*}
+  \end{problem}
+\end{enumerate}
+\subsection*{Problem 37}
+Consider two cocentric spherical shells, of radii $a$ and $b$. Suppose the inner one carries a charge $q$, and the outer one a charge $-q$. Calculate the energy of this configuration using equation 2.45 and equation 2.47 and the results of Ex. 2.9.
+\begin{problem}
+  First, we attempt to solve with equation 2.45.
+  \begin{subproblem}{Equation 2.45}\gline{}
+    Equation 2.45 gives us that:
+    \begin{align*}
+      \boxed{W = \frac{\varepsilon_0}2\int E^2\,d\tau}
+    \end{align*}
+    Via Gauss' law, in the case of this symmetrical surface, we know that:
+    \begin{align*}
+      |E|A = \frac{Q_\text{enclosed}}{\varepsilon_0}
+    \end{align*}
+    Thus, anywhere inside the sphere, because the charge enclosed is 0, the electric field is zero. However, outside the sphere, because we know $Q_\text{enclosed}$ is equal to $4\pi r^2 \sigma = q$, the electric field is given by:
+    \begin{align}
+      E=\frac{1}{4\pi\varepsilon_0}\frac{q}{r^2}
+    \end{align}
+    Thus, we end up with two circles with three different possibilities:
+    \begin{align*}
+      &r<0:\\
+      &a\le r < b:\\
+      &b\le r
+    \end{align*}
+    For $r< 0$, $Q_\text{enclosed}=0$, and for $r \ge b$, we have tha $\Q_\text{enclosed} = -q + q = 0$, so we only conider the charge in the midle fo the two spheres. The electric field given by one of the spheres is just:
+    \begin{align*}
+      \vE = \cpr{\frac{1}{4\pi\varepsilon_0}\frac{q}{r^2}}
+    \end{align*}
+    Thus, we just integrate with gauss' law from $a$ to $b$ in this scenario and we get the desired result:
+  \end{subproblem}
+  \begin{subproblem}{}
+    \begin{align*}
+      \frac{\varepsilon_0}2\int_a^b\cpr{\frac{1}{4\pi\varepsilon_0}\frac{q}{r^2}}^2\cdot 4\pi r^2 \,dr&=\frac{\varepsilon_0}2\cpr{\frac{q}{4\pi\varepsilon_0}}^2\int_a^b \cpr{\frac{1}{r^2}}^2 \cdot 4\pi r^2\,dr\\
+      &= \ldots \int_a^b \frac{1}{r^2}\,dr=\ldots\left[\frac{1}a-\frac{1}b\right]\\
+      &=\frac{q^2}{8\pi\varepsilon_0}\cpr{\frac{1}a-\frac{1}b}
+    \end{align*}
+  \end{subproblem}
+  Now, we'll solve this problem with equation 2.47 and see how that goes. 
+  \begin{subproblem}{Equation 2.47}\gline{}
+    Equation 2.47 tells us that:
+    \begin{align*}
+      W_\text{tot}=W_1+W_2 +\varepsilon_0\int\vE_1\cdot\vE_2\,d\tau
+    \end{align*}
+    From the properties of these spheres, we know that we can treat them like point charges such that:
+    \begin{align*}
+      \vE_1 &= \frac{1}{4\pi\varepsilon_0}\frac{q}{r^2}\arhat\\
+      \vE_2&=\frac{1}{4\pi\varepsilon_0}\frac{-q}{r^2}\arhat
+    \end{align*}
+    Dotting them is really easy because they have the same unit vector, so it just resolves to 1, so we just combine like terms. 
+    \begin{align*}
+      \vE_1\cdot \vE_2 = -\cpr{\frac{1}{4\pi\varepsilon_0}\frac{q}{r^2}}^2
+    \end{align*}
+    Now, we just integrate from $b\to\infty$ to get the total energy of this configuration:
+    \begin{align*}
+      \ldots\varepsilon_0\int_b^\infty \frac{1}{r^4}4\pi r^2&=\frac{q^2}{4\pi\varepsilon_0^2}\frac{-\varepsilon_0}b
+    \end{align*}
+    Then, we can just add the total enegery together, given that for a sphere our energy is simply $\frac{1}{8\pi\varepsilon_0}\frac{q^2}{r_0}$:
+    \begin{align*}
+      \frac{q^2}{8\pi\varepsilon_0}\cpr{\frac{1}a+\frac{1}b-2\frac{1}b}=\frac{q^2}{8\pi\varepsilon_0}(\frac{1}a - \frac{1}b)
+    \end{align*}
+    I like doing the other way better. 
+  \end{subproblem}
+\end{problem}
+\pagebreak
+\subsection*{Problem 44}
+Find the capacitence per unit length of two coaxial metal cylindrical tubes, of radii $a$ and $b$. 
+\begin{problem}
+  To solve this, first let charge $Q$ and $-Q$ exist on these cables, and let them be of length $\ell$. Then, we just use Gauss' law to solve:
+  \begin{align*}
+    \oint \vE \cdot dA &= \frac{Q_\text{enclosed}}{\varepsilon_0}\\
+    |\vE| &= \frac{Q}{\varepsilon_0 2\pi r\ell}\arhat
+  \end{align*}
+  Then, we want to calculate the potential difference between the two coaxial cables:
+  \begin{align*}
+    -\int_a^b \frac{Q}{2\pi\varepsilon_0\ell r}\, dr &= \frac{Q}{2\pi\varepsilon_0\ell}(\ln(b)-\ln(a))\\
+    &= \frac{Q}{2\pi\varepsilon_0\ell}\ln\cpr{\frac{b}a}
+  \end{align*}
+  That's of the whole cable, and if we remove $\ell$, it becomes per unit of length. 
+\end{problem}
+\section*{Chapter 3}
+\subsection*{Problem 3}
+Find the general solution to Laplace's equation in spherical coordinates, for the case where $V$ depends only on $r$. Do the sam efor cylindrical coordinates, assuming $V$ depends only on $s$. 
+\begin{problem}
+  For Laplace's equation, it's given as:
+  \begin{align*}
+    \nabla^2 V = 0
+  \end{align*}
+  So, we need to get the value of $\nabla^2$ for spherical and cyllindrical coordinates.
+  \begin{subproblem}{Spherical}
+    For spherical coordinates, we use the $r$ component of the Laplace operator:
+    \begin{align*}
+      \frac{1}{r^2}\frac{d}{dr}\cpr{r^2\frac{dV}{dr}}&=0\\
+    \end{align*}
+    Because the derivative is zero, we know that $r^2\frac{dV}{dr}$ must be equal to some constant $k$. Thus, we have that:
+    \begin{align*}
+      \frac{dV}{dr}&= \frac{k}{r^2}\\
+      V &= -\frac{k}r + C
+    \end{align*}
+  \end{subproblem}
+  Now, we move onto cylindrical coordinates:
+  \begin{subproblem}{Cylindrical}
+    First we grab the laplace operator for cylindrical coordinates where it only depends on $r$. 
+    \begin{align*}
+      \nabla^2V = \frac{1}r\prt{}r\cpr{r\prt{V}r}=0
+    \end{align*}
+    Then, because we know this needs to be equal to zero, we know that $r\prt{V}r$ must be equal to some constant $k$. Thus, we have that:
+    \begin{align*}
+      \prt{V}r &= \frac{k}r\\
+      V &= k\ln(r) + C
+    \end{align*}
+    
+  \end{subproblem}
+\end{problem}
+\end{document}

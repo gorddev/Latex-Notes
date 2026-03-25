@@ -19,7 +19,7 @@
 	\end{problem}
 	\item $\lim_{n\to \infty} \lpa\frac{1-i}{4}\rpa ^n$
 	\begin{problem}
-		It will helpful to observe the behavior of $(1-i)$ with additonal powers:
+		It will be helpful to observe the behavior of $(1-i)$ with additonal powers:
 		\begin{align*}
 			(1-i)^2 &= 2i \\
 			(1-i)^3 &= 2i-2\\
@@ -33,6 +33,9 @@
 		\end{align*}
 		Thus, the denominator outpaces the numerator without bound, and thus the limit is 0. 
 	\end{problem}
+	\begin{grade}
+		2/2 pts. Although the solution method is different, the limit is zero and the jusifaction is correct.
+	\end{grade}
 	\item $\lim_{z\to 2} \frac{z^2 +3}{iz}$
 	\begin{problem}
 		Because the limit exists at $2$, we just evaluate for 2:
@@ -51,10 +54,12 @@
 		\end{align*}
 		Then, as we take the limit as $z\to i$, we just get 0. 
 	\end{problem}
-	
+	\begin{grade}
+		2/2. The answer is correct and there is justifcation for why the answer is correct. It also follows more closely with the rubric this time around!
+	\end{grade}
 	\item $\lim_{\Delta z \to 0} \frac{(z_0 + \Delta z)^2 -z_0^2}{\Delta z}$
 	\begin{problem}
-		This limit exists for thi question. Consider that:
+		This limit exists for this question. Consider that:
 		\begin{align*}
 			\lim_{\Delta z\to0}\cpr{\frac{(z_0+\Delta z)^2 - z_0^2}{\Delta z}}&=\lim_{\Delta z\to0}\cpr{\frac{z_0^2 + 2z_0\Delta z + \Delta z^2 - z_0^2}{\Delta z}}\\
 			&= \lim_{\Delta z\to0}\cpr{2z_0 + \Delta z}\\
@@ -89,6 +94,14 @@
 		I think this is probably not possbile. If we were to assign it to infinity, all infinities would need to eventually lead to the same path. However, with each infinity, it leads to a different result, and that means that there's no well-defined output for $f(\infty)$, so we can't extend it. 
 	\end{problem}
 	\end{enumerate}
+	\begin{grade}
+		3.5/4 for part A. 1/1 for part b, 4.5 total.
+		\begin{itemize}[itemsep=0pt, parsep=0pt]
+			\item -0.5 pts in part a.i, because there is no justification for why $\lim_{x\to\infty}e^x = \infty$.
+			\item The rest of the conclusions are correct
+			\item Part b has a different explanation, but to me it still seems correct. 
+		\end{itemize}
+	\end{grade}
 \end{enumerate}
 
 
@@ -96,23 +109,84 @@
 \begin{enumerate}
 \setcounter{enumi}{2}
 \item Suppose $f(z)$ is continuous at $z_0$. Prove that $\overline{f(z)}$,  $\Re(z)$, and $\Im(z)$ are all continuous at $z_0$ by writing each one as a combination of continuous functions.
+\begin{proof}
+	First, let $\delta >0$ and $\varepsilon> 0$ such that $|z-z_0|<\delta$ and $|f(z)-f(z_0)|<\varepsilon$. \gline{}
+		Via the properties of the complex conjugate, we know that:
+		\begin{align*}
+			|f(z)-f(z-0)|&=\overline{|f(z)-f(z_0)|}\\
+			&=|\overline{f(z)}-\overline{f(z_0)}|<\varepsilon.
+		\end{align*}
+		Thus, $\overline{f(z_0)}$ is continuous. \gline{}
+		For $\Re(z)$ and $\Im(z)$, consider that:
+		\begin{align*}
+			\Re(z) = \frac{z + \bar z}2 &\quad\Im(z) = \frac{z-\bar z}{2}
+		\end{align*}
+		Thus, because both the real and imaginary function are compositions of other continuous functions, they themselves are continuous. 
+\end{proof}
+\begin{grade}
+	2.5/3 pts:
+	\begin{itemize}[parsep=0pt, itemsep=0pt]
+		\item -0.5pts: incorrect denominator for $\Im(z)$. (oops)
+	\end{itemize}
+\end{grade}
 
 \item Explain why each function $f(z)$ is continuous at $z_0$, then evaluate $\lim_{z \to z_0} f(z)$.
 \begin{enumerate}
 	\item $f(z) = |3z^2-5|, \quad z_0 = 2+i$
 	\begin{problem}
-		
+		First, we know that the function is defined on this point because there's no dividing by zero. Next, we calculate the limit:
+		\begin{align*}
+			|3(2+i)^2 - 5| &= (4+12i)\\
+			&= \sqrt{160} = \sqrt{16}\sqrt{10}=4\sqrt{10}
+		\end{align*}
+		Although I know it is excessive, I am going to show the whole function is continuous, to prove continuity at a point. \gline{}
+		Let the modulus be defined as $f(x+iy) = \sqrt{x^2 + y^2}$. $x^2$ and $y^2$ are automatically continuous because they are composed of continuous functions ($x\cdot x$ and $y\cdot y$). However, we will use the $\epsilon{-}\delta$ definition. \gline{}
+		Let $\varepsilon> 0$ and let $\delta  = \varepsilon\sqrt{u_0}$. Let $u\in\{x\in\R : x\ge 0\}$ such that $|u - u_0|<\delta$. Thus, we have that:
+		\begin{align*}
+			|f(u) - f(u_0)| &= |\sqrt{u}-\sqrt{u_0}|\\
+			&= \left|\frac{(\sqrt{u}-\sqrt{u_0})(\sqrt{u}+\sqrt{u_0})}{\sqrt{u}+\sqrt{u_0}}\right|\\
+			&= \frac{u - u_0}{\sqrt{u}+\sqrt{u_0}}\\
+			&< \frac{u - u_0}{\sqrt{u_0}}< \varepsilon
+		\end{align*}
+		Thus, the square root function is continuous. \gline{}
+		Hence, the composition of all fo these functions is continuous, and thus $f(z)$ is continuous at all points, including $2+i$. \gline{}
+		The limit evaluated at this point is $4\sqrt{10}$.
 	\end{problem}
 	\item $f(x+iy) = x^2-y^2, \quad z_0 = e^{i\pi/4}$
+	\begin{proof}
+		We want to show that $f(x+yi) = x^2 - y^2$ is continuous to show that the function is also continuous at $z_0$.\gline{}
+		Consider that $f(x+iy) = x$ and $f(x+iy) = y$ are continuous because $\Re(z)$ and $\Im(z)$ are continuous. Because the product of continuous functions are continuous, $x\cdot x = x^2$ is continuous, and so is $y \cdot y = y^2$. Furthermore, addition and subtraction of continuous functions are also continuous, so $x^2 - y^2$ is also continuous.\gline{}
+		Thus, $f$ is continuous, and thus is also continuous at $e^{i\pi/4}$. Note that $f(e^{i\pi/4}) = 0$
+	\end{proof}
 	
 	\item $f(z) = \frac{\overline{z}-z^3}{(2z-i)^4}, \quad z_0 = i$
-
+	\begin{proof}
+		We want to show that $f(z)$ exits as a composition of continuous functions at $i$. \gline{}
+		First, consider that $(2z-i)^4$ is trivially continuous at all values. It is only zero when $z = \frac{i}2$, so we do not run into an issue at $z = i$.\gline{}
+		Then, consider that $\bar z - z^3$ is also continuous because it is an arithmetic operation of two continuous functions: $g(z) = \bar z$, and $k(z) = z^3$. \gline{}
+		Thus, because $f(z)$ is a composition of continuous functions, $f(z)$ is continuous, and thus must also be continuous at $z_0 = i$. \gline{}
+		At $i$, $f(i) = 0$. 
+	\end{proof}
+	\begin{grade}
+		3/3 points. It turns out I ddi all of this one correctly (I think), as I just showed each was a composition of continuous functions and called it a day. 
+	\end{grade}
 \end{enumerate}
 
 \item Let $f(z)$ be defined by
 	\[f(z) = \begin{cases} 2z/(z+1) &\text{ if } z\neq 0,\\ 1 &\text{ if } z=0 \end{cases}. \]
-At which points does $f(z)$ have a finite limit, and at which points is it continuous? Which of the discontinuities of $f$ are removable?
+	At which points does $f(z)$ have a finite limit, and at which points is it continuous? Which of the discontinuities of $f$ are removable?
+	\begin{problem}
+		$f(z)$ has a finite limit everywhere except $z  = -1$. \gline{}
+		It is continuous at all points except for $z =0$ and $z = -1$.\gline{}
+		It has a removable discontinuity at $z = 0$. 
+	\end{problem}
+	\begin{grade}
+		This problem was done correctly, however it probably would've been better to use the $\C\,\backslash \{z\}$ notation rather than just saying $z = -1,\ldots$, ect. 
+	\end{grade}
 
+\begin{reflection}
+	\textbf{Collaboration Statement: }I worked on this assignment alone, but searched up modulus properties on google when trying to solve questions 4(b) and 4(c) with the $\varepsilon-\delta$ definition, which I eventually gave up on because that sucked. 
+\end{reflection}
 \end{enumerate}
 
 
@@ -121,8 +195,18 @@ At which points does $f(z)$ have a finite limit, and at which points is it conti
 \subsection*{Reflection Questions for HW 4}
     \begin{itemize}
         \item What do you understand well and what is working well for you in learning the material?
-
+		\begin{reflection}
+			I think I'm doing better and better as these assignments continue at doing them more thoroughly and accurately than I have in the past. I'm doing each of the problems, making sure I'm doing every single one (without accidentally skipping), and doing my best to double-check my answers.
+		\end{reflection}
 
         \item What do you need to keep studying and what are some habits you can change/pick up to learn the material better?
+		\begin{reflection}
+			I think this time around, even though there were less obvious mistakes, there were still a few ones I shouldn't have gotten wrong. For example:
+			\begin{align*}
+				\Im(z)\ne \frac{z-\bar z}{2}
+			\end{align*}
+			And also forgetting to justify why the $\lim_{x\to\infty}e^x = \infty$. But this is a big step up from previous assignments regardless I feel like. \gline{}
+			Also, I'm still trying to brute-force things I don't need to (like trying to the use $\varepsilon{-}\delta$ definitions on 4a, b, c), but I'm trying to stray more and more away from it. 
+		\end{reflection}
 
     \end{itemize}

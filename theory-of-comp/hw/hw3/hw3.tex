@@ -1,0 +1,225 @@
+\documentclass[10pt,oneside]{book}
+%%%% Page Info + Commands %%%%%{
+
+%packages
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{charter}
+\usepackage{amsthm,letltxmacro}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{changepage}
+\usepackage{mdframed}
+\usepackage{graphicx}
+
+% SMALL PAGE COMMAND
+\newcommand{\smallpage}{  \setlength \oddsidemargin{.25in}
+            \setlength \textwidth{5.5in}
+            \setlength \topmargin{0in}
+            \setlength \textheight{9in}}
+
+
+% Commands for sets of numbers
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\R}{\mathbb{R}}\newcommand{\N}{\mathbb{N}}\newcommand{\Q}{\mathbb{Q}}\newcommand{\C}{\mathbb{C}}
+\newcommand{\real}[1]{\text{Re}\left(#1\right)}
+\newcommand{\im}[1]{\text{Im}\left(#1\right)}
+
+% gordie spacing and boxing commands
+\newcommand{\gspc}{\vspace{0.13cm}} % 0.5 space
+\newcommand{\gline}[0]{\gspc\\} % 1.5 space
+\newcommand{\gbline}{\gspc\gspc\\} % double space
+\newcommand{\gbox}[1]{\fbox{\parbox{\linewidth}{#1}}} % multiline box command
+\newcommand{\gmod}[1]{\,(\text{mod}\,#1)}
+
+
+\newcommand{\gimage}[2]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
+\end{figure}
+}
+
+\newcommand{\gimageR}[3]{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=#2,angle=#3]{#1}
+\end{figure}
+}
+
+\newcommand{\centerit}[1]{{\begin{center} #1 \end{center}}}
+\newcommand{\ul}[1]{\underline{#1}}
+
+\newcommand{\prt}[2]{\frac{\partial#1}{\partial#2}}
+
+%%%%%%%% command for graphics %%%%%%%%%%%%%
+
+%}
+
+% COLOR BOX
+\newmdenv[backgroundcolor=gray!8,
+  linewidth=0pt, innerleftmargin=0pt, innerrightmargin=0pt,
+  skipabove=\baselineskip, skipbelow=\baselineskip
+]{coloredadjust}
+
+% PROOF
+\LetLtxMacro\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}[1][\proofname]
+  {\vspace{0.2cm}\begin{adjustwidth}{2em}{2em}
+   \oldproof[#1]}
+  {\endoldproof
+\end{adjustwidth}}
+
+% PROBLEM
+\newenvironment{problem}[1]
+  {\vspace{-0.1cm}\begin{coloredadjust}\begin{adjustwidth}{2em}{2em}
+   \textit{Problem. }#1}
+  {\endoldproof
+\end{adjustwidth}\end{coloredadjust}\gspc}
+
+%% DEFINITION
+\newtcbtheorem[]{definition}{Definition}{enhanced,
+  colback=blue!2, colframe=blue!50!black, coltitle=blue!70!black,
+  fonttitle=\bfseries,
+  boxrule=0pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{dfn}
+
+%% CRITERION
+\newtcbtheorem[]{criterion}{Criterion}{enhanced,
+  colback=magenta!3, colframe=magenta!60!black, coltitle=magenta!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=2pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=1pt, outer arc=1pt,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% COROLLARY
+\newtcbtheorem[]{corollary}{Corollary}{enhanced,
+  colback=orange!3, colframe=orange!80!black, coltitle=orange!50!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=1pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt, arc=5pt, outer arc=5pt,
+  attach title to upper, title={#1},
+}{ctn}
+
+%% THEOREM
+\newtcbtheorem[]{theorem}{Theorem}{enhanced,
+  colback=green!2, colframe=green!40!black, coltitle=green!20!black,
+  fonttitle=\bfseries,
+  boxrule=4pt, toprule=3pt, bottomrule=1pt, leftrule=1pt, rightrule=1pt,arc=5pt, outer arc=5pt,
+  attach title to upper, title={#1},
+}{thm}
+
+
+
+
+% color commands
+\newcommand{\cg}[1]{\color{OliveGreen}#1\color{white}}
+\newcommand{\cb}[1]{\color{BlueViolet}#1\color{white}}
+
+
+\newcommand{\cpr}[1]{\left(#1\right)}
+%%%%%%%%%%%%% PHYSICS SPECIFIC COMMANDS
+
+\newcommand{\vA}{\vec{\mathbf{A}}}
+\newcommand{\vB}{\vec{\mathbf{B}}}
+\newcommand{\vC}{\vec{\mathbf{C}}}
+\newcommand{\vZ}{\vec{\mathbf{0}}}
+\newcommand{\norm}{\vec{\mathbf{n}}}
+\newcommand{\pvec}[1]{\left\langle#1\right\rangle}
+\newcommand{\ar}{\vec{\mathbf{r}}}
+\newcommand{\arhat}{\hat{\mathbf{r}}}
+\newcommand{\vv}{\vec{\mathbf{v}}}
+\newcommand{\delfull}{\pvec{\prt{}{x}, \prt{}{y},\prt{}{z}}}
+\newcommand{\delinput}[3]{\pvec{\prt{}{x}\cpr{#1}, \prt{}{y}\cpr{#2},\prt{}{z}\cpr{#3}}}
+\newcommand{\dps}{\displaystyle}
+\newcommand{\delmatrix}[3]{\begin{bmatrix}\dps\hat x&\dps\hat y&\dps\hat z\\\dps\prt{}x&\dps\prt{}y&\dps\prt{}z\\\dps#1&\dps#2&\dps#3\end{bmatrix}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% begin doc
+
+%%%% Page Setup %%%%%%%
+\smallpage\sloppy
+\pagestyle{fancy}
+\lhead{\large{\textbf{HW3 - Theory of Computation}}}
+\setlength{\headheight}{10pt}
+
+
+
+\begin{document}
+\begin{enumerate}
+  \item Draw the diagram for an NFA that recognizes:
+  \begin{enumerate}
+    \item $01^*0$
+    \gimage{image.png}{5cm}
+    \item $(0\cup 1)1^* (0\cup 1)$
+    \gimage{image2.png}{5cm}
+    \item $(0\cup 10 \cup 11){(0 \cup 1)}^*$
+    \gimage{image3.png}{5cm}
+  \end{enumerate}
+  \item Give regular expressions describing the following languages. In all cases, the alphabet is $\{0,1\}$
+  \begin{enumerate}
+    \item $\{ w: \text{1011 is a substring of }w\}$
+    \begin{problem}
+      I would describe the language with the regular expression:
+      \begin{align*}
+        \Sigma^*1011\Sigma^*
+      \end{align*}
+    \end{problem}
+    \item $\{w:\text{ the length of }w\text{ is odd}\}$
+    \begin{problem}
+      All I want to do is ensure that there is $1 + 2k,\;k\in\Z$ elements:
+      \begin{align*}
+        \Sigma(\Sigma\Sigma)^*
+      \end{align*}
+    \end{problem}
+    \item $\{w:\text{ the number of 1s in }w\text{ is even}\}$
+    \begin{problem}
+      For this one, all I need to do is ensure that all 1s come in pairs with any number of 0s inbetween them:
+      \begin{align*}
+        0^*\cpr{10^*1}^*0^*
+      \end{align*}
+    \end{problem}
+  \end{enumerate}
+  \item For any string $w = w_1,..., w_n$, the \textbf{reverse} of $w$, written as $w^R$, is the string $w$ in reverse order. For example, the reverse of 0011 is 1100, and the reverse of 0101 is 1010. For any language $A$, let $A^R =\{w^R:w\in A\}$. Show that if $A$ is regular, so is $A^R$. 
+  \begin{problem}
+    Because $A$ is a regular language, let $A$ be represented by the regular expression $M$. Reverse the ordering of all \textbf{symbols}, treating each part of the expression in parenthesis $()$ as a single symbol. Then, for all elements in parenthesis, repeat this process.\gline{}
+    This expression is $A^R$. Thus, because $A^R$ can be represented by a regular expression, $A^R$ is a regular language if and only if $A$ is a regular langage. \gline{}
+    \textit{Note: }A \textbf{symbol} in this case is a single character or union of single characters. Any multicharacter expression must be reversed, even in a union. For example, take the expression:
+    \begin{align*}
+      \cpr{01(0\cup 10)^*\Sigma\Sigma^*01}^R = 10\Sigma^*\Sigma(0\cup 01)10
+    \end{align*}
+  \end{problem}
+  \item Write ``real world'' regular expressions to match the following strings. There are various websites that you can use
+  \begin{enumerate}
+    \item Dates in the format MM/DD/YY or MM/DD
+    \begin{problem}
+      Here is the representative regular expression:
+        \begin{verbatim}\d{1,2}\/\d{1,2}\/(\d{2}|\d{4})\end{verbatim}
+    \end{problem}
+
+    \item Prices in the format \$D.cc. Here, D can be any dollar amount (but should not start with 0). There should always be exactly two digits after the decimal, for cents. For example, your regular expression should match \$.99, \$237.17, and \$12818.00, but not \$0.99, \$010.00, \$58., \$218.2, or \$198484
+    \begin{problem}
+      Here is the solution I came up with:
+      \begin{verbatim}\$([1-9]\d*)*\.\d{2}\end{verbatim}
+    \end{problem}
+    \item Any ten-digit telephone number \textbf{either} in the form $(xxx)xxx-xxxx$\textbf{ or }$xxx-xxx-xxxx$.
+    \begin{problem}
+      I used the ? operator to make sure the parenthesis are optional:
+      \begin{verbatim}\(?\d{3}(\)|\-)\d{3}\-\d{4}\end{verbatim}
+    \end{problem}
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}
